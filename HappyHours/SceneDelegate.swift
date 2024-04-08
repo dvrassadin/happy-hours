@@ -9,8 +9,10 @@ import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    // MARK: Properties
     var window: UIWindow?
 
+    // MARK: Lifecycle
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
@@ -18,7 +20,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = SignInVC()
         window?.makeKeyAndVisible()
     }
 

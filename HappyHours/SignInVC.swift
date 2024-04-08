@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SignInVC.swift
 //  HappyHours
 //
 //  Created by Daniil Rassadin on 8/4/24.
@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class SignInVC: UIViewController {
+    
+    // MARK: Properties
 
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.Custom.background
     }
-
 
 }
 
