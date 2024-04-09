@@ -14,8 +14,6 @@
 		51CF88672BC3B8D900196E8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51CF88662BC3B8D900196E8A /* Assets.xcassets */; };
 		51CF886A2BC3B8D900196E8A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 51CF88692BC3B8D900196E8A /* Base */; };
 		51CF88722BC3B93000196E8A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 51CF88712BC3B93000196E8A /* .gitignore */; };
-		51CF88752BC3BBF400196E8A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 51CF88742BC3BBF400196E8A /* SnapKit */; };
-		51CF88772BC3BBF400196E8A /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 51CF88762BC3BBF400196E8A /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,14 +33,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51CF88752BC3BBF400196E8A /* SnapKit in Frameworks */,
-				51CF88772BC3BBF400196E8A /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		519B5CDF2BC58C2C00BD4EB4 /* SignInUpModule */ = {
+			isa = PBXGroup;
+			children = (
+				519B5CE32BC58CFA00BD4EB4 /* SignUp */,
+				519B5CE12BC58C7000BD4EB4 /* SignIn */,
+			);
+			path = SignInUpModule;
+			sourceTree = "<group>";
+		};
+		519B5CE02BC58C4200BD4EB4 /* MainModule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MainModule;
+			sourceTree = "<group>";
+		};
+		519B5CE12BC58C7000BD4EB4 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				51CF88612BC3B8D800196E8A /* SignInVC.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		519B5CE32BC58CFA00BD4EB4 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		51CF88512BC3B8D800196E8A = {
 			isa = PBXGroup;
 			children = (
@@ -65,8 +93,8 @@
 			children = (
 				51CF885D2BC3B8D800196E8A /* AppDelegate.swift */,
 				51CF885F2BC3B8D800196E8A /* SceneDelegate.swift */,
-				51CF88612BC3B8D800196E8A /* SignInVC.swift */,
-				51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */,
+				519B5CDF2BC58C2C00BD4EB4 /* SignInUpModule */,
+				519B5CE02BC58C4200BD4EB4 /* MainModule */,
 				51CF88662BC3B8D900196E8A /* Assets.xcassets */,
 				51CF88682BC3B8D900196E8A /* LaunchScreen.storyboard */,
 				51CF886B2BC3B8D900196E8A /* Info.plist */,
@@ -91,8 +119,6 @@
 			);
 			name = HappyHours;
 			packageProductDependencies = (
-				51CF88742BC3BBF400196E8A /* SnapKit */,
-				51CF88762BC3BBF400196E8A /* SnapKit-Dynamic */,
 			);
 			productName = HappyHours;
 			productReference = 51CF885A2BC3B8D800196E8A /* HappyHours.app */;
@@ -123,7 +149,6 @@
 			);
 			mainGroup = 51CF88512BC3B8D800196E8A;
 			packageReferences = (
-				51CF88732BC3BBF400196E8A /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 51CF885B2BC3B8D800196E8A /* Products */;
 			projectDirPath = "";
@@ -382,30 +407,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		51CF88732BC3BBF400196E8A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		51CF88742BC3BBF400196E8A /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 51CF88732BC3BBF400196E8A /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		51CF88762BC3BBF400196E8A /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 51CF88732BC3BBF400196E8A /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 51CF88522BC3B8D800196E8A /* Project object */;
 }
