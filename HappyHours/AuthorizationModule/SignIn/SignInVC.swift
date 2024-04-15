@@ -24,6 +24,12 @@ final class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigation()
+    }
+    
+    // MARK: Navigation
+    
+    private func setUpNavigation() {
         signInView.resetButton.addTarget(
             self,
             action: #selector(goToResetPasswordVC),
@@ -31,10 +37,8 @@ final class SignInVC: UIViewController {
         )
     }
     
-    // MARK: User interaction
-    
     @objc private func goToResetPasswordVC() {
-        print("Reset Password button pressed")
+        navigationController?.pushViewController(ResetPasswordVC(), animated: true)
     }
     
 }

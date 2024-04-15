@@ -103,14 +103,11 @@ final class SignInView: AuthScreenView {
                     constant: frame.height * AuthSizes.topReserButtonMultiplier
                 ),
                 resetButton.trailingAnchor.constraint(equalTo: logInButton.trailingAnchor),
-                resetButton.bottomAnchor.constraint(
-                    greaterThanOrEqualTo: signUpStackView.topAnchor,
-                    constant: 5
-                ),
                 
+                signUpStackView.topAnchor.constraint(greaterThanOrEqualTo: resetButton.bottomAnchor, constant: -5),
                 signUpStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-                keyboardLayoutGuide.topAnchor.constraint(equalTo: signUpStackView.bottomAnchor, constant: -5)
+                keyboardLayoutGuide.topAnchor.constraint(equalTo: signUpStackView.bottomAnchor, constant: 10)
             ]
         )
     }
