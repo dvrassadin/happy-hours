@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// Text with a button to go to the ``SignUpVC``
 final class SignUpStackView: UIStackView {
 
     // MARK: UI components
@@ -51,6 +53,7 @@ final class SignUpStackView: UIStackView {
         alignment = .center
         addArrangedSubview(label)
         addArrangedSubview(button)
+        
         
         button.addTarget(
             nil,

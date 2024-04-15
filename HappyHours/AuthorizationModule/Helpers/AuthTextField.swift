@@ -29,7 +29,7 @@ final class AuthTextField: UITextField {
         if textContentType == .password || textContentType == .newPassword {
             isSecureTextEntry = true
         }
-        setupAppearance()
+        setUpAppearance()
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +43,7 @@ final class AuthTextField: UITextField {
     
     // MARK: Set up appearance
     
-    private func setupAppearance() {
+    private func setUpAppearance() {
         layer.masksToBounds = true
         layer.shadowColor = UIColor.Custom.secondary.cgColor
         layer.shadowOpacity = 1

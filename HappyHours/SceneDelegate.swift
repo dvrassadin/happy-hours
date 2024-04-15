@@ -22,7 +22,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = SignInVC()
+        let vc = SignInVC()
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.navigationBar.tintColor = .Custom.primary
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

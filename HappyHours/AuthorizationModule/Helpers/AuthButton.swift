@@ -14,7 +14,7 @@ final class AuthButton: UIButton {
     init(title: String) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        setupAppearance()
+        setUpAppearance()
         configuration?.attributedTitle = AttributedString(
             title,
             attributes: .init([.font: UIFont.systemFont(ofSize: 20)])
@@ -31,7 +31,7 @@ final class AuthButton: UIButton {
     
     // MARK: Set up appearance
 
-    private func setupAppearance() {
+    private func setUpAppearance() {
         configuration = .borderedProminent()
         configuration?.cornerStyle = .capsule
         configuration?.baseForegroundColor = .Custom.primary

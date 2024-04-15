@@ -8,14 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
-		51B329702BC65A8300D7ADFB /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3296F2BC65A8300D7ADFB /* AuthTextField.swift */; };
 		51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329712BC6804700D7ADFB /* AuthSizes.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
 		51B329762BC6B8DF00D7ADFB /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* AuthButton.swift */; };
-		51B329782BC7EE5F00D7ADFB /* SignInViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329772BC7EE5F00D7ADFB /* SignInViewDelegate.swift */; };
-		51B3297A2BC7EF4700D7ADFB /* SignUpTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329792BC7EF4700D7ADFB /* SignUpTextView.swift */; };
 		51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3297B2BC90D7400D7ADFB /* SignUpStackView.swift */; };
 		51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */; };
+		51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329812BC9869600D7ADFB /* AuthTextField.swift */; };
+		51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329832BCA686D00D7ADFB /* SignUpView.swift */; };
 		51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */; };
 		51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF885D2BC3B8D800196E8A /* AppDelegate.swift */; };
 		51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF885F2BC3B8D800196E8A /* SceneDelegate.swift */; };
@@ -27,14 +26,13 @@
 
 /* Begin PBXFileReference section */
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		51B3296F2BC65A8300D7ADFB /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		51B329712BC6804700D7ADFB /* AuthSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSizes.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		51B329752BC6B8DF00D7ADFB /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
-		51B329772BC7EE5F00D7ADFB /* SignInViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewDelegate.swift; sourceTree = "<group>"; };
-		51B329792BC7EF4700D7ADFB /* SignUpTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextView.swift; sourceTree = "<group>"; };
 		51B3297B2BC90D7400D7ADFB /* SignUpStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStackView.swift; sourceTree = "<group>"; };
 		51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStackViewDelegate.swift; sourceTree = "<group>"; };
+		51B329812BC9869600D7ADFB /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		51B329832BCA686D00D7ADFB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		51CF885A2BC3B8D800196E8A /* HappyHours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyHours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51CF885D2BC3B8D800196E8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,9 +76,9 @@
 		519B5CE12BC58C7000BD4EB4 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				51B329802BC982C600D7ADFB /* Helpers */,
 				51CF88612BC3B8D800196E8A /* SignInVC.swift */,
 				51B329642BC64C6300D7ADFB /* SignInView.swift */,
-				51B329772BC7EE5F00D7ADFB /* SignInViewDelegate.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -89,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */,
+				51B329832BCA686D00D7ADFB /* SignUpView.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -96,11 +95,9 @@
 		51B3296C2BC6568300D7ADFB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				51B3296F2BC65A8300D7ADFB /* AuthTextField.swift */,
+				51B329812BC9869600D7ADFB /* AuthTextField.swift */,
 				51B329712BC6804700D7ADFB /* AuthSizes.swift */,
 				51B329752BC6B8DF00D7ADFB /* AuthButton.swift */,
-				51B329792BC7EF4700D7ADFB /* SignUpTextView.swift */,
-				51B3297F2BC923B200D7ADFB /* SignUpStackView */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -112,6 +109,14 @@
 				51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */,
 			);
 			path = SignUpStackView;
+			sourceTree = "<group>";
+		};
+		51B329802BC982C600D7ADFB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				51B3297F2BC923B200D7ADFB /* SignUpStackView */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		51CF88512BC3B8D800196E8A = {
@@ -223,16 +228,15 @@
 				51CF88622BC3B8D800196E8A /* SignInVC.swift in Sources */,
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
 				51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */,
-				51B329702BC65A8300D7ADFB /* AuthTextField.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
-				51B3297A2BC7EF4700D7ADFB /* SignUpTextView.swift in Sources */,
 				51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
 				51B329762BC6B8DF00D7ADFB /* AuthButton.swift in Sources */,
+				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
+				51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
-				51B329782BC7EE5F00D7ADFB /* SignInViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

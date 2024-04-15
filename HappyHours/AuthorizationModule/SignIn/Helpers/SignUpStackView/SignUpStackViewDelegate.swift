@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// This protocol is made for interaction via Responder Chain
 @objc protocol SignUpStackViewDelegate {
     
     func goToSignUp()
