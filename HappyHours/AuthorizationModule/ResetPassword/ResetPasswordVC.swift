@@ -26,6 +26,11 @@ final class ResetPasswordVC: UIViewController {
         setUpNavigation()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        resetPasswordView.emailTextField.becomeFirstResponder()
+    }
+    
     // MARK: Navigation
     
     private func setUpNavigation() {
@@ -37,7 +42,7 @@ final class ResetPasswordVC: UIViewController {
     }
     
     @objc private func goToOTPVC() {
-        print("Continue button to go to the OTP screen pressed")
+        navigationController?.pushViewController(OneTimeCodeVC(), animated: true)
     }
 
 }

@@ -153,7 +153,7 @@ final class SignUpView: AuthScreenView {
     @objc private func dateChanged(datePicker: UIDatePicker) {
         dateOfBirthTextField.text = datePicker.date.formatted(date: .long, time: .omitted)
     }
-    
+    // TODO: Decide whether to use keyboardLayoutGuide or both
 //    override func moveUpContentToElement() -> UIView? {
 //        print(createAccountButton.frame)
 //        return createAccountButton

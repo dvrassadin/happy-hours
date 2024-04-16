@@ -16,4 +16,5 @@ enum AuthSizes {
     static let topBetweenTextFieldsMultiplier = 0.0259
     static let topReserButtonMultiplier = 0.0098
     static let bottomSignUpTextViewMultiplier = -0.0505
+    static let oneTimeCodeWidthMultipier = 0.8
 }

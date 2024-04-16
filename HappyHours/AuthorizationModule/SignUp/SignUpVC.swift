@@ -33,6 +33,7 @@ final class SignUpVC: UIViewController {
     // MARK: User interaction
     
     @objc private func createAccount() {
+        // TODO: Make real navigation
         print("Create Account button pressed")
     }
     

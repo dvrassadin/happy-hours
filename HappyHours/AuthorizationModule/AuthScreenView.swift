@@ -60,6 +60,7 @@ class AuthScreenView: UIView {
     private func setUpUI() {
         backgroundColor = .Custom.background
         addSubviews()
+        // TODO: Decide whether to use keyboardLayoutGuide or both
 //        setUpKeyboardShowAndHiding()
     }
     
@@ -67,7 +68,7 @@ class AuthScreenView: UIView {
         addSubview(appNameLabel)
         addSubview(screenNameLabel)
     }
-    
+    // TODO: Decide whether to use keyboardLayoutGuide or both
 //    private func setUpKeyboardShowAndHiding() {
 //        NotificationCenter.default.addObserver(
 //            self,
@@ -105,6 +106,7 @@ class AuthScreenView: UIView {
         endEditing(true)
     }
     
+    // TODO: Decide whether to use keyboardLayoutGuide or both
 //    /// This method moves up the content when the keyboard appears.
 //    /// - Parameter notification: A notification to get the keyboard size
 //    @objc private func moveUpContent(notification: NSNotification) {

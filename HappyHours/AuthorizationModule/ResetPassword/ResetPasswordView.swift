@@ -11,19 +11,19 @@ final class ResetPasswordView: AuthScreenView {
     
     // MARK: UI components
     
-    private let emailTextField = AuthTextField(
+    let emailTextField = AuthTextField(
         placeholder: String(localized: "Email Address"),
         textContentType: .emailAddress,
         keyboardType: .emailAddress
     )
     
-    let continueButton = AuthButton(title: "Continue")
+    let continueButton = AuthButton(title: String(localized: "Continue"))
 
     // MARK: Lifecycle
     
     init() {
         super.init(screenName: String(localized: "Reset Password"))
-        setUpUI()
+        addSubViews()
     }
     
     required init?(coder: NSCoder) {
@@ -36,10 +36,6 @@ final class ResetPasswordView: AuthScreenView {
     }
     
     // MARK: Set up UI
-    
-    private func setUpUI() {
-        addSubViews()
-    }
     
     private func addSubViews() {
         addSubview(emailTextField)
@@ -75,4 +71,5 @@ final class ResetPasswordView: AuthScreenView {
             ]
         )
     }
+    
 }

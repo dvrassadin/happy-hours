@@ -51,6 +51,7 @@ final class AuthTextField: UITextField {
         layer.masksToBounds = true
         layer.borderWidth = 1.5
         layer.borderColor = UIColor.Custom.background.cgColor
+        returnKeyType = .done
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

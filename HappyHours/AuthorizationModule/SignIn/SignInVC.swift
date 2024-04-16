@@ -35,10 +35,20 @@ final class SignInVC: UIViewController {
             action: #selector(goToResetPasswordVC),
             for: .touchUpInside
         )
+        signInView.logInButton.addTarget(
+            self,
+            action: #selector(goToMainModule),
+            for: .touchUpInside
+        )
     }
     
     @objc private func goToResetPasswordVC() {
         navigationController?.pushViewController(ResetPasswordVC(), animated: true)
+    }
+    
+    @objc private func goToMainModule() {
+        // TODO: Make real navigation
+        print("Log in button pressed")
     }
     
 }
