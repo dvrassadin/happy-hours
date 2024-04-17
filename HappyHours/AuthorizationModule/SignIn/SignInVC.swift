@@ -10,7 +10,7 @@ import UIKit
 // MARK: - SignInVC class
 
 /// This class is made for the first logging in were user can enter the email and password, reset the password or sign up
-final class SignInVC: UIViewController {
+final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
     
     // MARK: Properties
     
@@ -22,8 +22,8 @@ final class SignInVC: UIViewController {
         view = signInView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setUpNavigation()
     }
     
@@ -47,8 +47,23 @@ final class SignInVC: UIViewController {
     }
     
     @objc private func goToMainModule() {
+        guard isValidCredentials() else { return }
         // TODO: Make real navigation
-        print("Log in button pressed")
+        print("Opening main module")
+    }
+    
+    private func isValidCredentials() -> Bool {
+        guard let email = signInView.emailTextField.text, isValidEmail(email) else {
+            showAlert(.invalidEmail)
+            return false
+        }
+        
+        guard let password = signInView.passwordTextField.text, isValidPassword(password) else {
+            showAlert(.invalidPasswordLength)
+            return false
+        }
+        
+        return true
     }
     
 }

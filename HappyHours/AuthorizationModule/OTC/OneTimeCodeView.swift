@@ -52,18 +52,18 @@ final class OneTimeCodeView: AuthScreenView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setUpConstraints()
-        // TODO: Find out how to set corner radius after layout
+    // TODO: Find out how to set corner radius after layout
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
 //        let cornerRadius = min(stackView.frame.height, stackView.frame.width) / 8
 //        digitsLabels.forEach { $0.layer.cornerRadius = cornerRadius }
-    }
+//    }
     
     // MARK: Set up UI
     
     private func setUpUI() {
         addSubviews()
+        setUpConstraints()
         configureLabels()
         codeTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
@@ -98,9 +98,13 @@ final class OneTimeCodeView: AuthScreenView {
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
+//                codeTextField.topAnchor.constraint(
+//                    equalTo: screenNameLabel.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+//                ),
                 codeTextField.topAnchor.constraint(
-                    equalTo: screenNameLabel.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
                 ),
                 codeTextField.widthAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.widthAnchor,

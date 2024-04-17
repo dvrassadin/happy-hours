@@ -35,8 +35,7 @@ final class OneTimeCodeVC: UIViewController {
     
     private func setUpNavigation() {
         otcView.oneTimeCodeFilled = { [weak self] code in
-            // TODO: Set up real navigation
-            print("Code \(code) was entered")
+            self?.navigationController?.pushViewController(NewPasswordVC(), animated: true)
         }
     }
 

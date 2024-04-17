@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - SignUpVC class
 
-final class SignUpVC: UIViewController {
+final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
     
     // MARK: Properties
     
@@ -21,8 +21,14 @@ final class SignUpVC: UIViewController {
         view = signUpView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setUpNavigation()
+    }
+    
+    // MARK: Navigation
+    
+    private func setUpNavigation() {
         signUpView.createAccountButton.addTarget(
             self,
             action: #selector(createAccount),
@@ -30,11 +36,43 @@ final class SignUpVC: UIViewController {
         )
     }
     
-    // MARK: User interaction
-    
     @objc private func createAccount() {
+        guard isValidCredentials() else { return }
         // TODO: Make real navigation
         print("Create Account button pressed")
+    }
+    
+    private func isValidCredentials() -> Bool {
+        guard isValidName() else {
+            showAlert(.emptyName)
+            return false
+        }
+        
+        guard let email = signUpView.emailTextField.text, isValidEmail(email) else {
+            showAlert(.invalidEmail)
+            return false
+        }
+        
+        guard let firstPassword = signUpView.passwordTextField.text,
+              isValidPassword(firstPassword),
+              let secondPassword = signUpView.confirmPasswordTextField.text,
+              isValidPassword(secondPassword)
+        else {
+            showAlert(.invalidPasswordLength)
+            return false
+        }
+        
+        guard firstPassword == secondPassword else {
+            showAlert(.notMatchPasswords)
+            return false
+        }
+        
+        return true
+    }
+    
+    private func isValidName() -> Bool {
+        guard let name = signUpView.nameTextField.text else { return false }
+        return !name.isEmpty
     }
     
 }

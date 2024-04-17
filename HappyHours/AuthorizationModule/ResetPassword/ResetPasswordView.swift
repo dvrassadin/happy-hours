@@ -23,19 +23,25 @@ final class ResetPasswordView: AuthScreenView {
     
     init() {
         super.init(screenName: String(localized: "Reset Password"))
-        addSubViews()
+        setUpUI()
+//        addSubViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setUpConstraints()
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        setUpConstraints()
+//    }
     
     // MARK: Set up UI
+    
+    private func setUpUI() {
+        addSubViews()
+        setUpConstraints()
+    }
     
     private func addSubViews() {
         addSubview(emailTextField)
@@ -46,9 +52,13 @@ final class ResetPasswordView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                emailTextField.topAnchor.constraint(
+//                    equalTo: screenNameLabel.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+//                ),
                 emailTextField.topAnchor.constraint(
-                    equalTo: screenNameLabel.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
                 ),
                 emailTextField.widthAnchor.constraint(
                     equalTo: widthAnchor,
@@ -59,9 +69,13 @@ final class ResetPasswordView: AuthScreenView {
                     multiplier: AuthSizes.textFieldHeightMultiplier
                 ),
                 
+//                continueButton.topAnchor.constraint(
+//                    equalTo: emailTextField.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
                 continueButton.topAnchor.constraint(
-                    equalTo: emailTextField.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 continueButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 continueButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),

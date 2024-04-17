@@ -13,18 +13,18 @@ final class SignUpView: AuthScreenView {
     
     // MARK: UI components
     
-    private let nameTextField = AuthTextField(
+    let nameTextField = AuthTextField(
         placeholder: String(localized: "Name"),
         textContentType: .name,
         keyboardType: .namePhonePad
     )
     
-    private let dateOfBirthTextField = AuthTextField(
+    let dateOfBirthTextField = AuthTextField(
         placeholder: String(localized: "Date of Birth"),
         textContentType: .dateTime
     )
     
-    private let datePicker: UIDatePicker = {
+    let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerMode = .date
@@ -34,18 +34,18 @@ final class SignUpView: AuthScreenView {
         return datePicker
     }()
     
-    private let emailTextField = AuthTextField(
+    let emailTextField = AuthTextField(
         placeholder: String(localized: "Email Address"),
         textContentType: .emailAddress,
         keyboardType: .emailAddress
     )
     
-    private let passwordTextField = AuthTextField(
+    let passwordTextField = AuthTextField(
         placeholder: String(localized: "Password"),
         textContentType: .newPassword
     )
     
-    private let confirmPasswordTextField = AuthTextField(
+    let confirmPasswordTextField = AuthTextField(
         placeholder: String(localized: "Confirm Password"),
         textContentType: .newPassword
     )
@@ -63,15 +63,16 @@ final class SignUpView: AuthScreenView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setUpConstraints()
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        setUpConstraints()
+//    }
     
     // MARK: Set up UI
     
     private func setUpUI() {
         addSubviews()
+        setUpConstraints()
         dateOfBirthTextField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)
     }
@@ -90,9 +91,13 @@ final class SignUpView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 nameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                nameTextField.topAnchor.constraint(
+//                    equalTo: screenNameLabel.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+//                ),
                 nameTextField.topAnchor.constraint(
-                    equalTo: screenNameLabel.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
                 ),
                 nameTextField.widthAnchor.constraint(
                     equalTo: widthAnchor,
@@ -104,40 +109,60 @@ final class SignUpView: AuthScreenView {
                 ),
                 
                 dateOfBirthTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                dateOfBirthTextField.topAnchor.constraint(
+//                    equalTo: nameTextField.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
                 dateOfBirthTextField.topAnchor.constraint(
-                    equalTo: nameTextField.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+                    equalToSystemSpacingBelow: nameTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 dateOfBirthTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 dateOfBirthTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                emailTextField.topAnchor.constraint(
+//                    equalTo: dateOfBirthTextField.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
                 emailTextField.topAnchor.constraint(
-                    equalTo: dateOfBirthTextField.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+                    equalToSystemSpacingBelow: dateOfBirthTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 emailTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 emailTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
                 passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                passwordTextField.topAnchor.constraint(
+//                    equalTo: emailTextField.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
                 passwordTextField.topAnchor.constraint(
-                    equalTo: emailTextField.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 passwordTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 passwordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
                 confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                confirmPasswordTextField.topAnchor.constraint(
+//                    equalTo: passwordTextField.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
                 confirmPasswordTextField.topAnchor.constraint(
-                    equalTo: passwordTextField.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 confirmPasswordTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 confirmPasswordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
+//                createAccountButton.topAnchor.constraint(
+//                    equalTo: confirmPasswordTextField.bottomAnchor,
+//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
                 createAccountButton.topAnchor.constraint(
-                    equalTo: confirmPasswordTextField.bottomAnchor,
-                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
+                    equalToSystemSpacingBelow: confirmPasswordTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 createAccountButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 createAccountButton.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),

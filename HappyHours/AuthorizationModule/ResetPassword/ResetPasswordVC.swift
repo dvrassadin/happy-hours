@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - ResetPasswordVC class
 
-final class ResetPasswordVC: UIViewController {
+final class ResetPasswordVC: AuthViewController, EmailChecker {
 
     // MARK: Properties
     
@@ -21,13 +21,9 @@ final class ResetPasswordVC: UIViewController {
         view = resetPasswordView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpNavigation()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setUpNavigation()
         resetPasswordView.emailTextField.becomeFirstResponder()
     }
     
@@ -42,7 +38,17 @@ final class ResetPasswordVC: UIViewController {
     }
     
     @objc private func goToOTPVC() {
+        guard isValidCredentials() else { return }
         navigationController?.pushViewController(OneTimeCodeVC(), animated: true)
+    }
+    
+    private func isValidCredentials() -> Bool {
+        guard let email = resetPasswordView.emailTextField.text, isValidEmail(email) else {
+            showAlert(.invalidEmail)
+            return false
+        }
+        
+        return true
     }
 
 }

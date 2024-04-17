@@ -50,16 +50,25 @@ class AuthScreenView: UIView {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupConstrains()
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        print(#function)
+//    }
+    
+//    override func updateConstraints() {
+//        print(needsUpdateConstraints())
+//        setUpConstrains()
+//        super.updateConstraints()
+//        print(#function)
+//    }
     
     // MARK: Set up UI
     
     private func setUpUI() {
         backgroundColor = .Custom.background
         addSubviews()
+        setUpConstrains()
+//        setNeedsUpdateConstraints()
         // TODO: Decide whether to use keyboardLayoutGuide or both
 //        setUpKeyboardShowAndHiding()
     }
@@ -84,20 +93,31 @@ class AuthScreenView: UIView {
 //        )
 //    }
     
-    private func setupConstrains() {
-        NSLayoutConstraint.activate([
-            appNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            appNameLabel.topAnchor.constraint(
-                lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor,
-                constant: frame.height * AuthSizes.appNameLabelTopMultiplier
-            ),
-            
-            screenNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            screenNameLabel.topAnchor.constraint(
-                equalTo: appNameLabel.bottomAnchor,
-                constant: frame.height * AuthSizes.screenNameLabelTopMultiplier
-            )
-        ])
+    private func setUpConstrains() {
+        NSLayoutConstraint.activate(
+            [
+                appNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+                //            appNameLabel.topAnchor.constraint(
+                //                lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor,
+                //                constant: frame.height * AuthSizes.appNameLabelTopMultiplier
+                //            ),
+                appNameLabel.topAnchor.constraint(
+                    lessThanOrEqualToSystemSpacingBelow: safeAreaLayoutGuide.topAnchor,
+                    multiplier: AuthSizes.appNameLabelTopMultiplier
+                ),
+                
+                screenNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+//                screenNameLabel.topAnchor.constraint(
+//                    equalTo: appNameLabel.bottomAnchor,
+//                    constant: frame.height * AuthSizes.screenNameLabelTopMultiplier
+//                )
+                screenNameLabel.topAnchor.constraint(
+                    lessThanOrEqualToSystemSpacingBelow: appNameLabel.bottomAnchor,
+                    multiplier: AuthSizes.screenNameLabelTopMultiplier
+                ),
+                screenNameLabel.topAnchor.constraint(greaterThanOrEqualTo: appNameLabel.bottomAnchor)
+            ]
+        )
     }
     
     // MARK: User interaction

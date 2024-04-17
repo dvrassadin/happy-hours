@@ -41,4 +41,5 @@ final class AuthButton: UIButton {
         layer.shadowRadius = 5
         layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
     }
+    
 }

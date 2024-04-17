@@ -11,6 +11,11 @@
 		5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5138299E2BCD74AB00AA4878 /* ResetPasswordVC.swift */; };
 		513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513829A12BCD90D500AA4878 /* OneTimeCodeVC.swift */; };
 		513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513829A32BCD90F800AA4878 /* OneTimeCodeView.swift */; };
+		513B6CC12BCF987E0006DD25 /* EmailChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CC02BCF987E0006DD25 /* EmailChecker.swift */; };
+		513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CC22BCF98D10006DD25 /* PasswordChecker.swift */; };
+		513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CC52BCF9F750006DD25 /* NewPasswordVC.swift */; };
+		513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CC72BCF9F950006DD25 /* NewPasswordView.swift */; };
+		513B6CEE2BCFC8040006DD25 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CED2BCFC8040006DD25 /* AuthViewController.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329712BC6804700D7ADFB /* AuthSizes.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
@@ -33,6 +38,11 @@
 		5138299E2BCD74AB00AA4878 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		513829A12BCD90D500AA4878 /* OneTimeCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeVC.swift; sourceTree = "<group>"; };
 		513829A32BCD90F800AA4878 /* OneTimeCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeView.swift; sourceTree = "<group>"; };
+		513B6CC02BCF987E0006DD25 /* EmailChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChecker.swift; sourceTree = "<group>"; };
+		513B6CC22BCF98D10006DD25 /* PasswordChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChecker.swift; sourceTree = "<group>"; };
+		513B6CC52BCF9F750006DD25 /* NewPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordVC.swift; sourceTree = "<group>"; };
+		513B6CC72BCF9F950006DD25 /* NewPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordView.swift; sourceTree = "<group>"; };
+		513B6CED2BCFC8040006DD25 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329712BC6804700D7ADFB /* AuthSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSizes.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
@@ -81,14 +91,27 @@
 			path = OTC;
 			sourceTree = "<group>";
 		};
+		513B6CC42BCF9F430006DD25 /* NewPassword */ = {
+			isa = PBXGroup;
+			children = (
+				513B6CC52BCF9F750006DD25 /* NewPasswordVC.swift */,
+				513B6CC72BCF9F950006DD25 /* NewPasswordView.swift */,
+			);
+			path = NewPassword;
+			sourceTree = "<group>";
+		};
 		519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
+				513B6CED2BCFC8040006DD25 /* AuthViewController.swift */,
 				51B329732BC68BC000D7ADFB /* AuthScreenView.swift */,
+				513B6CC22BCF98D10006DD25 /* PasswordChecker.swift */,
+				513B6CC02BCF987E0006DD25 /* EmailChecker.swift */,
 				519B5CE12BC58C7000BD4EB4 /* SignIn */,
 				519B5CE32BC58CFA00BD4EB4 /* SignUp */,
 				5138299B2BCD745300AA4878 /* ResetPassword */,
 				513829A02BCD90B600AA4878 /* OTC */,
+				513B6CC42BCF9F430006DD25 /* NewPassword */,
 				51B3296C2BC6568300D7ADFB /* Helpers */,
 			);
 			path = AuthorizationModule;
@@ -253,19 +276,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				513B6CEE2BCFC8040006DD25 /* AuthViewController.swift in Sources */,
 				51CF88622BC3B8D800196E8A /* SignInVC.swift in Sources */,
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
 				51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
+				513B6CC12BCF987E0006DD25 /* EmailChecker.swift in Sources */,
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
+				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
 				51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */,
 				513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */,
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
 				51B329762BC6B8DF00D7ADFB /* AuthButton.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
+				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
 				513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */,
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
+				513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */,
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
 				51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
