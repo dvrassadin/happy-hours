@@ -48,8 +48,8 @@ final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
     
     @objc private func goToMainModule() {
         guard isValidCredentials() else { return }
-        // TODO: Make real navigation
-        print("Opening main module")
+        // TODO: Make navigation without back button
+        navigationController?.pushViewController(MainTabBarController(), animated: true)
     }
     
     private func isValidCredentials() -> Bool {

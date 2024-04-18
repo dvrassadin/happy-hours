@@ -38,8 +38,10 @@ final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
     
     @objc private func createAccount() {
         guard isValidCredentials() else { return }
-        // TODO: Make real navigation
-        print("Create Account button pressed")
+        showAlert(.accountCreated) { _ in 
+            // TODO: Make navigation without back button
+            self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+        }
     }
     
     private func isValidCredentials() -> Bool {

@@ -16,6 +16,12 @@
 		513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CC52BCF9F750006DD25 /* NewPasswordVC.swift */; };
 		513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CC72BCF9F950006DD25 /* NewPasswordView.swift */; };
 		513B6CEE2BCFC8040006DD25 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CED2BCFC8040006DD25 /* AuthViewController.swift */; };
+		513B6CF02BD02CA90006DD25 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CEF2BD02CA90006DD25 /* MainTabBarController.swift */; };
+		513B6CF42BD16E230006DD25 /* ScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CF32BD16E230006DD25 /* ScannerVC.swift */; };
+		513B6CF72BD16E4A0006DD25 /* RestaurantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CF62BD16E4A0006DD25 /* RestaurantsVC.swift */; };
+		513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CF82BD16E650006DD25 /* ProfileVC.swift */; };
+		513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */; };
+		513B6CFD2BD16EA60006DD25 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CFC2BD16EA60006DD25 /* ProfileView.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329712BC6804700D7ADFB /* AuthSizes.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
@@ -43,6 +49,12 @@
 		513B6CC52BCF9F750006DD25 /* NewPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordVC.swift; sourceTree = "<group>"; };
 		513B6CC72BCF9F950006DD25 /* NewPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordView.swift; sourceTree = "<group>"; };
 		513B6CED2BCFC8040006DD25 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		513B6CEF2BD02CA90006DD25 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		513B6CF32BD16E230006DD25 /* ScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerVC.swift; sourceTree = "<group>"; };
+		513B6CF62BD16E4A0006DD25 /* RestaurantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsVC.swift; sourceTree = "<group>"; };
+		513B6CF82BD16E650006DD25 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsView.swift; sourceTree = "<group>"; };
+		513B6CFC2BD16EA60006DD25 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329712BC6804700D7ADFB /* AuthSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSizes.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
@@ -100,6 +112,24 @@
 			path = NewPassword;
 			sourceTree = "<group>";
 		};
+		513B6CF12BD16DE70006DD25 /* Restaurants */ = {
+			isa = PBXGroup;
+			children = (
+				513B6CF62BD16E4A0006DD25 /* RestaurantsVC.swift */,
+				513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */,
+			);
+			path = Restaurants;
+			sourceTree = "<group>";
+		};
+		513B6CF52BD16E2D0006DD25 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				513B6CF82BD16E650006DD25 /* ProfileVC.swift */,
+				513B6CFC2BD16EA60006DD25 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +150,10 @@
 		519B5CE02BC58C4200BD4EB4 /* MainModule */ = {
 			isa = PBXGroup;
 			children = (
+				513B6CEF2BD02CA90006DD25 /* MainTabBarController.swift */,
+				513B6CF12BD16DE70006DD25 /* Restaurants */,
+				513B6CF32BD16E230006DD25 /* ScannerVC.swift */,
+				513B6CF52BD16E2D0006DD25 /* Profile */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";
@@ -277,15 +311,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				513B6CEE2BCFC8040006DD25 /* AuthViewController.swift in Sources */,
+				513B6CFD2BD16EA60006DD25 /* ProfileView.swift in Sources */,
 				51CF88622BC3B8D800196E8A /* SignInVC.swift in Sources */,
+				513B6CF02BD02CA90006DD25 /* MainTabBarController.swift in Sources */,
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
 				51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */,
+				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
 				513B6CC12BCF987E0006DD25 /* EmailChecker.swift in Sources */,
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
+				513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */,
 				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
 				51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */,
 				513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */,
+				513B6CF72BD16E4A0006DD25 /* RestaurantsVC.swift in Sources */,
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
 				51B329762BC6B8DF00D7ADFB /* AuthButton.swift in Sources */,
@@ -293,6 +332,7 @@
 				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
 				513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */,
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
+				513B6CF42BD16E230006DD25 /* ScannerVC.swift in Sources */,
 				513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */,
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
 				51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */,

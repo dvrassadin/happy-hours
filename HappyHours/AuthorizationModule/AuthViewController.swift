@@ -12,10 +12,14 @@ class AuthViewController: UIViewController {
     // MARK: Alerts
     
     enum AlertType {
-        case invalidEmail, invalidPasswordLength, notMatchPasswords, accountCreated, emptyName
+        case invalidEmail
+        case invalidPasswordLength
+        case notMatchPasswords
+        case accountCreated
+        case emptyName
     }
     
-    func showAlert(_ type: AlertType) {
+    func showAlert(_ type: AlertType, handler: ((UIAlertAction) -> Void)? = nil) {
         let message: String
         let title: String
         
@@ -34,7 +38,7 @@ class AuthViewController: UIViewController {
             message = String(localized: "Please, enter your name.")
         case .accountCreated:
             title = String(localized: "Success")
-            message = String(localized: "Your account was created. Enter your email and password to sign in.")
+            message = String(localized: "Your account was created.")
         }
         
         let alertController = UIAlertController(
@@ -42,7 +46,7 @@ class AuthViewController: UIViewController {
             message: message,
             preferredStyle: .alert
         )
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
         
         present(alertController, animated: true)
     }

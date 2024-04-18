@@ -36,7 +36,7 @@ final class NewPasswordVC: AuthViewController, PasswordChecker {
     
     @objc private func goToSignInVC() {
         guard isValidCredentials() else { return }
-        navigationController?.pushViewController(SignInVC(), animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     private func isValidCredentials() -> Bool {
