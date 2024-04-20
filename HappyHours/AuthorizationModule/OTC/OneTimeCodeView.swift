@@ -98,10 +98,6 @@ final class OneTimeCodeView: AuthScreenView {
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
-//                codeTextField.topAnchor.constraint(
-//                    equalTo: screenNameLabel.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-//                ),
                 codeTextField.topAnchor.constraint(
                     equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
                     multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
@@ -156,6 +152,7 @@ extension OneTimeCodeView {
         replacementString string: String
     ) -> Bool {
         guard let count = textField.text?.count else { return false }
+        
         return count < numberOfDigits || string.isEmpty
     }
     

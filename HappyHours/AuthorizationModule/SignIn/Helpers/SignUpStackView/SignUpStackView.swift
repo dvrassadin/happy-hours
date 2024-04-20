@@ -54,7 +54,6 @@ final class SignUpStackView: UIStackView {
         addArrangedSubview(label)
         addArrangedSubview(button)
         
-        
         button.addTarget(
             nil,
             action: #selector(SignUpStackViewDelegate.goToSignUp),

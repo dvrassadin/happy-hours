@@ -50,11 +50,6 @@ final class SignInView: AuthScreenView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        setUpConstrains()
-//    }
-    
     // MARK: Set up UI
     
     private func setUpUI() {
@@ -74,10 +69,6 @@ final class SignInView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                emailTextField.topAnchor.constraint(
-//                    equalTo: screenNameLabel.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-//                ),
                 emailTextField.topAnchor.constraint(
                     equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
                     multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
@@ -92,10 +83,6 @@ final class SignInView: AuthScreenView {
                 ),
                 
                 passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                passwordTextField.topAnchor.constraint(
-//                    equalTo: emailTextField.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
-//                ),
                 passwordTextField.topAnchor.constraint(
                     equalToSystemSpacingBelow: emailTextField.bottomAnchor,
                     multiplier: AuthSizes.topBetweenTextFieldsMultiplier
@@ -103,10 +90,6 @@ final class SignInView: AuthScreenView {
                 passwordTextField.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
                 passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
                 
-//                logInButton.topAnchor.constraint(
-//                    equalTo: passwordTextField.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
-//                ),
                 logInButton.topAnchor.constraint(
                     equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
                     multiplier: AuthSizes.topBetweenTextFieldsMultiplier
@@ -115,10 +98,6 @@ final class SignInView: AuthScreenView {
                 logInButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
                 logInButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
                 
-//                resetButton.topAnchor.constraint(
-//                    equalTo: logInButton.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topReserButtonMultiplier
-//                ),
                 resetButton.topAnchor.constraint(
                     equalToSystemSpacingBelow: logInButton.bottomAnchor,
                     multiplier: AuthSizes.topReserButtonMultiplier

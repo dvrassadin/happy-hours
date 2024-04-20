@@ -26,11 +26,6 @@ final class MainTabBarController: UITabBarController {
     
     private func setUpTabs() {
         let restaurantsVC = RestaurantsVC()
-//        let restaurantsTabBarItem = UITabBarItem(
-//            title: String(localized: "Restaurants"),
-//            image: UIImage(systemName: "fork.knife"),
-//            tag: 0
-//        )
         let restaurantsTabBarItem = UITabBarItem(
             title: String(localized: "Restaurants"),
             image: UIImage(systemName: "fork.knife"),
@@ -39,11 +34,6 @@ final class MainTabBarController: UITabBarController {
         restaurantsVC.tabBarItem = restaurantsTabBarItem
         
         let scannerVC = ScannerVC()
-//        let scannerTabBarItem = UITabBarItem(
-//            title: String(localized: "Scanner"),
-//            image: UIImage(systemName: "qrcode"),
-//            tag: 1
-//        )
         let scannerTabBarItem = UITabBarItem(
             title: String(localized: "Scanner"),
             image: UIImage(systemName: "qrcode"),
@@ -52,11 +42,6 @@ final class MainTabBarController: UITabBarController {
         scannerVC.tabBarItem = scannerTabBarItem
         
         let profileVC = ProfileVC()
-//        let profileTabBarItem = UITabBarItem(
-//            title: String(localized: "Profile"),
-//            image: UIImage(systemName: "person"),
-//            tag: 2
-//        )
         let profileTabBarItem = UITabBarItem(
             title: String(localized: "Profile"),
             image: UIImage(systemName: "person"),

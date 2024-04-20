@@ -24,17 +24,11 @@ final class ResetPasswordView: AuthScreenView {
     init() {
         super.init(screenName: String(localized: "Reset Password"))
         setUpUI()
-//        addSubViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        setUpConstraints()
-//    }
     
     // MARK: Set up UI
     
@@ -52,10 +46,6 @@ final class ResetPasswordView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                emailTextField.topAnchor.constraint(
-//                    equalTo: screenNameLabel.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-//                ),
                 emailTextField.topAnchor.constraint(
                     equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
                     multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
@@ -69,10 +59,6 @@ final class ResetPasswordView: AuthScreenView {
                     multiplier: CommonSizes.textFieldHeightMultiplier
                 ),
                 
-//                continueButton.topAnchor.constraint(
-//                    equalTo: emailTextField.bottomAnchor,
-//                    constant: frame.height * AuthSizes.topBetweenTextFieldsMultiplier
-//                ),
                 continueButton.topAnchor.constraint(
                     equalToSystemSpacingBelow: emailTextField.bottomAnchor,
                     multiplier: AuthSizes.topBetweenTextFieldsMultiplier

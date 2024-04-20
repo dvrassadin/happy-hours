@@ -35,11 +35,6 @@ final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
             action: #selector(goToResetPasswordVC),
             for: .touchUpInside
         )
-//        signInView.logInButton.addTarget(
-//            self,
-//            action: #selector(goToMainModule),
-//            for: .touchUpInside
-//        )
         signInView.logInButton.addTarget(
             nil,
             action: #selector(LogInDelegate.logIn),
@@ -50,12 +45,6 @@ final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
     @objc private func goToResetPasswordVC() {
         navigationController?.pushViewController(ResetPasswordVC(), animated: true)
     }
-    
-//    @objc private func goToMainModule() {
-//        guard isValidCredentials() else { return }
-//        // TODO: Make navigation without back button
-//        navigationController?.pushViewController(MainTabBarController(), animated: true)
-//    }
     
     private func isValidCredentials() -> Bool {
         guard let email = signInView.emailTextField.text, isValidEmail(email) else {

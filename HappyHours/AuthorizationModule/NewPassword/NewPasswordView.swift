@@ -48,37 +48,39 @@ final class NewPasswordView: AuthScreenView {
     }
     
     private func setUpConstraints() {
-        NSLayoutConstraint.activate([
-            passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            passwordTextField.topAnchor.constraint(
-                equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
-                multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-            ),
-            passwordTextField.widthAnchor.constraint(
-                equalTo: widthAnchor,
-                multiplier: CommonSizes.textFieldWidthMultiplier
-            ),
-            passwordTextField.heightAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.heightAnchor,
-                multiplier: CommonSizes.textFieldHeightMultiplier
-            ),
-            
-            confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            confirmPasswordTextField.topAnchor.constraint(
-                equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
-                multiplier: AuthSizes.topBetweenTextFieldsMultiplier
-            ),
-            confirmPasswordTextField.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor),
-            confirmPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
-            
-            createButton.topAnchor.constraint(
-                equalToSystemSpacingBelow: confirmPasswordTextField.bottomAnchor,
-                multiplier: AuthSizes.topBetweenTextFieldsMultiplier
-            ),
-            createButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            createButton.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor),
-            createButton.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor)
-        ])
+        NSLayoutConstraint.activate(
+            [
+                passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+                passwordTextField.topAnchor.constraint(
+                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+                ),
+                passwordTextField.widthAnchor.constraint(
+                    equalTo: widthAnchor,
+                    multiplier: CommonSizes.textFieldWidthMultiplier
+                ),
+                passwordTextField.heightAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.heightAnchor,
+                    multiplier: CommonSizes.textFieldHeightMultiplier
+                ),
+                
+                confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+                confirmPasswordTextField.topAnchor.constraint(
+                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+                ),
+                confirmPasswordTextField.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor),
+                confirmPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
+                
+                createButton.topAnchor.constraint(
+                    equalToSystemSpacingBelow: confirmPasswordTextField.bottomAnchor,
+                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+                ),
+                createButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                createButton.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor),
+                createButton.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor)
+            ]
+        )
     }
 
 }

@@ -15,7 +15,6 @@ extension UIWindow: LogInDelegate {
         let mainVC = MainTabBarController()
         if let navigationController = rootViewController as? UINavigationController {
             navigationController.setViewControllers([mainVC], animated: true)
-            
         } else {
             rootViewController = mainVC
         }

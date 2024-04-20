@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - RestaurantsVC class
+
 final class RestaurantsVC: UIViewController {
     
     // MARK: Properties
@@ -19,4 +21,11 @@ final class RestaurantsVC: UIViewController {
         view = restaurantsView
     }
 
+}
+
+// MARK: - Preview
+
+@available(iOS 17, *)
+#Preview {
+    RestaurantsVC()
 }

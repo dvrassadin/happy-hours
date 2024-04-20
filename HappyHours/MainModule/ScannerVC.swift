@@ -60,7 +60,6 @@ final class ScannerVC: UIViewController {
         }
         
         view.layer.addSublayer(video)
-        
     }
     
     // MARK: Alert

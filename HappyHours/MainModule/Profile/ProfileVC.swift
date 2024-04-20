@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - ProfileVC class
+
 final class ProfileVC: UIViewController {
 
     // MARK: Properties
@@ -23,4 +25,11 @@ final class ProfileVC: UIViewController {
         super.viewDidLoad()
     }
 
+}
+
+// MARK: - Preview
+
+@available(iOS 17, *)
+#Preview {
+    ProfileVC()
 }
