@@ -68,7 +68,6 @@ class AuthScreenView: UIView {
         backgroundColor = .Custom.background
         addSubviews()
         setUpConstrains()
-//        setNeedsUpdateConstraints()
         // TODO: Decide whether to use keyboardLayoutGuide or both
 //        setUpKeyboardShowAndHiding()
     }
