@@ -45,6 +45,14 @@ final class ProfileView: UIView {
         NSLayoutConstraint.activate(
             [
                 logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                logOutButton.widthAnchor.constraint(
+                    equalTo: widthAnchor,
+                    multiplier: CommonSizes.textFieldWidthMultiplier
+                ),
+                logOutButton.heightAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.heightAnchor,
+                    multiplier: CommonSizes.textFieldHeightMultiplier
+                ),
                 
                 keyboardLayoutGuide.topAnchor.constraint(
                     greaterThanOrEqualToSystemSpacingBelow: logOutButton.bottomAnchor,

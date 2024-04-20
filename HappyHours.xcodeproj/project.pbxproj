@@ -25,6 +25,7 @@
 		5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */; };
 		5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9102BD3E82600659D73 /* LogOutDelegate.swift */; };
 		5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */; };
+		5148B92B2BD40E8600659D73 /* CommonSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B92A2BD40E8600659D73 /* CommonSizes.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329712BC6804700D7ADFB /* AuthSizes.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
@@ -61,6 +62,7 @@
 		5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInDelegate.swift; sourceTree = "<group>"; };
 		5148B9102BD3E82600659D73 /* LogOutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDelegate.swift; sourceTree = "<group>"; };
 		5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Navigation.swift"; sourceTree = "<group>"; };
+		5148B92A2BD40E8600659D73 /* CommonSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSizes.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329712BC6804700D7ADFB /* AuthSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSizes.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */,
 				5148B9102BD3E82600659D73 /* LogOutDelegate.swift */,
 				51B329752BC6B8DF00D7ADFB /* CommonButton.swift */,
+				5148B92A2BD40E8600659D73 /* CommonSizes.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
 				513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */,
 				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
+				5148B92B2BD40E8600659D73 /* CommonSizes.swift in Sources */,
 				51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */,
 				513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */,
 				513B6CF72BD16E4A0006DD25 /* RestaurantsVC.swift in Sources */,

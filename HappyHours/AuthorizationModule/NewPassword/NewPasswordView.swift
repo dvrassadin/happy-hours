@@ -56,11 +56,11 @@ final class NewPasswordView: AuthScreenView {
             ),
             passwordTextField.widthAnchor.constraint(
                 equalTo: widthAnchor,
-                multiplier: AuthSizes.textFieldWidthMultiplier
+                multiplier: CommonSizes.textFieldWidthMultiplier
             ),
             passwordTextField.heightAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.heightAnchor,
-                multiplier: AuthSizes.textFieldHeightMultiplier
+                multiplier: CommonSizes.textFieldHeightMultiplier
             ),
             
             confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),

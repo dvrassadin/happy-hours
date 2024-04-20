@@ -8,6 +8,7 @@
 import Foundation
 
 enum AuthSizes {
+    
 //    static let appNameLabelTopMultiplier = 0.015
 //    static let screenNameLabelTopMultiplier = 0.125
 //    static let topBetweenScreenNameAndFirstTextFiledMultiplier = 0.05
@@ -20,10 +21,11 @@ enum AuthSizes {
     static let appNameLabelTopMultiplier: CGFloat = 1.8
     static let screenNameLabelTopMultiplier: CGFloat = 13
     static let topBetweenScreenNameAndFirstTextFiledMultiplier: CGFloat = 4
-    static let textFieldHeightMultiplier = 0.0542
-    static let textFieldWidthMultiplier = 0.6853
+//    static let textFieldHeightMultiplier = 0.0542
+//    static let textFieldWidthMultiplier = 0.6853
     static let topBetweenTextFieldsMultiplier: CGFloat = 2
     static let topReserButtonMultiplier: CGFloat = 1.2
     static let bottomSignUpTextViewMultiplier = -0.0505
     static let oneTimeCodeWidthMultipier = 0.8
+    
 }

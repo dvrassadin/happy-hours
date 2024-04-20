@@ -18,5 +18,9 @@ final class ProfileVC: UIViewController {
     override func loadView() {
         view = profileView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 
 }

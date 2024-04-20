@@ -101,11 +101,11 @@ final class SignUpView: AuthScreenView {
                 ),
                 nameTextField.widthAnchor.constraint(
                     equalTo: widthAnchor,
-                    multiplier: AuthSizes.textFieldWidthMultiplier
+                    multiplier: CommonSizes.textFieldWidthMultiplier
                 ),
                 nameTextField.heightAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.heightAnchor,
-                    multiplier: AuthSizes.textFieldHeightMultiplier
+                    multiplier: CommonSizes.textFieldHeightMultiplier
                 ),
                 
                 dateOfBirthTextField.centerXAnchor.constraint(equalTo: centerXAnchor),

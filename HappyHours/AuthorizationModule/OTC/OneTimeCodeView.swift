@@ -112,7 +112,7 @@ final class OneTimeCodeView: AuthScreenView {
                 ),
                 codeTextField.heightAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.heightAnchor,
-                    multiplier: AuthSizes.textFieldHeightMultiplier * 2
+                    multiplier: CommonSizes.textFieldHeightMultiplier * 2
                 ),
                 codeTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
                 

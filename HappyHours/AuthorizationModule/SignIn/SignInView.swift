@@ -84,11 +84,11 @@ final class SignInView: AuthScreenView {
                 ),
                 emailTextField.widthAnchor.constraint(
                     equalTo: widthAnchor,
-                    multiplier: AuthSizes.textFieldWidthMultiplier
+                    multiplier: CommonSizes.textFieldWidthMultiplier
                 ),
                 emailTextField.heightAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.heightAnchor,
-                    multiplier: AuthSizes.textFieldHeightMultiplier
+                    multiplier: CommonSizes.textFieldHeightMultiplier
                 ),
                 
                 passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
