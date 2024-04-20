@@ -21,7 +21,7 @@ final class NewPasswordView: AuthScreenView {
         textContentType: .newPassword
     )
     
-    let createButton = AuthButton(title: String(localized: "Create"))
+    let createButton = CommonButton(title: String(localized: "Create"))
     
     // MARK: Lifecycle
     

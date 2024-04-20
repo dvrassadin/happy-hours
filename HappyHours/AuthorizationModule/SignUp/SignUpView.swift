@@ -50,7 +50,7 @@ final class SignUpView: AuthScreenView {
         textContentType: .newPassword
     )
     
-    let createAccountButton = AuthButton(title: "Create Account")
+    let createAccountButton = CommonButton(title: "Create Account")
 
     // MARK: Lifecycle
 

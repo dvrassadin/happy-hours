@@ -22,10 +22,13 @@
 		513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CF82BD16E650006DD25 /* ProfileVC.swift */; };
 		513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */; };
 		513B6CFD2BD16EA60006DD25 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CFC2BD16EA60006DD25 /* ProfileView.swift */; };
+		5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */; };
+		5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9102BD3E82600659D73 /* LogOutDelegate.swift */; };
+		5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329712BC6804700D7ADFB /* AuthSizes.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
-		51B329762BC6B8DF00D7ADFB /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* AuthButton.swift */; };
+		51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* CommonButton.swift */; };
 		51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3297B2BC90D7400D7ADFB /* SignUpStackView.swift */; };
 		51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */; };
 		51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329812BC9869600D7ADFB /* AuthTextField.swift */; };
@@ -55,10 +58,13 @@
 		513B6CF82BD16E650006DD25 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsView.swift; sourceTree = "<group>"; };
 		513B6CFC2BD16EA60006DD25 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInDelegate.swift; sourceTree = "<group>"; };
+		5148B9102BD3E82600659D73 /* LogOutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDelegate.swift; sourceTree = "<group>"; };
+		5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Navigation.swift"; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329712BC6804700D7ADFB /* AuthSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSizes.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
-		51B329752BC6B8DF00D7ADFB /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		51B329752BC6B8DF00D7ADFB /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		51B3297B2BC90D7400D7ADFB /* SignUpStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStackView.swift; sourceTree = "<group>"; };
 		51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStackViewDelegate.swift; sourceTree = "<group>"; };
 		51B329812BC9869600D7ADFB /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
@@ -130,6 +136,16 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		5148B90D2BD3E7CC00659D73 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */,
+				5148B9102BD3E82600659D73 /* LogOutDelegate.swift */,
+				51B329752BC6B8DF00D7ADFB /* CommonButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +198,6 @@
 			children = (
 				51B329812BC9869600D7ADFB /* AuthTextField.swift */,
 				51B329712BC6804700D7ADFB /* AuthSizes.swift */,
-				51B329752BC6B8DF00D7ADFB /* AuthButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -226,6 +241,8 @@
 			children = (
 				51CF885D2BC3B8D800196E8A /* AppDelegate.swift */,
 				51CF885F2BC3B8D800196E8A /* SceneDelegate.swift */,
+				5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */,
+				5148B90D2BD3E7CC00659D73 /* Common */,
 				519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */,
 				519B5CE02BC58C4200BD4EB4 /* MainModule */,
 				51CF88662BC3B8D900196E8A /* Assets.xcassets */,
@@ -316,6 +333,7 @@
 				513B6CF02BD02CA90006DD25 /* MainTabBarController.swift in Sources */,
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
 				51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */,
+				5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */,
 				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
 				513B6CC12BCF987E0006DD25 /* EmailChecker.swift in Sources */,
@@ -327,14 +345,16 @@
 				513B6CF72BD16E4A0006DD25 /* RestaurantsVC.swift in Sources */,
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
-				51B329762BC6B8DF00D7ADFB /* AuthButton.swift in Sources */,
+				51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
 				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
+				5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */,
 				513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */,
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
 				513B6CF42BD16E230006DD25 /* ScannerVC.swift in Sources */,
 				513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */,
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
+				5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */,
 				51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
 			);

@@ -24,7 +24,7 @@ final class SignInView: AuthScreenView {
         textContentType: .password
     )
     
-    let logInButton = AuthButton(title: "Log In")
+    let logInButton = CommonButton(title: "Log In")
     
     let resetButton: UIButton = {
         let button = UIButton(configuration: .plain())

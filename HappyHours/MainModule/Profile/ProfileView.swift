@@ -10,6 +10,8 @@ import UIKit
 final class ProfileView: UIView {
     
     // MARK: UI components
+    
+    private let logOutButton = CommonButton(title: String(localized: "Log Out"))
 
     // MARK: Lifecycle
     
@@ -28,14 +30,28 @@ final class ProfileView: UIView {
         backgroundColor = .Custom.background
         addSubviews()
         setUpConstraints()
+        logOutButton.addTarget(
+            nil,
+            action: #selector(LogOutDelegate.logOut),
+            for: .touchUpInside
+        )
     }
     
     private func addSubviews() {
-        
+        addSubview(logOutButton)
     }
     
     private func setUpConstraints() {
-        
+        NSLayoutConstraint.activate(
+            [
+                logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                
+                keyboardLayoutGuide.topAnchor.constraint(
+                    greaterThanOrEqualToSystemSpacingBelow: logOutButton.bottomAnchor,
+                    multiplier: 1.05
+                )
+            ]
+        )
     }
     
 }

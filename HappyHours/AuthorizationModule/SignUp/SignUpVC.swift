@@ -40,7 +40,13 @@ final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
         guard isValidCredentials() else { return }
         showAlert(.accountCreated) { _ in 
             // TODO: Make navigation without back button
-            self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+//            self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+            UIApplication.shared.sendAction(
+                #selector(LogInDelegate.logIn),
+                to: nil,
+                from: self,
+                for: nil
+            )
         }
     }
     

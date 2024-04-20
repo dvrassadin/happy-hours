@@ -17,7 +17,7 @@ final class ResetPasswordView: AuthScreenView {
         keyboardType: .emailAddress
     )
     
-    let continueButton = AuthButton(title: String(localized: "Continue"))
+    let continueButton = CommonButton(title: String(localized: "Continue"))
 
     // MARK: Lifecycle
     

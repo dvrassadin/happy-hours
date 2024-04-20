@@ -1,5 +1,5 @@
 //
-//  AuthButton.swift
+//  CommonButton.swift
 //  HappyHours
 //
 //  Created by Daniil Rassadin on 10/4/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AuthButton: UIButton {
+final class CommonButton: UIButton {
 
     // MARK: Lifecycle
     
