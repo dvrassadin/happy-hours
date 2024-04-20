@@ -95,7 +95,13 @@ extension ScannerVC: AVCaptureMetadataOutputObjectsDelegate {
             message: object.stringValue,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.session.startRunning()
+            }
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
         session.stopRunning()
     }
     
