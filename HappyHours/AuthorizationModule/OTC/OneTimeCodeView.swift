@@ -52,13 +52,6 @@ final class OneTimeCodeView: AuthScreenView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // TODO: Find out how to set corner radius after layout
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        let cornerRadius = min(stackView.frame.height, stackView.frame.width) / 8
-//        digitsLabels.forEach { $0.layer.cornerRadius = cornerRadius }
-//    }
-    
     // MARK: Set up UI
     
     private func setUpUI() {
@@ -78,7 +71,7 @@ final class OneTimeCodeView: AuthScreenView {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textAlignment = .center
-            label.textColor = .Custom.primary
+            label.textColor = .mainText
             label.font = .boldSystemFont(ofSize: 40)
             label.layer.borderColor = UIColor.black.cgColor
             label.layer.borderWidth = 1

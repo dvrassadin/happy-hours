@@ -35,7 +35,7 @@ final class RestaurantsView: UIView {
     // MARK: Set up UI
     
     private func setUpUI() {
-        backgroundColor = .Custom.background
+        backgroundColor = .background
         addSubviews()
         setUpConstraints()
     }

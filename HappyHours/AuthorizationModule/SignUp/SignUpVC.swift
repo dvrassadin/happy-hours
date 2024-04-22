@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - SignUpVC class
 
-final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
+final class SignUpVC: AuthViewController, NameChecker, EmailChecker, PasswordChecker {
     
     // MARK: Properties
     
@@ -39,8 +39,6 @@ final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
     @objc private func createAccount() {
         guard isValidCredentials() else { return }
         showAlert(.accountCreated) { _ in 
-            // TODO: Make navigation without back button
-//            self.navigationController?.pushViewController(MainTabBarController(), animated: true)
             UIApplication.shared.sendAction(
                 #selector(LogInDelegate.logIn),
                 to: nil,
@@ -51,8 +49,13 @@ final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
     }
     
     private func isValidCredentials() -> Bool {
-        guard isValidName() else {
+        guard let name = signUpView.nameTextField.text else {
             showAlert(.emptyName)
+            return false
+        }
+        
+        guard isValidName(name) else {
+            showAlert(.invalidName)
             return false
         }
         
@@ -78,10 +81,10 @@ final class SignUpVC: AuthViewController, EmailChecker, PasswordChecker {
         return true
     }
     
-    private func isValidName() -> Bool {
-        guard let name = signUpView.nameTextField.text else { return false }
-        return !name.isEmpty
-    }
+//    private func isValidName() -> Bool {
+//        guard let name = signUpView.nameTextField.text else { return false }
+//        return !name.isEmpty && name.count < 256
+//    }
     
 }
 

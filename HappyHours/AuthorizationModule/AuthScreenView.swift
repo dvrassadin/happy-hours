@@ -17,8 +17,10 @@ class AuthScreenView: UIView {
     private let appNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+//        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = UIFont(name: "Inter-Regular_Bold", size: 24)
         label.textAlignment = .center
+        label.textColor = .mainText
         label.text = String(localized: "Happy Hours")
         return label
     }()
@@ -28,6 +30,7 @@ class AuthScreenView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textAlignment = .center
+        label.textColor = .mainText
         return label
     }()
     
@@ -65,7 +68,7 @@ class AuthScreenView: UIView {
     // MARK: Set up UI
     
     private func setUpUI() {
-        backgroundColor = .Custom.background
+        backgroundColor = .background
         addSubviews()
         setUpConstrains()
         // TODO: Decide whether to use keyboardLayoutGuide or both

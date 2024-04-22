@@ -13,13 +13,13 @@ final class SignInView: AuthScreenView {
     
     // MARK: UI components
     
-    let emailTextField = AuthTextField(
+    let emailTextField = CommonTextField(
         placeholder: String(localized: "Email Address"),
         textContentType: .emailAddress,
         keyboardType: .emailAddress
     )
     
-    let passwordTextField = AuthTextField(
+    let passwordTextField = CommonTextField(
         placeholder: String(localized: "Password"),
         textContentType: .password
     )
@@ -31,7 +31,8 @@ final class SignInView: AuthScreenView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.configuration?.attributedTitle = AttributedString(
             String(localized: "Reset Password"),
-            attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 12)])
+            attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 12),
+                                            .foregroundColor: UIColor.mainText])
         )
         button.configuration?.baseForegroundColor = .black
         return button
@@ -53,6 +54,7 @@ final class SignInView: AuthScreenView {
     // MARK: Set up UI
     
     private func setUpUI() {
+        logInButton.isEnabled = false
         addSubviews()
         setUpConstraints()
     }

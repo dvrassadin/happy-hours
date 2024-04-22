@@ -11,7 +11,7 @@ final class ResetPasswordView: AuthScreenView {
     
     // MARK: UI components
     
-    let emailTextField = AuthTextField(
+    let emailTextField = CommonTextField(
         placeholder: String(localized: "Email Address"),
         textContentType: .emailAddress,
         keyboardType: .emailAddress

@@ -11,12 +11,12 @@ final class NewPasswordView: AuthScreenView {
 
     // MARK: UI components
     
-    let passwordTextField = AuthTextField(
+    let passwordTextField = CommonTextField(
         placeholder: String(localized: "Password"),
         textContentType: .newPassword
     )
     
-    let confirmPasswordTextField = AuthTextField(
+    let confirmPasswordTextField = CommonTextField(
         placeholder: String(localized: "Confirm Password"),
         textContentType: .newPassword
     )

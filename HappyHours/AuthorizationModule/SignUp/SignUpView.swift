@@ -13,39 +13,41 @@ final class SignUpView: AuthScreenView {
     
     // MARK: UI components
     
-    let nameTextField = AuthTextField(
+    let nameTextField = CommonTextField(
         placeholder: String(localized: "Name"),
         textContentType: .name,
         keyboardType: .namePhonePad
     )
     
-    let dateOfBirthTextField = AuthTextField(
-        placeholder: String(localized: "Date of Birth"),
-        textContentType: .dateTime
-    )
+    private let dateOfBirthLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = String(localized: "Date of Birth")
+        label.textColor = .TextField.placeholder
+        return label
+    }()
     
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
         datePicker.maximumDate = .now
         datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -120, to: .now)
         return datePicker
     }()
     
-    let emailTextField = AuthTextField(
+    let emailTextField = CommonTextField(
         placeholder: String(localized: "Email Address"),
         textContentType: .emailAddress,
         keyboardType: .emailAddress
     )
     
-    let passwordTextField = AuthTextField(
+    let passwordTextField = CommonTextField(
         placeholder: String(localized: "Password"),
         textContentType: .newPassword
     )
     
-    let confirmPasswordTextField = AuthTextField(
+    let confirmPasswordTextField = CommonTextField(
         placeholder: String(localized: "Confirm Password"),
         textContentType: .newPassword
     )
@@ -68,14 +70,12 @@ final class SignUpView: AuthScreenView {
     private func setUpUI() {
         addSubviews()
         setUpConstraints()
-        dateOfBirthTextField.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)
     }
     
     private func addSubviews() {
-        dateOfBirthTextField.inputView = datePicker
         addSubview(nameTextField)
-        addSubview(dateOfBirthTextField)
+        addSubview(dateOfBirthLabel)
+        addSubview(datePicker)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(confirmPasswordTextField)
@@ -99,17 +99,22 @@ final class SignUpView: AuthScreenView {
                     multiplier: CommonSizes.textFieldHeightMultiplier
                 ),
                 
-                dateOfBirthTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                dateOfBirthTextField.topAnchor.constraint(
+                dateOfBirthLabel.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
+                dateOfBirthLabel.centerYAnchor.constraint(equalTo: datePicker.centerYAnchor),
+                dateOfBirthLabel.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
+                dateOfBirthLabel.trailingAnchor.constraint(equalTo: datePicker.leadingAnchor),
+                
+                
+                datePicker.topAnchor.constraint(
                     equalToSystemSpacingBelow: nameTextField.bottomAnchor,
                     multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
-                dateOfBirthTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
-                dateOfBirthTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
+                datePicker.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
+                datePicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
                 
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
                 emailTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: dateOfBirthTextField.bottomAnchor,
+                    equalToSystemSpacingBelow: datePicker.bottomAnchor,
                     multiplier: AuthSizes.topBetweenTextFieldsMultiplier
                 ),
                 emailTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
@@ -146,9 +151,6 @@ final class SignUpView: AuthScreenView {
     
     // MARK: User interaction
     
-    @objc private func dateChanged(datePicker: UIDatePicker) {
-        dateOfBirthTextField.text = datePicker.date.formatted(date: .long, time: .omitted)
-    }
     // TODO: Decide whether to use keyboardLayoutGuide or both
 //    override func moveUpContentToElement() -> UIView? {
 //        print(createAccountButton.frame)

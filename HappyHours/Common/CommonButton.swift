@@ -25,21 +25,20 @@ final class CommonButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     // MARK: Set up appearance
 
     private func setUpAppearance() {
         configuration = .borderedProminent()
-        configuration?.cornerStyle = .capsule
-        configuration?.baseForegroundColor = .Custom.primary
-        configuration?.baseBackgroundColor = .Custom.back
-        layer.shadowColor = UIColor.Custom.secondary.cgColor
-        layer.shadowOpacity = 1
-        layer.shadowRadius = 5
-        layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
+        configurationUpdateHandler = { button in
+            switch button.state {
+            case .highlighted:
+                button.configuration?.baseBackgroundColor = .Button.pressed
+            case .disabled:
+                button.configuration?.baseBackgroundColor = .Button.disabled
+            default:
+                button.configuration?.baseBackgroundColor = .Button.default
+            }
+        }
     }
     
 }

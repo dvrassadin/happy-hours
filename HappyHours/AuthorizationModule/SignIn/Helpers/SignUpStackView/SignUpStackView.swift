@@ -27,7 +27,16 @@ final class SignUpStackView: UIStackView {
             String(localized: "Sign up Here"),
             attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 12)])
         )
-        button.configuration?.baseForegroundColor = .Custom.primary
+        button.configurationUpdateHandler = { button in
+            switch button.state {
+            case .highlighted:
+                button.configuration?.baseForegroundColor = .Button.pressed
+            case .disabled:
+                button.configuration?.baseForegroundColor = .Button.disabled
+            default:
+                button.configuration?.baseForegroundColor = .Button.default
+            }
+        }
         button.configuration?.contentInsets = .zero
         return button
     }()

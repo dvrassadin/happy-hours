@@ -22,8 +22,8 @@ final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
         view = signInView
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setUpNavigation()
     }
     
@@ -36,9 +36,20 @@ final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
             for: .touchUpInside
         )
         signInView.logInButton.addTarget(
-            nil,
-            action: #selector(LogInDelegate.logIn),
+            self,
+            action: #selector(goToMainModule),
             for: .touchUpInside
+        )
+    }
+    
+    @objc private func goToMainModule() {
+        guard isValidCredentials() else { return }
+        
+        UIApplication.shared.sendAction(
+            #selector(LogInDelegate.logIn),
+            to: nil,
+            from: self,
+            for: nil
         )
     }
     

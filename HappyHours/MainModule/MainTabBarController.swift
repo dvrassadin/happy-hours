@@ -19,8 +19,9 @@ final class MainTabBarController: UITabBarController {
     // MARK: Set up UI
     
     private func setUpUI() {
-        view.backgroundColor = .Custom.background
-        tabBar.tintColor = .Custom.primary
+        view.backgroundColor = .background
+        tabBar.tintColor = .main
+        title = String(localized: "Happy Hours")
         setUpTabs()
     }
     

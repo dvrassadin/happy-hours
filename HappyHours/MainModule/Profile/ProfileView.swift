@@ -63,7 +63,7 @@ final class ProfileView: UIView {
     // MARK: Set up UI
     
     private func setUpUI() {
-        backgroundColor = .Custom.background
+        backgroundColor = .background
         addSubviews()
         setUpConstraints()
         logOutButton.addTarget(
@@ -118,8 +118,6 @@ final class ProfileView: UIView {
                     equalTo: safeAreaLayoutGuide.trailingAnchor,
                     constant: -10
                 ),
-//                editButton.leadingAnchor.constraint(lessThanOrEqualTo: nameLabel.trailingAnchor),
-//                editButton.leadingAnchor.constraint(lessThanOrEqualTo: emailLabel.trailingAnchor),
                 
                 logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 logOutButton.widthAnchor.constraint(

@@ -22,10 +22,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-//        let vc = SignInVC()
-        let vc = MainTabBarController()
+        let vc = SignInVC()
+//        let vc = MainTabBarController()
         let navigationController = UINavigationController(rootViewController: vc)
-        navigationController.navigationBar.tintColor = .Custom.primary
+        navigationController.navigationBar.tintColor = .main
         window?.rootViewController = navigationController
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()

@@ -17,6 +17,7 @@ class AuthViewController: UIViewController {
         case notMatchPasswords
         case accountCreated
         case emptyName
+        case invalidName
     }
     
     func showAlert(_ type: AlertType, handler: ((UIAlertAction) -> Void)? = nil) {
@@ -39,6 +40,9 @@ class AuthViewController: UIViewController {
         case .accountCreated:
             title = String(localized: "Success")
             message = String(localized: "Your account was created.")
+        case .invalidName:
+            title = String(localized: "Invalid Name")
+            message = String(localized: "Name should not be empty and contains digits.")
         }
         
         let alertController = UIAlertController(

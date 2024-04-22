@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		512D00562BD6B3DB0057D696 /* NameChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00552BD6B3DB0057D696 /* NameChecker.swift */; };
+		512D00582BD6C1EF0057D696 /* Inter-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 512D00572BD6C1EF0057D696 /* Inter-VariableFont.ttf */; };
 		5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5138299C2BCD747800AA4878 /* ResetPasswordView.swift */; };
 		5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5138299E2BCD74AB00AA4878 /* ResetPasswordVC.swift */; };
 		513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513829A12BCD90D500AA4878 /* OneTimeCodeVC.swift */; };
@@ -34,7 +36,7 @@
 		51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* CommonButton.swift */; };
 		51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3297B2BC90D7400D7ADFB /* SignUpStackView.swift */; };
 		51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */; };
-		51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329812BC9869600D7ADFB /* AuthTextField.swift */; };
+		51B329822BC9869600D7ADFB /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329812BC9869600D7ADFB /* CommonTextField.swift */; };
 		51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329832BCA686D00D7ADFB /* SignUpView.swift */; };
 		51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */; };
 		51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF885D2BC3B8D800196E8A /* AppDelegate.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		512D00552BD6B3DB0057D696 /* NameChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChecker.swift; sourceTree = "<group>"; };
+		512D00572BD6C1EF0057D696 /* Inter-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-VariableFont.ttf"; sourceTree = "<group>"; };
 		5138299C2BCD747800AA4878 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		5138299E2BCD74AB00AA4878 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		513829A12BCD90D500AA4878 /* OneTimeCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeVC.swift; sourceTree = "<group>"; };
@@ -73,7 +77,7 @@
 		51B329752BC6B8DF00D7ADFB /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		51B3297B2BC90D7400D7ADFB /* SignUpStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStackView.swift; sourceTree = "<group>"; };
 		51B3297D2BC9138600D7ADFB /* SignUpStackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStackViewDelegate.swift; sourceTree = "<group>"; };
-		51B329812BC9869600D7ADFB /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		51B329812BC9869600D7ADFB /* CommonTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		51B329832BCA686D00D7ADFB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		51CF885A2BC3B8D800196E8A /* HappyHours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyHours.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,8 +152,11 @@
 			children = (
 				5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */,
 				5148B9102BD3E82600659D73 /* LogOutDelegate.swift */,
+				5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */,
 				51B329752BC6B8DF00D7ADFB /* CommonButton.swift */,
 				5148B92A2BD40E8600659D73 /* CommonSizes.swift */,
+				51B329812BC9869600D7ADFB /* CommonTextField.swift */,
+				512D00552BD6B3DB0057D696 /* NameChecker.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -169,12 +176,12 @@
 				51B329732BC68BC000D7ADFB /* AuthScreenView.swift */,
 				513B6CC22BCF98D10006DD25 /* PasswordChecker.swift */,
 				513B6CC02BCF987E0006DD25 /* EmailChecker.swift */,
+				51B329712BC6804700D7ADFB /* AuthSizes.swift */,
 				519B5CE12BC58C7000BD4EB4 /* SignIn */,
 				519B5CE32BC58CFA00BD4EB4 /* SignUp */,
 				5138299B2BCD745300AA4878 /* ResetPassword */,
 				513829A02BCD90B600AA4878 /* OTC */,
 				513B6CC42BCF9F430006DD25 /* NewPassword */,
-				51B3296C2BC6568300D7ADFB /* Helpers */,
 			);
 			path = AuthorizationModule;
 			sourceTree = "<group>";
@@ -208,15 +215,6 @@
 				51B329832BCA686D00D7ADFB /* SignUpView.swift */,
 			);
 			path = SignUp;
-			sourceTree = "<group>";
-		};
-		51B3296C2BC6568300D7ADFB /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				51B329812BC9869600D7ADFB /* AuthTextField.swift */,
-				51B329712BC6804700D7ADFB /* AuthSizes.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		51B3297F2BC923B200D7ADFB /* SignUpStackView */ = {
@@ -258,11 +256,11 @@
 			children = (
 				51CF885D2BC3B8D800196E8A /* AppDelegate.swift */,
 				51CF885F2BC3B8D800196E8A /* SceneDelegate.swift */,
-				5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */,
 				5148B90D2BD3E7CC00659D73 /* Common */,
 				519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */,
 				519B5CE02BC58C4200BD4EB4 /* MainModule */,
 				51CF88662BC3B8D900196E8A /* Assets.xcassets */,
+				512D00572BD6C1EF0057D696 /* Inter-VariableFont.ttf */,
 				51CF88682BC3B8D900196E8A /* LaunchScreen.storyboard */,
 				51CF886B2BC3B8D900196E8A /* Info.plist */,
 			);
@@ -331,6 +329,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				512D00582BD6C1EF0057D696 /* Inter-VariableFont.ttf in Resources */,
 				51CF88672BC3B8D900196E8A /* Assets.xcassets in Resources */,
 				51CF88722BC3B93000196E8A /* .gitignore in Resources */,
 				51CF886A2BC3B8D900196E8A /* Base in Resources */,
@@ -368,6 +367,7 @@
 				5148B95A2BD61C8300659D73 /* Restaurant.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
 				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
+				512D00562BD6B3DB0057D696 /* NameChecker.swift in Sources */,
 				5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */,
 				513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */,
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
@@ -375,7 +375,7 @@
 				513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */,
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
 				5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */,
-				51B329822BC9869600D7ADFB /* AuthTextField.swift in Sources */,
+				51B329822BC9869600D7ADFB /* CommonTextField.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
