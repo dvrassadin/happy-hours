@@ -11,6 +11,42 @@ final class ProfileView: UIView {
     
     // MARK: UI components
     
+    let subscriptionStatusLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let userImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    let emailLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    let editButton: UIButton = {
+        let button = UIButton(configuration: .plain())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
+        button.setTitle(String(localized: "Edit"), for: .normal)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        return button
+    }()
+    
     private let logOutButton = CommonButton(title: String(localized: "Log Out"))
 
     // MARK: Lifecycle
@@ -38,12 +74,53 @@ final class ProfileView: UIView {
     }
     
     private func addSubviews() {
+        addSubview(subscriptionStatusLabel)
+        addSubview(userImageView)
+        addSubview(nameLabel)
+        addSubview(emailLabel)
+        addSubview(editButton)
         addSubview(logOutButton)
     }
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
+                subscriptionStatusLabel.topAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.topAnchor,
+                    constant: 10
+                ),
+                subscriptionStatusLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+                
+                userImageView.topAnchor.constraint(
+                    equalTo: subscriptionStatusLabel.bottomAnchor,
+                    constant: 20
+                ),
+                userImageView.leadingAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.leadingAnchor,
+                    constant: 10
+                ),
+                userImageView.widthAnchor.constraint(equalToConstant: 70),
+                userImageView.heightAnchor.constraint(equalTo: userImageView.widthAnchor),
+                
+                nameLabel.leadingAnchor.constraint(
+                    equalTo: userImageView.trailingAnchor,
+                    constant: 10
+                ),
+                nameLabel.bottomAnchor.constraint(equalTo: userImageView.centerYAnchor),
+                nameLabel.trailingAnchor.constraint(equalTo: editButton.leadingAnchor),
+                
+                emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+                emailLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+                emailLabel.trailingAnchor.constraint(equalTo: editButton.leadingAnchor),
+                
+                editButton.centerYAnchor.constraint(equalTo: userImageView.centerYAnchor),
+                editButton.trailingAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.trailingAnchor,
+                    constant: -10
+                ),
+//                editButton.leadingAnchor.constraint(lessThanOrEqualTo: nameLabel.trailingAnchor),
+//                editButton.leadingAnchor.constraint(lessThanOrEqualTo: emailLabel.trailingAnchor),
+                
                 logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 logOutButton.widthAnchor.constraint(
                     equalTo: widthAnchor,
@@ -60,6 +137,13 @@ final class ProfileView: UIView {
                 )
             ]
         )
+    }
+    
+    func setUpUser() {
+        subscriptionStatusLabel.text = "Active"
+        userImageView.image = UIImage(systemName: "person.circle")
+        nameLabel.text = "User"
+        emailLabel.text = "email@example.com"
     }
     
 }

@@ -51,4 +51,12 @@ final class MainTabBarController: UITabBarController {
         
         viewControllers = [restaurantsVC, scannerVC, profileVC]
     }
+    
+}
+
+// MARK: - Preview
+
+@available(iOS 17, *)
+#Preview {
+    MainTabBarController()
 }

@@ -26,6 +26,8 @@
 		5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9102BD3E82600659D73 /* LogOutDelegate.swift */; };
 		5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */; };
 		5148B92B2BD40E8600659D73 /* CommonSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B92A2BD40E8600659D73 /* CommonSizes.swift */; };
+		5148B95A2BD61C8300659D73 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9592BD61C8300659D73 /* Restaurant.swift */; };
+		5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329712BC6804700D7ADFB /* AuthSizes.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
@@ -63,6 +65,8 @@
 		5148B9102BD3E82600659D73 /* LogOutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDelegate.swift; sourceTree = "<group>"; };
 		5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Navigation.swift"; sourceTree = "<group>"; };
 		5148B92A2BD40E8600659D73 /* CommonSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSizes.swift; sourceTree = "<group>"; };
+		5148B9592BD61C8300659D73 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsTableViewCell.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329712BC6804700D7ADFB /* AuthSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSizes.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			children = (
 				513B6CF62BD16E4A0006DD25 /* RestaurantsVC.swift */,
 				513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */,
+				5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */,
 			);
 			path = Restaurants;
 			sourceTree = "<group>";
@@ -147,6 +152,14 @@
 				5148B92A2BD40E8600659D73 /* CommonSizes.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		5148B9582BD61C6D00659D73 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5148B9592BD61C8300659D73 /* Restaurant.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */ = {
@@ -173,6 +186,7 @@
 				513B6CF12BD16DE70006DD25 /* Restaurants */,
 				513B6CF32BD16E230006DD25 /* ScannerVC.swift */,
 				513B6CF52BD16E2D0006DD25 /* Profile */,
+				5148B9582BD61C6D00659D73 /* Models */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";
@@ -343,6 +357,7 @@
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
 				513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */,
 				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
+				5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */,
 				5148B92B2BD40E8600659D73 /* CommonSizes.swift in Sources */,
 				51B329722BC6804700D7ADFB /* AuthSizes.swift in Sources */,
 				513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */,
@@ -350,6 +365,7 @@
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
 				51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */,
+				5148B95A2BD61C8300659D73 /* Restaurant.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
 				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
 				5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */,
