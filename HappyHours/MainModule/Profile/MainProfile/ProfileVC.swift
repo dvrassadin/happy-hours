@@ -34,12 +34,22 @@ final class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigation()
-        profileView.setUpUser(user: model.user)
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        profileView.setUser(user: model.user)
     }
     
     // MARK: Navigation
     
     private func setUpNavigation() {
+        profileView.profileButton.addAction(UIAction { [weak self] _ in
+            guard let self else { return }
+            let editProfileVC = EditProfileVC(model: self.model)
+            self.navigationController?.pushViewController(editProfileVC, animated: true)
+        }, for: .touchUpInside)
+        
         profileView.logOutButton.addAction(UIAction { [weak self] _ in
             self?.logOut()
         }, for: .touchUpInside)

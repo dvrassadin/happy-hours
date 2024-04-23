@@ -124,7 +124,7 @@ final class ProfileView: UIView {
         )
     }
     
-    func setUpUser(user: User) {
+    func setUser(user: User) {
         if let avatar = user.avatar {
             userImageView.image = avatar
         } else {

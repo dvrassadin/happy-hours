@@ -19,7 +19,6 @@ final class RestaurantsTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-//        imageView.clipsToBounds = true
         return imageView
     }()
     

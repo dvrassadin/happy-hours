@@ -81,11 +81,6 @@ final class SignUpVC: AuthViewController, NameChecker, EmailChecker, PasswordChe
         return true
     }
     
-//    private func isValidName() -> Bool {
-//        guard let name = signUpView.nameTextField.text else { return false }
-//        return !name.isEmpty && name.count < 256
-//    }
-    
 }
 
 // MARK: - Preview

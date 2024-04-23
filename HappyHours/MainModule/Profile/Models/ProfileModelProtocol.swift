@@ -11,4 +11,6 @@ protocol ProfileModelProtocol {
     
     var user: User { get }
     
+    func updateUser(_ user: User)
+    
 }

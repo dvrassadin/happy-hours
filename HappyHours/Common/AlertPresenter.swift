@@ -1,24 +1,24 @@
 //
-//  AuthViewController.swift
+//  AlertPresenter.swift
 //  HappyHours
 //
-//  Created by Daniil Rassadin on 17/4/24.
+//  Created by Daniil Rassadin on 23/4/24.
 //
 
 import UIKit
 
-class AuthViewController: UIViewController {
-    
-    // MARK: Alerts
-    
-//    enum AlertType {
-//        case invalidEmail
-//        case invalidPasswordLength
-//        case notMatchPasswords
-//        case accountCreated
-//        case emptyName
-//        case invalidName
-//    }
+enum AlertType {
+    case invalidEmail
+    case invalidPasswordLength
+    case notMatchPasswords
+    case accountCreated
+    case emptyName
+    case invalidName
+}
+
+protocol AlertPresenter: UIViewController { }
+
+extension AlertPresenter {
     
     func showAlert(_ type: AlertType, handler: ((UIAlertAction) -> Void)? = nil) {
         let message: String

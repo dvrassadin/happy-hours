@@ -1,17 +1,31 @@
 //
-//  SignUpView.swift
+//  EditProfileView.swift
 //  HappyHours
 //
-//  Created by Daniil Rassadin on 13/4/24.
+//  Created by Daniil Rassadin on 23/4/24.
 //
 
 import UIKit
 
-// MARK: - SignUpView class
-
-final class SignUpView: AuthScreenView {
+final class EditProfileView: UIView {
     
     // MARK: UI components
+    
+    let userImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }()
+    
+    let editImageButton: UIButton = {
+        let button = UIButton(configuration: .plain())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration?.image = UIImage(systemName: "pencil.circle.fill")
+        button.configuration?.baseForegroundColor = .main
+        return button
+    }()
     
     let nameTextField = CommonTextField(
         placeholder: String(localized: "Name"),
@@ -43,22 +57,12 @@ final class SignUpView: AuthScreenView {
         keyboardType: .emailAddress
     )
     
-    let passwordTextField = CommonTextField(
-        placeholder: String(localized: "Password"),
-        textContentType: .newPassword
-    )
-    
-    let confirmPasswordTextField = CommonTextField(
-        placeholder: String(localized: "Confirm Password"),
-        textContentType: .newPassword
-    )
-    
-    let createAccountButton = CommonButton(title: "Create Account")
+    let updateButton = CommonButton(title: String(localized: "Update"))
 
     // MARK: Lifecycle
-
+    
     init() {
-        super.init(screenName: "Create an Account")
+        super.init(frame: .zero)
         setUpUI()
     }
     
@@ -67,27 +71,59 @@ final class SignUpView: AuthScreenView {
     }
     
     // MARK: Set up UI
-    
+
     private func setUpUI() {
+        backgroundColor = .background
         addSubviews()
         setUpConstraints()
     }
     
     private func addSubviews() {
+        addSubview(userImageView)
+        userImageView.addSubview(editImageButton)
         addSubview(nameTextField)
         addSubview(dateOfBirthLabel)
         addSubview(datePicker)
         addSubview(emailTextField)
-        addSubview(passwordTextField)
-        addSubview(confirmPasswordTextField)
-        addSubview(createAccountButton)
+        addSubview(updateButton)
     }
     
     private func setUpConstraints() {
+        let editButtonCenterX = NSLayoutConstraint(
+            item: editImageButton,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: userImageView,
+            attribute: .trailing,
+            multiplier: 0.8536,
+            constant: 0
+        )
+        let editButtonCenterY = NSLayoutConstraint(
+            item: editImageButton,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: userImageView,
+            attribute: .bottom,
+            multiplier: 0.8536,
+            constant: 0
+        )
         NSLayoutConstraint.activate(
             [
+                userImageView.topAnchor.constraint(
+                    equalTo: safeAreaLayoutGuide.topAnchor,
+                    constant: 20
+                ),
+                userImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+                userImageView.widthAnchor.constraint(equalToConstant: 80),
+                userImageView.heightAnchor.constraint(equalTo: userImageView.widthAnchor),
+                
+                editImageButton.widthAnchor.constraint(equalToConstant: 20),
+                editImageButton.heightAnchor.constraint(equalTo: editImageButton.widthAnchor),
+                editButtonCenterX,
+                editButtonCenterY,
+                
                 nameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                Constraints.spaceBeforeFirstElement(for: nameTextField, under: screenNameLabel),
+                Constraints.spaceBeforeFirstElement(for: nameTextField, under: userImageView),
                 Constraints.textFieldAndButtonWidthConstraint(for: nameTextField, on: self),
                 Constraints.textFieldAndButtonHeighConstraint(for: nameTextField, on: self),
                 
@@ -105,41 +141,30 @@ final class SignUpView: AuthScreenView {
                 emailTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 emailTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
-                passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
                 Constraints.topBetweenTextFieldsAndButtons(
-                    for: passwordTextField,
+                    for: updateButton,
                     under: emailTextField
                 ),
-                passwordTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
-                passwordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
+                updateButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                updateButton.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
+                updateButton.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
-                confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                Constraints.topBetweenTextFieldsAndButtons(
-                    for: confirmPasswordTextField,
-                    under: passwordTextField
-                ),
-                confirmPasswordTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
-                confirmPasswordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
-                
-                Constraints.topBetweenTextFieldsAndButtons(
-                    for: createAccountButton,
-                    under: confirmPasswordTextField
-                ),
-                createAccountButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-                createAccountButton.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
-                createAccountButton.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
-                
-                keyboardLayoutGuide.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: createAccountButton.bottomAnchor, multiplier: 1.05)
+                keyboardLayoutGuide.topAnchor.constraint(
+                    greaterThanOrEqualToSystemSpacingBelow: updateButton.bottomAnchor,
+                    multiplier: 1.05
+                )
             ]
         )
     }
     
-    // MARK: User interaction
-    
-    // TODO: Decide whether to use keyboardLayoutGuide or both
-//    override func moveUpContentToElement() -> UIView? {
-//        print(createAccountButton.frame)
-//        return createAccountButton
-//    }
-
+    func setUser(_ user: User) {
+        if let avatar = user.avatar {
+            userImageView.image = avatar
+        } else {
+            userImageView.image = UIImage(systemName: "person.circle.fill")
+        }
+        nameTextField.text = user.name
+        datePicker.date = user.birthday
+        emailTextField.text = user.email
+    }
 }

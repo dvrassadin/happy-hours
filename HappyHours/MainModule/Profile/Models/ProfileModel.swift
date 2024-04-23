@@ -13,4 +13,10 @@ final class ProfileModel: ProfileModelProtocol {
     
     private(set) var user: User = User.example
     
+    // MARK: Updating user
+    
+    func updateUser(_ user: User) {
+        self.user = user
+    }
+    
 }
