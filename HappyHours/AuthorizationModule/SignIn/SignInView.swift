@@ -54,7 +54,6 @@ final class SignInView: AuthScreenView {
     // MARK: Set up UI
     
     private func setUpUI() {
-        logInButton.isEnabled = false
         addSubviews()
         setUpConstraints()
     }
@@ -71,30 +70,41 @@ final class SignInView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                emailTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-                ),
-                emailTextField.widthAnchor.constraint(
-                    equalTo: widthAnchor,
-                    multiplier: CommonSizes.textFieldWidthMultiplier
-                ),
-                emailTextField.heightAnchor.constraint(
-                    equalTo: safeAreaLayoutGuide.heightAnchor,
-                    multiplier: CommonSizes.textFieldHeightMultiplier
-                ),
+//                emailTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+//                ),
+                Constraints.spaceBeforeFirstElement(for: emailTextField, under: screenNameLabel),
+//                emailTextField.widthAnchor.constraint(
+//                    equalTo: widthAnchor,
+//                    multiplier: Constraints.textFieldWidthMultiplier
+//                ),
+                Constraints.textFieldAndButtonWidthConstraint(for: emailTextField, on: self),
+//                emailTextField.heightAnchor.constraint(
+//                    equalTo: safeAreaLayoutGuide.heightAnchor,
+//                    multiplier: Constraints.textFieldHeightMultiplier
+//                ),
+                Constraints.textFieldAndButtonHeighConstraint(for: emailTextField, on: self),
                 
                 passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                passwordTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                passwordTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
+//                    multiplier: Constraints.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: passwordTextField,
+                    under: emailTextField
                 ),
                 passwordTextField.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
                 passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
                 
-                logInButton.topAnchor.constraint(
-                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                logInButton.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
+//                    multiplier: Constraints.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: logInButton,
+                    under: passwordTextField
                 ),
                 logInButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 logInButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
@@ -102,7 +112,7 @@ final class SignInView: AuthScreenView {
                 
                 resetButton.topAnchor.constraint(
                     equalToSystemSpacingBelow: logInButton.bottomAnchor,
-                    multiplier: AuthSizes.topReserButtonMultiplier
+                    multiplier: 1.2
                 ),
                 resetButton.trailingAnchor.constraint(equalTo: logInButton.trailingAnchor),
                 

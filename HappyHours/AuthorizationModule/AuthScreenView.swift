@@ -105,7 +105,7 @@ class AuthScreenView: UIView {
                 //            ),
                 appNameLabel.topAnchor.constraint(
                     lessThanOrEqualToSystemSpacingBelow: safeAreaLayoutGuide.topAnchor,
-                    multiplier: AuthSizes.appNameLabelTopMultiplier
+                    multiplier: 1.8
                 ),
                 
                 screenNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -115,7 +115,7 @@ class AuthScreenView: UIView {
 //                )
                 screenNameLabel.topAnchor.constraint(
                     lessThanOrEqualToSystemSpacingBelow: appNameLabel.bottomAnchor,
-                    multiplier: AuthSizes.screenNameLabelTopMultiplier
+                    multiplier: 13
                 ),
                 screenNameLabel.topAnchor.constraint(greaterThanOrEqualTo: appNameLabel.bottomAnchor)
             ]

@@ -26,7 +26,8 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func setUpTabs() {
-        let restaurantsVC = RestaurantsVC()
+        let restaurantsModel: RestaurantsModelProtocol = RestaurantsModel()
+        let restaurantsVC = RestaurantsVC(model: restaurantsModel)
         let restaurantsTabBarItem = UITabBarItem(
             title: String(localized: "Restaurants"),
             image: UIImage(systemName: "fork.knife"),
@@ -42,7 +43,8 @@ final class MainTabBarController: UITabBarController {
         )
         scannerVC.tabBarItem = scannerTabBarItem
         
-        let profileVC = ProfileVC()
+        let profileModel: ProfileModelProtocol = ProfileModel()
+        let profileVC = ProfileVC(model: profileModel)
         let profileTabBarItem = UITabBarItem(
             title: String(localized: "Profile"),
             image: UIImage(systemName: "person"),

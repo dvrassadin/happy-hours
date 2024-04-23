@@ -46,22 +46,29 @@ final class ResetPasswordView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                emailTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-                ),
-                emailTextField.widthAnchor.constraint(
-                    equalTo: widthAnchor,
-                    multiplier: CommonSizes.textFieldWidthMultiplier
-                ),
-                emailTextField.heightAnchor.constraint(
-                    equalTo: safeAreaLayoutGuide.heightAnchor,
-                    multiplier: CommonSizes.textFieldHeightMultiplier
-                ),
+//                emailTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+//                ),
+                Constraints.spaceBeforeFirstElement(for: emailTextField, under: screenNameLabel),
+//                emailTextField.widthAnchor.constraint(
+//                    equalTo: widthAnchor,
+//                    multiplier: Constraints.textFieldWidthMultiplier
+//                ),
+                Constraints.textFieldAndButtonWidthConstraint(for: emailTextField, on: self),
+//                emailTextField.heightAnchor.constraint(
+//                    equalTo: safeAreaLayoutGuide.heightAnchor,
+//                    multiplier: Constraints.textFieldHeightMultiplier
+//                ),
+                Constraints.textFieldAndButtonHeighConstraint(for: emailTextField, on: self),
                 
-                continueButton.topAnchor.constraint(
-                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                continueButton.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
+//                    multiplier: Constraints.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: continueButton,
+                    under: emailTextField
                 ),
                 continueButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 continueButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),

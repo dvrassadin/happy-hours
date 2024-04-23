@@ -33,6 +33,8 @@ final class SignUpView: AuthScreenView {
         datePicker.datePickerMode = .date
         datePicker.maximumDate = .now
         datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -120, to: .now)
+        datePicker.tintColor = .main
+        
         return datePicker
     }()
     
@@ -86,18 +88,21 @@ final class SignUpView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 nameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                nameTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-                ),
-                nameTextField.widthAnchor.constraint(
-                    equalTo: widthAnchor,
-                    multiplier: CommonSizes.textFieldWidthMultiplier
-                ),
-                nameTextField.heightAnchor.constraint(
-                    equalTo: safeAreaLayoutGuide.heightAnchor,
-                    multiplier: CommonSizes.textFieldHeightMultiplier
-                ),
+//                nameTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
+//                ),
+                Constraints.spaceBeforeFirstElement(for: nameTextField, under: screenNameLabel),
+//                nameTextField.widthAnchor.constraint(
+//                    equalTo: widthAnchor,
+//                    multiplier: Constraints.textFieldWidthMultiplier
+//                ),
+                Constraints.textFieldAndButtonWidthConstraint(for: nameTextField, on: self),
+//                nameTextField.heightAnchor.constraint(
+//                    equalTo: safeAreaLayoutGuide.heightAnchor,
+//                    multiplier: Constraints.textFieldHeightMultiplier
+//                ),
+                Constraints.textFieldAndButtonHeighConstraint(for: nameTextField, on: self),
                 
                 dateOfBirthLabel.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
                 dateOfBirthLabel.centerYAnchor.constraint(equalTo: datePicker.centerYAnchor),
@@ -105,40 +110,54 @@ final class SignUpView: AuthScreenView {
                 dateOfBirthLabel.trailingAnchor.constraint(equalTo: datePicker.leadingAnchor),
                 
                 
-                datePicker.topAnchor.constraint(
-                    equalToSystemSpacingBelow: nameTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
-                ),
+//                datePicker.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: nameTextField.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(for: datePicker, under: nameTextField),
                 datePicker.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 datePicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
                 
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                emailTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: datePicker.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
-                ),
+//                emailTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: datePicker.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(for: emailTextField, under: datePicker),
                 emailTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 emailTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
                 passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                passwordTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                passwordTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: emailTextField.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: passwordTextField,
+                    under: emailTextField
                 ),
                 passwordTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 passwordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
                 confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                confirmPasswordTextField.topAnchor.constraint(
-                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                confirmPasswordTextField.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: confirmPasswordTextField,
+                    under: passwordTextField
                 ),
                 confirmPasswordTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 confirmPasswordTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
-                createAccountButton.topAnchor.constraint(
-                    equalToSystemSpacingBelow: confirmPasswordTextField.bottomAnchor,
-                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                createAccountButton.topAnchor.constraint(
+//                    equalToSystemSpacingBelow: confirmPasswordTextField.bottomAnchor,
+//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
+//                ),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: createAccountButton,
+                    under: confirmPasswordTextField
                 ),
                 createAccountButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 createAccountButton.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
