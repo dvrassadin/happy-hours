@@ -9,11 +9,11 @@ import UIKit
 
 // MARK: - SignUpVC class
 
-final class SignUpVC: AuthViewController, NameChecker, EmailChecker, PasswordChecker {
+final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordChecker, AlertPresenter {
     
     // MARK: Properties
     
-    private let signUpView = SignUpView()
+    private lazy var signUpView = SignUpView()
 
     // MARK: Lifecycle
     

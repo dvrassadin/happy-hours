@@ -9,10 +9,6 @@ import UIKit
 
 enum Constraints {
     
-//    static let textFieldWidthMultiplier = 0.6853
-//    static let textFieldHeightMultiplier = 0.0542
-//    static let topBetweenTextFieldsMultiplier: CGFloat = 2
-    
     static func spaceBeforeFirstElement(
         for bottomView: UIView,
         under topView: UIView

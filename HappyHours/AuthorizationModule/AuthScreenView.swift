@@ -17,7 +17,6 @@ class AuthScreenView: UIView {
     private let appNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = .systemFont(ofSize: 24, weight: .bold)
         label.font = UIFont(name: "Inter-Regular_Bold", size: 24)
         label.textAlignment = .center
         label.textColor = .mainText
@@ -53,18 +52,6 @@ class AuthScreenView: UIView {
         }
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        print(#function)
-//    }
-    
-//    override func updateConstraints() {
-//        print(needsUpdateConstraints())
-//        setUpConstrains()
-//        super.updateConstraints()
-//        print(#function)
-//    }
-    
     // MARK: Set up UI
     
     private func setUpUI() {
@@ -99,25 +86,19 @@ class AuthScreenView: UIView {
         NSLayoutConstraint.activate(
             [
                 appNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-                //            appNameLabel.topAnchor.constraint(
-                //                lessThanOrEqualTo: safeAreaLayoutGuide.topAnchor,
-                //                constant: frame.height * AuthSizes.appNameLabelTopMultiplier
-                //            ),
                 appNameLabel.topAnchor.constraint(
                     lessThanOrEqualToSystemSpacingBelow: safeAreaLayoutGuide.topAnchor,
                     multiplier: 1.8
                 ),
                 
                 screenNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                screenNameLabel.topAnchor.constraint(
-//                    equalTo: appNameLabel.bottomAnchor,
-//                    constant: frame.height * AuthSizes.screenNameLabelTopMultiplier
-//                )
                 screenNameLabel.topAnchor.constraint(
                     lessThanOrEqualToSystemSpacingBelow: appNameLabel.bottomAnchor,
                     multiplier: 13
                 ),
-                screenNameLabel.topAnchor.constraint(greaterThanOrEqualTo: appNameLabel.bottomAnchor)
+                screenNameLabel.topAnchor.constraint(
+                    greaterThanOrEqualTo: appNameLabel.bottomAnchor
+                )
             ]
         )
     }

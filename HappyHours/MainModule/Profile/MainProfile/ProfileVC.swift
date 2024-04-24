@@ -13,7 +13,7 @@ final class ProfileVC: UIViewController {
 
     // MARK: Properties
     
-    private let profileView = ProfileView()
+    private lazy var profileView = ProfileView()
     private let model: ProfileModelProtocol
 
     // MARK: Lifecycle

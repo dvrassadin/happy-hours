@@ -98,22 +98,13 @@ final class ProfileView: UIView {
                 ),
                 stackView.bottomAnchor.constraint(equalTo: userImageView.bottomAnchor),
                 
-//                Constraints.topBetweenTextFieldsAndButtons(for: profileButton, under: userImageView),
                 Constraints.spaceBeforeFirstElement(for: profileButton, under: userImageView),
                 Constraints.textFieldAndButtonHeighConstraint(for: profileButton, on: self),
                 Constraints.textFieldAndButtonWidthConstraint(for: profileButton, on: self),
                 profileButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 
                 logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                logOutButton.widthAnchor.constraint(
-//                    equalTo: widthAnchor,
-//                    multiplier: Constraints.textFieldWidthMultiplier
-//                ),
                 Constraints.textFieldAndButtonWidthConstraint(for: logOutButton, on: self),
-//                logOutButton.heightAnchor.constraint(
-//                    equalTo: safeAreaLayoutGuide.heightAnchor,
-//                    multiplier: Constraints.textFieldHeightMultiplier
-//                ),
                 Constraints.textFieldAndButtonHeighConstraint(for: logOutButton, on: self),
                 
                 keyboardLayoutGuide.topAnchor.constraint(

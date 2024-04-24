@@ -12,4 +12,5 @@ final class RestaurantsModel: RestaurantsModelProtocol {
     // MARK: Properties
     
     private(set) var restaurants: [Restaurant] = Restaurant.example
+    
 }

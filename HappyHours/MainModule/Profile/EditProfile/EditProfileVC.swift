@@ -11,7 +11,7 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     // MARK: Properties
     
-    private let editProfileView = EditProfileView()
+    private lazy var editProfileView = EditProfileView()
     private let model: ProfileModelProtocol
 
     // MARK: Lifecycle

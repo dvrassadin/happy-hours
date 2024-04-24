@@ -20,6 +20,14 @@ final class RestaurantsView: UIView {
         )
         return tableView
     }()
+    
+//    private lazy var headerLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.textAlignment = .center
+//        label.font = .preferredFont(forTextStyle: .subheadline)
+//        return label
+//    }()
 
     // MARK: Lifecycle
     
@@ -38,6 +46,8 @@ final class RestaurantsView: UIView {
         backgroundColor = .background
         addSubviews()
         setUpConstraints()
+//        tableView.tableHeaderView = headerLabel
+//        headerLabel.text = String(localized: "Your subscription is active.")
     }
     
     private func addSubviews() {
@@ -49,7 +59,10 @@ final class RestaurantsView: UIView {
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+//            headerLabel.widthAnchor.constraint(equalTo: tableView.widthAnchor),
+//            headerLabel.heightAnchor
         ])
     }
 

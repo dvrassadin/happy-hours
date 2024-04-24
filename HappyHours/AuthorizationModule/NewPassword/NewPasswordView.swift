@@ -51,38 +51,22 @@ final class NewPasswordView: AuthScreenView {
         NSLayoutConstraint.activate(
             [
                 passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                passwordTextField.topAnchor.constraint(
-//                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
-//                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-//                ),
                 Constraints.spaceBeforeFirstElement(for: passwordTextField, under: screenNameLabel),
-//                passwordTextField.widthAnchor.constraint(
-//                    equalTo: widthAnchor,
-//                    multiplier: Constraints.textFieldWidthMultiplier
-//                ),
                 Constraints.textFieldAndButtonWidthConstraint(for: passwordTextField, on: self),
-//                passwordTextField.heightAnchor.constraint(
-//                    equalTo: safeAreaLayoutGuide.heightAnchor,
-//                    multiplier: Constraints.textFieldHeightMultiplier
-//                ),
                 Constraints.textFieldAndButtonHeighConstraint(for: passwordTextField, on: self),
                 
                 confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                confirmPasswordTextField.topAnchor.constraint(
-//                    equalToSystemSpacingBelow: passwordTextField.bottomAnchor,
-//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
-//                ),
                 Constraints.topBetweenTextFieldsAndButtons(
                     for: confirmPasswordTextField,
                     under: passwordTextField
                 ),
-                confirmPasswordTextField.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor),
-                confirmPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
+                confirmPasswordTextField.widthAnchor.constraint(
+                    equalTo: passwordTextField.widthAnchor
+                ),
+                confirmPasswordTextField.heightAnchor.constraint(
+                    equalTo: passwordTextField.heightAnchor
+                ),
                 
-//                createButton.topAnchor.constraint(
-//                    equalToSystemSpacingBelow: confirmPasswordTextField.bottomAnchor,
-//                    multiplier: AuthSizes.topBetweenTextFieldsMultiplier
-//                ),
                 Constraints.topBetweenTextFieldsAndButtons(
                     for: createButton,
                     under: confirmPasswordTextField

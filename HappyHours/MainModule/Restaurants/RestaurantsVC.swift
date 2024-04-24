@@ -14,14 +14,13 @@ final class RestaurantsVC: UIViewController {
     // MARK: Properties
     
     private let model: RestaurantsModelProtocol
-    private let restaurantsView = RestaurantsView()
+    private lazy var restaurantsView = RestaurantsView()
 
     // MARK: Lifecycle
     
     init(model: RestaurantsModelProtocol) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
-        restaurantsView.tableView.dataSource = self
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +29,16 @@ final class RestaurantsVC: UIViewController {
     
     override func loadView() {
         view = restaurantsView
+        restaurantsView.tableView.dataSource = self
+        restaurantsView.tableView.delegate = self
     }
+    
+//    override func viewIsAppearing(_ animated: Bool) {
+//        super.viewIsAppearing(animated)
+//        if let selectedIndexPath = restaurantsView.tableView.indexPathForSelectedRow {
+//            restaurantsView.tableView.deselectRow(at: selectedIndexPath, animated: animated)
+//        }
+//    }
 
 }
 
@@ -57,6 +65,16 @@ extension RestaurantsVC: UITableViewDataSource {
         
         cell.configure(restaurant: model.restaurants[indexPath.row])
         return cell
+    }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension RestaurantsVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
 }

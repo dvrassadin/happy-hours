@@ -25,6 +25,7 @@ final class RestaurantsTableViewCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
     
@@ -41,6 +42,7 @@ final class RestaurantsTableViewCell: UITableViewCell {
     private let hoursLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
@@ -64,32 +66,34 @@ final class RestaurantsTableViewCell: UITableViewCell {
     
     private func addSubviews() {
         contentView.addSubview(logoImageView)
-//        contentView.addSubview(nameLabel)
-//        contentView.addSubview(clockImageView)
-//        contentView.addSubview(hoursLabel)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(clockImageView)
+        contentView.addSubview(hoursLabel)
     }
 
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 2),
             logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            logoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+            logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -2),
             logoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 60),
+            logoImageView.heightAnchor.constraint(equalToConstant: 70),
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor),
             
-//            nameLabel.topAnchor.constraint(equalTo: logoImageView.topAnchor),
-//            nameLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 2),
-//            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-//            
-//            clockImageView.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 2),
-//            clockImageView.heightAnchor.constraint(equalToConstant: 20),
-//            clockImageView.widthAnchor.constraint(equalTo: clockImageView.heightAnchor),
-//            clockImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-//            
-//            hoursLabel.centerYAnchor.constraint(equalTo: clockImageView.centerYAnchor),
-//            hoursLabel.leadingAnchor.constraint(equalTo: clockImageView.trailingAnchor),
-//            hoursLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor)
+            nameLabel.topAnchor.constraint(equalTo: logoImageView.topAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: logoImageView.centerYAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 2),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            
+            clockImageView.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 2),
+            clockImageView.heightAnchor.constraint(equalToConstant: 15),
+            clockImageView.widthAnchor.constraint(equalTo: clockImageView.heightAnchor),
+            clockImageView.centerYAnchor.constraint(equalTo: hoursLabel.centerYAnchor),
+            
+            hoursLabel.topAnchor.constraint(equalTo: logoImageView.centerYAnchor),
+            hoursLabel.bottomAnchor.constraint(equalTo: logoImageView.bottomAnchor),
+            hoursLabel.leadingAnchor.constraint(equalTo: clockImageView.trailingAnchor, constant: 2),
+            hoursLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor)
         ])
     }
     

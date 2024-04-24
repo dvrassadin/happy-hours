@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class NewPasswordVC: AuthViewController, PasswordChecker {
+final class NewPasswordVC: UIViewController, PasswordChecker, AlertPresenter {
 
     // MARK: Properties
     
-    private let newPasswordView = NewPasswordView()
+    private lazy var newPasswordView = NewPasswordView()
     
     // MARK: Lifecycle
     

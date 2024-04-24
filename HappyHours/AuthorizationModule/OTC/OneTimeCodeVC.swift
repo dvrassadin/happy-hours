@@ -13,7 +13,7 @@ final class OneTimeCodeVC: UIViewController {
     
     // MARK: Properties
     
-    private let otcView = OneTimeCodeView(numberOfDigits: 4)
+    private lazy var otcView = OneTimeCodeView(numberOfDigits: 4)
 
     // MARK: Lifecycle
     

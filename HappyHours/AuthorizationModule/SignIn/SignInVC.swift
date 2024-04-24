@@ -10,11 +10,11 @@ import UIKit
 // MARK: - SignInVC class
 
 /// This class is made for the first logging in were user can enter the email and password, reset the password or sign up
-final class SignInVC: AuthViewController, EmailChecker, PasswordChecker {
+final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPresenter {
     
     // MARK: Properties
     
-    private let signInView = SignInView()
+    private lazy var signInView = SignInView()
 
     // MARK: Lifecycle
     

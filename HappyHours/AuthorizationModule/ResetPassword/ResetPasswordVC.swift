@@ -9,11 +9,11 @@ import UIKit
 
 // MARK: - ResetPasswordVC class
 
-final class ResetPasswordVC: AuthViewController, EmailChecker {
+final class ResetPasswordVC: UIViewController, EmailChecker, AlertPresenter {
 
     // MARK: Properties
     
-    private let resetPasswordView = ResetPasswordView()
+    private lazy var resetPasswordView = ResetPasswordView()
 
     // MARK: Lifecycle
     

@@ -35,6 +35,14 @@ final class MainTabBarController: UITabBarController {
         )
         restaurantsVC.tabBarItem = restaurantsTabBarItem
         
+        let searchVC = SearchVC()
+        let searchTabBarItem = UITabBarItem(
+            title: String(localized: "Search"),
+            image: UIImage(systemName: "magnifyingglass"),
+            selectedImage: UIImage(systemName: "magnifyingglass")
+        )
+        searchVC.tabBarItem = searchTabBarItem
+        
         let scannerVC = ScannerVC()
         let scannerTabBarItem = UITabBarItem(
             title: String(localized: "Scanner"),
@@ -52,7 +60,7 @@ final class MainTabBarController: UITabBarController {
         )
         profileVC.tabBarItem = profileTabBarItem
         
-        viewControllers = [restaurantsVC, scannerVC, profileVC]
+        viewControllers = [restaurantsVC, searchVC, scannerVC, profileVC]
     }
     
 }
