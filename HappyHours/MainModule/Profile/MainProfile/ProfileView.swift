@@ -41,7 +41,7 @@ final class ProfileView: UIView {
         return stackView
     }()
     
-    let profileButton = CommonButton(title: String(localized: "Profile"))
+    let profileButton = CommonButton(title: String(localized: "Edit Profile"))
     
     let logOutButton = CommonButton(title: String(localized: "Log Out"), isTinted: true)
 

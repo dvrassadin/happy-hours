@@ -39,6 +39,9 @@
 		5148B92B2BD40E8600659D73 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B92A2BD40E8600659D73 /* Constraints.swift */; };
 		5148B95A2BD61C8300659D73 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9592BD61C8300659D73 /* Restaurant.swift */; };
 		5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */; };
+		515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3642BDB87D60032364D /* BeverageTableViewCell.swift */; };
+		515CE3682BDB91960032364D /* SearchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3672BDB91960032364D /* SearchViewDelegate.swift */; };
+		515CE36A2BDB92130032364D /* SearchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3692BDB92130032364D /* SearchMode.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
 		51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* CommonButton.swift */; };
@@ -47,6 +50,7 @@
 		51B329822BC9869600D7ADFB /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329812BC9869600D7ADFB /* CommonTextField.swift */; };
 		51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329832BCA686D00D7ADFB /* SignUpView.swift */; };
 		51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */; };
+		51CE539E2BDE52EA001A5112 /* NothingFoundStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CE539D2BDE52EA001A5112 /* NothingFoundStateView.swift */; };
 		51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF885D2BC3B8D800196E8A /* AppDelegate.swift */; };
 		51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF885F2BC3B8D800196E8A /* SceneDelegate.swift */; };
 		51CF88622BC3B8D800196E8A /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF88612BC3B8D800196E8A /* SignInVC.swift */; };
@@ -88,6 +92,9 @@
 		5148B92A2BD40E8600659D73 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		5148B9592BD61C8300659D73 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsTableViewCell.swift; sourceTree = "<group>"; };
+		515CE3642BDB87D60032364D /* BeverageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeverageTableViewCell.swift; sourceTree = "<group>"; };
+		515CE3672BDB91960032364D /* SearchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDelegate.swift; sourceTree = "<group>"; };
+		515CE3692BDB92130032364D /* SearchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMode.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		51B329752BC6B8DF00D7ADFB /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 		51B329812BC9869600D7ADFB /* CommonTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		51B329832BCA686D00D7ADFB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		51CE539D2BDE52EA001A5112 /* NothingFoundStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingFoundStateView.swift; sourceTree = "<group>"; };
 		51CF885A2BC3B8D800196E8A /* HappyHours.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyHours.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51CF885D2BC3B8D800196E8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51CF885F2BC3B8D800196E8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				51280B7D2BD8F6EA00FD0271 /* SearchVC.swift */,
-				51280B7F2BD8F71400FD0271 /* SearchView.swift */,
+				515CE3662BDB87DB0032364D /* View */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -166,8 +174,8 @@
 		512D00672BD7A85B0057D696 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
-				512D00682BD7AAAD0057D696 /* EditProfileView.swift */,
 				512D006A2BD7AB830057D696 /* EditProfileVC.swift */,
+				512D00682BD7AAAD0057D696 /* EditProfileView.swift */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -241,6 +249,18 @@
 				5148B9592BD61C8300659D73 /* Restaurant.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		515CE3662BDB87DB0032364D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				51280B7F2BD8F71400FD0271 /* SearchView.swift */,
+				515CE3642BDB87D60032364D /* BeverageTableViewCell.swift */,
+				515CE3672BDB91960032364D /* SearchViewDelegate.swift */,
+				515CE3692BDB92130032364D /* SearchMode.swift */,
+				51CE539D2BDE52EA001A5112 /* NothingFoundStateView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		519B5CDF2BC58C2C00BD4EB4 /* AuthorizationModule */ = {
@@ -414,17 +434,20 @@
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
 				51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */,
 				5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */,
+				515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */,
 				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
 				512D006B2BD7AB830057D696 /* EditProfileVC.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
 				51280B802BD8F71400FD0271 /* SearchView.swift in Sources */,
 				513B6CC12BCF987E0006DD25 /* EmailChecker.swift in Sources */,
+				51CE539E2BDE52EA001A5112 /* NothingFoundStateView.swift in Sources */,
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
 				513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */,
 				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
 				5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */,
 				5148B92B2BD40E8600659D73 /* Constraints.swift in Sources */,
 				512D00652BD7894F0057D696 /* ProfileModelProtocol.swift in Sources */,
+				515CE3682BDB91960032364D /* SearchViewDelegate.swift in Sources */,
 				513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */,
 				513B6CF72BD16E4A0006DD25 /* RestaurantsVC.swift in Sources */,
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
@@ -447,6 +470,7 @@
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
 				5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */,
 				512D005A2BD769CB0057D696 /* RestaurantsModel.swift in Sources */,
+				515CE36A2BDB92130032364D /* SearchMode.swift in Sources */,
 				51B329822BC9869600D7ADFB /* CommonTextField.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
 			);
@@ -597,7 +621,8 @@
 				INFOPLIST_FILE = HappyHours/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Happy Hours";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Allow the app to scan restaurants' QR codes.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow Happy Hours to scan restaurants' QR codes.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Happy Hours to use your location and show it when you are looking for restaurants.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -633,7 +658,8 @@
 				INFOPLIST_FILE = HappyHours/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Happy Hours";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Allow the app to scan restaurants' QR codes.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow Happy Hours to scan restaurants' QR codes.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Happy Hours to use your location and show it when you are looking for restaurants.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
