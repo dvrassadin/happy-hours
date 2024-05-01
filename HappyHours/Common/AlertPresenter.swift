@@ -14,6 +14,7 @@ enum AlertType {
     case accountCreated
     case emptyName
     case invalidName
+    case accessDenied
 }
 
 protocol AlertPresenter: UIViewController { }
@@ -43,6 +44,9 @@ extension AlertPresenter {
         case .invalidName:
             title = String(localized: "Invalid Name")
             message = String(localized: "Name should not be empty and contains digits.")
+        case .accessDenied:
+            title = String(localized: "Access Denied")
+            message = String(localized: "The password is incorrect or the user is not registered.")
         }
         
         let alertController = UIAlertController(

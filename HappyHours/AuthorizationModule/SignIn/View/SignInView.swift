@@ -11,6 +11,28 @@ import UIKit
 
 final class SignInView: AuthScreenView {
     
+    // MARK: Properties
+    
+    var isLoggingIn: Bool = false {
+        didSet {
+            if isLoggingIn {
+                logInButton.configuration?.attributedTitle = logInButtonTitle
+                logInButton.configuration?.showsActivityIndicator = true
+                logInButton.isEnabled = false
+            } else {
+                logInButton.configuration?.attributedTitle = logInButtonTitle
+                logInButton.configuration?.showsActivityIndicator = false
+                logInButton.isEnabled = true
+            }
+        }
+    }
+    private var logInButtonTitle: AttributedString {
+        AttributedString(
+            String(localized: isLoggingIn ? "Logging In" : "Log In"),
+            attributes: .init([.font: UIFont.systemFont(ofSize: 20)])
+        )
+    }
+    
     // MARK: UI components
     
     let emailTextField = CommonTextField(
@@ -24,7 +46,7 @@ final class SignInView: AuthScreenView {
         textContentType: .password
     )
     
-    let logInButton = CommonButton(title: "Log In")
+    let logInButton = CommonButton(title: String(localized: "Log In"))
     
     let resetButton: UIButton = {
         let button = UIButton(configuration: .plain())
@@ -45,6 +67,10 @@ final class SignInView: AuthScreenView {
     init() {
         super.init(screenName: String(localized: "Sign In to Continue"))
         setUpUI()
+        
+        // TODO: Delete
+        emailTextField.text = "user@example.com"
+        passwordTextField.text = "stringst"
     }
     
     required init?(coder: NSCoder) {
@@ -103,6 +129,10 @@ final class SignInView: AuthScreenView {
                 keyboardLayoutGuide.topAnchor.constraint(equalTo: signUpStackView.bottomAnchor, constant: 10)
             ]
         )
+    }
+    
+    func showLoggingIn() {
+        logInButton.configuration?.showsActivityIndicator = true
     }
     
 }

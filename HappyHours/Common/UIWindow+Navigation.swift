@@ -7,6 +7,15 @@
 
 import UIKit
 
+// MARK: - Properties
+
+extension UIWindow {
+    var isLoggedIn: Bool {
+        get { UserDefaults.standard.bool(forKey: "isLoggedIn") }
+        set { UserDefaults.standard.setValue(newValue, forKey: "isLoggedIn") }
+    }
+}
+
 // MARK: - LogInDelegate
 
 extension UIWindow: LogInDelegate {
@@ -18,6 +27,7 @@ extension UIWindow: LogInDelegate {
         } else {
             rootViewController = mainVC
         }
+        isLoggedIn = true
     }
     
 }
@@ -27,12 +37,14 @@ extension UIWindow: LogInDelegate {
 extension UIWindow: LogOutDelegate {
     
     func logOut() {
-        let signInVC = SignInVC()
+        let signInModel = SignInModel(networkService: NetworkService())
+        let signInVC = SignInVC(model: signInModel)
         if let navigationController = rootViewController as? UINavigationController {
             navigationController.setViewControllers([signInVC], animated: true)
         } else {
             rootViewController = signInVC
         }
+        isLoggedIn = false
     }
     
 }

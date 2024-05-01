@@ -23,13 +23,21 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-//        let vc = SignInVC()
-        let vc = MainTabBarController()
+        
+        let networkService = NetworkService()
+        let vc: UIViewController
+        if let window, window.isLoggedIn {
+            vc = MainTabBarController()
+        } else {
+            let signInModel = SignInModel(networkService: networkService)
+            vc = SignInVC(model: signInModel)
+        }
         let navigationController = UINavigationController(rootViewController: vc)
         navigationController.navigationBar.tintColor = .main
         if let inter = UIFont(name: "Inter-Regular_Bold", size: 18) {
             navigationController.navigationBar.titleTextAttributes = [.font: inter]
         }
+        
         window?.rootViewController = navigationController
         window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
