@@ -6,31 +6,50 @@
 //
 
 import OSLog
-import OpenAPIRuntime
-import OpenAPIURLSession
 
 final class NetworkService: NetworkServiceProtocol {
     
     // MARK: Properties
     
+    private let session: URLSession = {
+        let session = URLSession(configuration: .default)
+        session.configuration.timeoutIntervalForRequest = 20
+        return session
+    }()
+    
+    private let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        return decoder
+    }()
+    
+    private let encoder: JSONEncoder = {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return encoder
+    }()
+    
+    private let baseURL = "http://16.170.203.161"
+    
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "",
         category: String(describing: NetworkService.self)
     )
-    private let server = try! Servers.server1()
-    private var client: Client
+    
     private let keyChainService: TokensKeyChainServiceProtocol = KeyChainService()
+    
     private var accessToken: String? {
         didSet {
             guard let token = accessToken else { return }
-            client = Client(
-                serverURL: server,
-                transport: URLSessionTransport(),
-                middlewares: [AuthenticationMiddleware(token: token)]
-            )
             keyChainService.save(token: token, type: .access)
         }
     }
+    
     private var refreshToken: String? {
         didSet {
             guard let token = accessToken else { return }
@@ -42,74 +61,66 @@ final class NetworkService: NetworkServiceProtocol {
     
     init() {
         accessToken = keyChainService.getToken(.access)
-        if let accessToken {
-            client = Client(
-                serverURL: server,
-                transport: URLSessionTransport(),
-                middlewares: [AuthenticationMiddleware(token: accessToken)]
-            )
-        } else {
-            client = Client(serverURL: server, transport: URLSessionTransport())
-        }
         refreshToken = keyChainService.getToken(.refresh)
     }
     
     // MARK: Authentication requests
     
-    func login(_ tokenObtain: Components.Schemas.TokenObtain) async throws {
-        let tokenRefresh = try await client.v1_user_token_create(
-            body: .json(tokenObtain)
-        ).ok.body.json
-        logger.info("Login request completed.")
+    func logIn(logIn: LogIn) async throws {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
         
-        accessToken = tokenRefresh.access
-        refreshToken = tokenRefresh.refresh
+        urlComponents.path.append("/api/v1/user/token/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try encoder.encode(logIn)
+        } catch {
+            logger.error("Could not encode data for request: \(url.absoluteString)")
+            throw APIError.encodingError
+        }
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let tokens: Tokens
+        do {
+            tokens = try decoder.decode(Tokens.self, from: data)
+            logger.info("Received tokens for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)")
+            throw APIError.decodingError
+        }
+        
+        accessToken = tokens.access
+        refreshToken = tokens.refresh
+        print(tokens)
+        
     }
     
-//    private func refreshTokens() {
-//        guard let refreshToken else { return }
-//        Task {
-//            do {
-//                self.refreshToken = try await client.v1_user_token_refresh_create(
-//                    body: .json(.init(refresh: refreshToken))
-//                ).ok.body.json.refresh
-//            } catch {
-//
-//            }
-//        }
-//    }
-    
-    func createUser(_ user: Components.Schemas.ClientRegister) async throws {
-        print(user.email)
-        print(user.password)
-        print(user.password_confirm)
-        print(user.name)
-        print(user.date_of_birth)
-        let response = try await client.v1_user_client_register_create(
-            body: .json(
-                .init(
-                    email: user.email,
-                    password: user.password,
-                    password_confirm: user.password_confirm,
-                    name: user.name,
-                    date_of_birth: user.date_of_birth
-                )
-            )
-        )
-        logger.info("Create user request completed.")
+    func createUser() async throws {
 
-        switch response {
-        case let .created(okResponse):
-            print("created")
-            switch okResponse.body {
-            case .json(let json):
-                accessToken = json.tokens?.access
-                refreshToken = json.tokens?.refresh
-            }
-        case .undocumented(statusCode: let statusCode, _):
-            logger.error("Create user response status code: \(statusCode).")
-            throw APIError.userWasNotCreated
-        }
     }
     
 }

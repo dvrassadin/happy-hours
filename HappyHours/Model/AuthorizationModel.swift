@@ -23,12 +23,8 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     // MARK: Log in
     
     func logIn(email: String, password: String) async throws {
-        do {
-            try await networkService.login(.init(email: email, password: password))
-            keyChainService.saveCredentials(email: email, password: password)
-        } catch {
-            throw error
-        }
+        let logIn = LogIn(email: email.lowercased(), password: password)
+        try await networkService.logIn(logIn: logIn)
     }
     
     // MARK: Creating user
@@ -40,18 +36,7 @@ final class AuthorizationModel: AuthorizationModelProtocol {
         name: String,
         date: Date
     ) async throws {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        let newUser = Components.Schemas.ClientRegister(
-            email: email.lowercased(),
-            password: password,
-            password_confirm: confirmPassword,
-            name: name,
-            date_of_birth: dateFormatter.string(from: date)
-        )
-        
-        try await networkService.createUser(newUser)
+
     }
 
 }

@@ -37,53 +37,6 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigation()
-        
-//        Task {
-//            do {
-//                try await model.logIn(email: "user@example.com", password: "stringst")
-//            } catch {
-//                print(error)
-//            }
-//        }
-    
-//        let client = Client(serverURL: try! Servers.server1(), transport: URLSessionTransport())
-//        
-//        Task {
-//            do {
-//                let response = try await client.v1_user_token_create(
-//                    body: .json(.init(email: "user@example.com", password: "stringst"))
-//                )
-//                
-//                switch response {
-//                case let .ok(okResponse):
-//                    switch okResponse.body {
-//                    case .json(let token):
-//                        print(token)
-//                        let client = Client(
-//                            serverURL: try! Servers.server1(),
-//                            transport: URLSessionTransport(),
-//                            middlewares: [AuthenticationMiddleware(
-//                                token: token.access
-//                            )]
-//                        )
-//                        let response = try await client.v1_beverage_beverages_list(query: .init(limit: 1))
-//                        switch response {
-//                        case let .ok(okResponse):
-//                            switch okResponse.body {
-//                            case .json(let beverages):
-//                                print(beverages.results)
-//                            }
-//                        case .undocumented(statusCode: let statusCode, _):
-//                            print(statusCode)
-//                        }
-//                    }
-//                case .undocumented(statusCode: let statusCode, _):
-//                    print(statusCode)
-//                }
-//            } catch {
-//                print(error)
-//            }
-//        }
     }
     
     // MARK: Navigation

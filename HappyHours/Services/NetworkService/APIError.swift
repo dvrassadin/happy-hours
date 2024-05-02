@@ -8,5 +8,10 @@
 import Foundation
 
 enum APIError: Error {
-    case userWasNotCreated
+    case invalidServerURL
+    case invalidAPIEndpoint
+    case notHTTPResponse
+    case unexpectedStatusCode
+    case encodingError
+    case decodingError
 }
