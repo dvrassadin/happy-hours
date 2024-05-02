@@ -14,8 +14,18 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
     // MARK: Properties
     
     private lazy var signUpView = SignUpView()
+    private let model: AuthorizationModelProtocol
 
     // MARK: Lifecycle
+    
+    init(model: AuthorizationModelProtocol) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = signUpView
@@ -37,15 +47,61 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
     }
     
     @objc private func createAccount() {
-        guard isValidCredentials() else { return }
-        showAlert(.accountCreated) { _ in 
-            UIApplication.shared.sendAction(
-                #selector(LogInDelegate.logIn),
-                to: nil,
-                from: self,
-                for: nil
-            )
+//        guard isValidCredentials() else { return }
+        guard let name = signUpView.nameTextField.text else {
+            showAlert(.emptyName)
+            return
         }
+        
+        guard isValidName(name) else {
+            showAlert(.invalidName)
+            return
+        }
+        
+        guard let email = signUpView.emailTextField.text, isValidEmail(email) else {
+            showAlert(.invalidEmail)
+            return
+        }
+        
+        guard let firstPassword = signUpView.passwordTextField.text,
+              isValidPassword(firstPassword),
+              let secondPassword = signUpView.confirmPasswordTextField.text,
+              isValidPassword(secondPassword)
+        else {
+            showAlert(.invalidPasswordLength)
+            return
+        }
+        
+        guard firstPassword == secondPassword else {
+            showAlert(.notMatchPasswords)
+            return
+        }
+        
+        signUpView.isCreatingAccount = true
+        Task {
+            do {
+                try await model.createUser(
+                    email: email,
+                    password: firstPassword,
+                    confirmPassword: secondPassword,
+                    name: name,
+                    date: signUpView.datePicker.date
+                )
+                signUpView.isCreatingAccount = false
+                showAlert(.accountCreated) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogInDelegate.logIn),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
+            } catch {
+                signUpView.isCreatingAccount = false
+                showAlert(.createUserServerError, message: error.localizedDescription)
+            }
+        }
+
     }
     
     private func isValidCredentials() -> Bool {
@@ -87,5 +143,5 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
 
 @available(iOS 17, *)
 #Preview {
-    SignUpVC()
+    SignUpVC(model: AuthorizationModel(networkService: NetworkService()))
 }

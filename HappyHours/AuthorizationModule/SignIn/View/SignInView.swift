@@ -69,7 +69,7 @@ final class SignInView: AuthScreenView {
         setUpUI()
         
         // TODO: Delete
-        emailTextField.text = "user@example.com"
+        emailTextField.text = "tmp_admin@example.com"
         passwordTextField.text = "stringst"
     }
     

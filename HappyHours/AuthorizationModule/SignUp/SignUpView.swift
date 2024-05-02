@@ -11,6 +11,28 @@ import UIKit
 
 final class SignUpView: AuthScreenView {
     
+    // MARK: Properties
+    
+    var isCreatingAccount: Bool = false {
+        didSet {
+            if isCreatingAccount {
+                createAccountButton.configuration?.attributedTitle = createAccountButtonTitle
+                createAccountButton.configuration?.showsActivityIndicator = true
+                createAccountButton.isEnabled = false
+            } else {
+                createAccountButton.configuration?.attributedTitle = createAccountButtonTitle
+                createAccountButton.configuration?.showsActivityIndicator = false
+                createAccountButton.isEnabled = true
+            }
+        }
+    }
+    private var createAccountButtonTitle: AttributedString {
+        AttributedString(
+            String(localized: isCreatingAccount ? "Creating Account" : "Create Account"),
+            attributes: .init([.font: UIFont.systemFont(ofSize: 20)])
+        )
+    }
+    
     // MARK: UI components
     
     let nameTextField = CommonTextField(
@@ -53,7 +75,7 @@ final class SignUpView: AuthScreenView {
         textContentType: .newPassword
     )
     
-    let createAccountButton = CommonButton(title: "Create Account")
+    let createAccountButton = CommonButton(title: String(localized: "Create Account"))
 
     // MARK: Lifecycle
 

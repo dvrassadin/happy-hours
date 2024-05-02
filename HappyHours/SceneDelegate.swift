@@ -29,7 +29,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let window, window.isLoggedIn {
             vc = MainTabBarController()
         } else {
-            let signInModel = SignInModel(networkService: networkService)
+            let signInModel = AuthorizationModel(networkService: networkService)
             vc = SignInVC(model: signInModel)
         }
         let navigationController = UINavigationController(rootViewController: vc)

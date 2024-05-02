@@ -13,12 +13,12 @@ final class RestaurantsVC: UIViewController {
     
     // MARK: Properties
     
-    private let model: RestaurantsModelProtocol
+    private let model: MainModelProtocol
     private lazy var restaurantsView = RestaurantsView()
 
     // MARK: Lifecycle
     
-    init(model: RestaurantsModelProtocol) {
+    init(model: MainModelProtocol) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +46,7 @@ final class RestaurantsVC: UIViewController {
 
 @available(iOS 17, *)
 #Preview {
-    RestaurantsVC(model: RestaurantsModel())
+    RestaurantsVC(model: MainModel())
 }
 
 // MARK: - UITableViewDataSource

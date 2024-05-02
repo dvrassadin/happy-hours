@@ -28,14 +28,12 @@ final class NetworkService: NetworkServiceProtocol {
                 transport: URLSessionTransport(),
                 middlewares: [AuthenticationMiddleware(token: token)]
             )
-//            keyChainService.saveAccessToken(token)
             keyChainService.save(token: token, type: .access)
         }
     }
     private var refreshToken: String? {
         didSet {
             guard let token = accessToken else { return }
-//            keyChainService.saveRefreshToken(token)
             keyChainService.save(token: token, type: .refresh)
         }
     }
@@ -43,7 +41,6 @@ final class NetworkService: NetworkServiceProtocol {
     // MARK: Lifecycle
     
     init() {
-//        accessToken = keyChainService.getAccessToken()
         accessToken = keyChainService.getToken(.access)
         if let accessToken {
             client = Client(
@@ -54,7 +51,6 @@ final class NetworkService: NetworkServiceProtocol {
         } else {
             client = Client(serverURL: server, transport: URLSessionTransport())
         }
-//        refreshToken = keyChainService.getRefreshToken()
         refreshToken = keyChainService.getToken(.refresh)
     }
     
@@ -67,38 +63,53 @@ final class NetworkService: NetworkServiceProtocol {
         logger.info("Login request completed.")
         
         accessToken = tokenRefresh.access
-//        print(tokenRefresh.access)
-//        keyChainService.saveAccessToken(tokenRefresh.access)
         refreshToken = tokenRefresh.refresh
-//        print(tokenRefresh.refresh)
-//        keyChainService.saveRefreshToken(tokenRefresh.refresh)
-        
-//        return tokenRefresh
     }
     
-    private func refreshTokens() {
-        guard let refreshToken else {
-            logOutUser()
-            return
-        }
-        Task {
-            do {
-                self.refreshToken = try await client.v1_user_token_refresh_create(
-                    body: .json(.init(refresh: refreshToken))
-                ).ok.body.json.refresh
-            } catch {
-                logOutUser()
-            }
-        }
-    }
+//    private func refreshTokens() {
+//        guard let refreshToken else { return }
+//        Task {
+//            do {
+//                self.refreshToken = try await client.v1_user_token_refresh_create(
+//                    body: .json(.init(refresh: refreshToken))
+//                ).ok.body.json.refresh
+//            } catch {
+//
+//            }
+//        }
+//    }
     
-    private func logOutUser() {
-//        UIApplication.shared.sendAction(
-//            #selector(LogInDelegate.logIn),
-//            to: nil,
-//            from: self,
-//            for: nil
-//        )
-    }
+    func createUser(_ user: Components.Schemas.ClientRegister) async throws {
+        print(user.email)
+        print(user.password)
+        print(user.password_confirm)
+        print(user.name)
+        print(user.date_of_birth)
+        let response = try await client.v1_user_client_register_create(
+            body: .json(
+                .init(
+                    email: user.email,
+                    password: user.password,
+                    password_confirm: user.password_confirm,
+                    name: user.name,
+                    date_of_birth: user.date_of_birth
+                )
+            )
+        )
+        logger.info("Create user request completed.")
 
+        switch response {
+        case let .created(okResponse):
+            print("created")
+            switch okResponse.body {
+            case .json(let json):
+                accessToken = json.tokens?.access
+                refreshToken = json.tokens?.refresh
+            }
+        case .undocumented(statusCode: let statusCode, _):
+            logger.error("Create user response status code: \(statusCode).")
+            throw APIError.userWasNotCreated
+        }
+    }
+    
 }

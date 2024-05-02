@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class RestaurantsModel: RestaurantsModelProtocol {
+final class MainModel: MainModelProtocol {
     
     // MARK: Properties
     

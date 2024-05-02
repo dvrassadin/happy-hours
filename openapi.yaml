@@ -10,13 +10,6 @@ paths:
       description: |-
         Beverage ViewSet that handles creating, retrieving, updating, and deleting beverage items.
 
-        ### Fields:
-        - `price`: The price of the beverage. Must be a non-negative number.
-        - `category_name`: The name of the category to which the beverage belongs (read-only).
-        - `establishment_name` : The name of the establishment to which the beverage belongs (read-only).
-        - `category_id`: The ID of the category to which the beverage should be linked (write-only).
-        - `establishment_id`: The ID of the establishment where the beverage is served (write-only).
-
         ### Validation:
         - The `price` field must be a non-negative number.
       parameters:
@@ -54,22 +47,51 @@ paths:
                       price: 2.5
                       description: Refreshing carbonated soft drink.
                       availability_status: true
-                      category_name: Soft Drinks
-                      establishment_name: Joe's Bar
+                      category: Soft Drinks
+                      establishment: Joe's Bar
                   summary: Beverage Retrieval Success
                   description: Successful retrieval of a beverage
+          description: ''
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBeverageList'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    count: 123
+                    next: http://api.example.org/accounts/?offset=400&limit=100
+                    previous: http://api.example.org/accounts/?offset=200&limit=100
+                    results:
+                    - id: 1
+                      name: Cola
+                      price: 2.5
+                      description: Refreshing carbonated soft drink.
+                      availability_status: true
+                      category: Soft Drinks
+                      establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageCreationError:
+                  value:
+                    price:
+                    - Ensure this value is greater than or equal to 0.01.
+                  summary: Beverage Creation Error
+                  description: Error during the creation of a beverage due to invalid
+                    data
           description: ''
     post:
       operationId: v1_beverage_beverages_create
       description: |-
         Beverage ViewSet that handles creating, retrieving, updating, and deleting beverage items.
-
-        ### Fields:
-        - `price`: The price of the beverage. Must be a non-negative number.
-        - `category_name`: The name of the category to which the beverage belongs (read-only).
-        - `establishment_name` : The name of the establishment to which the beverage belongs (read-only).
-        - `category_id`: The ID of the category to which the beverage should be linked (write-only).
-        - `establishment_id`: The ID of the establishment where the beverage is served (write-only).
 
         ### Validation:
         - The `price` field must be a non-negative number.
@@ -87,8 +109,8 @@ paths:
                   price: 2.5
                   description: Refreshing carbonated soft drink.
                   availability_status: true
-                  category_id: 1
-                  establishment_id: 1
+                  category: 1
+                  establishment: 1
                 summary: Create Beverage Success
                 description: Successful creation of a beverage
               BeverageUpdateSuccess:
@@ -98,14 +120,32 @@ paths:
                   price: 3.0
                   description: Extra refreshing carbonated soft drink.
                   availability_status: true
-                  category_id: 1
-                  establishment_id: 1
+                  category: 1
+                  establishment: 1
                 summary: Beverage Update Success
                 description: Successful update of a beverage
         required: true
       security:
       - jwtAuth: []
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    id: 1
+                    name: Cola
+                    price: 2.5
+                    description: Refreshing carbonated soft drink.
+                    availability_status: true
+                    category: Soft Drinks
+                    establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
         '201':
           content:
             application/json:
@@ -119,23 +159,30 @@ paths:
                     price: 2.5
                     description: Refreshing carbonated soft drink.
                     availability_status: true
-                    category_name: Soft Drinks
-                    establishment_name: Joe's Bar
+                    category: Soft Drinks
+                    establishment: Joe's Bar
                   summary: Beverage Retrieval Success
                   description: Successful retrieval of a beverage
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageCreationError:
+                  value:
+                    price:
+                    - Ensure this value is greater than or equal to 0.01.
+                  summary: Beverage Creation Error
+                  description: Error during the creation of a beverage due to invalid
+                    data
           description: ''
   /api/v1/beverage/beverages/{id}/:
     get:
       operationId: v1_beverage_beverages_retrieve
       description: |-
         Beverage ViewSet that handles creating, retrieving, updating, and deleting beverage items.
-
-        ### Fields:
-        - `price`: The price of the beverage. Must be a non-negative number.
-        - `category_name`: The name of the category to which the beverage belongs (read-only).
-        - `establishment_name` : The name of the establishment to which the beverage belongs (read-only).
-        - `category_id`: The ID of the category to which the beverage should be linked (write-only).
-        - `establishment_id`: The ID of the establishment where the beverage is served (write-only).
 
         ### Validation:
         - The `price` field must be a non-negative number.
@@ -164,22 +211,47 @@ paths:
                     price: 2.5
                     description: Refreshing carbonated soft drink.
                     availability_status: true
-                    category_name: Soft Drinks
-                    establishment_name: Joe's Bar
+                    category: Soft Drinks
+                    establishment: Joe's Bar
                   summary: Beverage Retrieval Success
                   description: Successful retrieval of a beverage
+          description: ''
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    id: 1
+                    name: Cola
+                    price: 2.5
+                    description: Refreshing carbonated soft drink.
+                    availability_status: true
+                    category: Soft Drinks
+                    establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageCreationError:
+                  value:
+                    price:
+                    - Ensure this value is greater than or equal to 0.01.
+                  summary: Beverage Creation Error
+                  description: Error during the creation of a beverage due to invalid
+                    data
           description: ''
     put:
       operationId: v1_beverage_beverages_update
       description: |-
         Beverage ViewSet that handles creating, retrieving, updating, and deleting beverage items.
-
-        ### Fields:
-        - `price`: The price of the beverage. Must be a non-negative number.
-        - `category_name`: The name of the category to which the beverage belongs (read-only).
-        - `establishment_name` : The name of the establishment to which the beverage belongs (read-only).
-        - `category_id`: The ID of the category to which the beverage should be linked (write-only).
-        - `establishment_id`: The ID of the establishment where the beverage is served (write-only).
 
         ### Validation:
         - The `price` field must be a non-negative number.
@@ -204,8 +276,8 @@ paths:
                   price: 2.5
                   description: Refreshing carbonated soft drink.
                   availability_status: true
-                  category_id: 1
-                  establishment_id: 1
+                  category: 1
+                  establishment: 1
                 summary: Create Beverage Success
                 description: Successful creation of a beverage
               BeverageUpdateSuccess:
@@ -215,8 +287,8 @@ paths:
                   price: 3.0
                   description: Extra refreshing carbonated soft drink.
                   availability_status: true
-                  category_id: 1
-                  establishment_id: 1
+                  category: 1
+                  establishment: 1
                 summary: Beverage Update Success
                 description: Successful update of a beverage
         required: true
@@ -236,22 +308,47 @@ paths:
                     price: 2.5
                     description: Refreshing carbonated soft drink.
                     availability_status: true
-                    category_name: Soft Drinks
-                    establishment_name: Joe's Bar
+                    category: Soft Drinks
+                    establishment: Joe's Bar
                   summary: Beverage Retrieval Success
                   description: Successful retrieval of a beverage
+          description: ''
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    id: 1
+                    name: Cola
+                    price: 2.5
+                    description: Refreshing carbonated soft drink.
+                    availability_status: true
+                    category: Soft Drinks
+                    establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageCreationError:
+                  value:
+                    price:
+                    - Ensure this value is greater than or equal to 0.01.
+                  summary: Beverage Creation Error
+                  description: Error during the creation of a beverage due to invalid
+                    data
           description: ''
     patch:
       operationId: v1_beverage_beverages_partial_update
       description: |-
         Beverage ViewSet that handles creating, retrieving, updating, and deleting beverage items.
-
-        ### Fields:
-        - `price`: The price of the beverage. Must be a non-negative number.
-        - `category_name`: The name of the category to which the beverage belongs (read-only).
-        - `establishment_name` : The name of the establishment to which the beverage belongs (read-only).
-        - `category_id`: The ID of the category to which the beverage should be linked (write-only).
-        - `establishment_id`: The ID of the establishment where the beverage is served (write-only).
 
         ### Validation:
         - The `price` field must be a non-negative number.
@@ -276,8 +373,8 @@ paths:
                   price: 2.5
                   description: Refreshing carbonated soft drink.
                   availability_status: true
-                  category_id: 1
-                  establishment_id: 1
+                  category: 1
+                  establishment: 1
                 summary: Create Beverage Success
                 description: Successful creation of a beverage
               BeverageUpdateSuccess:
@@ -287,8 +384,8 @@ paths:
                   price: 3.0
                   description: Extra refreshing carbonated soft drink.
                   availability_status: true
-                  category_id: 1
-                  establishment_id: 1
+                  category: 1
+                  establishment: 1
                 summary: Beverage Update Success
                 description: Successful update of a beverage
       security:
@@ -307,22 +404,47 @@ paths:
                     price: 2.5
                     description: Refreshing carbonated soft drink.
                     availability_status: true
-                    category_name: Soft Drinks
-                    establishment_name: Joe's Bar
+                    category: Soft Drinks
+                    establishment: Joe's Bar
                   summary: Beverage Retrieval Success
                   description: Successful retrieval of a beverage
+          description: ''
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    id: 1
+                    name: Cola
+                    price: 2.5
+                    description: Refreshing carbonated soft drink.
+                    availability_status: true
+                    category: Soft Drinks
+                    establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageCreationError:
+                  value:
+                    price:
+                    - Ensure this value is greater than or equal to 0.01.
+                  summary: Beverage Creation Error
+                  description: Error during the creation of a beverage due to invalid
+                    data
           description: ''
     delete:
       operationId: v1_beverage_beverages_destroy
       description: |-
         Beverage ViewSet that handles creating, retrieving, updating, and deleting beverage items.
-
-        ### Fields:
-        - `price`: The price of the beverage. Must be a non-negative number.
-        - `category_name`: The name of the category to which the beverage belongs (read-only).
-        - `establishment_name` : The name of the establishment to which the beverage belongs (read-only).
-        - `category_id`: The ID of the category to which the beverage should be linked (write-only).
-        - `establishment_id`: The ID of the establishment where the beverage is served (write-only).
 
         ### Validation:
         - The `price` field must be a non-negative number.
@@ -338,8 +460,56 @@ paths:
       security:
       - jwtAuth: []
       responses:
-        '204':
-          description: No response body
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    id: 1
+                    name: Cola
+                    price: 2.5
+                    description: Refreshing carbonated soft drink.
+                    availability_status: true
+                    category: Soft Drinks
+                    establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageRetrievalSuccess:
+                  value:
+                    id: 1
+                    name: Cola
+                    price: 2.5
+                    description: Refreshing carbonated soft drink.
+                    availability_status: true
+                    category: Soft Drinks
+                    establishment: Joe's Bar
+                  summary: Beverage Retrieval Success
+                  description: Successful retrieval of a beverage
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beverage'
+              examples:
+                BeverageCreationError:
+                  value:
+                    price:
+                    - Ensure this value is greater than or equal to 0.01.
+                  summary: Beverage Creation Error
+                  description: Error during the creation of a beverage due to invalid
+                    data
+          description: ''
   /api/v1/beverage/categories/:
     get:
       operationId: v1_beverage_categories_list
@@ -1219,16 +1389,11 @@ paths:
                   description: Successful retrieval of an establishment's menu including
                     beverages
           description: ''
-  /api/v1/user/{id}/:
+  /api/v1/user/:
     get:
       operationId: v1_user_retrieve
-      description: User viewset with Owner permission
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+      description: User viewset with Owner permission. Does not usr ID, takes user
+        from request
       tags:
       - Users
       security:
@@ -1242,13 +1407,8 @@ paths:
           description: ''
     put:
       operationId: v1_user_update
-      description: User viewset with Owner permission
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+      description: User viewset with Owner permission. Does not usr ID, takes user
+        from request
       tags:
       - Users
       requestBody:
@@ -1267,13 +1427,8 @@ paths:
           description: ''
     patch:
       operationId: v1_user_partial_update
-      description: User viewset with Owner permission
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+      description: User viewset with Owner permission. Does not usr ID, takes user
+        from request
       tags:
       - Users
       requestBody:
@@ -1292,13 +1447,8 @@ paths:
           description: ''
     delete:
       operationId: v1_user_destroy
-      description: User viewset with Owner permission
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
+      description: User viewset with Owner permission. Does not usr ID, takes user
+        from request
       tags:
       - Users
       security:
@@ -1594,26 +1744,14 @@ components:
           type: string
         availability_status:
           type: boolean
-#        category_name:
-#          type: string
-#          readOnly: true
-#        establishment_name:
-#          type: string
-#          readOnly: true
-#        category_id:
-#          type: integer
-#          writeOnly: true
-#          description: ID of the category to which this beverage belongs.
-#        establishment_id:
-#          type: integer
-#          writeOnly: true
-#          description: ID of the establishment that offers this beverage.
+        establishment:
+          type: integer
+        category:
+          type: integer
       required:
-      - category_id
-      - category_name
+      - category
       - description
-      - establishment_id
-      - establishment_name
+      - establishment
       - id
       - name
       - price
@@ -1716,6 +1854,7 @@ components:
         id:
           type: integer
           readOnly: true
+          nullable: true
         email:
           type: string
           format: email
@@ -1726,6 +1865,29 @@ components:
         password_confirm:
           type: string
           writeOnly: true
+        name:
+          type: string
+          nullable: true
+          maxLength: 255
+        date_of_birth:
+          type: string
+          format: date
+          nullable: true
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+        tokens:
+          type: object
+          properties:
+            access:
+              type: string
+              readOnly: true
+            refresh:
+              type: string
+      required:
+      - access
+      - refresh
       required:
       - email
       - id
@@ -2132,20 +2294,10 @@ components:
           type: string
         availability_status:
           type: boolean
-        category_name:
-          type: string
-          readOnly: true
-        establishment_name:
-          type: string
-          readOnly: true
-        category_id:
+        establishment:
           type: integer
-          writeOnly: true
-          description: ID of the category to which this beverage belongs.
-        establishment_id:
+        category:
           type: integer
-          writeOnly: true
-          description: ID of the establishment that offers this beverage.
     PatchedCategory:
       type: object
       properties:
@@ -2267,7 +2419,6 @@ components:
         access:
           type: string
           readOnly: true
-          nullable: true
         refresh:
           type: string
       required:

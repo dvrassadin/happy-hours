@@ -15,14 +15,15 @@ enum AlertType {
     case emptyName
     case invalidName
     case accessDenied
+    case createUserServerError
 }
 
 protocol AlertPresenter: UIViewController { }
 
 extension AlertPresenter {
     
-    func showAlert(_ type: AlertType, handler: ((UIAlertAction) -> Void)? = nil) {
-        let message: String
+    func showAlert(_ type: AlertType, message: String? = nil, handler: ((UIAlertAction) -> Void)? = nil) {
+        var message = message
         let title: String
         
         switch type {
@@ -47,6 +48,8 @@ extension AlertPresenter {
         case .accessDenied:
             title = String(localized: "Access Denied")
             message = String(localized: "The password is incorrect or the user is not registered.")
+        case .createUserServerError:
+            title = String(localized: "Cannot Create Account")
         }
         
         let alertController = UIAlertController(

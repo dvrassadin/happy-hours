@@ -17,11 +17,11 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
     // MARK: Properties
     
     private lazy var signInView = SignInView()
-    private let model: SignInModelProtocol
+    private let model: AuthorizationModelProtocol
 
     // MARK: Lifecycle
     
-    init(model: SignInModelProtocol) {
+    init(model: AuthorizationModelProtocol) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -155,7 +155,7 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
 
 @available(iOS 17, *)
 #Preview {
-    SignInVC(model: SignInModel(networkService: NetworkService()))
+    SignInVC(model: AuthorizationModel(networkService: NetworkService()))
 }
 
 // MARK: - SignUpStackViewDelegate
@@ -163,7 +163,7 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
 extension SignInVC: SignUpStackViewDelegate {
     
     func goToSignUp() {
-        navigationController?.pushViewController(SignUpVC(), animated: true)
+        navigationController?.pushViewController(SignUpVC(model: model), animated: true)
     }
     
 }

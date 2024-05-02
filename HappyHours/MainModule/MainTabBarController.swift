@@ -26,7 +26,7 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func setUpTabs() {
-        let restaurantsModel: RestaurantsModelProtocol = RestaurantsModel()
+        let restaurantsModel: MainModelProtocol = MainModel()
         let restaurantsVC = RestaurantsVC(model: restaurantsModel)
         let restaurantsTabBarItem = UITabBarItem(
             title: String(localized: "Restaurants"),

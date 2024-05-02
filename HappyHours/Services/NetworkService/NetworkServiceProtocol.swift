@@ -9,4 +9,5 @@ import Foundation
 
 protocol NetworkServiceProtocol {
     func login(_ tokenObtain: Components.Schemas.TokenObtain) async throws
+    func createUser(_ user: Components.Schemas.ClientRegister) async throws
 }

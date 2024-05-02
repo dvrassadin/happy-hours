@@ -37,7 +37,7 @@ extension UIWindow: LogInDelegate {
 extension UIWindow: LogOutDelegate {
     
     func logOut() {
-        let signInModel = SignInModel(networkService: NetworkService())
+        let signInModel = AuthorizationModel(networkService: NetworkService())
         let signInVC = SignInVC(model: signInModel)
         if let navigationController = rootViewController as? UINavigationController {
             navigationController.setViewControllers([signInVC], animated: true)
