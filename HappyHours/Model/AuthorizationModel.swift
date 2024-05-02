@@ -24,7 +24,7 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     
     func logIn(email: String, password: String) async throws {
         let logIn = LogIn(email: email.lowercased(), password: password)
-        try await networkService.logIn(logIn: logIn)
+        try await networkService.logIn(logIn)
     }
     
     // MARK: Creating user
@@ -32,11 +32,18 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     func createUser(
         email: String,
         password: String,
-        confirmPassword: String,
+        passwordConfirm: String,
         name: String,
         date: Date
     ) async throws {
-
+        let newUser = CreateUser(
+            email: email.lowercased(),
+            password: password,
+            passwordConfirm: passwordConfirm,
+            name: name,
+            dateOfBirth: date
+        )
+        try await networkService.createUser(newUser)
     }
 
 }

@@ -31,6 +31,7 @@ final class NetworkService: NetworkServiceProtocol {
         encoder.keyEncodingStrategy = .convertToSnakeCase
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        encoder.dateEncodingStrategy = .formatted(dateFormatter)
         return encoder
     }()
     
@@ -66,7 +67,7 @@ final class NetworkService: NetworkServiceProtocol {
     
     // MARK: Authentication requests
     
-    func logIn(logIn: LogIn) async throws {
+    func logIn(_ logIn: LogIn) async throws {
         guard var urlComponents = URLComponents(string: baseURL) else {
             logger.error("Invalid server URL: \(self.baseURL)")
             throw APIError.invalidServerURL
@@ -115,12 +116,62 @@ final class NetworkService: NetworkServiceProtocol {
         
         accessToken = tokens.access
         refreshToken = tokens.refresh
-        print(tokens)
-        
     }
     
-    func createUser() async throws {
+    func createUser(_ user: CreateUser) async throws {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/client_register/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try encoder.encode(user)
+        } catch {
+            logger.error("Could not encode data for request: \(url.absoluteString)")
+            throw APIError.encodingError
+        }
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
 
+        guard httpResponse.statusCode == 201 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        logger.info("User created for request: \(url.absoluteString)")
+        
+        let tokens: Tokens
+        do {
+            tokens = try decoder.decode(CreateUserResponse.self, from: data).tokens
+            logger.info("Received tokens for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)")
+            throw APIError.decodingError
+        }
+        
+        accessToken = tokens.access
+        refreshToken = tokens.refresh
     }
+    
+    // MARK: Profile requests
+    
+    // MARK: Main requests
     
 }

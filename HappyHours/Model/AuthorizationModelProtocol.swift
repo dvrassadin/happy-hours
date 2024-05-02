@@ -13,7 +13,7 @@ protocol AuthorizationModelProtocol {
     func createUser(
         email: String,
         password: String,
-        confirmPassword: String,
+        passwordConfirm: String,
         name: String,
         date: Date
     ) async throws

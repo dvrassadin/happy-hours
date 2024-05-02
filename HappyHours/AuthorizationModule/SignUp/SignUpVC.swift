@@ -63,16 +63,16 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
             return
         }
         
-        guard let firstPassword = signUpView.passwordTextField.text,
-              isValidPassword(firstPassword),
-              let secondPassword = signUpView.confirmPasswordTextField.text,
-              isValidPassword(secondPassword)
+        guard let password = signUpView.passwordTextField.text,
+              isValidPassword(password),
+              let passwordConfirm = signUpView.confirmPasswordTextField.text,
+              isValidPassword(passwordConfirm)
         else {
             showAlert(.invalidPasswordLength)
             return
         }
         
-        guard firstPassword == secondPassword else {
+        guard password == passwordConfirm else {
             showAlert(.notMatchPasswords)
             return
         }
@@ -82,8 +82,8 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
             do {
                 try await model.createUser(
                     email: email,
-                    password: firstPassword,
-                    confirmPassword: secondPassword,
+                    password: password,
+                    passwordConfirm: passwordConfirm,
                     name: name,
                     date: signUpView.datePicker.date
                 )
@@ -101,7 +101,6 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
                 showAlert(.createUserServerError, message: error.localizedDescription)
             }
         }
-
     }
     
     private func isValidCredentials() -> Bool {

@@ -49,6 +49,8 @@
 		515CE36A2BDB92130032364D /* SearchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3692BDB92130032364D /* SearchMode.swift */; };
 		515EF0512BDFE574008795BA /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */; };
 		519ECCFE2BDF9CB8004BF955 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519ECCFD2BDF9CB8004BF955 /* NetworkService.swift */; };
+		51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B122BE3EEBD0021F505 /* CreateUser.swift */; };
+		51AC3B152BE3F8300021F505 /* CreateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
 		51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* CommonButton.swift */; };
@@ -112,6 +114,8 @@
 		515CE3692BDB92130032364D /* SearchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMode.swift; sourceTree = "<group>"; };
 		515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		519ECCFD2BDF9CB8004BF955 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		51AC3B122BE3EEBD0021F505 /* CreateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUser.swift; sourceTree = "<group>"; };
+		51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserResponse.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		51B329752BC6B8DF00D7ADFB /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
@@ -417,6 +421,8 @@
 			children = (
 				51BC17622BE3A3A90095C104 /* LogIn.swift */,
 				51BC17642BE3A53D0095C104 /* Tokens.swift */,
+				51AC3B122BE3EEBD0021F505 /* CreateUser.swift */,
+				51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 				5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */,
 				515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */,
 				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
+				51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */,
 				512D006B2BD7AB830057D696 /* EditProfileVC.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
 				51280B802BD8F71400FD0271 /* SearchView.swift in Sources */,
@@ -551,6 +558,7 @@
 				512D005A2BD769CB0057D696 /* MainModel.swift in Sources */,
 				515CE36A2BDB92130032364D /* SearchMode.swift in Sources */,
 				51B329822BC9869600D7ADFB /* CommonTextField.swift in Sources */,
+				51AC3B152BE3F8300021F505 /* CreateUserResponse.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
 				5103C66D2BE0E3B2009CFCB7 /* AuthorizationModelProtocol.swift in Sources */,
 			);
