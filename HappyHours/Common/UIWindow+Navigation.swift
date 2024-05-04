@@ -21,7 +21,10 @@ extension UIWindow {
 extension UIWindow: LogInDelegate {
     
     func logIn() {
-        let mainVC = MainTabBarController()
+        guard let networkService = (windowScene?.delegate as? SceneDelegate)?.networkService else {
+            return
+        }
+        let mainVC = MainTabBarController(networkService: networkService)
         if let navigationController = rootViewController as? UINavigationController {
             navigationController.setViewControllers([mainVC], animated: true)
         } else {
@@ -37,7 +40,8 @@ extension UIWindow: LogInDelegate {
 extension UIWindow: LogOutDelegate {
     
     func logOut() {
-        let signInModel = AuthorizationModel(networkService: NetworkService())
+        let networkService = NetworkService()
+        let signInModel = AuthorizationModel(networkService: networkService)
         let signInVC = SignInVC(model: signInModel)
         if let navigationController = rootViewController as? UINavigationController {
             navigationController.setViewControllers([signInVC], animated: true)

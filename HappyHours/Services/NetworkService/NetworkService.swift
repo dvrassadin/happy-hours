@@ -61,8 +61,10 @@ final class NetworkService: NetworkServiceProtocol {
     // MARK: Lifecycle
     
     init() {
-        accessToken = keyChainService.getToken(.access)
-        refreshToken = keyChainService.getToken(.refresh)
+        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            accessToken = keyChainService.getToken(.access)
+            refreshToken = keyChainService.getToken(.refresh)
+        }
     }
     
     // MARK: Authentication requests
@@ -170,8 +172,123 @@ final class NetworkService: NetworkServiceProtocol {
         refreshToken = tokens.refresh
     }
     
+    func logOut() async throws {
+        guard let refreshToken else {
+            logger.error("Refresh token is nil when trying to log out.")
+            throw APIError.noToken
+        }
+        
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/logout/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let logOut = LogOut(refresh: refreshToken)
+        do {
+            request.httpBody = try encoder.encode(logOut)
+        } catch {
+            logger.error("Could not encode data for request: \(url.absoluteString)")
+            throw APIError.encodingError
+        }
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        logger.info("User logged out for request: \(url.absoluteString)")
+        
+        keyChainService.deleteAllTokens()
+    }
+    
     // MARK: Profile requests
     
     // MARK: Main requests
+    
+    func getRestaurants(limit: UInt, offset: UInt) async throws -> [Restaurant] {
+        guard let accessToken else {
+            logger.error("Access token is nil when trying to get restaurants.")
+            throw APIError.noToken
+        }
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/partner/establishment/list/")
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "limit", value: String(limit)),
+            URLQueryItem(name: "offset", value: String(offset))
+        ]
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let restaurants: [Restaurant]
+        do {
+            restaurants = try decoder.decode(RestaurantsResponse.self, from: data).results
+            logger.info("Received tokens for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)")
+            throw APIError.decodingError
+        }
+        
+        return restaurants
+    }
+    
+    func getRestaurantLogoData(from stringURL: String) async -> Data? {
+        guard let url = URL(string: stringURL) else { return nil }
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        do {
+            let (data, _) = try await session.data(from: url)
+            return data
+        } catch {
+            logger.error("Data not received for image request: \(url.absoluteString)")
+        }
+        
+        return nil
+    }
     
 }

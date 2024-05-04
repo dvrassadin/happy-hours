@@ -22,6 +22,10 @@ final class RestaurantsTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let defaultLogo = UIImage(
+        systemName: "storefront.fill"
+    )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +66,7 @@ final class RestaurantsTableViewCell: UITableViewCell {
     private func setUpUI() {
         addSubviews()
         setUpConstraints()
+        logoImageView.image = defaultLogo
     }
     
     private func addSubviews() {
@@ -100,14 +105,19 @@ final class RestaurantsTableViewCell: UITableViewCell {
     // MARK: Configure data
     
     func configure(restaurant: Restaurant) {
-        logoImageView.image = restaurant.image
         nameLabel.text = restaurant.name
-        hoursLabel.text = restaurant.hours
+        hoursLabel.text = "\(restaurant.happyhoursStart) – \(restaurant.happyhoursEnd)"
+    }
+    
+    func configure(logo: UIImage?) {
+        if let logo {
+            logoImageView.image = logo
+        }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        logoImageView.image = nil
+        logoImageView.image = defaultLogo
         nameLabel.text = nil
         hoursLabel.text = nil
     }

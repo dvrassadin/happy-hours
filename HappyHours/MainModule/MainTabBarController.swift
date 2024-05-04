@@ -9,7 +9,18 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
+    private let networkService: NetworkServiceProtocol
+    
     // MARK: Lifecycle
+    
+    init(networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +37,9 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func setUpTabs() {
-        let restaurantsModel: MainModelProtocol = MainModel()
+        let restaurantsModel: RestaurantsModelProtocol = RestaurantsModel(
+            networkService: networkService
+        )
         let restaurantsVC = RestaurantsVC(model: restaurantsModel)
         let restaurantsTabBarItem = UITabBarItem(
             title: String(localized: "Restaurants"),
@@ -51,7 +64,7 @@ final class MainTabBarController: UITabBarController {
         )
         scannerVC.tabBarItem = scannerTabBarItem
         
-        let profileModel: ProfileModelProtocol = ProfileModel()
+        let profileModel: ProfileModelProtocol = ProfileModel(networkService: networkService)
         let profileVC = ProfileVC(model: profileModel)
         let profileTabBarItem = UITabBarItem(
             title: String(localized: "Profile"),
@@ -69,5 +82,5 @@ final class MainTabBarController: UITabBarController {
 
 @available(iOS 17, *)
 #Preview {
-    MainTabBarController()
+    MainTabBarController(networkService: NetworkService())
 }

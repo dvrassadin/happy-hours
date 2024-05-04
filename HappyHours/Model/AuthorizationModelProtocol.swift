@@ -17,4 +17,5 @@ protocol AuthorizationModelProtocol {
         name: String,
         date: Date
     ) async throws
+    
 }

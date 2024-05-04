@@ -16,6 +16,7 @@ enum AlertType {
     case invalidName
     case accessDenied
     case createUserServerError
+    case getRestaurantsServerError
 }
 
 protocol AlertPresenter: UIViewController { }
@@ -50,6 +51,9 @@ extension AlertPresenter {
             message = String(localized: "The password is incorrect or the user is not registered.")
         case .createUserServerError:
             title = String(localized: "Cannot Create Account")
+        case .getRestaurantsServerError:
+            title = String(localized: "Unable to Download")
+            message = String(localized: "Failed to get list of restaurants. Try again.")
         }
         
         let alertController = UIAlertController(

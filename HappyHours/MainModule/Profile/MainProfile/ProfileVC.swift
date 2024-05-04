@@ -65,6 +65,9 @@ final class ProfileVC: UIViewController {
             title: String(localized: "Log Out"),
             style: .destructive
         ) { _ in
+            Task {
+                try await self.model.logOut()
+            }
             UIApplication.shared.sendAction(#selector(LogOutDelegate.logOut),
                 to: nil,
                 from: self,
@@ -83,5 +86,5 @@ final class ProfileVC: UIViewController {
 
 @available(iOS 17, *)
 #Preview {
-    ProfileVC(model: ProfileModel())
+    ProfileVC(model: ProfileModel(networkService: NetworkService()))
 }

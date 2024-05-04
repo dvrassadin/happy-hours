@@ -15,5 +15,5 @@ enum APIError: Error {
     case unexpectedStatusCode
     case encodingError
     case decodingError
-    
+    case noToken
 }

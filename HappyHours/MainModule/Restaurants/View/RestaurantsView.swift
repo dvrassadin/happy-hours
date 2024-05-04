@@ -18,6 +18,7 @@ final class RestaurantsView: UIView {
             RestaurantsTableViewCell.self,
             forCellReuseIdentifier: RestaurantsTableViewCell.identifier
         )
+        tableView.refreshControl = UIRefreshControl()
         return tableView
     }()
     

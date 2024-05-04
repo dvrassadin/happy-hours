@@ -12,6 +12,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Properties
     
     var window: UIWindow?
+    let networkService: NetworkServiceProtocol = NetworkService()
 
     // MARK: Lifecycle
     
@@ -24,10 +25,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let networkService = NetworkService()
+//        let networkService = NetworkService()
         let vc: UIViewController
         if let window, window.isLoggedIn {
-            vc = MainTabBarController()
+            vc = MainTabBarController(networkService: networkService)
         } else {
             let signInModel = AuthorizationModel(networkService: networkService)
             vc = SignInVC(model: signInModel)

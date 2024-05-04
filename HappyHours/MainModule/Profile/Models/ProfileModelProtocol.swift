@@ -13,4 +13,5 @@ protocol ProfileModelProtocol {
     
     func updateUser(_ user: User)
     
+    func logOut() async throws
 }

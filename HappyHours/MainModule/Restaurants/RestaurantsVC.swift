@@ -9,16 +9,16 @@ import UIKit
 
 // MARK: - RestaurantsVC class
 
-final class RestaurantsVC: UIViewController {
+final class RestaurantsVC: UIViewController, AlertPresenter {
     
     // MARK: Properties
     
-    private let model: MainModelProtocol
+    private let model: RestaurantsModelProtocol
     private lazy var restaurantsView = RestaurantsView()
 
     // MARK: Lifecycle
     
-    init(model: MainModelProtocol) {
+    init(model: RestaurantsModelProtocol) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,6 +31,30 @@ final class RestaurantsVC: UIViewController {
         view = restaurantsView
         restaurantsView.tableView.dataSource = self
         restaurantsView.tableView.delegate = self
+        restaurantsView.tableView.refreshControl?.addTarget(
+            self,
+            action: #selector(updateRestaurants),
+            for: .valueChanged
+        )
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateRestaurants()
+    }
+    
+    // MARK: Update restaurants
+    
+    @objc private func updateRestaurants() {
+        Task {
+            do {
+                try await model.getRestaurants(limit: 100, offset: 0)
+                restaurantsView.tableView.reloadData()
+            } catch {
+                showAlert(.getRestaurantsServerError)
+            }
+            restaurantsView.tableView.refreshControl?.endRefreshing()
+        }
     }
     
 //    override func viewIsAppearing(_ animated: Bool) {
@@ -46,7 +70,7 @@ final class RestaurantsVC: UIViewController {
 
 @available(iOS 17, *)
 #Preview {
-    RestaurantsVC(model: MainModel())
+    RestaurantsVC(model: RestaurantsModel(networkService: NetworkService()))
 }
 
 // MARK: - UITableViewDataSource
@@ -63,7 +87,12 @@ extension RestaurantsVC: UITableViewDataSource {
             for: indexPath
         ) as? RestaurantsTableViewCell else { return UITableViewCell() }
         
-        cell.configure(restaurant: model.restaurants[indexPath.row])
+        let restaurant = model.restaurants[indexPath.row]
+        
+        cell.configure(restaurant: restaurant)
+        Task {
+            cell.configure(logo: await model.getLogo(stringURL: restaurant.logo))
+        }
         return cell
     }
     
