@@ -8,6 +8,7 @@
 import UIKit
 
 enum AlertType {
+    
     case invalidEmail
     case invalidPasswordLength
     case notMatchPasswords
@@ -17,6 +18,9 @@ enum AlertType {
     case accessDenied
     case createUserServerError
     case getRestaurantsServerError
+    case getUserServerError
+    case editUserServerError
+    
 }
 
 protocol AlertPresenter: UIViewController { }
@@ -54,6 +58,12 @@ extension AlertPresenter {
         case .getRestaurantsServerError:
             title = String(localized: "Unable to Download")
             message = String(localized: "Failed to get list of restaurants. Try again.")
+        case .getUserServerError:
+            title = String(localized: "Unable to Download")
+            message = String(localized: "Failed to get your credentials.")
+        case .editUserServerError:
+            title = String(localized: "Unable to Update")
+            message = String(localized: "Failed to update your credentials.")
         }
         
         let alertController = UIAlertController(

@@ -12,7 +12,11 @@ final class EditProfileView: UIView {
     // MARK: UI components
     
     let userImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView = UIImageView(
+            image: UIImage(
+                systemName: "person.circle.fill"
+            )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+        )
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
@@ -77,6 +81,7 @@ final class EditProfileView: UIView {
         addSubviews()
         setUpConstraints()
         emailTextField.isEnabled = false
+//        emailTextField.backgroundColor = .TextField.disabledBackground
     }
     
     private func addSubviews() {
@@ -158,14 +163,11 @@ final class EditProfileView: UIView {
         )
     }
     
-    func setUser(_ user: User) {
-        if let avatar = user.avatar {
-            userImageView.image = avatar
-        } else {
-            userImageView.image = UIImage(systemName: "person.circle.fill")
-        }
+    func set(user: User) {
         nameTextField.text = user.name
-        datePicker.date = user.birthday
+        if let dateOfBirth = user.dateOfBirth {
+            datePicker.date = dateOfBirth
+        }
         emailTextField.text = user.email
     }
 }

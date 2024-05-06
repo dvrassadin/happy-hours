@@ -8,6 +8,14 @@
 import UIKit
 
 final class CommonTextField: UITextField {
+    
+    // MARK: Properties
+    
+    override var isEnabled: Bool {
+        willSet {
+            backgroundColor = newValue ? .white : .TextField.disabledBackground
+        }
+    }
 
     // MARK: Lifecycle
     

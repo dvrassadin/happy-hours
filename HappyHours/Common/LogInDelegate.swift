@@ -12,18 +12,3 @@ import Foundation
     func logIn()
     
 }
-
-//protocol LogInDelegate { }
-//
-//extension LogInDelegate {
-//    
-//    var isLoggedIn: Bool {
-//        get { UserDefaults.standard.bool(forKey: "isLoggedIn") }
-//        set { UserDefaults.standard.setValue(newValue, forKey: "isLoggedIn") }
-//    }
-//    
-//    func logIn() {
-//        
-//    }
-//    
-//}

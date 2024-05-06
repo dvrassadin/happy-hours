@@ -5,13 +5,15 @@
 //  Created by Daniil Rassadin on 23/4/24.
 //
 
-import Foundation
+import UIKit
 
 protocol ProfileModelProtocol {
     
-    var user: User { get }
+    var user: User? { get }
+    var avatarImage: UIImage? { get async }
     
-    func updateUser(_ user: User)
-    
+    func downloadUser() async throws
     func logOut() async throws
+    func editUser(_ user: UserUpdate) async throws
+    
 }

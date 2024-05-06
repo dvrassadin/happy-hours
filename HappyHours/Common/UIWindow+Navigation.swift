@@ -40,7 +40,11 @@ extension UIWindow: LogInDelegate {
 extension UIWindow: LogOutDelegate {
     
     func logOut() {
-        let networkService = NetworkService()
+//        let networkService = NetworkService()
+        guard let networkService = (windowScene?.delegate as? SceneDelegate)?.networkService else {
+            return
+        }
+        
         let signInModel = AuthorizationModel(networkService: networkService)
         let signInVC = SignInVC(model: signInModel)
         if let navigationController = rootViewController as? UINavigationController {

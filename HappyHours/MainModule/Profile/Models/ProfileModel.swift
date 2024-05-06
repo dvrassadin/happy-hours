@@ -5,14 +5,23 @@
 //  Created by Daniil Rassadin on 23/4/24.
 //
 
-import Foundation
+import UIKit
 
 final class ProfileModel: ProfileModelProtocol {
     
     // MARK: Properties
     
     private let networkService: NetworkServiceProtocol
-    private(set) var user: User = User.example
+    private(set) var user: User?
+    var avatarImage: UIImage? {
+        get async {
+            guard let url = user?.avatar,
+                  let data = await networkService.getImageData(from: url),
+                  let image = UIImage(data: data)
+            else { return nil }
+            return image
+        }
+    }
     
     // MARK: Lifecycle
     
@@ -22,8 +31,21 @@ final class ProfileModel: ProfileModelProtocol {
     
     // MARK: Updating user
     
-    func updateUser(_ user: User) {
-        self.user = user
+    func downloadUser() async throws {
+        try await self.user = networkService.getUser()
+    }
+    
+    func editUser(_ user: UserUpdate) async throws {
+        do {
+            try await networkService.editUser(user)
+            try await self.user = networkService.getUser()
+        } catch {
+            throw error
+        }
+    }
+    
+    func updateAvatar() {
+        
     }
     
     // MARK: Logout

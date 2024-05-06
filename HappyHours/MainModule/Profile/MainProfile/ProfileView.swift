@@ -12,7 +12,11 @@ final class ProfileView: UIView {
     // MARK: UI components
     
     let userImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView = UIImageView(
+            image: UIImage(
+                systemName: "person.circle.fill"
+            )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+        )
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -115,14 +119,14 @@ final class ProfileView: UIView {
         )
     }
     
-    func setUser(user: User) {
-        if let avatar = user.avatar {
-            userImageView.image = avatar
-        } else {
-            userImageView.image = UIImage(systemName: "person.circle.fill")
-        }
-        nameLabel.text = user.name
-        emailLabel.text = user.email
-    }
+//    func set(user: User) {
+//        if let avatar = user.avatar {
+//            userImageView.image = avatar
+//        } else {
+//            userImageView.image = UIImage(systemName: "person.circle.fill")
+//        }
+//        nameLabel.text = user.name
+//        emailLabel.text = user.email
+//    }
     
 }

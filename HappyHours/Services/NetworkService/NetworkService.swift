@@ -115,7 +115,7 @@ final class NetworkService: NetworkServiceProtocol {
             logger.error("Could not decode data for request: \(url.absoluteString)")
             throw APIError.decodingError
         }
-        
+
         accessToken = tokens.access
         refreshToken = tokens.refresh
     }
@@ -178,6 +178,10 @@ final class NetworkService: NetworkServiceProtocol {
             throw APIError.noToken
         }
         
+        accessToken = nil
+        self.refreshToken = nil
+        keyChainService.deleteAllTokens()
+        
         guard var urlComponents = URLComponents(string: baseURL) else {
             logger.error("Invalid server URL: \(self.baseURL)")
             throw APIError.invalidServerURL
@@ -196,6 +200,7 @@ final class NetworkService: NetworkServiceProtocol {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let logOut = LogOut(refresh: refreshToken)
+        
         do {
             request.httpBody = try encoder.encode(logOut)
         } catch {
@@ -215,12 +220,108 @@ final class NetworkService: NetworkServiceProtocol {
             logger.error("Unexpected status code: \(httpResponse.statusCode)")
             throw APIError.unexpectedStatusCode
         }
-        logger.info("User logged out for request: \(url.absoluteString)")
         
-        keyChainService.deleteAllTokens()
+        logger.info("User logged out for request: \(url.absoluteString)")
     }
     
     // MARK: Profile requests
+    
+    func getUser() async throws -> User {
+        guard let accessToken else {
+            logger.error("Access token is nil when trying to get restaurants.")
+            throw APIError.noToken
+        }
+        
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let user: User
+        do {
+            user = try decoder.decode(User.self, from: data)
+            logger.info("Received user for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+
+        return user
+    }
+    
+    func editUser(_ user: UserUpdate) async throws {
+        guard let accessToken else {
+            logger.error("Access token is nil when trying to get restaurants.")
+            throw APIError.noToken
+        }
+        
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        do {
+//            let json = try encoder.encode(user)
+//            print(String(data: json, encoding: .utf8))
+            request.httpBody = try encoder.encode(user)
+        } catch {
+            logger.error("Could not encode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.encodingError
+        }
+
+        logger.info("Starting request: \(url.absoluteString)")
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        logger.info("User edited for request: \(url.absoluteString)")
+    }
     
     // MARK: Main requests
     
@@ -229,6 +330,7 @@ final class NetworkService: NetworkServiceProtocol {
             logger.error("Access token is nil when trying to get restaurants.")
             throw APIError.noToken
         }
+        
         guard var urlComponents = URLComponents(string: baseURL) else {
             logger.error("Invalid server URL: \(self.baseURL)")
             throw APIError.invalidServerURL
@@ -267,17 +369,17 @@ final class NetworkService: NetworkServiceProtocol {
         
         let restaurants: [Restaurant]
         do {
-            restaurants = try decoder.decode(RestaurantsResponse.self, from: data).results
-            logger.info("Received tokens for request: \(url.absoluteString)")
+            restaurants = try decoder.decode(RestaurantsResponse.self, from: data).results.features
+            logger.info("Received restaurants for request: \(url.absoluteString)")
         } catch {
-            logger.error("Could not decode data for request: \(url.absoluteString)")
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
             throw APIError.decodingError
         }
         
         return restaurants
     }
     
-    func getRestaurantLogoData(from stringURL: String) async -> Data? {
+    func getImageData(from stringURL: String) async -> Data? {
         guard let url = URL(string: stringURL) else { return nil }
         
         logger.info("Starting request: \(url.absoluteString)")

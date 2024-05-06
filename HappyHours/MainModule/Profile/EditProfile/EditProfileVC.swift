@@ -31,7 +31,9 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        editProfileView.setUser(model.user)
+        if let user = model.user {
+            editProfileView.set(user: user)
+        }
         setUpNavigation()
     }
     
@@ -52,19 +54,30 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     }
     
     private func updateUser() {
-        guard isValidCredentials(),
-              let name = editProfileView.nameTextField.text,
-              let email = editProfileView.emailTextField.text
-        else { return }
-        model.updateUser(
-            User(
-                name: name,
-                email: email,
-                birthday: editProfileView.datePicker.date,
-                avatar: editProfileView.userImageView.image
-            )
-        )
-        navigationController?.popViewController(animated: true)
+        guard isValidCredentials(), let name = editProfileView.nameTextField.text else { return }
+
+        Task {
+            do {
+                let user = UserUpdate(
+                    name: name,
+                    dateOfBirth: editProfileView.datePicker.date,
+                    avatar: nil
+                )
+                try await model.editUser(user)
+                navigationController?.popViewController(animated: true)
+            } catch {
+                showAlert(.editUserServerError)
+            }
+        }
+//        model.updateUser(
+//            User(
+//                name: name,
+//                email: email,
+//                birthday: editProfileView.datePicker.date,
+//                avatar: editProfileView.userImageView.image
+//            )
+//        )
+//        navigationController?.popViewController(animated: true)
     }
     
     private func isValidCredentials() -> Bool {

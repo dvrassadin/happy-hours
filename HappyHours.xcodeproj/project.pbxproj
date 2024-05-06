@@ -18,7 +18,6 @@
 		512D00582BD6C1EF0057D696 /* Inter-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 512D00572BD6C1EF0057D696 /* Inter-VariableFont.ttf */; };
 		512D005A2BD769CB0057D696 /* RestaurantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00592BD769CB0057D696 /* RestaurantsModel.swift */; };
 		512D005C2BD769EE0057D696 /* RestaurantsModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D005B2BD769EE0057D696 /* RestaurantsModelProtocol.swift */; };
-		512D00602BD785560057D696 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D005F2BD785560057D696 /* User.swift */; };
 		512D00622BD7892F0057D696 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00612BD7892F0057D696 /* ProfileModel.swift */; };
 		512D00652BD7894F0057D696 /* ProfileModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00642BD7894F0057D696 /* ProfileModelProtocol.swift */; };
 		512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00682BD7AAAD0057D696 /* EditProfileView.swift */; };
@@ -42,7 +41,7 @@
 		5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9102BD3E82600659D73 /* LogOutDelegate.swift */; };
 		5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */; };
 		5148B92B2BD40E8600659D73 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B92A2BD40E8600659D73 /* Constraints.swift */; };
-		5148B95A2BD61C8300659D73 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9592BD61C8300659D73 /* Restaurant.swift */; };
+		5148B95A2BD61C8300659D73 /* RestaurantsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9592BD61C8300659D73 /* RestaurantsResponse.swift */; };
 		5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */; };
 		515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3642BDB87D60032364D /* BeverageTableViewCell.swift */; };
 		515CE3682BDB91960032364D /* SearchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3672BDB91960032364D /* SearchViewDelegate.swift */; };
@@ -52,6 +51,7 @@
 		51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B122BE3EEBD0021F505 /* CreateUser.swift */; };
 		51AC3B152BE3F8300021F505 /* CreateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */; };
 		51AC3B172BE49B460021F505 /* LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B162BE49B460021F505 /* LogOut.swift */; };
+		51AC3B1B2BE698670021F505 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B1A2BE698670021F505 /* User.swift */; };
 		51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329642BC64C6300D7ADFB /* SignInView.swift */; };
 		51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329732BC68BC000D7ADFB /* AuthScreenView.swift */; };
 		51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329752BC6B8DF00D7ADFB /* CommonButton.swift */; };
@@ -60,6 +60,7 @@
 		51B329822BC9869600D7ADFB /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329812BC9869600D7ADFB /* CommonTextField.swift */; };
 		51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B329832BCA686D00D7ADFB /* SignUpView.swift */; };
 		51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */; };
+		51B68D4C2BE8AD1300F1D26C /* UserUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B68D4B2BE8AD1300F1D26C /* UserUpdate.swift */; };
 		51BC17632BE3A3A90095C104 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC17622BE3A3A90095C104 /* LogIn.swift */; };
 		51BC17652BE3A53D0095C104 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC17642BE3A53D0095C104 /* Tokens.swift */; };
 		51CE539E2BDE52EA001A5112 /* NothingFoundStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CE539D2BDE52EA001A5112 /* NothingFoundStateView.swift */; };
@@ -84,7 +85,6 @@
 		512D00572BD6C1EF0057D696 /* Inter-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-VariableFont.ttf"; sourceTree = "<group>"; };
 		512D00592BD769CB0057D696 /* RestaurantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsModel.swift; sourceTree = "<group>"; };
 		512D005B2BD769EE0057D696 /* RestaurantsModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsModelProtocol.swift; sourceTree = "<group>"; };
-		512D005F2BD785560057D696 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		512D00612BD7892F0057D696 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		512D00642BD7894F0057D696 /* ProfileModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModelProtocol.swift; sourceTree = "<group>"; };
 		512D00682BD7AAAD0057D696 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		5148B9102BD3E82600659D73 /* LogOutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDelegate.swift; sourceTree = "<group>"; };
 		5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Navigation.swift"; sourceTree = "<group>"; };
 		5148B92A2BD40E8600659D73 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		5148B9592BD61C8300659D73 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		5148B9592BD61C8300659D73 /* RestaurantsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsResponse.swift; sourceTree = "<group>"; };
 		5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsTableViewCell.swift; sourceTree = "<group>"; };
 		515CE3642BDB87D60032364D /* BeverageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeverageTableViewCell.swift; sourceTree = "<group>"; };
 		515CE3672BDB91960032364D /* SearchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +118,7 @@
 		51AC3B122BE3EEBD0021F505 /* CreateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUser.swift; sourceTree = "<group>"; };
 		51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserResponse.swift; sourceTree = "<group>"; };
 		51AC3B162BE49B460021F505 /* LogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOut.swift; sourceTree = "<group>"; };
+		51AC3B1A2BE698670021F505 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		51B329642BC64C6300D7ADFB /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		51B329732BC68BC000D7ADFB /* AuthScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		51B329752BC6B8DF00D7ADFB /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		51B329812BC9869600D7ADFB /* CommonTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		51B329832BCA686D00D7ADFB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		51B5B0EF2BC43E9A0096DB8B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		51B68D4B2BE8AD1300F1D26C /* UserUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdate.swift; sourceTree = "<group>"; };
 		51BC17622BE3A3A90095C104 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		51BC17642BE3A53D0095C104 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		51CE539D2BDE52EA001A5112 /* NothingFoundStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingFoundStateView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				519ECCFD2BDF9CB8004BF955 /* NetworkService.swift */,
 				515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */,
 				51EEC06B2BE391C100780019 /* APIError.swift */,
+				51EEC06F2BE396D500780019 /* APIModels */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -220,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				512D00612BD7892F0057D696 /* ProfileModel.swift */,
-				512D005F2BD785560057D696 /* User.swift */,
 				512D00642BD7894F0057D696 /* ProfileModelProtocol.swift */,
 			);
 			path = Models;
@@ -303,7 +305,6 @@
 				512D00552BD6B3DB0057D696 /* NameChecker.swift */,
 				513B6CC02BCF987E0006DD25 /* EmailChecker.swift */,
 				512D006C2BD803150057D696 /* AlertPresenter.swift */,
-				51EEC06F2BE396D500780019 /* Models */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -417,7 +418,7 @@
 			path = HappyHours;
 			sourceTree = "<group>";
 		};
-		51EEC06F2BE396D500780019 /* Models */ = {
+		51EEC06F2BE396D500780019 /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
 				51BC17622BE3A3A90095C104 /* LogIn.swift */,
@@ -425,9 +426,11 @@
 				51AC3B122BE3EEBD0021F505 /* CreateUser.swift */,
 				51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */,
 				51AC3B162BE49B460021F505 /* LogOut.swift */,
-				5148B9592BD61C8300659D73 /* Restaurant.swift */,
+				5148B9592BD61C8300659D73 /* RestaurantsResponse.swift */,
+				51AC3B1A2BE698670021F505 /* User.swift */,
+				51B68D4B2BE8AD1300F1D26C /* UserUpdate.swift */,
 			);
-			path = Models;
+			path = APIModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				513B6CFD2BD16EA60006DD25 /* ProfileView.swift in Sources */,
+				51B68D4C2BE8AD1300F1D26C /* UserUpdate.swift in Sources */,
 				5103C6712BE0EC27009CFCB7 /* KeyChainService.swift in Sources */,
 				51CF88622BC3B8D800196E8A /* SignInVC.swift in Sources */,
 				513B6CF02BD02CA90006DD25 /* MainTabBarController.swift in Sources */,
@@ -514,6 +518,7 @@
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
 				51B3297E2BC9138600D7ADFB /* SignUpStackViewDelegate.swift in Sources */,
 				5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */,
+				51AC3B1B2BE698670021F505 /* User.swift in Sources */,
 				515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */,
 				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
 				51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */,
@@ -537,12 +542,11 @@
 				51BC17652BE3A53D0095C104 /* Tokens.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
 				51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */,
-				5148B95A2BD61C8300659D73 /* Restaurant.swift in Sources */,
+				5148B95A2BD61C8300659D73 /* RestaurantsResponse.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
 				512D00622BD7892F0057D696 /* ProfileModel.swift in Sources */,
 				51280B7E2BD8F6EA00FD0271 /* SearchVC.swift in Sources */,
 				512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */,
-				512D00602BD785560057D696 /* User.swift in Sources */,
 				51BC17632BE3A3A90095C104 /* LogIn.swift in Sources */,
 				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
 				512D005C2BD769EE0057D696 /* RestaurantsModelProtocol.swift in Sources */,

@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - ProfileVC class
 
-final class ProfileVC: UIViewController {
+final class ProfileVC: UIViewController, AlertPresenter {
 
     // MARK: Properties
     
@@ -38,14 +38,14 @@ final class ProfileVC: UIViewController {
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        profileView.setUser(user: model.user)
+        setUser()
     }
     
     // MARK: Navigation
     
     private func setUpNavigation() {
         profileView.profileButton.addAction(UIAction { [weak self] _ in
-            guard let self else { return }
+            guard let self, model.user != nil else { return }
             let editProfileVC = EditProfileVC(model: self.model)
             self.navigationController?.pushViewController(editProfileVC, animated: true)
         }, for: .touchUpInside)
@@ -78,6 +78,28 @@ final class ProfileVC: UIViewController {
         alertController.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel))
         
         present(alertController, animated: true)
+    }
+    
+    // MARK: Set user
+    
+    private func setUser() {
+        Task {
+            do {
+                try await model.downloadUser()
+                guard let user = model.user else { 
+                    showAlert(.getUserServerError)
+                    return
+                }
+//                profileView.set(user: user)
+                profileView.nameLabel.text = user.name
+                profileView.emailLabel.text = user.email
+                if let avatar = await model.avatarImage {
+                    profileView.userImageView.image = avatar
+                }
+            } catch {
+                showAlert(.getUserServerError)
+            }
+        }
     }
 
 }

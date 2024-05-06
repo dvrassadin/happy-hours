@@ -105,8 +105,11 @@ final class RestaurantsTableViewCell: UITableViewCell {
     // MARK: Configure data
     
     func configure(restaurant: Restaurant) {
-        nameLabel.text = restaurant.name
-        hoursLabel.text = "\(restaurant.happyhoursStart) – \(restaurant.happyhoursEnd)"
+        nameLabel.text = restaurant.properties.name
+        if let hhStart = restaurant.properties.happyhoursStart,
+           let hhEnd = restaurant.properties.happyhoursEnd {
+            hoursLabel.text = "\(hhStart) – \(hhEnd)"
+        }
     }
     
     func configure(logo: UIImage?) {
