@@ -17,5 +17,8 @@ protocol AuthorizationModelProtocol {
         name: String,
         date: Date
     ) async throws
+    func sendEmailForOTC(_ email: String) async throws
+    func sendOTC(_ code: String) async throws
+    func setNewPassword(password: String, passwordConfirmation: String) async throws
     
 }

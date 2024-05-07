@@ -16,7 +16,7 @@ final class NewPasswordView: AuthScreenView {
         textContentType: .newPassword
     )
     
-    let confirmPasswordTextField = CommonTextField(
+    let passwordConfirmationTextField = CommonTextField(
         placeholder: String(localized: "Confirm Password"),
         textContentType: .newPassword
     )
@@ -43,7 +43,7 @@ final class NewPasswordView: AuthScreenView {
     
     private func addSubviews() {
         addSubview(passwordTextField)
-        addSubview(confirmPasswordTextField)
+        addSubview(passwordConfirmationTextField)
         addSubview(createButton)
     }
     
@@ -55,21 +55,21 @@ final class NewPasswordView: AuthScreenView {
                 Constraints.textFieldAndButtonWidthConstraint(for: passwordTextField, on: self),
                 Constraints.textFieldAndButtonHeighConstraint(for: passwordTextField, on: self),
                 
-                confirmPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+                passwordConfirmationTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
                 Constraints.topBetweenTextFieldsAndButtons(
-                    for: confirmPasswordTextField,
+                    for: passwordConfirmationTextField,
                     under: passwordTextField
                 ),
-                confirmPasswordTextField.widthAnchor.constraint(
+                passwordConfirmationTextField.widthAnchor.constraint(
                     equalTo: passwordTextField.widthAnchor
                 ),
-                confirmPasswordTextField.heightAnchor.constraint(
+                passwordConfirmationTextField.heightAnchor.constraint(
                     equalTo: passwordTextField.heightAnchor
                 ),
                 
                 Constraints.topBetweenTextFieldsAndButtons(
                     for: createButton,
-                    under: confirmPasswordTextField
+                    under: passwordConfirmationTextField
                 ),
                 createButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 createButton.widthAnchor.constraint(equalTo: passwordTextField.widthAnchor),

@@ -69,15 +69,6 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                 showAlert(.editUserServerError)
             }
         }
-//        model.updateUser(
-//            User(
-//                name: name,
-//                email: email,
-//                birthday: editProfileView.datePicker.date,
-//                avatar: editProfileView.userImageView.image
-//            )
-//        )
-//        navigationController?.popViewController(animated: true)
     }
     
     private func isValidCredentials() -> Bool {

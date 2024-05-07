@@ -14,8 +14,18 @@ final class ResetPasswordVC: UIViewController, EmailChecker, AlertPresenter {
     // MARK: Properties
     
     private lazy var resetPasswordView = ResetPasswordView()
+    private let model: AuthorizationModelProtocol
 
     // MARK: Lifecycle
+    
+    init(model: AuthorizationModelProtocol) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = resetPasswordView
@@ -32,14 +42,27 @@ final class ResetPasswordVC: UIViewController, EmailChecker, AlertPresenter {
     private func setUpNavigation() {
         resetPasswordView.continueButton.addTarget(
             self,
-            action: #selector(goToOTPVC),
+            action: #selector(goToOTCVC),
             for: .touchUpInside
         )
     }
     
-    @objc private func goToOTPVC() {
-        guard isValidCredentials() else { return }
-        navigationController?.pushViewController(OneTimeCodeVC(), animated: true)
+    @objc private func goToOTCVC() {
+        guard isValidCredentials(), let email = resetPasswordView.emailTextField.text else {
+            return
+        }
+        
+        Task {
+            do {
+                try await model.sendEmailForOTC(String(email.lowercased()))
+                navigationController?.pushViewController(
+                    OneTimeCodeVC(model: model),
+                    animated: true
+                )
+            } catch {
+                showAlert(.sendingEmailServerError)
+            }
+        }
     }
     
     private func isValidCredentials() -> Bool {
@@ -57,5 +80,5 @@ final class ResetPasswordVC: UIViewController, EmailChecker, AlertPresenter {
 
 @available(iOS 17, *)
 #Preview {
-    ResetPasswordVC()
+    ResetPasswordVC(model: AuthorizationModel(networkService: NetworkService()))
 }

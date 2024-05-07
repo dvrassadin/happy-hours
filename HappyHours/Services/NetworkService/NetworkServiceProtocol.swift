@@ -16,5 +16,8 @@ protocol NetworkServiceProtocol {
     func getImageData(from stringURL: String) async -> Data?
     func getUser() async throws -> User
     func editUser(_ user: UserUpdate) async throws
+    func sendEmailForOTC(_ email: ResetPassword) async throws
+    func sendOTC(_ otc: OTC) async throws
+    func setNewPassword(_ password: NewPassword) async throws
     
 }

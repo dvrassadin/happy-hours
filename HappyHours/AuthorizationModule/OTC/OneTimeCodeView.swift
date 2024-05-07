@@ -91,10 +91,6 @@ final class OneTimeCodeView: AuthScreenView {
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
-//                codeTextField.topAnchor.constraint(
-//                    equalToSystemSpacingBelow: screenNameLabel.bottomAnchor,
-//                    multiplier: AuthSizes.topBetweenScreenNameAndFirstTextFiledMultiplier
-//                ),
                 Constraints.spaceBeforeFirstElement(for: codeTextField, under: screenNameLabel),
                 codeTextField.widthAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.widthAnchor,

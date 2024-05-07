@@ -40,7 +40,6 @@ extension UIWindow: LogInDelegate {
 extension UIWindow: LogOutDelegate {
     
     func logOut() {
-//        let networkService = NetworkService()
         guard let networkService = (windowScene?.delegate as? SceneDelegate)?.networkService else {
             return
         }

@@ -12,8 +12,17 @@ final class NewPasswordVC: UIViewController, PasswordChecker, AlertPresenter {
     // MARK: Properties
     
     private lazy var newPasswordView = NewPasswordView()
+    private let model: AuthorizationModelProtocol
     
     // MARK: Lifecycle
+    init(model: AuthorizationModelProtocol) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = newPasswordView
@@ -35,21 +44,34 @@ final class NewPasswordVC: UIViewController, PasswordChecker, AlertPresenter {
     }
     
     @objc private func goToSignInVC() {
-        guard isValidCredentials() else { return }
-        navigationController?.popToRootViewController(animated: true)
+        guard isValidCredentials(),
+              let password = newPasswordView.passwordTextField.text,
+              let passwordConfirmation = newPasswordView.passwordConfirmationTextField.text
+        else { return }
+        Task {
+            do {
+                try await model.setNewPassword(
+                    password: password,
+                    passwordConfirmation: passwordConfirmation
+                )
+                navigationController?.popToRootViewController(animated: true)
+            } catch {
+                showAlert(.settingNewPasswordServerError)
+            }
+        }
     }
     
     private func isValidCredentials() -> Bool {
-        guard let firstPassword = newPasswordView.passwordTextField.text,
-              isValidPassword(firstPassword),
-              let secondPassword = newPasswordView.confirmPasswordTextField.text,
-              isValidPassword(secondPassword)
+        guard let password = newPasswordView.passwordTextField.text,
+              isValidPassword(password),
+              let passwordConfirmation = newPasswordView.passwordConfirmationTextField.text,
+              isValidPassword(passwordConfirmation)
         else {
             showAlert(.invalidPasswordLength)
             return false
         }
         
-        guard firstPassword == secondPassword else {
+        guard password == passwordConfirmation else {
             showAlert(.notMatchPasswords)
             return false
         }

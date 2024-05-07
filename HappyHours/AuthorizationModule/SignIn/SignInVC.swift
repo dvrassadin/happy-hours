@@ -6,8 +6,6 @@
 //
 
 import UIKit
-//import OpenAPIRuntime
-//import OpenAPIURLSession
 
 // MARK: - SignInVC class
 
@@ -55,7 +53,6 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
     }
     
     @objc private func goToMainModule() {
-//        guard isValidCredentials() else { return }
         guard let email = signInView.emailTextField.text, isValidEmail(email) else {
             showAlert(.invalidEmail)
             return
@@ -85,22 +82,8 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
     }
     
     @objc private func goToResetPasswordVC() {
-        navigationController?.pushViewController(ResetPasswordVC(), animated: true)
+        navigationController?.pushViewController(ResetPasswordVC(model: model), animated: true)
     }
-    
-//    private func isValidCredentials() -> Bool {
-//        guard let email = signInView.emailTextField.text, isValidEmail(email) else {
-//            showAlert(.invalidEmail)
-//            return false
-//        }
-//        
-//        guard let password = signInView.passwordTextField.text, isValidPassword(password) else {
-//            showAlert(.invalidPasswordLength)
-//            return false
-//        }
-//        
-//        return true
-//    }
     
 }
 

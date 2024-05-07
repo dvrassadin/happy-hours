@@ -20,6 +20,9 @@ enum AlertType {
     case getRestaurantsServerError
     case getUserServerError
     case editUserServerError
+    case sendingEmailServerError
+    case incorrectOTC
+    case settingNewPasswordServerError
     
 }
 
@@ -64,6 +67,15 @@ extension AlertPresenter {
         case .editUserServerError:
             title = String(localized: "Unable to Update")
             message = String(localized: "Failed to update your credentials.")
+        case .sendingEmailServerError:
+            title = String(localized: "Error")
+            message = String(localized: "The email could not be sent or the user does not exist.")
+        case .incorrectOTC:
+            title = String(localized: "Incorrect Code")
+            message = String(localized: "The one-time code is incorrect.")
+        case .settingNewPasswordServerError:
+            title = String(localized: "Unable to Set Password")
+            message = String(localized: "The password does not meet the password requirements or the server is unavailable.")
         }
         
         let alertController = UIAlertController(

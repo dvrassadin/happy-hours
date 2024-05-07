@@ -47,7 +47,6 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
     }
     
     @objc private func createAccount() {
-//        guard isValidCredentials() else { return }
         guard let name = signUpView.nameTextField.text else {
             showAlert(.emptyName)
             return

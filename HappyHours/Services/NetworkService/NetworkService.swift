@@ -224,6 +224,142 @@ final class NetworkService: NetworkServiceProtocol {
         logger.info("User logged out for request: \(url.absoluteString)")
     }
     
+    func sendEmailForOTC(_ email: ResetPassword) async throws {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/password_forgot/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try encoder.encode(email)
+        } catch {
+            logger.error("Could not encode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.encodingError
+        }
+
+        logger.info("Starting request: \(url.absoluteString)")
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        logger.info("Email sent for request: \(url.absoluteString)")
+    }
+    
+    func sendOTC(_ otc: OTC) async throws {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/password_reset/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try encoder.encode(otc)
+        } catch {
+            logger.error("Could not encode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.encodingError
+        }
+
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        logger.info("OTC successfully sent for request: \(url.absoluteString)")
+        
+        let tokens: Tokens
+        do {
+            tokens = try decoder.decode(Tokens.self, from: data)
+            logger.info("Received tokens for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)")
+            throw APIError.decodingError
+        }
+
+        accessToken = tokens.access
+        refreshToken = tokens.refresh
+    }
+    
+    func setNewPassword(_ newPassword: NewPassword) async throws {
+        guard let accessToken else {
+            logger.error("Access token is nil when trying to get restaurants.")
+            throw APIError.noToken
+        }
+        
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/user/password_change/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        request.httpBody = try encoder.encode(newPassword)
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        logger.info("Completed set new password request: \(url.absoluteString)")
+    }
+    
     // MARK: Profile requests
     
     func getUser() async throws -> User {
@@ -300,8 +436,6 @@ final class NetworkService: NetworkServiceProtocol {
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
         do {
-//            let json = try encoder.encode(user)
-//            print(String(data: json, encoding: .utf8))
             request.httpBody = try encoder.encode(user)
         } catch {
             logger.error("Could not encode data for request: \(url.absoluteString)\n\(error)")
@@ -323,7 +457,7 @@ final class NetworkService: NetworkServiceProtocol {
         logger.info("User edited for request: \(url.absoluteString)")
     }
     
-    // MARK: Main requests
+    // MARK: Restaurants requests
     
     func getRestaurants(limit: UInt, offset: UInt) async throws -> [Restaurant] {
         guard let accessToken else {

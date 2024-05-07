@@ -13,6 +13,7 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     
     private let networkService: NetworkServiceProtocol
     private let keyChainService: CredentialsKeyChainServiceProtocol = KeyChainService()
+    private var resetEmail: String?
     
     // MARK: Lifecycle
     
@@ -45,5 +46,23 @@ final class AuthorizationModel: AuthorizationModelProtocol {
         )
         try await networkService.createUser(newUser)
     }
-
+    
+    // MARK: Reset password
+    
+    func sendEmailForOTC(_ email: String) async throws {
+        resetEmail = email
+        try await networkService.sendEmailForOTC(ResetPassword(email: email))
+    }
+    
+    func sendOTC(_ code: String) async throws {
+        guard let resetEmail else { return }
+        let otc = OTC(email: resetEmail, resetCode: code)
+        try await networkService.sendOTC(otc)
+    }
+    
+    func setNewPassword(password: String, passwordConfirmation: String) async throws {
+        let newPassword = NewPassword(password: password, passwordConfirm: passwordConfirmation)
+        try await networkService.setNewPassword(newPassword)
+    }
+    
 }
