@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol MenuModelProtocol {
+    
+    var menu: [(category: String, beverages: [Beverage])] { get }
+    
+    func updateMenu(restaurantID: Int, limit: UInt, offset: UInt) async throws
+    
+}

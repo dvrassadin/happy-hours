@@ -91,7 +91,17 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
 
 @available(iOS 17, *)
 #Preview {
-    SignInVC(model: AuthorizationModel(networkService: NetworkService()))
+    
+    SignInVC(
+        model: AuthorizationModel(
+            networkService: NetworkService(
+                authService: AuthService(
+                    keyChainService: KeyChainService()
+                )
+            )
+        )
+    )
+    
 }
 
 // MARK: - SignUpStackViewDelegate

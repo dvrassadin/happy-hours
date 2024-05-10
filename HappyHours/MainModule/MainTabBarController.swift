@@ -82,5 +82,13 @@ final class MainTabBarController: UITabBarController {
 
 @available(iOS 17, *)
 #Preview {
-    MainTabBarController(networkService: NetworkService())
+    
+    MainTabBarController(
+        networkService: NetworkService(
+            authService: AuthService(
+                keyChainService: KeyChainService()
+            )
+        )
+    )
+    
 }

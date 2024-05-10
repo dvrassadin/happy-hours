@@ -66,5 +66,15 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
 
 @available(iOS 17, *)
 #Preview {
-    OneTimeCodeVC(model: AuthorizationModel(networkService: NetworkService()))
+    
+    OneTimeCodeVC(
+        model: AuthorizationModel(
+            networkService: NetworkService(
+                authService: AuthService(
+                    keyChainService: KeyChainService()
+                )
+            )
+        )
+    )
+    
 }

@@ -10,5 +10,7 @@ import Foundation
 enum AuthError: Error {
     
     case missingToken
+    case noDelegate
+    case invalidToken
     
 }

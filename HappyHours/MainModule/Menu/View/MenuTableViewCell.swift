@@ -7,17 +7,103 @@
 
 import UIKit
 
-class MenuTableViewCell: UITableViewCell {
+final class MenuTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: Properties
+    
+    static let identifier = "MenuCell"
+
+    // MARK: UI components
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.textColor = .mainText
+        return label
+    }()
+    
+    private let priceLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.textColor = .mainText
+        return label
+    }()
+    
+    private let orderButton: UIButton = {
+        let button = UIButton(configuration: .borderedProminent())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configurationUpdateHandler = { button in
+            switch button.state {
+            case .highlighted:
+                button.configuration?.baseBackgroundColor = .Button.pressed
+            case .disabled:
+                button.configuration?.baseBackgroundColor = .Button.disabled
+            default:
+                button.configuration?.baseBackgroundColor = .Button.default
+            }
+        }
+        button.configuration?.attributedTitle = AttributedString(
+            String(localized: "Get for\nFree"),
+            attributes: .init([.font: UIFont.boldSystemFont(ofSize: 12)])
+        )
+        return button
+    }()
+    
+    // MARK: Lifecycle
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUpUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Set up UI
+    
+    private func setUpUI() {
+        backgroundColor = .background
+        addSubviews()
+        setUpConstraints()
+    }
+    
+    private func addSubviews() {
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(priceLabel)
+        contentView.addSubview(orderButton)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    private func setUpConstraints() {
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+//            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: orderButton.leadingAnchor, constant: -10),
+            nameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -2),
+            
+            priceLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            priceLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            priceLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10),
+            
+            orderButton.topAnchor.constraint(equalTo: nameLabel.topAnchor),
+            orderButton.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor),
+            orderButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    
+    // MARK: Configure data
+    
+    func configure(beverage: Beverage) {
+        nameLabel.text = beverage.name.capitalized
+        priceLabel.text = beverage.price
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameLabel.text = nil
     }
 
 }

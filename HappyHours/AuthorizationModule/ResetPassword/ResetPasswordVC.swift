@@ -80,5 +80,11 @@ final class ResetPasswordVC: UIViewController, EmailChecker, AlertPresenter {
 
 @available(iOS 17, *)
 #Preview {
-    ResetPasswordVC(model: AuthorizationModel(networkService: NetworkService()))
+    ResetPasswordVC(
+        model: AuthorizationModel(
+            networkService: NetworkService(
+                authService: AuthService(keyChainService: KeyChainService())
+            )
+        )
+    )
 }

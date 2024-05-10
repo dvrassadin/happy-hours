@@ -30,6 +30,7 @@ final class RestaurantsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .title2)
+        label.textColor = .mainText
         return label
     }()
     
@@ -81,7 +82,7 @@ final class RestaurantsTableViewCell: UITableViewCell {
             logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 2),
             logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -2),
-            logoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+//            logoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 70),
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor),
             
@@ -105,9 +106,9 @@ final class RestaurantsTableViewCell: UITableViewCell {
     // MARK: Configure data
     
     func configure(restaurant: Restaurant) {
-        nameLabel.text = restaurant.properties.name
-        if let hhStart = restaurant.properties.happyhoursStart,
-           let hhEnd = restaurant.properties.happyhoursEnd {
+        nameLabel.text = restaurant.name
+        if let hhStart = restaurant.happyhoursStart,
+           let hhEnd = restaurant.happyhoursEnd {
             hoursLabel.text = "\(hhStart) – \(hhEnd)"
         }
     }
@@ -124,4 +125,5 @@ final class RestaurantsTableViewCell: UITableViewCell {
         nameLabel.text = nil
         hoursLabel.text = nil
     }
+    
 }

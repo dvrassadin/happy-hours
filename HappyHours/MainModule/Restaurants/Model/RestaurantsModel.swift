@@ -11,7 +11,7 @@ final class RestaurantsModel: RestaurantsModelProtocol {
     
     // MARK: Properties
     
-    private let networkService: NetworkServiceProtocol
+    let networkService: NetworkServiceProtocol
     private(set) var restaurants: [Restaurant] = []
     private let logoCache = NSCache<NSString, UIImage>()
     
@@ -22,7 +22,11 @@ final class RestaurantsModel: RestaurantsModelProtocol {
     }
     
     func getRestaurants(limit: UInt, offset: UInt) async throws {
-        restaurants = try await networkService.getRestaurants(limit: limit, offset: offset)
+        restaurants = try await networkService.getRestaurants(
+            limit: limit,
+            offset: offset,
+            allowRetry: true
+        )
     }
     
     func getLogo(stringURL: String) async -> UIImage? {

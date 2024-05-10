@@ -12,7 +12,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Properties
     
     var window: UIWindow?
-    let networkService: NetworkServiceProtocol = NetworkService()
+    let networkService: NetworkServiceProtocol = NetworkService(
+        authService: AuthService(keyChainService: KeyChainService())
+    )
 
     // MARK: Lifecycle
     
@@ -25,7 +27,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-//        let networkService = NetworkService()
         let vc: UIViewController
         if let window, window.isLoggedIn {
             vc = MainTabBarController(networkService: networkService)

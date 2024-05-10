@@ -14,10 +14,16 @@ final class MenuView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.tableHeaderView?.isUserInteractionEnabled = true
+        tableView.register(
+            MenuTableViewCell.self,
+            forCellReuseIdentifier: MenuTableViewCell.identifier
+        )
+        tableView.backgroundColor = .background
         return tableView
     }()
     
-//    private let restaurantHeaderView
+    let restaurantHeaderView = RestaurantHeaderView()
     
     // MARK: lifecycle
     
@@ -34,6 +40,7 @@ final class MenuView: UIView {
     
     private func setUpUI() {
         backgroundColor = .background
+        tableView.tableHeaderView = restaurantHeaderView
         addSubviews()
         setUpConstraints()
     }
@@ -48,7 +55,9 @@ final class MenuView: UIView {
                 tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
                 tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
                 tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+                tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                
+                restaurantHeaderView.widthAnchor.constraint(equalTo: tableView.widthAnchor)
             ]
         )
     }

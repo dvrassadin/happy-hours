@@ -23,6 +23,7 @@ enum AlertType {
     case sendingEmailServerError
     case incorrectOTC
     case settingNewPasswordServerError
+    case gettingMenuServerError
     
 }
 
@@ -76,6 +77,9 @@ extension AlertPresenter {
         case .settingNewPasswordServerError:
             title = String(localized: "Unable to Set Password")
             message = String(localized: "The password does not meet the password requirements or the server is unavailable.")
+        case .gettingMenuServerError:
+            title = String(localized: "Unable to Get Menu")
+            message = String(localized: "Failed to get menu. Check your internet connection.")
         }
         
         let alertController = UIAlertController(

@@ -108,5 +108,15 @@ final class ProfileVC: UIViewController, AlertPresenter {
 
 @available(iOS 17, *)
 #Preview {
-    ProfileVC(model: ProfileModel(networkService: NetworkService()))
+    
+    ProfileVC(
+        model: ProfileModel(
+            networkService: NetworkService(
+                authService: AuthService(
+                    keyChainService: KeyChainService()
+                )
+            )
+        )
+    )
+    
 }

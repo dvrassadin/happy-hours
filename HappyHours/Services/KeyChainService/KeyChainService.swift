@@ -9,23 +9,15 @@ import OSLog
 
 // MARK: - KeyChainService class
 
-final class KeyChainService {
+final class KeyChainService: KeyChainServiceProtocol {
     
     // MARK: Properties
     
     private let service = "HappyHours" as CFString
-//    private let accessTokenIdentifier = "accessToken" as CFString
-//    private let refreshTokenIdentifier = "refreshToken" as CFString
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "",
         category: String(describing: KeyChainService.self)
     )
-    
-}
-
-// MARK: - TokensKeyChainServiceProtocol
-
-extension KeyChainService: TokensKeyChainServiceProtocol {
     
     // MARK: Updating tokens
     
@@ -138,12 +130,6 @@ extension KeyChainService: TokensKeyChainServiceProtocol {
         return token
     }
     
-}
-
-// MARK: - CredentialsKeyChainServiceProtocol
-
-extension KeyChainService: CredentialsKeyChainServiceProtocol {
-    
     // MARK: Saving credentials
     
     func saveCredentials(email: String, password: String) {
@@ -207,4 +193,5 @@ extension KeyChainService: CredentialsKeyChainServiceProtocol {
 
         return (email: email, password: password)
     }
+    
 }

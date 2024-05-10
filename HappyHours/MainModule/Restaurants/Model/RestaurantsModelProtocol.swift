@@ -9,7 +9,9 @@ import UIKit
 
 protocol RestaurantsModelProtocol {
     
+    var networkService: NetworkServiceProtocol { get }
     var restaurants: [Restaurant] { get }
+    
     func getRestaurants(limit: UInt, offset: UInt) async throws
     func getLogo(stringURL: String) async -> UIImage?
     

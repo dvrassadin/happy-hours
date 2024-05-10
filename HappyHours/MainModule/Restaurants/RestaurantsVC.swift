@@ -70,7 +70,17 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
 
 @available(iOS 17, *)
 #Preview {
-    RestaurantsVC(model: RestaurantsModel(networkService: NetworkService()))
+    
+    RestaurantsVC(
+        model: RestaurantsModel(
+            networkService: NetworkService(
+                authService: AuthService(
+                    keyChainService: KeyChainService()
+                )
+            )
+        )
+    )
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -91,7 +101,9 @@ extension RestaurantsVC: UITableViewDataSource {
         
         cell.configure(restaurant: restaurant)
         Task {
-            cell.configure(logo: await model.getLogo(stringURL: restaurant.logo))
+            if let stringLogo = restaurant.logo {
+                cell.configure(logo: await model.getLogo(stringURL: stringLogo))
+            }
         }
         return cell
     }
@@ -104,6 +116,21 @@ extension RestaurantsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        Task {
+            let logoImage: UIImage?
+            if let stringLogo = model.restaurants[indexPath.row].logo {
+                logoImage = await model.getLogo(stringURL: stringLogo)
+            } else {
+                logoImage = nil
+            }
+            let menuModel = MenuModel(networkService: model.networkService)
+            let menuVC = MenuVC(
+                restaurant: model.restaurants[indexPath.row],
+                logoImage: logoImage,
+                model: menuModel
+            )
+            navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
 }

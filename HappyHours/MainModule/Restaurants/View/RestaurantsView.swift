@@ -22,7 +22,7 @@ final class RestaurantsView: UIView {
         return tableView
     }()
     
-    private lazy var headerLabel: UILabel = {
+    private let headerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -49,7 +49,7 @@ final class RestaurantsView: UIView {
         headerLabel.text = String(localized: "Your subscription is active. 🟢")
         addSubviews()
         setUpConstraints()
-        layoutIfNeeded()
+//        layoutIfNeeded()
     }
     
     private func addSubviews() {
@@ -61,11 +61,10 @@ final class RestaurantsView: UIView {
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            headerLabel.widthAnchor.constraint(equalTo: tableView.widthAnchor)
         ])
-        
-        tableView.tableHeaderView?.widthAnchor.constraint(equalTo: tableView.widthAnchor)
-            .isActive = true
     }
     
 }

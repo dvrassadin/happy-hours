@@ -32,13 +32,13 @@ final class ProfileModel: ProfileModelProtocol {
     // MARK: Updating user
     
     func downloadUser() async throws {
-        try await self.user = networkService.getUser()
+        try await self.user = networkService.getUser(allowRetry: true)
     }
     
     func editUser(_ user: UserUpdate) async throws {
         do {
-            try await networkService.editUser(user)
-            try await self.user = networkService.getUser()
+            try await networkService.editUser(user, allowRetry: true)
+            try await self.user = networkService.getUser(allowRetry: true)
         } catch {
             throw error
         }

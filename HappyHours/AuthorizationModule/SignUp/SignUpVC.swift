@@ -141,5 +141,15 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
 
 @available(iOS 17, *)
 #Preview {
-    SignUpVC(model: AuthorizationModel(networkService: NetworkService()))
+    
+    SignUpVC(
+        model: AuthorizationModel(
+            networkService: NetworkService(
+                authService: AuthService(
+                    keyChainService: KeyChainService()
+                )
+            )
+        )
+    )
+    
 }

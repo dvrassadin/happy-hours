@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+protocol AuthServiceProtocol: Actor {
+    
+    var delegate: AuthServiceDelegate? { get set }
+    var validAccessToken: String { get async throws }
+    var validRefreshToken: String { get async throws }
+    
+    @discardableResult func refreshTokens() async throws -> Tokens
+    func set(delegate: AuthServiceDelegate)
+    func set(tokens: Tokens)
+    func deleteTokens()
+    
+}

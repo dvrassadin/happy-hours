@@ -12,7 +12,6 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     // MARK: Properties
     
     private let networkService: NetworkServiceProtocol
-    private let keyChainService: CredentialsKeyChainServiceProtocol = KeyChainService()
     private var resetEmail: String?
     
     // MARK: Lifecycle
@@ -62,7 +61,7 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     
     func setNewPassword(password: String, passwordConfirmation: String) async throws {
         let newPassword = NewPassword(password: password, passwordConfirm: passwordConfirmation)
-        try await networkService.setNewPassword(newPassword)
+        try await networkService.setNewPassword(newPassword, allowRetry: true)
     }
     
 }
