@@ -1,5 +1,5 @@
 //
-//  LogOut.swift
+//  RefreshToken.swift
 //  HappyHours
 //
 //  Created by Daniil Rassadin on 3/5/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LogOut: Encodable {
+struct RefreshToken: Encodable {
     
     let refresh: String
     

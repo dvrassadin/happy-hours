@@ -1,5 +1,5 @@
 //
-//  MenuView.swift
+//  RestaurantHeaderView.swift
 //  HappyHours
 //
 //  Created by Daniil Rassadin on 7/5/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class MenuView: UIView {
+final class RestaurantHeaderView: UIView {
 
     // MARK: UI components
     
-    // MARK: lifecycle
+    // MARK: Lifecycle
     
     init() {
         super.init(frame: .zero)
@@ -25,9 +25,7 @@ final class MenuView: UIView {
     // MARK: Set up UI
     
     private func setUpUI() {
-        backgroundColor = .background
-        addSubviews()
-        setUpConstraints()
+        
     }
     
     private func addSubviews() {
