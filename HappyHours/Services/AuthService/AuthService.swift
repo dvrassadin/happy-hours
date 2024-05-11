@@ -7,7 +7,7 @@
 
 import Foundation
 
-final actor AuthService: AuthServiceProtocol {
+actor AuthService: AuthServiceProtocol {
     
     // MARK: Properties
     

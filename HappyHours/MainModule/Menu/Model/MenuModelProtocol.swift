@@ -12,5 +12,6 @@ protocol MenuModelProtocol {
     var menu: [(category: String, beverages: [Beverage])] { get }
     
     func updateMenu(restaurantID: Int, limit: UInt, offset: UInt) async throws
+    func makeOrder(_ order: Order) async throws
     
 }

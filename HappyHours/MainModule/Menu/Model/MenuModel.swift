@@ -34,4 +34,10 @@ final class MenuModel: MenuModelProtocol {
             .sorted { $0.category < $1.category }
     }
     
+    // MARK: Make order
+    
+    func makeOrder(_ order: Order) async throws {
+        try await networkService.makeOrder(order, allowRetry: true)
+    }
+    
 }

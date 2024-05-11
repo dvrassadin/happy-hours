@@ -12,6 +12,8 @@ final class MenuTableViewCell: UITableViewCell {
     // MARK: Properties
     
     static let identifier = "MenuCell"
+    weak var delegate: MenuTableViewCellDelegate?
+    private var beverageID: Int?
 
     // MARK: UI components
     
@@ -68,6 +70,7 @@ final class MenuTableViewCell: UITableViewCell {
         backgroundColor = .background
         addSubviews()
         setUpConstraints()
+        setUpNavigation()
     }
     
     private func addSubviews() {
@@ -80,7 +83,6 @@ final class MenuTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-//            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: orderButton.leadingAnchor, constant: -10),
             nameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -2),
             
@@ -90,20 +92,34 @@ final class MenuTableViewCell: UITableViewCell {
             
             orderButton.topAnchor.constraint(equalTo: nameLabel.topAnchor),
             orderButton.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor),
-            orderButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            orderButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ])
     }
     
     // MARK: Configure data
     
-    func configure(beverage: Beverage) {
+    func configure(beverage: Beverage, delegate: MenuTableViewCellDelegate) {
         nameLabel.text = beverage.name.capitalized
         priceLabel.text = beverage.price
+        beverageID = beverage.id
+        self.delegate = delegate
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         nameLabel.text = nil
+        priceLabel.text = nil
+        beverageID = nil
+        delegate = nil
+    }
+    
+    // MARK: Navigation
+    
+    private func setUpNavigation() {
+        orderButton.addAction(UIAction { [weak self] _ in
+            guard let self, let delegate, let beverageID else { return }
+            delegate.didClickOnCellWith(beverageID: beverageID)
+        }, for: .touchUpInside)
     }
 
 }

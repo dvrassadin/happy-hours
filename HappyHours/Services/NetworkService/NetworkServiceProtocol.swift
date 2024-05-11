@@ -25,5 +25,5 @@ protocol NetworkServiceProtocol {
         offset: UInt,
         allowRetry: Bool
     ) async throws -> [Beverage]
-    
+    func makeOrder(_ order: Order, allowRetry: Bool) async throws
 }

@@ -24,6 +24,8 @@ enum AlertType {
     case incorrectOTC
     case settingNewPasswordServerError
     case gettingMenuServerError
+    case makingOrderServerError
+    case orderMade
     
 }
 
@@ -80,6 +82,12 @@ extension AlertPresenter {
         case .gettingMenuServerError:
             title = String(localized: "Unable to Get Menu")
             message = String(localized: "Failed to get menu. Check your internet connection.")
+        case .makingOrderServerError:
+            title = String(localized: "Unable to Make Order")
+            message = String(localized: "Failed to make the order. It may not be happy hours or you may have ordered recently.")
+        case .orderMade:
+            title = String(localized: "Order Placed")
+            message = String(localized: "Your order was successful. Enjoy your meal.")
         }
         
         let alertController = UIAlertController(

@@ -101,8 +101,8 @@ extension MenuVC: UITableViewDataSource {
         
         let beverage = model.menu[indexPath.section].beverages[indexPath.row]
         
-        cell.configure(beverage: beverage)
-        
+        cell.configure(beverage: beverage, delegate: self)
+
         return cell
     }
     
@@ -114,6 +114,24 @@ extension MenuVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
+// MARK: - MenuTableViewCellDelegate
+
+extension MenuVC: MenuTableViewCellDelegate {
+    
+    func didClickOnCellWith(beverageID: Int) {
+        Task {
+            do {
+                let order = Order(beverage: beverageID)
+                try await model.makeOrder(order)
+                showAlert(.orderMade)
+            } catch {
+                showAlert(.makingOrderServerError)
+            }
+        }
     }
     
 }
