@@ -26,6 +26,8 @@ enum AlertType {
     case gettingMenuServerError
     case makingOrderServerError
     case orderMade
+    case invalidBarcode
+    case barcodeServerError
     
 }
 
@@ -33,7 +35,11 @@ protocol AlertPresenter: UIViewController { }
 
 extension AlertPresenter {
     
-    func showAlert(_ type: AlertType, message: String? = nil, handler: ((UIAlertAction) -> Void)? = nil) {
+    func showAlert(
+        _ type: AlertType,
+        message: String? = nil,
+        handler: ((UIAlertAction) -> Void)? = nil
+    ) {
         var message = message
         let title: String
         
@@ -88,6 +94,12 @@ extension AlertPresenter {
         case .orderMade:
             title = String(localized: "Order Placed")
             message = String(localized: "Your order was successful. Enjoy your meal.")
+        case .invalidBarcode:
+            title = String(localized: "Incorrect Barcode")
+            message = String(localized: "This is not a restaurant menu barcode.")
+        case .barcodeServerError:
+            title = String(localized: "Error Getting Restaurant")
+            message = String(localized: "This restaurant was not found or there are problems with the Internet.")
         }
         
         let alertController = UIAlertController(

@@ -13,7 +13,7 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
     
     // MARK: Properties
     
-    private lazy var otcView = OneTimeCodeView(numberOfDigits: 4)
+    private lazy var otcView = OneTimeCodeView(numberOfDigits: 4, email: model.resetEmail)
     private let model: AuthorizationModelProtocol
 
     // MARK: Lifecycle

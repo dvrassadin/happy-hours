@@ -19,6 +19,15 @@ final class OneTimeCodeView: AuthScreenView {
     
     // MARK: UI components
     
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .preferredFont(forTextStyle: .caption1)
+        return label
+    }()
+    
     let codeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -42,10 +51,13 @@ final class OneTimeCodeView: AuthScreenView {
 
     // MARK: Lifecycle
     
-    init(numberOfDigits: UInt) {
+    init(numberOfDigits: UInt, email: String?) {
         self.numberOfDigits = numberOfDigits
         super.init(screenName: String(localized: "Enter Code"))
         setUpUI()
+        if let email {
+            descriptionLabel.text = String(localized: "Enter the code sent to \(email).")
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +74,7 @@ final class OneTimeCodeView: AuthScreenView {
     }
     
     private func addSubviews() {
+        addSubview(descriptionLabel)
         addSubview(codeTextField)
         codeTextField.addSubview(cellsStackView)
     }
@@ -91,7 +104,12 @@ final class OneTimeCodeView: AuthScreenView {
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
-                Constraints.spaceBeforeFirstElement(for: codeTextField, under: screenNameLabel),
+                Constraints.spaceBeforeFirstElement(for: descriptionLabel, under: screenNameLabel),
+                Constraints.textFieldAndButtonWidthConstraint(for: descriptionLabel, on: self),
+                descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+                
+//                Constraints.spaceBeforeFirstElement(for: codeTextField, under: screenNameLabel),
+                Constraints.topBetweenTextFieldsAndButtons(for: codeTextField, under: descriptionLabel),
                 codeTextField.widthAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.widthAnchor,
                     multiplier: 0.8

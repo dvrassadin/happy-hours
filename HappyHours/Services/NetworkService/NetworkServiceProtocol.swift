@@ -25,5 +25,6 @@ protocol NetworkServiceProtocol {
         offset: UInt,
         allowRetry: Bool
     ) async throws -> [Beverage]
+    func getRestaurant(id: Int, allowRetry: Bool) async throws -> Restaurant
     func makeOrder(_ order: Order, allowRetry: Bool) async throws
 }

@@ -12,7 +12,7 @@ actor AuthService: AuthServiceProtocol {
     // MARK: Properties
     
     private let keyChainService: KeyChainServiceProtocol
-    weak var delegate: AuthServiceDelegate?
+    private weak var delegate: AuthServiceDelegate?
     private var refreshTask: Task<Tokens, Error>?
     
     private var accessToken: String? {

@@ -12,11 +12,27 @@ final class MenuModel: MenuModelProtocol {
     // MARK: Properties
     
     let networkService: NetworkServiceProtocol
+    private(set) var restaurant: Restaurant
     private(set) var menu: [(category: String, beverages: [Beverage])] = []
+    private var _logoImage: UIImage?
+    var logoImage: UIImage? {
+        get async {
+            if let logoImage = _logoImage {
+                return logoImage
+            } else if let logoImageString = restaurant.logo,
+                      let logoImageData = await networkService.getImageData(from: logoImageString),
+                      let logoImage = UIImage(data: logoImageData) {
+                return logoImage
+            }
+            return nil
+        }
+    }
     
     // MARK: lifecycle
     
-    init(networkService: NetworkServiceProtocol) {
+    init(restaurant: Restaurant, logoImage: UIImage?, networkService: NetworkServiceProtocol) {
+        self.restaurant = restaurant
+        _logoImage = logoImage
         self.networkService = networkService
     }
     

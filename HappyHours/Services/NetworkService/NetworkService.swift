@@ -522,7 +522,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/partner/establishment/list/")
+        urlComponents.path.append("/api/v1/partner/establishments/")
         
         urlComponents.queryItems = [
             URLQueryItem(name: "limit", value: String(limit)),
@@ -553,9 +553,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         if httpResponse.statusCode == 401 {
-            print(1)
             if allowRetry {
-                print(2)
                 try await authService.refreshTokens()
                 return try await getRestaurants(limit: limit, offset: offset, allowRetry: false)
             }
@@ -578,6 +576,63 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         return restaurants
+    }
+    
+    func getRestaurant(id: Int, allowRetry: Bool = true) async throws -> Restaurant {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/partner/establishments/\(id)/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(
+            "Bearer \(try await authService.validAccessToken)",
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 401 {
+            if allowRetry {
+                try await authService.refreshTokens()
+                return try await getRestaurant(id: id, allowRetry: false)
+            }
+            logger.error("Invalid token for request: \(url.absoluteString)")
+            throw AuthError.invalidToken
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let restaurant: Restaurant
+        do {
+            restaurant = try decoder.decode(Restaurant.self, from: data)
+            logger.info("Received restaurant for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+        
+        return restaurant
     }
     
     func getMenu(

@@ -11,6 +11,16 @@ final class ResetPasswordView: AuthScreenView {
     
     // MARK: UI components
     
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.text = String(localized: "Please enter your email address. We will send you a code to reset your password.")
+        return label
+    }()
+    
     let emailTextField = CommonTextField(
         placeholder: String(localized: "Email Address"),
         textContentType: .emailAddress,
@@ -38,6 +48,7 @@ final class ResetPasswordView: AuthScreenView {
     }
     
     private func addSubViews() {
+        addSubview(descriptionLabel)
         addSubview(emailTextField)
         addSubview(continueButton)
     }
@@ -45,8 +56,13 @@ final class ResetPasswordView: AuthScreenView {
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
+                Constraints.spaceBeforeFirstElement(for: descriptionLabel, under: screenNameLabel),
+                Constraints.textFieldAndButtonWidthConstraint(for: descriptionLabel, on: self),
+                descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+                
+                Constraints.topBetweenTextFieldsAndButtons(for: emailTextField, under: descriptionLabel),
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                Constraints.spaceBeforeFirstElement(for: emailTextField, under: screenNameLabel),
+//                Constraints.spaceBeforeFirstElement(for: emailTextField, under: screenNameLabel),
                 Constraints.textFieldAndButtonWidthConstraint(for: emailTextField, on: self),
                 Constraints.textFieldAndButtonHeighConstraint(for: emailTextField, on: self),
                 

@@ -11,11 +11,13 @@ final class RestaurantHeaderView: UIView {
     
     // MARK: UI components
     
-    private let logoImageView: UIImageView = {
+    let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        //        imageView.backgroundColor = .systemMint
+        imageView.image = UIImage(
+            systemName: "storefront.fill"
+        )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
         return imageView
     }()
     
@@ -25,29 +27,16 @@ final class RestaurantHeaderView: UIView {
         label.font = .preferredFont(forTextStyle: .title1)
         label.textColor = .mainText
         label.numberOfLines = 0
-//        label.text = "Very long long long long restaurant name"
         return label
     }()
-    
-//    private let addressLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = .preferredFont(forTextStyle: .subheadline)
-//        label.textColor = .mainText
-//        label.numberOfLines = 0
-//        label.text = "Abdumomunova St., 220 A, Bishkek 720000 Kyrgyzstan"
-//        label.textAlignment = .right
-//        return label
-//    }()
     
     private let addressTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .preferredFont(forTextStyle: .subheadline)
         textView.textColor = .mainText
-//        textView.text = "Abdumomunova St., 220 A, Bishkek 720000 Kyrgyzstan"
         textView.textAlignment = .right
-        textView.dataDetectorTypes = .address
+//        textView.dataDetectorTypes = .address
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
@@ -86,7 +75,7 @@ final class RestaurantHeaderView: UIView {
     private let phoneNumberTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.dataDetectorTypes = .phoneNumber
+//        textView.dataDetectorTypes = .phoneNumber
         textView.font = .preferredFont(forTextStyle: .body)
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
@@ -102,7 +91,7 @@ final class RestaurantHeaderView: UIView {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = false
-        textView.dataDetectorTypes = .link
+//        textView.dataDetectorTypes = .link
         textView.font = .preferredFont(forTextStyle: .body)
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
@@ -154,7 +143,10 @@ final class RestaurantHeaderView: UIView {
     }
     
     private func setUpConstraints() {
-        let leadingAnchor = logoImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10)
+        let leadingAnchor = logoImageView.leadingAnchor.constraint(
+            equalTo: safeAreaLayoutGuide.leadingAnchor,
+            constant: 10
+        )
         leadingAnchor.priority = UILayoutPriority(999)
         
         NSLayoutConstraint.activate([
@@ -171,7 +163,7 @@ final class RestaurantHeaderView: UIView {
             addressTextView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 10),
             addressTextView.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             addressTextView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            
+           
             descriptionLabel.topAnchor.constraint(equalTo: addressTextView.bottomAnchor, constant: 10),
             descriptionLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
@@ -185,7 +177,7 @@ final class RestaurantHeaderView: UIView {
             
             phoneNumberTextView.topAnchor.constraint(equalTo: contactsLabel.topAnchor),
             phoneNumberTextView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            
+           
             emailTextView.topAnchor.constraint(equalTo: phoneNumberTextView.bottomAnchor, constant: 10),
             emailTextView.trailingAnchor.constraint(equalTo: phoneNumberTextView.trailingAnchor),
             
@@ -196,14 +188,7 @@ final class RestaurantHeaderView: UIView {
         ])
     }
     
-    func set(restaurant: Restaurant, logoImage: UIImage?) {
-        if let logoImage {
-            logoImageView.image = logoImage
-        } else {
-            logoImageView.image = UIImage(
-                systemName: "storefront.fill"
-            )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
-        }
+    func set(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         addressTextView.text = restaurant.address
         descriptionLabel.text = restaurant.description
@@ -212,13 +197,6 @@ final class RestaurantHeaderView: UIView {
         }
         phoneNumberTextView.text = restaurant.phoneNumber
         emailTextView.text = restaurant.email
-//        layoutSubviews()
     }
-    
-//    func set(logo: UIImage?) {
-//        if let logo {
-//            logoImageView.image = logo
-//        }
-//    }
     
 }

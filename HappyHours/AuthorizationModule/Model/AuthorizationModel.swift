@@ -12,7 +12,7 @@ final class AuthorizationModel: AuthorizationModelProtocol {
     // MARK: Properties
     
     private let networkService: NetworkServiceProtocol
-    private var resetEmail: String?
+    private(set) var resetEmail: String?
     
     // MARK: Lifecycle
     

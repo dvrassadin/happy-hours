@@ -10,5 +10,5 @@ import Foundation
 protocol AuthServiceDelegate: AnyObject {
     
     func refreshTokens(refreshToken: String) async throws -> Tokens
-    
+    func logIn(_ logIn: LogIn) async throws
 }

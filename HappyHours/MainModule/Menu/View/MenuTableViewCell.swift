@@ -98,10 +98,11 @@ final class MenuTableViewCell: UITableViewCell {
     
     // MARK: Configure data
     
-    func configure(beverage: Beverage, delegate: MenuTableViewCellDelegate) {
+    func configure(beverage: Beverage, isOrderEnable: Bool, delegate: MenuTableViewCellDelegate) {
         nameLabel.text = beverage.name.capitalized
         priceLabel.text = beverage.price
         beverageID = beverage.id
+        orderButton.isEnabled = isOrderEnable
         self.delegate = delegate
     }
     

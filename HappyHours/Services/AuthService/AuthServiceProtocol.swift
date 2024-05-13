@@ -9,7 +9,6 @@ import Foundation
 
 protocol AuthServiceProtocol: Actor {
     
-    var delegate: AuthServiceDelegate? { get set }
     var validAccessToken: String { get async throws }
     var validRefreshToken: String { get async throws }
     

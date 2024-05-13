@@ -115,21 +115,24 @@ extension RestaurantsVC: UITableViewDataSource {
 extension RestaurantsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        Task {
+        Task(priority: .high) {
             let logoImage: UIImage?
             if let stringLogo = model.restaurants[indexPath.row].logo {
                 logoImage = await model.getLogo(stringURL: stringLogo)
             } else {
                 logoImage = nil
             }
-            let menuModel = MenuModel(networkService: model.networkService)
-            let menuVC = MenuVC(
+            let menuModel = MenuModel(
                 restaurant: model.restaurants[indexPath.row],
                 logoImage: logoImage,
-                model: menuModel
+                networkService: model.networkService
+            )
+            let menuVC = MenuVC(
+                model: menuModel,
+                areOrdersEnable: false
             )
             navigationController?.pushViewController(menuVC, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     

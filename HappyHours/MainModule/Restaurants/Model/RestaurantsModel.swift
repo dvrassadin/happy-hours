@@ -34,6 +34,7 @@ final class RestaurantsModel: RestaurantsModelProtocol {
             return logo
         } else if let logoData = await networkService.getImageData(from: stringURL),
                   let logo = UIImage(data: logoData) {
+            logoCache.setObject(logo, forKey: stringURL as NSString)
             return logo
         }
         

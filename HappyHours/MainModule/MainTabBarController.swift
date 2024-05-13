@@ -56,7 +56,7 @@ final class MainTabBarController: UITabBarController {
         )
         searchVC.tabBarItem = searchTabBarItem
         
-        let scannerVC = ScannerVC()
+        let scannerVC = ScannerVC(networkService: networkService)
         let scannerTabBarItem = UITabBarItem(
             title: String(localized: "Scanner"),
             image: UIImage(systemName: "qrcode"),

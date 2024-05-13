@@ -9,6 +9,8 @@ import Foundation
 
 protocol AuthorizationModelProtocol {
     
+    var resetEmail: String? { get }
+    
     func logIn(email: String, password: String) async throws
     func createUser(
         email: String,
