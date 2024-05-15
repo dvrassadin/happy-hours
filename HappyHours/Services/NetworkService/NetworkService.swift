@@ -35,7 +35,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         return encoder
     }()
     
-    private let baseURL = "http://16.170.203.161"
+    private let baseURL = "https://happyhours.zapto.org"
     
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "",
@@ -61,7 +61,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/token/")
+        urlComponents.path.append("/api/v1/user/auth/token/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -111,7 +111,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/client_register/")
+        urlComponents.path.append("/api/v1/user/client/register/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -162,7 +162,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/token/refresh/")
+        urlComponents.path.append("/api/v1/user/auth/token/refresh/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -220,7 +220,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/logout/")
+        urlComponents.path.append("/api/v1/user/auth/logout/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -263,7 +263,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/password_forgot/")
+        urlComponents.path.append("/api/v1/user/client/password/forgot/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -304,7 +304,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/password_reset/")
+        urlComponents.path.append("/api/v1/user/client/password/reset/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -356,7 +356,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/password_change/")
+        urlComponents.path.append("/api/v1/user/client/password/change/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -407,7 +407,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/")
+        urlComponents.path.append("/api/v1/user/users/profile/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -463,7 +463,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/")
+        urlComponents.path.append("/api/v1/user/users/profile/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -515,6 +515,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
     func getRestaurants(
         limit: UInt,
         offset: UInt,
+        search: String? = nil,
         allowRetry: Bool = true
     ) async throws -> [Restaurant] {
         guard var urlComponents = URLComponents(string: baseURL) else {
@@ -528,6 +529,9 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             URLQueryItem(name: "limit", value: String(limit)),
             URLQueryItem(name: "offset", value: String(offset))
         ]
+        if let search {
+            urlComponents.queryItems?.append(URLQueryItem(name: "search", value: search))
+        }
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")
@@ -569,6 +573,79 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         let restaurants: [Restaurant]
         do {
             restaurants = try decoder.decode(RestaurantsResponse.self, from: data).results
+            logger.info("Received restaurants for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+        
+        return restaurants
+    }
+    
+    func getRestaurants(
+        latitude: Double,
+        longitude: Double,
+        metersRadius: Int,
+        allowRetry: Bool = true
+    ) async throws -> [Restaurant] {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/partner/establishments/")
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "latitude", value: String(latitude)),
+            URLQueryItem(name: "longitude", value: String(longitude)),
+            URLQueryItem(name: "near_me", value: String(metersRadius)),
+        ]
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(
+            "Bearer \(try await authService.validAccessToken)",
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 401 {
+            if allowRetry {
+                try await authService.refreshTokens()
+                return try await getRestaurants(
+                    latitude: latitude,
+                    longitude: longitude,
+                    metersRadius: metersRadius,
+                    allowRetry: true
+                )
+            }
+            logger.error("Invalid token for request: \(url.absoluteString)")
+            throw AuthError.invalidToken
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let restaurants: [Restaurant]
+        do {
+            restaurants = try decoder.decode([Restaurant].self, from: data)
             logger.info("Received restaurants for request: \(url.absoluteString)")
         } catch {
             logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")

@@ -24,9 +24,6 @@
 		</dict>
 	</dict>
 	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
+	<dict/>
 </dict>
 </plist>

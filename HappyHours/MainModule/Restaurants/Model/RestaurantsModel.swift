@@ -25,6 +25,7 @@ final class RestaurantsModel: RestaurantsModelProtocol {
         restaurants = try await networkService.getRestaurants(
             limit: limit,
             offset: offset,
+            search: nil,
             allowRetry: true
         )
     }

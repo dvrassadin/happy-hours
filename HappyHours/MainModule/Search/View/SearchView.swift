@@ -19,6 +19,7 @@ final class SearchView: UIView {
             delegate?.searchModeHasChanged(searchMode)
         }
     }
+    private var addedID = Set<Int>()
     
     weak var delegate: SearchViewDelegate?
     
@@ -44,11 +45,16 @@ final class SearchView: UIView {
         return tableView
     }()
     
-    private let mapView: MKMapView = {
+    let mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.showsUserLocation = true
         mapView.showsScale = true
+        mapView.showsCompass = true
+        mapView.register(
+            RestaurantMarkerView.self,
+            forAnnotationViewWithReuseIdentifier: RestaurantMarkerView.identifier
+        )
         return mapView
     }()
     
@@ -161,13 +167,52 @@ final class SearchView: UIView {
     
     // MARK: Setting up map
     
-    func setUpUsersRegion(location: CLLocationCoordinate2D) {
+    func setUpUsersRegion(
+        location: CLLocationCoordinate2D,
+        regionRadius: CLLocationDistance = 2000
+    ) {
+//        let regionRadius: CLLocationDistance = 2000
         let region = MKCoordinateRegion(
             center: location,
-            latitudinalMeters: 5000,
-            longitudinalMeters: 5000
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius
         )
         mapView.setRegion(region, animated: true)
+    }
+    
+    func addNewMapAnnotations(restaurants: [Restaurant]) {
+        mapView.removeAnnotations(mapView.annotations)
+        addedID.removeAll()
+        restaurants.forEach { restaurant in
+            addMapAnnotation(restaurant: restaurant)
+        }
+    }
+    
+    /// Adds a restaurant if it was not added on the map. Use it when the map is moving.
+    /// - Parameter restaurant: The new restaurant to display in the map view.
+    func addMapAnnotation(restaurant: Restaurant) {
+        guard let coordinate = restaurant.locationCoordinate,
+              !addedID.contains(restaurant.id)
+        else { return }
+        
+        let annotation: RestaurantAnnotation
+        if let hhStart = restaurant.hhStart, let hhEnd = restaurant.hhEnd {
+            annotation = RestaurantAnnotation(
+                title: restaurant.name,
+                subtitle: "\(hhStart) – \(hhEnd)",
+                coordinate: coordinate,
+                restaurantID: restaurant.id
+            )
+        } else {
+            annotation = RestaurantAnnotation(
+                title: restaurant.name,
+                subtitle: nil,
+                coordinate: coordinate,
+                restaurantID: restaurant.id
+            )
+        }
+        mapView.addAnnotation(annotation)
+        addedID.insert(restaurant.id)
     }
     
 }

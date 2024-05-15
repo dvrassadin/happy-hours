@@ -61,31 +61,31 @@ final class MenuVC: UIViewController, AlertPresenter {
 
 }
 
-// MARK: - Preview
-
-@available(iOS 17, *)
-#Preview {
-    
-    MenuVC(
-        model: MenuModel(
-            restaurant: Restaurant(
-                id: 1,
-                name: "Very long long long long restaurant name",
-                description: "Very elegant and classy restaurant with romantic atmosphere tasty plates small portions professional staff and high prices but I think it's suitable for the high quality service they offer it's good for special occasions like anniversary or proposals. Usually there's a classical singer with a band in the evening singing inside the restaurant",
-                phoneNumber: "+996 551 664 466",
-                logo: nil,
-                address: "Abdumomunova St., 220 A, Bishkek 720000 Kyrgyzstan",
-                happyhoursStart: "19:00",
-                happyhoursEnd: "20:00",
-                email: "frunze312.kg@mail.ru"
-            ),
-            logoImage: nil,
-            networkService: NetworkService(authService: AuthService(keyChainService: KeyChainService()))
-        ),
-        areOrdersEnable: true
-    )
-    
-}
+//// MARK: - Preview
+//
+//@available(iOS 17, *)
+//#Preview {
+//    
+//    MenuVC(
+//        model: MenuModel(
+//            restaurant: Restaurant(
+//                id: 1,
+//                name: "Very long long long long restaurant name",
+//                description: "Very elegant and classy restaurant with romantic atmosphere tasty plates small portions professional staff and high prices but I think it's suitable for the high quality service they offer it's good for special occasions like anniversary or proposals. Usually there's a classical singer with a band in the evening singing inside the restaurant",
+//                phoneNumber: "+996 551 664 466",
+//                logo: nil,
+//                address: "Abdumomunova St., 220 A, Bishkek 720000 Kyrgyzstan",
+//                happyhoursStart: "19:00",
+//                happyhoursEnd: "20:00",
+//                email: "frunze312.kg@mail.ru"
+//            ),
+//            logoImage: nil,
+//            networkService: NetworkService(authService: AuthService(keyChainService: KeyChainService()))
+//        ),
+//        areOrdersEnable: true
+//    )
+//    
+//}
 
 // MARK: - UITableViewDataSource
 

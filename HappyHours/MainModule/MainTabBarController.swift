@@ -48,7 +48,8 @@ final class MainTabBarController: UITabBarController {
         )
         restaurantsVC.tabBarItem = restaurantsTabBarItem
         
-        let searchVC = SearchVC()
+        let searchModel = SearchModel(networkService: networkService)
+        let searchVC = SearchVC(model: searchModel)
         let searchTabBarItem = UITabBarItem(
             title: String(localized: "Search"),
             image: UIImage(systemName: "magnifyingglass"),

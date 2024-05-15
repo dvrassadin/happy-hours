@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 struct RestaurantsResponse: Decodable {
     
@@ -21,8 +22,31 @@ struct Restaurant: Decodable {
     let phoneNumber: String?
     let logo: String?
     let address: String?
-    let happyhoursStart: String?
-    let happyhoursEnd: String?
+    private let happyhoursStart: String?
+    var hhStart: String? {
+        if let happyhoursStart {
+            return String(happyhoursStart.prefix(5))
+        }
+        return nil
+    }
+    private let happyhoursEnd: String?
+    var hhEnd: String? {
+        if let happyhoursEnd {
+            return String(happyhoursEnd.prefix(5))
+        }
+        return nil
+    }
     let email: String?
+    
+    private let location: Location?
+    var locationCoordinate: CLLocationCoordinate2D? {
+        if let latitude = location?.coordinates.last, let longitude = location?.coordinates.first {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+        return nil
+    }
+    private struct Location: Decodable {
+        let coordinates: [Double]
+    }
     
 }

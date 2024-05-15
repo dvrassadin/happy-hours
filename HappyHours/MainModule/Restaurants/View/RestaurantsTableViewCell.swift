@@ -107,8 +107,7 @@ final class RestaurantsTableViewCell: UITableViewCell {
     
     func configure(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
-        if let hhStart = restaurant.happyhoursStart,
-           let hhEnd = restaurant.happyhoursEnd {
+        if let hhStart = restaurant.hhStart, let hhEnd = restaurant.hhEnd {
             hoursLabel.text = "\(hhStart) – \(hhEnd)"
         }
     }

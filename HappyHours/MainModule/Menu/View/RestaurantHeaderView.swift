@@ -192,7 +192,7 @@ final class RestaurantHeaderView: UIView {
         nameLabel.text = restaurant.name
         addressTextView.text = restaurant.address
         descriptionLabel.text = restaurant.description
-        if let hhStart = restaurant.happyhoursStart, let hhEnd = restaurant.happyhoursEnd {
+        if let hhStart = restaurant.hhStart, let hhEnd = restaurant.hhEnd {
             happyHoursLabel.text = String(localized: "Happy hours from \(hhStart) to \(hhEnd).")
         }
         phoneNumberTextView.text = restaurant.phoneNumber

@@ -28,6 +28,8 @@ enum AlertType {
     case orderMade
     case invalidBarcode
     case barcodeServerError
+    case getRestaurantServerError
+    case restaurantsNotFound
     
 }
 
@@ -100,6 +102,12 @@ extension AlertPresenter {
         case .barcodeServerError:
             title = String(localized: "Error Getting Restaurant")
             message = String(localized: "This restaurant was not found or there are problems with the Internet.")
+        case .getRestaurantServerError:
+            title = String(localized: "Unable to Download")
+            message = String(localized: "Failed to get the restaurant.")
+        case .restaurantsNotFound:
+            title = String(localized: "Nothing Found")
+            message = String(localized: "Could not find such restaurants.")
         }
         
         let alertController = UIAlertController(

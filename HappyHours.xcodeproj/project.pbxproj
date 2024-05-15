@@ -48,6 +48,8 @@
 		515CE3682BDB91960032364D /* SearchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3672BDB91960032364D /* SearchViewDelegate.swift */; };
 		515CE36A2BDB92130032364D /* SearchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3692BDB92130032364D /* SearchMode.swift */; };
 		515EF0512BDFE574008795BA /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */; };
+		516AD57F2BF483EB00F26B32 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516AD57E2BF483EB00F26B32 /* RestaurantAnnotation.swift */; };
+		516AD5812BF494AA00F26B32 /* RestaurantMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516AD5802BF494AA00F26B32 /* RestaurantMarkerView.swift */; };
 		516C20282BE8DF1500FCBFB1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C20272BE8DF1500FCBFB1 /* String.swift */; };
 		516C202A2BE8E92100FCBFB1 /* OTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C20292BE8E92100FCBFB1 /* OTC.swift */; };
 		516C202C2BE8EDE400FCBFB1 /* NewPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C202B2BE8EDE400FCBFB1 /* NewPassword.swift */; };
@@ -63,6 +65,8 @@
 		518B1EA12BEBD453004F203F /* AuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B1EA02BEBD453004F203F /* AuthServiceProtocol.swift */; };
 		518B1EA32BECAEB4004F203F /* AuthServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B1EA22BECAEB4004F203F /* AuthServiceDelegate.swift */; };
 		519ECCFE2BDF9CB8004BF955 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519ECCFD2BDF9CB8004BF955 /* NetworkService.swift */; };
+		51AACDFB2BF337E0008CD997 /* SearchModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AACDFA2BF337E0008CD997 /* SearchModelProtocol.swift */; };
+		51AACDFD2BF337F3008CD997 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AACDFC2BF337F3008CD997 /* SearchModel.swift */; };
 		51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B122BE3EEBD0021F505 /* CreateUser.swift */; };
 		51AC3B152BE3F8300021F505 /* CreateUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */; };
 		51AC3B172BE49B460021F505 /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B162BE49B460021F505 /* RefreshToken.swift */; };
@@ -130,6 +134,8 @@
 		515CE3672BDB91960032364D /* SearchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDelegate.swift; sourceTree = "<group>"; };
 		515CE3692BDB92130032364D /* SearchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMode.swift; sourceTree = "<group>"; };
 		515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		516AD57E2BF483EB00F26B32 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
+		516AD5802BF494AA00F26B32 /* RestaurantMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMarkerView.swift; sourceTree = "<group>"; };
 		516C20272BE8DF1500FCBFB1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		516C20292BE8E92100FCBFB1 /* OTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTC.swift; sourceTree = "<group>"; };
 		516C202B2BE8EDE400FCBFB1 /* NewPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPassword.swift; sourceTree = "<group>"; };
@@ -145,6 +151,8 @@
 		518B1EA02BEBD453004F203F /* AuthServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceProtocol.swift; sourceTree = "<group>"; };
 		518B1EA22BECAEB4004F203F /* AuthServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceDelegate.swift; sourceTree = "<group>"; };
 		519ECCFD2BDF9CB8004BF955 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		51AACDFA2BF337E0008CD997 /* SearchModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModelProtocol.swift; sourceTree = "<group>"; };
+		51AACDFC2BF337F3008CD997 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		51AC3B122BE3EEBD0021F505 /* CreateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUser.swift; sourceTree = "<group>"; };
 		51AC3B142BE3F8300021F505 /* CreateUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserResponse.swift; sourceTree = "<group>"; };
 		51AC3B162BE49B460021F505 /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
@@ -226,6 +234,7 @@
 			children = (
 				51280B7D2BD8F6EA00FD0271 /* SearchVC.swift */,
 				515CE3662BDB87DB0032364D /* View */,
+				51AACDF92BF337CB008CD997 /* Model */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -346,6 +355,8 @@
 				515CE3672BDB91960032364D /* SearchViewDelegate.swift */,
 				515CE3692BDB92130032364D /* SearchMode.swift */,
 				51CE539D2BDE52EA001A5112 /* NothingFoundStateView.swift */,
+				516AD57E2BF483EB00F26B32 /* RestaurantAnnotation.swift */,
+				516AD5802BF494AA00F26B32 /* RestaurantMarkerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -445,6 +456,15 @@
 				51B329832BCA686D00D7ADFB /* SignUpView.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		51AACDF92BF337CB008CD997 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				51AACDFA2BF337E0008CD997 /* SearchModelProtocol.swift */,
+				51AACDFC2BF337F3008CD997 /* SearchModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		51B3297F2BC923B200D7ADFB /* SignUpStackView */ = {
@@ -591,6 +611,7 @@
 				5103C6712BE0EC27009CFCB7 /* KeyChainService.swift in Sources */,
 				51CF88622BC3B8D800196E8A /* SignInVC.swift in Sources */,
 				513B6CF02BD02CA90006DD25 /* MainTabBarController.swift in Sources */,
+				516AD5812BF494AA00F26B32 /* RestaurantMarkerView.swift in Sources */,
 				512D006D2BD803150057D696 /* AlertPresenter.swift in Sources */,
 				518B1E9E2BEBCA58004F203F /* AuthError.swift in Sources */,
 				51B329742BC68BC000D7ADFB /* AuthScreenView.swift in Sources */,
@@ -605,6 +626,7 @@
 				518B1E742BEA29F1004F203F /* MenuModelProtocol.swift in Sources */,
 				516C202A2BE8E92100FCBFB1 /* OTC.swift in Sources */,
 				51B5B0F02BC43E9A0096DB8B /* SignUpVC.swift in Sources */,
+				516AD57F2BF483EB00F26B32 /* RestaurantAnnotation.swift in Sources */,
 				51280B802BD8F71400FD0271 /* SearchView.swift in Sources */,
 				513B6CC12BCF987E0006DD25 /* EmailChecker.swift in Sources */,
 				519ECCFE2BDF9CB8004BF955 /* NetworkService.swift in Sources */,
@@ -625,6 +647,7 @@
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
 				51BC17652BE3A53D0095C104 /* Tokens.swift in Sources */,
 				51B3297C2BC90D7400D7ADFB /* SignUpStackView.swift in Sources */,
+				51AACDFD2BF337F3008CD997 /* SearchModel.swift in Sources */,
 				51B329762BC6B8DF00D7ADFB /* CommonButton.swift in Sources */,
 				5148B95A2BD61C8300659D73 /* RestaurantsResponse.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
@@ -635,6 +658,7 @@
 				512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */,
 				51BC17632BE3A3A90095C104 /* LogIn.swift in Sources */,
 				518B1E782BEA4476004F203F /* MenuTableViewCell.swift in Sources */,
+				51AACDFB2BF337E0008CD997 /* SearchModelProtocol.swift in Sources */,
 				516C202C2BE8EDE400FCBFB1 /* NewPassword.swift in Sources */,
 				513B6CC62BCF9F750006DD25 /* NewPasswordVC.swift in Sources */,
 				512D005C2BD769EE0057D696 /* RestaurantsModelProtocol.swift in Sources */,
