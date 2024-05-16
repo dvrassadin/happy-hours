@@ -45,7 +45,6 @@ final class RestaurantMarkerView: MKMarkerAnnotationView {
     private func setUpUI() {
         canShowCallout = true
         rightCalloutAccessoryView = button
-        glyphImage = UIImage(systemName: "storefront.fill")
     }
     
     func startActivityIndicator() {

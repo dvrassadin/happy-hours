@@ -83,14 +83,12 @@ final class SearchVC: UISearchController, AlertPresenter {
         }
     }
     
-    private func updateRestaurantsInRadius(search: String) {
-        Task {
-            do {
-                try await model.updateRestaurants(search: search)
-                searchView.addNewMapAnnotations(restaurants: model.restaurants)
-            } catch {
-                showAlert(.getRestaurantsServerError)
-            }
+    private func updateRestaurants(search: String) async {
+        do {
+            try await model.updateRestaurants(search: search)
+            searchView.addNewMapAnnotations(restaurants: model.restaurants)
+        } catch {
+            showAlert(.getRestaurantsServerError)
         }
     }
 
@@ -172,8 +170,10 @@ extension SearchVC: UISearchBarDelegate {
             return
         }
         
-        updateRestaurantsInRadius(search: text)
-        searchView.mapView.showAnnotations(searchView.mapView.annotations, animated: true)
+        Task {
+            await updateRestaurants(search: text)
+            searchView.mapView.showAnnotations(searchView.mapView.annotations, animated: true)
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -200,6 +200,8 @@ extension SearchVC: MKMapViewDelegate {
               let annotationView = mapView.dequeueReusableAnnotationView(
                 withIdentifier: RestaurantMarkerView.identifier
               ) as? RestaurantMarkerView else { return nil }
+        
+        annotationView.glyphImage = UIImage(systemName: "storefront.fill")
         
         return annotationView
     }

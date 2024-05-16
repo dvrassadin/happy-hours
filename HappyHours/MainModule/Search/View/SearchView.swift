@@ -171,7 +171,6 @@ final class SearchView: UIView {
         location: CLLocationCoordinate2D,
         regionRadius: CLLocationDistance = 2000
     ) {
-//        let regionRadius: CLLocationDistance = 2000
         let region = MKCoordinateRegion(
             center: location,
             latitudinalMeters: regionRadius,
