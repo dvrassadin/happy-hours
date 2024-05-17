@@ -559,7 +559,12 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         if httpResponse.statusCode == 401 {
             if allowRetry {
                 try await authService.refreshTokens()
-                return try await getRestaurants(limit: limit, offset: offset, allowRetry: false)
+                return try await getRestaurants(
+                    limit: limit,
+                    offset: offset,
+                    search: search,
+                    allowRetry: false
+                )
             }
             logger.error("Invalid token for request: \(url.absoluteString)")
             throw AuthError.invalidToken
@@ -712,6 +717,8 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         return restaurant
     }
     
+    // MARK: Menus and orders requests
+    
     func getMenu(
         restaurantID: Int,
         limit: UInt,
@@ -835,6 +842,83 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         logger.info("Order was made for request: \(url.absoluteString)")
+    }
+    
+    // MARK: Beverages requests
+    
+    func getBeverages(
+        limit: UInt,
+        offset: UInt,
+        search: String? = nil,
+        allowRetry: Bool = true
+    ) async throws -> [Beverage] {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/beverage/beverages/")
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "limit", value: String(limit)),
+            URLQueryItem(name: "offset", value: String(offset))
+        ]
+        if let search {
+            urlComponents.queryItems?.append(URLQueryItem(name: "search", value: search))
+        }
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(
+            "Bearer \(try await authService.validAccessToken)",
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 401 {
+            if allowRetry {
+                try await authService.refreshTokens()
+                return try await getBeverages(
+                    limit: limit,
+                    offset: offset,
+                    search: search,
+                    allowRetry: false
+                )
+            }
+            logger.error("Invalid token for request: \(url.absoluteString)")
+            throw AuthError.invalidToken
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let beverages: [Beverage]
+        do {
+            beverages = try decoder.decode(BeverageResponse.self, from: data).results
+            logger.info("Received \(beverages.count) beverages for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+        
+        return beverages
     }
     
     // MARK: Common requests

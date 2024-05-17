@@ -59,6 +59,13 @@ final class SearchView: UIView {
     }()
     
     private var nothingFoundStateView = NothingFoundStateView()
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .main
+        return activityIndicator
+    }()
 
     // MARK: Lifecycle
     
@@ -86,6 +93,7 @@ final class SearchView: UIView {
         addSubview(segmentedControl)
         addSubview(tableView)
         addSubview(mapView)
+        addSubview(activityIndicator)
         tableView.backgroundView = nothingFoundStateView
     }
     
@@ -113,6 +121,9 @@ final class SearchView: UIView {
                 nothingFoundStateView.centerYAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.centerYAnchor
                 ),
+                
+                activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
                 
                 keyboardLayoutGuide.topAnchor.constraint(
                     greaterThanOrEqualTo: nothingFoundStateView.bottomAnchor
@@ -147,6 +158,7 @@ final class SearchView: UIView {
     }
     
     private func changeSelectedView() {
+        searchController.searchBar.text = nil
         switch searchMode {
         case .beverages:
             mapView.isHidden = true
@@ -158,11 +170,13 @@ final class SearchView: UIView {
     }
     
     func showNothingFoundState() {
-        tableView.backgroundView = nothingFoundStateView
+//        tableView.backgroundView = nothingFoundStateView
+        tableView.backgroundView?.isHidden = false
     }
     
-    func removeState() {
-        tableView.backgroundView = nil
+    func removeNothingFoundState() {
+//        tableView.backgroundView = nil
+        tableView.backgroundView?.isHidden = true
     }
     
     // MARK: Setting up map

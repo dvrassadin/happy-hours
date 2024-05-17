@@ -15,8 +15,6 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     // MARK: Properties
     
-    private let beverages = ["Cola", "Beer", "Wine", "Apple juice", "Orange juice", "Tomato juice", "Sprite", "Pepsi", "Fanta", "Vodka", "Coffee", "Tea", "Greenfield", "Latte", "Americano", "7 up"]
-    private var filteredBeverages = [String]()
     private lazy var searchView = SearchView()
     private let locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -42,7 +40,7 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchView.searchController.searchResultsUpdater = self
+//        searchView.searchController.searchResultsUpdater = self
         searchView.searchController.searchBar.delegate = self
         searchView.mapView.delegate = self
         searchView.tableView.dataSource = self
@@ -91,38 +89,63 @@ final class SearchVC: UISearchController, AlertPresenter {
             showAlert(.getRestaurantsServerError)
         }
     }
-
-}
-
-// MARK: - UISearchResultsUpdating
-
-extension SearchVC: UISearchResultsUpdating {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-        
-        switch searchView.searchMode {
-        case .beverages:
-            filteredBeverages = beverages.filter { $0.lowercased().contains(text.lowercased()) }
-            searchView.tableView.reloadData()
-        case .restaurants:
-            break
+    // MARK: Update beverages
+    
+    private func updateBeverages(search: String) {
+        searchView.activityIndicator.startAnimating()
+        Task {
+            defer {
+                searchView.activityIndicator.stopAnimating()
+            }
+            do {
+                try await model.updateBeverages(search: search)
+                if model.beverages.isEmpty {
+                    searchView.tableView.reloadData()
+//                    searchView.showNothingFoundState()
+                } else {
+                    searchView.removeNothingFoundState()
+                    searchView.tableView.reloadData()
+                }
+            } catch {
+                searchView.showNothingFoundState()
+                showAlert(.beveragesServerError)
+            }
         }
     }
-    
+
 }
+
+//// MARK: - UISearchResultsUpdating
+//
+//extension SearchVC: UISearchResultsUpdating {
+//    
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let text = searchController.searchBar.text else { return }
+//        
+//        switch searchView.searchMode {
+//        case .beverages:
+//            filteredBeverages = beverages.filter { $0.lowercased().contains(text.lowercased()) }
+//            searchView.tableView.reloadData()
+//        case .restaurants:
+//            break
+//        }
+//    }
+//    
+//}
 
 // MARK: - UITableViewDataSource
 
 extension SearchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filteredBeverages.isEmpty {
+        if model.beverages.isEmpty {
             searchView.showNothingFoundState()
+            print("*")
             return 0
         } else {
-            searchView.removeState()
-            return filteredBeverages.count
+            searchView.removeNothingFoundState()
+            return model.beverages.count
         }
     }
     
@@ -133,9 +156,11 @@ extension SearchVC: UITableViewDataSource {
         ) as? BeverageTableViewCell else { return UITableViewCell() }
         
         var contentConfiguration = cell.defaultContentConfiguration()
-        contentConfiguration.text = filteredBeverages[indexPath.row]
-        contentConfiguration.secondaryText = "KFC"
+        let beverage = model.beverages[indexPath.row]
+        contentConfiguration.text = beverage.name
+        contentConfiguration.secondaryText = beverage.establishment
         cell.contentConfiguration = contentConfiguration
+        
         return cell
     }
     
@@ -170,9 +195,14 @@ extension SearchVC: UISearchBarDelegate {
             return
         }
         
-        Task {
-            await updateRestaurants(search: text)
-            searchView.mapView.showAnnotations(searchView.mapView.annotations, animated: true)
+        switch searchView.searchMode {
+        case .beverages:
+            updateBeverages(search: text)
+        case .restaurants:
+            Task {
+                await updateRestaurants(search: text)
+                searchView.mapView.showAnnotations(searchView.mapView.annotations, animated: true)
+            }
         }
     }
     
@@ -183,6 +213,7 @@ extension SearchVC: UISearchBarDelegate {
 }
 
 // MARK: - MKMapViewDelegate
+
 extension SearchVC: MKMapViewDelegate {
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
@@ -192,7 +223,11 @@ extension SearchVC: MKMapViewDelegate {
             selector: #selector(updateRestaurantsInRadius(_:)),
             object: searchView.mapView
         )
-        perform(#selector(updateRestaurantsInRadius(_:)), with: searchView.mapView, afterDelay: 0.75)
+        perform(
+            #selector(updateRestaurantsInRadius(_:)),
+            with: searchView.mapView,
+            afterDelay: 0.75
+        )
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {

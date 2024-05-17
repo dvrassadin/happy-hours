@@ -13,6 +13,7 @@ final class SearchModel: SearchModelProtocol {
     
     let networkService: NetworkServiceProtocol
     private(set) var restaurants: [Restaurant] = []
+    private(set) var beverages: [Beverage] = []
     
     // MARK: Lifecycle
     
@@ -42,6 +43,17 @@ final class SearchModel: SearchModelProtocol {
     
     func getRestaurant(id: Int) async throws -> Restaurant {
         try await networkService.getRestaurant(id: id, allowRetry: true)
+    }
+    
+    // MARK: Update beverages
+    
+    func updateBeverages(search: String) async throws {
+        beverages = try await networkService.getBeverages(
+            limit: 100,
+            offset: 0,
+            search: search,
+            allowRetry: true
+        )
     }
     
 }

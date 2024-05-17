@@ -108,8 +108,10 @@ final class OneTimeCodeView: AuthScreenView {
                 Constraints.textFieldAndButtonWidthConstraint(for: descriptionLabel, on: self),
                 descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
                 
-//                Constraints.spaceBeforeFirstElement(for: codeTextField, under: screenNameLabel),
-                Constraints.topBetweenTextFieldsAndButtons(for: codeTextField, under: descriptionLabel),
+                Constraints.topBetweenTextFieldsAndButtons(
+                    for: codeTextField,
+                    under: descriptionLabel
+                ),
                 codeTextField.widthAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.widthAnchor,
                     multiplier: 0.8
