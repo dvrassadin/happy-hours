@@ -82,7 +82,6 @@ final class RestaurantsTableViewCell: UITableViewCell {
             logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 2),
             logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -2),
-//            logoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 70),
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor),
             

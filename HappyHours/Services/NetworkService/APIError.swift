@@ -16,4 +16,5 @@ enum APIError: Error {
     case encodingError
     case decodingError
     case noToken
+    
 }

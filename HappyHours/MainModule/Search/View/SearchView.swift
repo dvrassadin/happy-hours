@@ -66,6 +66,13 @@ final class SearchView: UIView {
         activityIndicator.color = .main
         return activityIndicator
     }()
+    
+    let footerActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .main
+        return activityIndicator
+    }()
 
     // MARK: Lifecycle
     

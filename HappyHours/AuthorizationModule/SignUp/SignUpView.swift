@@ -15,17 +15,17 @@ final class SignUpView: AuthScreenView {
     
     var isCreatingAccount: Bool = false {
         didSet {
+            createAccountButton.configuration?.attributedTitle = createAccountButtonTitle
             if isCreatingAccount {
-                createAccountButton.configuration?.attributedTitle = createAccountButtonTitle
                 createAccountButton.configuration?.showsActivityIndicator = true
                 createAccountButton.isEnabled = false
             } else {
-                createAccountButton.configuration?.attributedTitle = createAccountButtonTitle
                 createAccountButton.configuration?.showsActivityIndicator = false
                 createAccountButton.isEnabled = true
             }
         }
     }
+    
     private var createAccountButtonTitle: AttributedString {
         AttributedString(
             String(localized: isCreatingAccount ? "Creating Account" : "Create Account"),

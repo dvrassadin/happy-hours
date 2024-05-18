@@ -12,8 +12,11 @@ final class SearchModel: SearchModelProtocol {
     // MARK: Properties
     
     let networkService: NetworkServiceProtocol
+    
     private(set) var restaurants: [Restaurant] = []
+    
     private(set) var beverages: [Beverage] = []
+    private var countOfAllBeverages: Int = 0
     
     // MARK: Lifecycle
     
@@ -47,13 +50,29 @@ final class SearchModel: SearchModelProtocol {
     
     // MARK: Update beverages
     
-    func updateBeverages(search: String) async throws {
-        beverages = try await networkService.getBeverages(
-            limit: 100,
-            offset: 0,
-            search: search,
-            allowRetry: true
-        )
+    func updateBeverages(search: String, append: Bool = false) async throws {
+        if append && beverages.count >= countOfAllBeverages { return }
+        
+        let limit: UInt = 50
+        
+        if append {
+            let beverageResponse = try await networkService.getBeverages(
+                limit: limit,
+                offset: UInt(beverages.count),
+                search: search,
+                allowRetry: true
+            )
+            beverages.append(contentsOf: beverageResponse.results)
+        } else {
+            let beverageResponse = try await networkService.getBeverages(
+                limit: limit,
+                offset: 0,
+                search: search,
+                allowRetry: true
+            )
+            beverages = beverageResponse.results
+            countOfAllBeverages = beverageResponse.count
+        }
     }
     
 }

@@ -62,7 +62,6 @@ final class ResetPasswordView: AuthScreenView {
                 
                 Constraints.topBetweenTextFieldsAndButtons(for: emailTextField, under: descriptionLabel),
                 emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-//                Constraints.spaceBeforeFirstElement(for: emailTextField, under: screenNameLabel),
                 Constraints.textFieldAndButtonWidthConstraint(for: emailTextField, on: self),
                 Constraints.textFieldAndButtonHeighConstraint(for: emailTextField, on: self),
                 

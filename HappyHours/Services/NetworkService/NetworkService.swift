@@ -851,7 +851,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         offset: UInt,
         search: String? = nil,
         allowRetry: Bool = true
-    ) async throws -> [Beverage] {
+    ) async throws -> BeverageResponse {
         guard var urlComponents = URLComponents(string: baseURL) else {
             logger.error("Invalid server URL: \(self.baseURL)")
             throw APIError.invalidServerURL
@@ -909,16 +909,16 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.unexpectedStatusCode
         }
         
-        let beverages: [Beverage]
+        let beverageResponse: BeverageResponse
         do {
-            beverages = try decoder.decode(BeverageResponse.self, from: data).results
-            logger.info("Received \(beverages.count) beverages for request: \(url.absoluteString)")
+            beverageResponse = try decoder.decode(BeverageResponse.self, from: data)
+            logger.info("Received beverages for request: \(url.absoluteString)")
         } catch {
             logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
             throw APIError.decodingError
         }
         
-        return beverages
+        return beverageResponse
     }
     
     // MARK: Common requests

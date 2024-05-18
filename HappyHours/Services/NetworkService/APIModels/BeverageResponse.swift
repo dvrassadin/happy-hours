@@ -9,6 +9,7 @@ import Foundation
 
 struct BeverageResponse: Decodable {
     
+    let count: Int
     let results: [Beverage]
     
 }

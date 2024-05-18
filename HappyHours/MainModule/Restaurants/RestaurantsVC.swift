@@ -40,6 +40,7 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        restaurantsView.activityIndicator.startAnimating()
         updateRestaurants()
     }
     
@@ -47,22 +48,18 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
     
     @objc private func updateRestaurants() {
         Task {
+            defer {
+                restaurantsView.activityIndicator.stopAnimating()
+                restaurantsView.tableView.refreshControl?.endRefreshing()
+            }
             do {
                 try await model.getRestaurants(limit: 100, offset: 0)
                 restaurantsView.tableView.reloadData()
             } catch {
                 showAlert(.getRestaurantsServerError)
             }
-            restaurantsView.tableView.refreshControl?.endRefreshing()
         }
     }
-    
-//    override func viewIsAppearing(_ animated: Bool) {
-//        super.viewIsAppearing(animated)
-//        if let selectedIndexPath = restaurantsView.tableView.indexPathForSelectedRow {
-//            restaurantsView.tableView.deselectRow(at: selectedIndexPath, animated: animated)
-//        }
-//    }
 
 }
 

@@ -15,6 +15,7 @@ final class NewPasswordVC: UIViewController, PasswordChecker, AlertPresenter {
     private let model: AuthorizationModelProtocol
     
     // MARK: Lifecycle
+    
     init(model: AuthorizationModelProtocol) {
         self.model = model
         super.init(nibName: nil, bundle: nil)

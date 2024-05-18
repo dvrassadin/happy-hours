@@ -22,6 +22,8 @@ final class SearchVC: UISearchController, AlertPresenter {
         return locationManager
     }()
     private let model: SearchModelProtocol
+    private var searchText: String = ""
+    private var isLoadingBeverages = false
 
     // MARK: Lifecycle
     
@@ -44,6 +46,7 @@ final class SearchVC: UISearchController, AlertPresenter {
         searchView.searchController.searchBar.delegate = self
         searchView.mapView.delegate = self
         searchView.tableView.dataSource = self
+        searchView.tableView.delegate = self
         searchView.delegate = self
     }
     
@@ -92,17 +95,29 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     // MARK: Update beverages
     
-    private func updateBeverages(search: String) {
-        searchView.activityIndicator.startAnimating()
+    private func updateBeverages(search: String, append: Bool = false) {
+        if !append { searchText = search }
+        
+        isLoadingBeverages = true
+        
+        if append {
+            searchView.tableView.tableFooterView = searchView.footerActivityIndicator
+            searchView.footerActivityIndicator.startAnimating()
+        } else {
+            searchView.activityIndicator.startAnimating()
+        }
+        
         Task {
             defer {
                 searchView.activityIndicator.stopAnimating()
+                searchView.footerActivityIndicator.stopAnimating()
+                searchView.tableView.tableFooterView = nil
+                isLoadingBeverages = false
             }
             do {
-                try await model.updateBeverages(search: search)
+                try await model.updateBeverages(search: search, append: append)
                 if model.beverages.isEmpty {
                     searchView.tableView.reloadData()
-//                    searchView.showNothingFoundState()
                 } else {
                     searchView.removeNothingFoundState()
                     searchView.tableView.reloadData()
@@ -134,6 +149,12 @@ final class SearchVC: UISearchController, AlertPresenter {
 //    
 //}
 
+// MARK: - UITableViewDelegate
+
+extension SearchVC: UITableViewDelegate {
+    
+}
+
 // MARK: - UITableViewDataSource
 
 extension SearchVC: UITableViewDataSource {
@@ -141,7 +162,6 @@ extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if model.beverages.isEmpty {
             searchView.showNothingFoundState()
-            print("*")
             return 0
         } else {
             searchView.removeNothingFoundState()
@@ -162,6 +182,20 @@ extension SearchVC: UITableViewDataSource {
         cell.contentConfiguration = contentConfiguration
         
         return cell
+    }
+    
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension SearchVC: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !isLoadingBeverages else { return }
+
+        if searchView.tableView.contentOffset.y >= (searchView.tableView.contentSize.height - searchView.tableView.frame.size.height) {
+            updateBeverages(search: searchText, append: true)
+        }
     }
     
 }

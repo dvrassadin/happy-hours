@@ -42,6 +42,7 @@ protocol NetworkServiceProtocol {
         offset: UInt,
         search: String?,
         allowRetry: Bool
-    ) async throws -> [Beverage]
+    ) async throws -> BeverageResponse
     func makeOrder(_ order: Order, allowRetry: Bool) async throws
+    
 }

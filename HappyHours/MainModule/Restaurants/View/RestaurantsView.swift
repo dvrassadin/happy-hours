@@ -19,6 +19,7 @@ final class RestaurantsView: UIView {
             forCellReuseIdentifier: RestaurantsTableViewCell.identifier
         )
         tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = .main
         return tableView
     }()
     
@@ -28,6 +29,13 @@ final class RestaurantsView: UIView {
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
+    }()
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .main
+        return activityIndicator
     }()
 
     // MARK: Lifecycle
@@ -49,11 +57,11 @@ final class RestaurantsView: UIView {
         headerLabel.text = String(localized: "Your subscription is active. 🟢")
         addSubviews()
         setUpConstraints()
-//        layoutIfNeeded()
     }
     
     private func addSubviews() {
         addSubview(tableView)
+        addSubview(activityIndicator)
     }
     
     private func setUpConstraints() {
@@ -63,7 +71,10 @@ final class RestaurantsView: UIView {
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            headerLabel.widthAnchor.constraint(equalTo: tableView.widthAnchor)
+            headerLabel.widthAnchor.constraint(equalTo: tableView.widthAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
