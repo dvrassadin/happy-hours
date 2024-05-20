@@ -48,6 +48,7 @@ final class SearchVC: UISearchController, AlertPresenter {
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.delegate = self
+        updateBeverages(search: "A")
     }
     
     override func viewIsAppearing(_ animated: Bool) {
@@ -131,27 +132,17 @@ final class SearchVC: UISearchController, AlertPresenter {
 
 }
 
-//// MARK: - UISearchResultsUpdating
-//
-//extension SearchVC: UISearchResultsUpdating {
-//    
-//    func updateSearchResults(for searchController: UISearchController) {
-//        guard let text = searchController.searchBar.text else { return }
-//        
-//        switch searchView.searchMode {
-//        case .beverages:
-//            filteredBeverages = beverages.filter { $0.lowercased().contains(text.lowercased()) }
-//            searchView.tableView.reloadData()
-//        case .restaurants:
-//            break
-//        }
-//    }
-//    
-//}
-
 // MARK: - UITableViewDelegate
 
 extension SearchVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let beverageVC = BeverageVC(beverage: model.beverages[indexPath.row])
+        beverageVC.sheetPresentationController?.prefersGrabberVisible = true
+        beverageVC.sheetPresentationController?.detents = [.medium(), .large()]
+        present(beverageVC, animated: true)
+        searchView.tableView.deselectRow(at: indexPath, animated: true)
+    }
     
 }
 
@@ -293,6 +284,7 @@ extension SearchVC: MKMapViewDelegate {
                 networkService: model.networkService
             )
             let menuVC = MenuVC(model: menuModel, areOrdersEnable: false)
+            menuVC.sheetPresentationController?.prefersGrabberVisible = true
             present(menuVC, animated: true)
         } else {
             restaurantMarkerView.startActivityIndicator()

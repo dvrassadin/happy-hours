@@ -93,6 +93,11 @@ extension MenuVC: UITableViewDataSource {
 extension MenuVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let beverage = model.menu[indexPath.section].beverages[indexPath.row]
+        let beverageVC = BeverageVC(beverage: beverage)
+        beverageVC.sheetPresentationController?.prefersGrabberVisible = true
+        beverageVC.sheetPresentationController?.detents = [.medium(), .large()]
+        present(beverageVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

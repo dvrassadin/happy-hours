@@ -42,6 +42,7 @@ final class SearchView: UIView {
             forCellReuseIdentifier: BeverageTableViewCell.identifier
         )
         tableView.backgroundColor = .background
+        tableView.allowsSelection = true
         return tableView
     }()
     
@@ -55,6 +56,10 @@ final class SearchView: UIView {
             RestaurantMarkerView.self,
             forAnnotationViewWithReuseIdentifier: RestaurantMarkerView.identifier
         )
+        if #available(iOS 17.0, *) {
+            mapView.showsUserTrackingButton = true
+        }
+        mapView.tintColor = .main
         return mapView
     }()
     
@@ -117,7 +122,7 @@ final class SearchView: UIView {
                 ),
                 tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
                 tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
                 
                 mapView.topAnchor.constraint(equalTo: tableView.topAnchor),
                 mapView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
@@ -155,13 +160,7 @@ final class SearchView: UIView {
                 action: #selector(endEditing)
             )
         )
-        
-        tableView.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: searchController.searchBar,
-                action: #selector(endEditing)
-            )
-        )
+    
     }
     
     private func changeSelectedView() {
@@ -177,12 +176,10 @@ final class SearchView: UIView {
     }
     
     func showNothingFoundState() {
-//        tableView.backgroundView = nothingFoundStateView
         tableView.backgroundView?.isHidden = false
     }
     
     func removeNothingFoundState() {
-//        tableView.backgroundView = nil
         tableView.backgroundView?.isHidden = true
     }
     
