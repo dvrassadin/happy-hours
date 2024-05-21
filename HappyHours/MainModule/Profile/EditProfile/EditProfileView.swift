@@ -163,7 +163,10 @@ final class EditProfileView: UIView {
         )
     }
     
-    func set(user: User) {
+    func set(user: User, avatar: UIImage?) {
+        if let avatar {
+            userImageView.image = avatar
+        }
         nameTextField.text = user.name
         if let dateOfBirth = user.dateOfBirth {
             datePicker.date = dateOfBirth

@@ -65,6 +65,14 @@ final class MainTabBarController: UITabBarController {
         )
         scannerVC.tabBarItem = scannerTabBarItem
         
+        let orderVC = ScannerVC(networkService: networkService)
+        let ordersTabBarItem = UITabBarItem(
+            title: String(localized: "Orders"),
+            image: UIImage(systemName: "list.bullet.rectangle"),
+            selectedImage: UIImage(systemName: "list.bullet.rectangle.fill")
+        )
+        orderVC.tabBarItem = scannerTabBarItem
+        
         let profileModel: ProfileModelProtocol = ProfileModel(networkService: networkService)
         let profileVC = ProfileVC(model: profileModel)
         let profileTabBarItem = UITabBarItem(

@@ -48,7 +48,6 @@ final class SearchVC: UISearchController, AlertPresenter {
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.delegate = self
-        updateBeverages(search: "A")
     }
     
     override func viewIsAppearing(_ animated: Bool) {

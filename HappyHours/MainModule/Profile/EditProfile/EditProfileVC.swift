@@ -5,7 +5,9 @@
 //  Created by Daniil Rassadin on 23/4/24.
 //
 
-import UIKit
+import PhotosUI
+
+// MARK: - EditProfileVC class
 
 final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPresenter {
     
@@ -13,11 +15,13 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     private lazy var editProfileView = EditProfileView()
     private let model: ProfileModelProtocol
+    private var avatar: UIImage?
 
     // MARK: Lifecycle
     
-    init(model: ProfileModelProtocol) {
+    init(model: ProfileModelProtocol, avatar: UIImage?) {
         self.model = model
+        self.avatar = avatar
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,7 +36,7 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     override func viewDidLoad() {
         super.viewDidLoad()
         if let user = model.user {
-            editProfileView.set(user: user)
+            editProfileView.set(user: user, avatar: avatar)
         }
         setUpNavigation()
     }
@@ -41,7 +45,14 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     private func setUpNavigation() {
         editProfileView.editImageButton.addAction(UIAction { [weak self] _ in
-            self?.editUserImage()
+            guard let self else { return }
+
+            var configuration = PHPickerConfiguration()
+            configuration.selectionLimit = 1
+            configuration.filter = .images
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            present(picker, animated: true)
         }, for: .touchUpInside)
         
         editProfileView.updateButton.addAction(UIAction { [weak self] _ in
@@ -49,21 +60,16 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         }, for: .touchUpInside)
     }
     
-    private func editUserImage() {
-        print("Edit user image button pressed.")
-    }
-    
     private func updateUser() {
         guard isValidCredentials(), let name = editProfileView.nameTextField.text else { return }
 
         Task {
             do {
-                let user = UserUpdate(
+                try await model.editUser(
+                    imageData: avatar?.pngData(),
                     name: name,
-                    dateOfBirth: editProfileView.datePicker.date,
-                    avatar: nil
+                    dateOfBirth: editProfileView.datePicker.date
                 )
-                try await model.editUser(user)
                 navigationController?.popViewController(animated: true)
             } catch {
                 showAlert(.editUserServerError)
@@ -88,6 +94,29 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         }
         
         return true
+    }
+    
+}
+
+// MARK: - PHPickerViewControllerDelegate
+
+extension EditProfileVC: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        guard let itemProvider = results.first?.itemProvider else { return }
+        
+        itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+            if let _ = error {
+                self.showAlert(.getPhotoError)
+            }
+            guard let image = reading as? UIImage else { return }
+            DispatchQueue.main.async {
+                self.editProfileView.userImageView.image = image
+                self.avatar = image
+            }
+        }
     }
     
 }

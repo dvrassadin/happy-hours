@@ -31,6 +31,7 @@ enum AlertType {
     case getRestaurantServerError
     case restaurantsNotFound
     case beveragesServerError
+    case getPhotoError
     
 }
 
@@ -112,6 +113,8 @@ extension AlertPresenter {
         case .beveragesServerError:
             title = String(localized: "Error")
             message = String(localized: "An error occurred while searching for drinks.")
+        case .getPhotoError:
+            title = String(localized: "Unable to Get Image")
         }
         
         let alertController = UIAlertController(

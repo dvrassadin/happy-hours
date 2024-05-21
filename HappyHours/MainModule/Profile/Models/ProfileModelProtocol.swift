@@ -14,6 +14,6 @@ protocol ProfileModelProtocol {
     
     func downloadUser() async throws
     func logOut() async throws
-    func editUser(_ user: UserUpdate) async throws
+    func editUser(imageData: Data?, name: String?, dateOfBirth: Date?) async throws
     
 }

@@ -46,7 +46,7 @@ final class ProfileVC: UIViewController, AlertPresenter {
     private func setUpNavigation() {
         profileView.profileButton.addAction(UIAction { [weak self] _ in
             guard let self, model.user != nil else { return }
-            let editProfileVC = EditProfileVC(model: self.model)
+            let editProfileVC = EditProfileVC(model: self.model, avatar: profileView.userImageView.image)
             self.navigationController?.pushViewController(editProfileVC, animated: true)
         }, for: .touchUpInside)
         
@@ -90,7 +90,6 @@ final class ProfileVC: UIViewController, AlertPresenter {
                     showAlert(.getUserServerError)
                     return
                 }
-//                profileView.set(user: user)
                 profileView.nameLabel.text = user.name
                 profileView.emailLabel.text = user.email
                 if let avatar = await model.avatarImage {
