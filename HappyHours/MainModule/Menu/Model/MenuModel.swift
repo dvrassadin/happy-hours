@@ -52,7 +52,7 @@ final class MenuModel: MenuModelProtocol {
     
     // MARK: Make order
     
-    func makeOrder(_ order: Order) async throws {
+    func makeOrder(_ order: PlaceOrder) async throws {
         try await networkService.makeOrder(order, allowRetry: true)
     }
     

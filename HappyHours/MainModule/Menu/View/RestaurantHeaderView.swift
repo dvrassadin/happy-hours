@@ -14,10 +14,12 @@ final class RestaurantHeaderView: UIView {
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(
             systemName: "storefront.fill"
         )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+        imageView.layer.cornerRadius = 50
+        imageView.clipsToBounds = true
         return imageView
     }()
     

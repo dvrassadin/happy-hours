@@ -12,7 +12,7 @@
 		5103C6712BE0EC27009CFCB7 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5103C6702BE0EC27009CFCB7 /* KeyChainService.swift */; };
 		51253A212BEE2B6800106D57 /* KeyChainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A202BEE2B6800106D57 /* KeyChainServiceProtocol.swift */; };
 		51253A402BEF489300106D57 /* MenuTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A3F2BEF489300106D57 /* MenuTableViewCellDelegate.swift */; };
-		51253A422BEF56FF00106D57 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A412BEF56FF00106D57 /* Order.swift */; };
+		51253A422BEF56FF00106D57 /* PlaceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A412BEF56FF00106D57 /* PlaceOrder.swift */; };
 		51280B7E2BD8F6EA00FD0271 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51280B7D2BD8F6EA00FD0271 /* SearchVC.swift */; };
 		51280B802BD8F71400FD0271 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51280B7F2BD8F71400FD0271 /* SearchView.swift */; };
 		512D00562BD6B3DB0057D696 /* NameChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00552BD6B3DB0057D696 /* NameChecker.swift */; };
@@ -61,6 +61,9 @@
 		5184614E2BFD0652001C02B6 /* OrdersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5184614D2BFD0652001C02B6 /* OrdersVC.swift */; };
 		518461512BFD0693001C02B6 /* OrdersModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518461502BFD0693001C02B6 /* OrdersModelProtocol.swift */; };
 		518461532BFD06A2001C02B6 /* OrdersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518461522BFD06A2001C02B6 /* OrdersModel.swift */; };
+		518461562BFDA42A001C02B6 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518461552BFDA42A001C02B6 /* OrderTableViewCell.swift */; };
+		518461582BFDA56B001C02B6 /* OrdersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518461572BFDA56B001C02B6 /* OrdersResponse.swift */; };
+		5184616D2BFE0623001C02B6 /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5184616C2BFE0623001C02B6 /* StatusLabel.swift */; };
 		518B1E6E2BE9FA4F004F203F /* RestaurantHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B1E6D2BE9FA4F004F203F /* RestaurantHeaderView.swift */; };
 		518B1E712BEA29D8004F203F /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B1E702BEA29D7004F203F /* MenuModel.swift */; };
 		518B1E742BEA29F1004F203F /* MenuModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518B1E732BEA29F1004F203F /* MenuModelProtocol.swift */; };
@@ -103,7 +106,7 @@
 		5103C6702BE0EC27009CFCB7 /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 		51253A202BEE2B6800106D57 /* KeyChainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainServiceProtocol.swift; sourceTree = "<group>"; };
 		51253A3F2BEF489300106D57 /* MenuTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCellDelegate.swift; sourceTree = "<group>"; };
-		51253A412BEF56FF00106D57 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		51253A412BEF56FF00106D57 /* PlaceOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceOrder.swift; sourceTree = "<group>"; };
 		51280B7D2BD8F6EA00FD0271 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		51280B7F2BD8F71400FD0271 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		512D00552BD6B3DB0057D696 /* NameChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameChecker.swift; sourceTree = "<group>"; };
@@ -152,6 +155,9 @@
 		5184614D2BFD0652001C02B6 /* OrdersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersVC.swift; sourceTree = "<group>"; };
 		518461502BFD0693001C02B6 /* OrdersModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersModelProtocol.swift; sourceTree = "<group>"; };
 		518461522BFD06A2001C02B6 /* OrdersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersModel.swift; sourceTree = "<group>"; };
+		518461552BFDA42A001C02B6 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+		518461572BFDA56B001C02B6 /* OrdersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersResponse.swift; sourceTree = "<group>"; };
+		5184616C2BFE0623001C02B6 /* StatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
 		518B1E6D2BE9FA4F004F203F /* RestaurantHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantHeaderView.swift; sourceTree = "<group>"; };
 		518B1E702BEA29D7004F203F /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		518B1E732BEA29F1004F203F /* MenuModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModelProtocol.swift; sourceTree = "<group>"; };
@@ -404,7 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				5184614D2BFD0652001C02B6 /* OrdersVC.swift */,
-				5184614B2BFD063C001C02B6 /* OrdersView.swift */,
+				518461542BFD9711001C02B6 /* View */,
 				5184614F2BFD067E001C02B6 /* Model */,
 			);
 			path = Orders;
@@ -417,6 +423,16 @@
 				518461522BFD06A2001C02B6 /* OrdersModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		518461542BFD9711001C02B6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5184614B2BFD063C001C02B6 /* OrdersView.swift */,
+				518461552BFDA42A001C02B6 /* OrderTableViewCell.swift */,
+				5184616C2BFE0623001C02B6 /* StatusLabel.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		518B1E6F2BE9FA56004F203F /* View */ = {
@@ -564,7 +580,8 @@
 				516C20292BE8E92100FCBFB1 /* OTC.swift */,
 				516C202B2BE8EDE400FCBFB1 /* NewPassword.swift */,
 				518B1E752BEA3E93004F203F /* BeverageResponse.swift */,
-				51253A412BEF56FF00106D57 /* Order.swift */,
+				51253A412BEF56FF00106D57 /* PlaceOrder.swift */,
+				518461572BFDA56B001C02B6 /* OrdersResponse.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -659,7 +676,7 @@
 				5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */,
 				51AC3B1B2BE698670021F505 /* User.swift in Sources */,
 				515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */,
-				51253A422BEF56FF00106D57 /* Order.swift in Sources */,
+				51253A422BEF56FF00106D57 /* PlaceOrder.swift in Sources */,
 				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
 				51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */,
 				512D006B2BD7AB830057D696 /* EditProfileVC.swift in Sources */,
@@ -683,7 +700,9 @@
 				515EF0512BDFE574008795BA /* NetworkServiceProtocol.swift in Sources */,
 				512D00652BD7894F0057D696 /* ProfileModelProtocol.swift in Sources */,
 				515CE3682BDB91960032364D /* SearchViewDelegate.swift in Sources */,
+				518461582BFDA56B001C02B6 /* OrdersResponse.swift in Sources */,
 				513829A42BCD90F800AA4878 /* OneTimeCodeView.swift in Sources */,
+				5184616D2BFE0623001C02B6 /* StatusLabel.swift in Sources */,
 				513B6CF72BD16E4A0006DD25 /* RestaurantsVC.swift in Sources */,
 				5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */,
 				51BC17652BE3A53D0095C104 /* Tokens.swift in Sources */,
@@ -716,6 +735,7 @@
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
 				513B6CF42BD16E230006DD25 /* ScannerVC.swift in Sources */,
 				513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */,
+				518461562BFDA42A001C02B6 /* OrderTableViewCell.swift in Sources */,
 				518B1E9C2BEB8426004F203F /* AuthService.swift in Sources */,
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
 				51253A402BEF489300106D57 /* MenuTableViewCellDelegate.swift in Sources */,

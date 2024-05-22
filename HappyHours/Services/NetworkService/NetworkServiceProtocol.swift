@@ -49,6 +49,11 @@ protocol NetworkServiceProtocol {
         search: String?,
         allowRetry: Bool
     ) async throws -> BeverageResponse
-    func makeOrder(_ order: Order, allowRetry: Bool) async throws
+    func makeOrder(_ order: PlaceOrder, allowRetry: Bool) async throws
+    func getOrders(
+        limit: UInt,
+        offset: UInt,
+        allowRetry: Bool
+    ) async throws -> OrdersResponse
     
 }

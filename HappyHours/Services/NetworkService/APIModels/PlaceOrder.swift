@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Order: Encodable {
+struct PlaceOrder: Encodable {
     
     let beverage: Int
     

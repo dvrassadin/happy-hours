@@ -48,6 +48,7 @@ final class SearchVC: UISearchController, AlertPresenter {
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.delegate = self
+        updateBeverages(search: searchText)
     }
     
     override func viewIsAppearing(_ animated: Bool) {
@@ -104,6 +105,7 @@ final class SearchVC: UISearchController, AlertPresenter {
             searchView.tableView.tableFooterView = searchView.footerActivityIndicator
             searchView.footerActivityIndicator.startAnimating()
         } else {
+            searchView.removeNothingFoundState()
             searchView.activityIndicator.startAnimating()
         }
         
@@ -118,6 +120,7 @@ final class SearchVC: UISearchController, AlertPresenter {
                 try await model.updateBeverages(search: search, append: append)
                 if model.beverages.isEmpty {
                     searchView.tableView.reloadData()
+                    searchView.showNothingFoundState()
                 } else {
                     searchView.removeNothingFoundState()
                     searchView.tableView.reloadData()
@@ -151,7 +154,7 @@ extension SearchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if model.beverages.isEmpty {
-            searchView.showNothingFoundState()
+//            searchView.showNothingFoundState()
             return 0
         } else {
             searchView.removeNothingFoundState()

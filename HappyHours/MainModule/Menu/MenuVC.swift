@@ -110,7 +110,7 @@ extension MenuVC: MenuTableViewCellDelegate {
     func didClickOnCellWith(beverageID: Int) {
         Task {
             do {
-                let order = Order(beverage: beverageID)
+                let order = PlaceOrder(beverage: beverageID)
                 try await model.makeOrder(order)
                 showAlert(.orderMade)
             } catch {

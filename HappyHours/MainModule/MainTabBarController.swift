@@ -65,13 +65,14 @@ final class MainTabBarController: UITabBarController {
         )
         scannerVC.tabBarItem = scannerTabBarItem
         
-        let orderVC = ScannerVC(networkService: networkService)
+        let ordersModel = OrdersModel(networkService: networkService)
+        let orderVC = OrdersVC(model: ordersModel)
         let ordersTabBarItem = UITabBarItem(
             title: String(localized: "Orders"),
             image: UIImage(systemName: "list.bullet.rectangle"),
             selectedImage: UIImage(systemName: "list.bullet.rectangle.fill")
         )
-        orderVC.tabBarItem = scannerTabBarItem
+        orderVC.tabBarItem = ordersTabBarItem
         
         let profileModel: ProfileModelProtocol = ProfileModel(networkService: networkService)
         let profileVC = ProfileVC(model: profileModel)
@@ -82,7 +83,7 @@ final class MainTabBarController: UITabBarController {
         )
         profileVC.tabBarItem = profileTabBarItem
         
-        viewControllers = [restaurantsVC, searchVC, scannerVC, profileVC]
+        viewControllers = [restaurantsVC, searchVC, scannerVC, orderVC, profileVC]
     }
     
 }

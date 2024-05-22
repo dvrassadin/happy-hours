@@ -18,7 +18,9 @@ final class RestaurantsTableViewCell: UITableViewCell {
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 35
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -79,25 +81,25 @@ final class RestaurantsTableViewCell: UITableViewCell {
 
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 2),
-            logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -2),
+            logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 5),
+            logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -5),
             logoImageView.heightAnchor.constraint(equalToConstant: 70),
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: logoImageView.topAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: logoImageView.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 2),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            nameLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 5),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             
-            clockImageView.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 2),
+            clockImageView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             clockImageView.heightAnchor.constraint(equalToConstant: 15),
             clockImageView.widthAnchor.constraint(equalTo: clockImageView.heightAnchor),
             clockImageView.centerYAnchor.constraint(equalTo: hoursLabel.centerYAnchor),
             
             hoursLabel.topAnchor.constraint(equalTo: logoImageView.centerYAnchor),
             hoursLabel.bottomAnchor.constraint(equalTo: logoImageView.bottomAnchor),
-            hoursLabel.leadingAnchor.constraint(equalTo: clockImageView.trailingAnchor, constant: 2),
+            hoursLabel.leadingAnchor.constraint(equalTo: clockImageView.trailingAnchor, constant: 5),
             hoursLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor)
         ])
     }

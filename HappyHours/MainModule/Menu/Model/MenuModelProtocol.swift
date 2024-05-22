@@ -14,6 +14,6 @@ protocol MenuModelProtocol {
     var logoImage: UIImage? { get async }
     
     func updateMenu(restaurantID: Int, limit: UInt, offset: UInt) async throws
-    func makeOrder(_ order: Order) async throws
+    func makeOrder(_ order: PlaceOrder) async throws
     
 }

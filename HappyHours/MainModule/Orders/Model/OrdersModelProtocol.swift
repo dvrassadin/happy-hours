@@ -9,4 +9,7 @@ import Foundation
 
 protocol OrdersModelProtocol {
     
+    var orders: [Order] { get }
+    
+    func updateOrders(append: Bool) async throws
 }
