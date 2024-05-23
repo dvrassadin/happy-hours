@@ -22,7 +22,7 @@ final class SearchVC: UISearchController, AlertPresenter {
         return locationManager
     }()
     private let model: SearchModelProtocol
-    private var searchText: String = ""
+    private var searchText: String?
     private var isLoadingBeverages = false
 
     // MARK: Lifecycle
@@ -48,7 +48,7 @@ final class SearchVC: UISearchController, AlertPresenter {
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.delegate = self
-        updateBeverages(search: searchText)
+        updateBeverages()
     }
     
     override func viewIsAppearing(_ animated: Bool) {
@@ -96,7 +96,7 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     // MARK: Update beverages
     
-    private func updateBeverages(search: String, append: Bool = false) {
+    private func updateBeverages(search: String? = nil, append: Bool = false) {
         if !append { searchText = search }
         
         isLoadingBeverages = true
@@ -117,7 +117,7 @@ final class SearchVC: UISearchController, AlertPresenter {
                 isLoadingBeverages = false
             }
             do {
-                try await model.updateBeverages(search: search, append: append)
+                try await model.updateBeverages(search: searchText, append: append)
                 if model.beverages.isEmpty {
                     searchView.tableView.reloadData()
                     searchView.showNothingFoundState()

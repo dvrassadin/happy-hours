@@ -19,6 +19,7 @@ final class CommonButton: UIButton {
             title,
             attributes: .init([.font: UIFont.systemFont(ofSize: 20)])
         )
+        configuration?.imagePadding = 5
     }
     
     required init?(coder: NSCoder) {

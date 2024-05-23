@@ -9,6 +9,28 @@ import UIKit
 
 final class EditProfileView: UIView {
     
+    // MARK: Properties
+    
+    var isUpdating: Bool = false {
+        didSet {
+            if isUpdating {
+                updateButton.configuration?.attributedTitle = updateButtonTitle
+                updateButton.configuration?.showsActivityIndicator = true
+                updateButton.isEnabled = false
+            } else {
+                updateButton.configuration?.attributedTitle = updateButtonTitle
+                updateButton.configuration?.showsActivityIndicator = false
+                updateButton.isEnabled = true
+            }
+        }
+    }
+    private var updateButtonTitle: AttributedString {
+        AttributedString(
+            String(localized: isUpdating ? "Updating" : "Update"),
+            attributes: .init([.font: UIFont.systemFont(ofSize: 20)])
+        )
+    }
+    
     // MARK: UI components
     
     let userImageView: UIImageView = {
@@ -18,8 +40,10 @@ final class EditProfileView: UIView {
             )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
         )
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
+        imageView.layer.cornerRadius = 40
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -86,7 +110,7 @@ final class EditProfileView: UIView {
     
     private func addSubviews() {
         addSubview(userImageView)
-        userImageView.addSubview(editImageButton)
+        addSubview(editImageButton)
         addSubview(nameTextField)
         addSubview(dateOfBirthLabel)
         addSubview(datePicker)
@@ -101,7 +125,8 @@ final class EditProfileView: UIView {
             relatedBy: .equal,
             toItem: userImageView,
             attribute: .trailing,
-            multiplier: 0.8536,
+//            multiplier: 0.8536,
+            multiplier: 0.95,
             constant: 0
         )
         let editButtonCenterY = NSLayoutConstraint(
@@ -110,9 +135,11 @@ final class EditProfileView: UIView {
             relatedBy: .equal,
             toItem: userImageView,
             attribute: .bottom,
-            multiplier: 0.8536,
+//            multiplier: 0.8536,
+            multiplier: 0.95,
             constant: 0
         )
+        
         NSLayoutConstraint.activate(
             [
                 userImageView.topAnchor.constraint(

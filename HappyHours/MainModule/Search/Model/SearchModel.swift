@@ -50,7 +50,7 @@ final class SearchModel: SearchModelProtocol {
     
     // MARK: Update beverages
     
-    func updateBeverages(search: String, append: Bool = false) async throws {
+    func updateBeverages(search: String? = nil, append: Bool = false) async throws {
         if append && beverages.count >= countOfAllBeverages { return }
         
         let limit: UInt = 50

@@ -18,7 +18,9 @@ final class ProfileView: UIView {
             )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
         )
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 40
+        imageView.clipsToBounds = true
         return imageView
     }()
     

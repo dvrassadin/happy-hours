@@ -69,8 +69,8 @@ final class SignInView: AuthScreenView {
         setUpUI()
         
         // TODO: Delete
-        emailTextField.text = "happyadmin@mail.com"
-        passwordTextField.text = "kaganat1"
+//        emailTextField.text = "happyadmin@mail.com"
+//        passwordTextField.text = "kaganat1"
     }
     
     required init?(coder: NSCoder) {

@@ -22,7 +22,7 @@ final class ProfileModel: ProfileModelProtocol {
             return image
         }
     }
-    private var avatarHasChanged = false
+//    private var avatarHasChanged = false
     
     // MARK: Lifecycle
     

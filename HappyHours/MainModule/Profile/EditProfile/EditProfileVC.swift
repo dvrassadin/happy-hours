@@ -15,7 +15,15 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     private lazy var editProfileView = EditProfileView()
     private let model: ProfileModelProtocol
-    private var avatar: UIImage?
+    private var avatar: UIImage? {
+        didSet {
+            DispatchQueue.main.async {
+                self.editProfileView.userImageView.image = self.avatar
+            }
+            avatarWasChanged = true
+        }
+    }
+    private var avatarWasChanged = false
 
     // MARK: Lifecycle
     
@@ -60,16 +68,31 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         }, for: .touchUpInside)
     }
     
+    // MARK: Update user
+    
     private func updateUser() {
         guard isValidCredentials(), let name = editProfileView.nameTextField.text else { return }
-
+        
+        editProfileView.isUpdating = true
         Task {
+            defer {
+                editProfileView.isUpdating = false
+            }
             do {
-                try await model.editUser(
-                    imageData: avatar?.pngData(),
-                    name: name,
-                    dateOfBirth: editProfileView.datePicker.date
-                )
+                if avatarWasChanged, let avatar {
+                    let compressedAvatar = compress(image: avatar, toMB: 3)
+                    try await model.editUser(
+                        imageData: compressedAvatar,
+                        name: name,
+                        dateOfBirth: editProfileView.datePicker.date
+                    )
+                } else {
+                    try await model.editUser(
+                        imageData: nil,
+                        name: name,
+                        dateOfBirth: editProfileView.datePicker.date
+                    )
+                }
                 navigationController?.popViewController(animated: true)
             } catch {
                 showAlert(.editUserServerError)
@@ -96,6 +119,30 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         return true
     }
     
+    private func compress(image: UIImage, toMB expectedSize: Int) -> Data? {
+            let sizeInBytes = expectedSize * 1024 * 1024
+            var needCompress: Bool = true
+            var imageData: Data?
+            var compressingValue: CGFloat = 1.0
+            while (needCompress && compressingValue > 0.0) {
+                if let data: Data = image.jpegData(compressionQuality: compressingValue) {
+                    if data.count < sizeInBytes {
+                        needCompress = false
+                        imageData = data
+                    } else {
+                        compressingValue -= 0.1
+                    }
+                }
+            }
+
+            if let imageData {
+                if (imageData.count < sizeInBytes) {
+                    return imageData
+                }
+            }
+            return nil
+        }
+    
 }
 
 // MARK: - PHPickerViewControllerDelegate
@@ -112,10 +159,11 @@ extension EditProfileVC: PHPickerViewControllerDelegate {
                 self.showAlert(.getPhotoError)
             }
             guard let image = reading as? UIImage else { return }
-            DispatchQueue.main.async {
-                self.editProfileView.userImageView.image = image
-                self.avatar = image
-            }
+            
+            self.avatar = image
+//            DispatchQueue.main.async {
+//                self.editProfileView.userImageView.image = image
+//            }
         }
     }
     
