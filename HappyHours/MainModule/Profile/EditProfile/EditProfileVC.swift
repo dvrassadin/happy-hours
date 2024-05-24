@@ -161,9 +161,6 @@ extension EditProfileVC: PHPickerViewControllerDelegate {
             guard let image = reading as? UIImage else { return }
             
             self.avatar = image
-//            DispatchQueue.main.async {
-//                self.editProfileView.userImageView.image = image
-//            }
         }
     }
     

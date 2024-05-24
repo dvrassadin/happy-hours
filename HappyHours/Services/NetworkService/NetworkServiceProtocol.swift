@@ -20,7 +20,6 @@ protocol NetworkServiceProtocol {
     ) async throws -> [Restaurant]
     func getImageData(from stringURL: String) async -> Data?
     func getUser(allowRetry: Bool) async throws -> User
-//    func editUser(_ user: UserUpdate, allowRetry: Bool) async throws
     func editUser(
         imageData: Data?,
         name: String?,

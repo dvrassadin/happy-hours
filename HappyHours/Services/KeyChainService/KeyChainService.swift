@@ -73,7 +73,6 @@ final class KeyChainService: KeyChainServiceProtocol {
         
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
-//            kSecAttrService: service,
             kSecAttrAccount: type.identifier,
             kSecValueData: token
         ]

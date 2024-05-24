@@ -24,6 +24,21 @@ final class SearchVC: UISearchController, AlertPresenter {
     private let model: SearchModelProtocol
     private var searchText: String?
     private var isLoadingBeverages = false
+    private var isFiltering = false
+    private var filteredBeverages: [Beverage] {
+        isFiltering ? model.beverages.filter { $0.availabilityStatus } : model.beverages
+    }
+    
+    // MARK: Navigation bar items
+    
+    private let searchController = UISearchController()
+    
+    private lazy var rightBarButton = UIBarButtonItem(
+        title: "All",
+        style: .plain,
+        target: self,
+        action: #selector(filterBeverages)
+    )
 
     // MARK: Lifecycle
     
@@ -42,23 +57,38 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchView.searchController.searchResultsUpdater = self
-        searchView.searchController.searchBar.delegate = self
+        searchController.searchBar.delegate = self
         searchView.mapView.delegate = self
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.delegate = self
         updateBeverages()
+        setUpUserInteraction()
     }
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        tabBarController?.navigationItem.searchController = searchView.searchController
+        tabBarController?.navigationItem.searchController = searchController
+        if searchView.searchMode == .beverages {
+            tabBarController?.navigationItem.rightBarButtonItem = rightBarButton
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.navigationItem.searchController = nil
+        tabBarController?.navigationItem.rightBarButtonItem = nil
+    }
+    
+    // MARK: User interaction
+    
+    private func setUpUserInteraction() {
+        searchView.mapView.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: searchController.searchBar,
+                action: #selector(searchView.endEditing)
+            )
+        )
     }
     
     // MARK: Update restaurants
@@ -131,6 +161,12 @@ final class SearchVC: UISearchController, AlertPresenter {
             }
         }
     }
+    
+    @objc private func filterBeverages() {
+        isFiltering.toggle()
+        rightBarButton.title = String(localized: isFiltering ? "Available" : "All")
+        searchView.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
 
 }
 
@@ -153,12 +189,11 @@ extension SearchVC: UITableViewDelegate {
 extension SearchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if model.beverages.isEmpty {
-//            searchView.showNothingFoundState()
+        if filteredBeverages.isEmpty {
             return 0
         } else {
             searchView.removeNothingFoundState()
-            return model.beverages.count
+            return filteredBeverages.count
         }
     }
     
@@ -169,7 +204,7 @@ extension SearchVC: UITableViewDataSource {
         ) as? BeverageTableViewCell else { return UITableViewCell() }
         
         var contentConfiguration = cell.defaultContentConfiguration()
-        let beverage = model.beverages[indexPath.row]
+        let beverage = filteredBeverages[indexPath.row]
         contentConfiguration.text = beverage.name
         contentConfiguration.secondaryText = beverage.establishment
         cell.contentConfiguration = contentConfiguration
@@ -198,10 +233,13 @@ extension SearchVC: UIScrollViewDelegate {
 extension SearchVC: SearchViewDelegate {
     
     func searchModeHasChanged(_ searchMode: SearchMode) {
+        searchController.searchBar.text = nil
         switch searchMode {
         case .beverages:
+            tabBarController?.navigationItem.rightBarButtonItem = rightBarButton
             locationManager.stopUpdatingLocation()
         case .restaurants:
+            tabBarController?.navigationItem.rightBarButtonItem = nil
             if locationManager.authorizationStatus == .notDetermined {
                 locationManager.requestWhenInUseAuthorization()
             }
@@ -218,9 +256,7 @@ extension SearchVC: SearchViewDelegate {
 extension SearchVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchView.searchController.searchBar.text, !text.isEmpty else {
-            return
-        }
+        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
         
         switch searchView.searchMode {
         case .beverages:
@@ -244,7 +280,7 @@ extension SearchVC: UISearchBarDelegate {
 extension SearchVC: MKMapViewDelegate {
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        guard !searchView.mapView.isHidden, !searchView.searchController.isActive else { return }
+        guard !searchView.mapView.isHidden, !searchController.isActive else { return }
         NSObject.cancelPreviousPerformRequests(
             withTarget: self,
             selector: #selector(updateRestaurantsInRadius(_:)),

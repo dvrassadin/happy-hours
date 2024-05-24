@@ -105,7 +105,6 @@ final class EditProfileView: UIView {
         addSubviews()
         setUpConstraints()
         emailTextField.isEnabled = false
-//        emailTextField.backgroundColor = .TextField.disabledBackground
     }
     
     private func addSubviews() {

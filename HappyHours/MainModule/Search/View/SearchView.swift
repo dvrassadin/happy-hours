@@ -25,7 +25,7 @@ final class SearchView: UIView {
     
     // MARK: UI components
     
-    let searchController = UISearchController()
+//    let searchController = UISearchController()
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: SearchMode.allCases.map({ $0.name }))
@@ -154,17 +154,17 @@ final class SearchView: UIView {
             self.searchMode = searchMode
         }, for: .valueChanged)
         
-        mapView.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: searchController.searchBar,
-                action: #selector(endEditing)
-            )
-        )
+//        mapView.addGestureRecognizer(
+//            UITapGestureRecognizer(
+//                target: searchController.searchBar,
+//                action: #selector(endEditing)
+//            )
+//        )
     
     }
     
     private func changeSelectedView() {
-        searchController.searchBar.text = nil
+//        searchController.searchBar.text = nil
         switch searchMode {
         case .beverages:
             mapView.isHidden = true

@@ -20,6 +20,7 @@ struct Beverage: Decodable {
     let name: String
     let price: String
     let description: String
+    let availabilityStatus: Bool
     let category: String
     let establishment: String
     

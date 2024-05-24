@@ -8,6 +8,7 @@
 import Foundation
 
 enum SearchMode: Int, CaseIterable {
+    
     case beverages
     case restaurants
     
@@ -19,4 +20,5 @@ enum SearchMode: Int, CaseIterable {
             String(localized: "Restaurants")
         }
     }
+    
 }

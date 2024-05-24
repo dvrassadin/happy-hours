@@ -457,59 +457,6 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         return user
     }
     
-//    func editUser(_ user: UserUpdate, allowRetry: Bool = true) async throws {
-//        guard var urlComponents = URLComponents(string: baseURL) else {
-//            logger.error("Invalid server URL: \(self.baseURL)")
-//            throw APIError.invalidServerURL
-//        }
-//        
-//        urlComponents.path.append("/api/v1/user/users/profile/")
-//        
-//        guard let url = urlComponents.url else {
-//            logger.error("Invalid API endpoint: \(urlComponents)")
-//            throw APIError.invalidAPIEndpoint
-//        }
-//        
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "PUT"
-//        
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue(
-//            "Bearer \(try await authService.validAccessToken)",
-//            forHTTPHeaderField: "Authorization"
-//        )
-//        
-//        do {
-//            request.httpBody = try encoder.encode(user)
-//        } catch {
-//            logger.error("Could not encode data for request: \(url.absoluteString)\n\(error)")
-//            throw APIError.encodingError
-//        }
-//        
-//        logger.info("Starting request: \(url.absoluteString)")
-//        let (data, response) = try await session.data(for: request)
-//        print(String(decoding: data, as: UTF8.self))
-//        guard let httpResponse = response as? HTTPURLResponse else {
-//            logger.error("API response is not HTTP response")
-//            throw APIError.notHTTPResponse
-//        }
-//        
-//        if httpResponse.statusCode == 401 {
-//            if allowRetry {
-//                try await authService.refreshTokens()
-//                return try await editUser(user, allowRetry: false)
-//            }
-//            logger.error("Invalid token for request: \(url.absoluteString)")
-//            throw AuthError.invalidToken
-//        }
-//        
-//        guard httpResponse.statusCode == 200 else {
-//            logger.error("Unexpected status code: \(httpResponse.statusCode)")
-//            throw APIError.unexpectedStatusCode
-//        }
-//        logger.info("User edited for request: \(url.absoluteString)")
-//    }
-    
     func editUser(
         imageData: Data?,
         name: String?,
@@ -551,7 +498,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         var body = Data()
         
         if let imageData {
-            guard let contentDescription = "Content-Disposition: form-data; name=\"avatar\"; filename=\"\(Date().formatted()).png\"\(lineBreak)".data(using: .utf8),
+            guard let contentDescription = "Content-Disposition: form-data; name=\"avatar\"; filename=\"\(Date().formatted()).jpg\"\(lineBreak)".data(using: .utf8),
                   let contentType = "Content-Type: image/png\(lineBreak)\(lineBreak)".data(using: .utf8),
                   let lineBreak = lineBreak.data(using: .utf8) else {
                 logger.error("Could not encode data for request: \(request)")
@@ -592,8 +539,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         request.httpBody = body
         
         logger.info("Starting request: \(url.absoluteString)")
-        let (data, response) = try await session.data(for: request)
-        print(String(decoding: data, as: UTF8.self))
+        let (_, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse

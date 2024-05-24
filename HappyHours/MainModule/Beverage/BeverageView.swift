@@ -30,7 +30,6 @@ final class BeverageView: UIView {
         label.textColor = .mainText
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.numberOfLines = 2
-//        label.text = "Bublik"
         return label
     }()
     
@@ -40,7 +39,6 @@ final class BeverageView: UIView {
         label.textColor = .mainText
         label.font = .preferredFont(forTextStyle: .title1)
         label.numberOfLines = 2
-//        label.text = "Honey lemon tea"
         return label
     }()
     
@@ -50,7 +48,6 @@ final class BeverageView: UIView {
         label.textColor = .mainText
         label.font = .preferredFont(forTextStyle: .headline)
         label.numberOfLines = 1
-//        label.text = "Tea"
         return label
     }()
     
@@ -60,7 +57,6 @@ final class BeverageView: UIView {
         label.textColor = .mainText
         label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
-//        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         return label
     }()
     
@@ -70,7 +66,6 @@ final class BeverageView: UIView {
         label.textColor = .mainText
         label.font = .preferredFont(forTextStyle: .headline)
         label.numberOfLines = 1
-//        label.text = "250 som"
         return label
     }()
     

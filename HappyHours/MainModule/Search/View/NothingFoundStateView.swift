@@ -49,11 +49,6 @@ final class NothingFoundStateView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func didMoveToSuperview() {
-//        super.didMoveToSuperview()
-//        layoutIfNeeded()
-//    }
-    
     // MARK: Set up UI
     
     private func setUpUI() {

@@ -14,7 +14,6 @@ final class SearchModel: SearchModelProtocol {
     let networkService: NetworkServiceProtocol
     
     private(set) var restaurants: [Restaurant] = []
-    
     private(set) var beverages: [Beverage] = []
     private var countOfAllBeverages: Int = 0
     

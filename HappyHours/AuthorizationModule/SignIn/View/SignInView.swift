@@ -67,10 +67,6 @@ final class SignInView: AuthScreenView {
     init() {
         super.init(screenName: String(localized: "Sign In to Continue"))
         setUpUI()
-        
-        // TODO: Delete
-//        emailTextField.text = "happyadmin@mail.com"
-//        passwordTextField.text = "kaganat1"
     }
     
     required init?(coder: NSCoder) {

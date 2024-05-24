@@ -22,7 +22,6 @@ final class ProfileModel: ProfileModelProtocol {
             return image
         }
     }
-//    private var avatarHasChanged = false
     
     // MARK: Lifecycle
     
@@ -36,14 +35,6 @@ final class ProfileModel: ProfileModelProtocol {
         try await self.user = networkService.getUser(allowRetry: true)
     }
     
-//    func editUser(_ user: UserUpdate) async throws {
-//        do {
-//            try await networkService.editUser(user, allowRetry: true)
-//            try await self.user = networkService.getUser(allowRetry: true)
-//        } catch {
-//            throw error
-//        }
-//    }
     func editUser(imageData: Data?, name: String?, dateOfBirth: Date?) async throws {
         do {
             try await networkService.editUser(
@@ -56,10 +47,6 @@ final class ProfileModel: ProfileModelProtocol {
         } catch {
             throw error
         }
-    }
-    
-    func updateAvatar() {
-        
     }
     
     // MARK: Logout

@@ -121,14 +121,4 @@ final class ProfileView: UIView {
         )
     }
     
-//    func set(user: User) {
-//        if let avatar = user.avatar {
-//            userImageView.image = avatar
-//        } else {
-//            userImageView.image = UIImage(systemName: "person.circle.fill")
-//        }
-//        nameLabel.text = user.name
-//        emailLabel.text = user.email
-//    }
-    
 }
