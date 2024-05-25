@@ -95,6 +95,15 @@ final class ProfileVC: UIViewController, AlertPresenter {
                 if let avatar = await model.avatarImage {
                     profileView.userImageView.image = avatar
                 }
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.getUserServerError)
             }

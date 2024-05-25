@@ -94,6 +94,15 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                     )
                 }
                 navigationController?.popViewController(animated: true)
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.editUserServerError)
             }

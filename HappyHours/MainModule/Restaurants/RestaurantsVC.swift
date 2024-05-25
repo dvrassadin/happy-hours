@@ -55,6 +55,15 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
             do {
                 try await model.getRestaurants(limit: 100, offset: 0)
                 restaurantsView.tableView.reloadData()
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.getRestaurantsServerError)
             }

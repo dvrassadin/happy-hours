@@ -32,6 +32,7 @@ enum AlertType {
     case restaurantsNotFound
     case beveragesServerError
     case getPhotoError
+    case invalidToken
     
 }
 
@@ -91,7 +92,7 @@ extension AlertPresenter {
             message = String(localized: "The password does not meet the password requirements or the server is unavailable.")
         case .gettingMenuServerError:
             title = String(localized: "Unable to Get Menu")
-            message = String(localized: "Failed to get menu. Check your internet connection.")
+            message = String(localized: "There are no beverages available at this restaurant.")
         case .makingOrderServerError:
             title = String(localized: "Unable to Make Order")
             message = String(localized: "Failed to make the order. It may not be happy hours or you may have ordered recently.")
@@ -115,6 +116,9 @@ extension AlertPresenter {
             message = String(localized: "An error occurred while searching for drinks.")
         case .getPhotoError:
             title = String(localized: "Unable to Get Image")
+        case .invalidToken:
+            title = String(localized: "Session Expired")
+            message = String(localized: "You need to log into the application again.")
         }
         
         let alertController = UIAlertController(

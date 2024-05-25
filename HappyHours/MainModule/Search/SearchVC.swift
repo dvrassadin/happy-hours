@@ -109,6 +109,15 @@ final class SearchVC: UISearchController, AlertPresenter {
                 model.restaurants.forEach { restaurant in
                     searchView.addMapAnnotation(restaurant: restaurant)
                 }
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.getRestaurantsServerError)
             }
@@ -119,6 +128,15 @@ final class SearchVC: UISearchController, AlertPresenter {
         do {
             try await model.updateRestaurants(search: search)
             searchView.addNewMapAnnotations(restaurants: model.restaurants)
+        } catch AuthError.invalidToken {
+            showAlert(.invalidToken) { _ in
+                UIApplication.shared.sendAction(
+                    #selector(LogOutDelegate.logOut),
+                    to: nil,
+                    from: self,
+                    for: nil
+                )
+            }
         } catch {
             showAlert(.getRestaurantsServerError)
         }
@@ -154,6 +172,15 @@ final class SearchVC: UISearchController, AlertPresenter {
                 } else {
                     searchView.removeNothingFoundState()
                     searchView.tableView.reloadData()
+                }
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
                 }
             } catch {
                 searchView.showNothingFoundState()

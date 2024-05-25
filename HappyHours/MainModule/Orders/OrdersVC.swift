@@ -62,6 +62,15 @@ final class OrdersVC: UIViewController, AlertPresenter {
             do {
                 try await model.updateOrders(append: append)
                 ordersView.tableView.reloadData()
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.beveragesServerError)
             }

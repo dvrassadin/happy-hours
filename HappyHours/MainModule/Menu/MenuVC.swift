@@ -46,6 +46,15 @@ final class MenuVC: UIViewController, AlertPresenter {
             do {
                 try await model.updateMenu(restaurantID: model.restaurant.id, limit: 100, offset: 0)
                 menuView.tableView.reloadData()
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.gettingMenuServerError)
             }
@@ -113,6 +122,15 @@ extension MenuVC: MenuTableViewCellDelegate {
                 let order = PlaceOrder(beverage: beverageID)
                 try await model.makeOrder(order)
                 showAlert(.orderMade)
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
             } catch {
                 showAlert(.makingOrderServerError)
             }
