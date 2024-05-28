@@ -14,10 +14,17 @@ final class MenuView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.tableHeaderView?.isUserInteractionEnabled = true
         tableView.register(
             MenuTableViewCell.self,
             forCellReuseIdentifier: MenuTableViewCell.identifier
+        )
+        tableView.register(
+            FeedbackTableViewCell.self,
+            forCellReuseIdentifier: FeedbackTableViewCell.identifier
+        )
+        tableView.register(
+            LeaveFeedbackTableViewCell.self,
+            forCellReuseIdentifier: LeaveFeedbackTableViewCell.identifier
         )
         tableView.backgroundColor = .background
         return tableView

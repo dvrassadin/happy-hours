@@ -54,5 +54,11 @@ protocol NetworkServiceProtocol {
         offset: UInt,
         allowRetry: Bool
     ) async throws -> OrdersResponse
-    
+    func getFeedbacks(
+        restaurantID: Int,
+        limit: UInt,
+        offset: UInt,
+        allowRetry: Bool
+    ) async throws -> FeedbackResponse
+    func sendFeedback(_ feedback: SendFeedback) async throws
 }

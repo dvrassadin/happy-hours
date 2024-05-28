@@ -27,6 +27,8 @@ final class MenuModel: MenuModelProtocol {
             return nil
         }
     }
+    private(set) var feedback: [Feedback] = []
+    private var countOfAllFeedbacks = 0
     
     // MARK: lifecycle
     
@@ -54,6 +56,38 @@ final class MenuModel: MenuModelProtocol {
     
     func makeOrder(_ order: PlaceOrder) async throws {
         try await networkService.makeOrder(order, allowRetry: true)
+    }
+    
+    // MARK: Feedback
+    
+    func updateFeedback(append: Bool = false) async throws {
+        if append && feedback.count >= countOfAllFeedbacks { return }
+        
+        let limit: UInt = 50
+        
+        if append {
+            let feedbacksResponse = try await networkService.getFeedbacks(
+                restaurantID: restaurant.id,
+                limit: limit,
+                offset: UInt(feedback.count),
+                allowRetry: true
+            )
+            feedback.append(contentsOf: feedbacksResponse.results)
+        } else {
+            let feedbacksResponse = try await networkService.getFeedbacks(
+                restaurantID: restaurant.id,
+                limit: limit,
+                offset: 0,
+                allowRetry: true
+            )
+            feedback = feedbacksResponse.results
+            countOfAllFeedbacks = feedbacksResponse.count
+        }
+    }
+    
+    func sendFeedback(_ text: String) async throws {
+        let feedback = SendFeedback(establishment: restaurant.id, text: text)
+        try await networkService.sendFeedback(feedback)
     }
     
 }

@@ -33,7 +33,8 @@ enum AlertType {
     case beveragesServerError
     case getPhotoError
     case invalidToken
-    
+    case getFeedbackServerError
+    case sendFeedbackServerError
 }
 
 protocol AlertPresenter: UIViewController { }
@@ -119,6 +120,12 @@ extension AlertPresenter {
         case .invalidToken:
             title = String(localized: "Session Expired")
             message = String(localized: "You need to log into the application again.")
+        case .getFeedbackServerError:
+            title = String(localized: "Unable to Download")
+            message = String(localized: "Failed to get the feedback.")
+        case .sendFeedbackServerError:
+            title = String(localized: "Unable to Send")
+            message = String(localized: "Failed to send the feedback.")
         }
         
         let alertController = UIAlertController(

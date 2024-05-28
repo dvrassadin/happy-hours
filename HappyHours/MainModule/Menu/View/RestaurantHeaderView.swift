@@ -103,13 +103,35 @@ final class RestaurantHeaderView: UIView {
         return textView
     }()
     
-    private let menuLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.textColor = .mainText
-        label.text = String(localized: "Menu")
-        return label
+//    private let menuLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = .preferredFont(forTextStyle: .title1)
+//        label.textColor = .mainText
+//        label.text = String(localized: "Menu")
+//        return label
+//    }()
+    
+    let tabBarCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+//        layout.estimatedItemSize = CGSize(width: 500, height: 100)
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(
+            MenuTabCollectionViewCell.self,
+            forCellWithReuseIdentifier: MenuTabCollectionViewCell.identifier
+        )
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .background
+        return collectionView
     }()
     
     // MARK: Lifecycle
@@ -128,6 +150,7 @@ final class RestaurantHeaderView: UIView {
     private func setUpUI() {
         backgroundColor = .background
         translatesAutoresizingMaskIntoConstraints = false
+        isUserInteractionEnabled = true
         addSubviews()
         setUpConstraints()
     }
@@ -141,7 +164,8 @@ final class RestaurantHeaderView: UIView {
         addSubview(contactsLabel)
         addSubview(phoneNumberTextView)
         addSubview(emailTextView)
-        addSubview(menuLabel)
+//        addSubview(menuLabel)
+        addSubview(tabBarCollectionView)
     }
     
     private func setUpConstraints() {
@@ -158,7 +182,7 @@ final class RestaurantHeaderView: UIView {
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: logoImageView.topAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 5),
+            nameLabel.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 10),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             nameLabel.bottomAnchor.constraint(equalTo: logoImageView.bottomAnchor),
             
@@ -183,10 +207,16 @@ final class RestaurantHeaderView: UIView {
             emailTextView.topAnchor.constraint(equalTo: phoneNumberTextView.bottomAnchor, constant: 10),
             emailTextView.trailingAnchor.constraint(equalTo: phoneNumberTextView.trailingAnchor),
             
-            menuLabel.topAnchor.constraint(equalTo: emailTextView.bottomAnchor),
-            menuLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
-            menuLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            menuLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            menuLabel.topAnchor.constraint(equalTo: emailTextView.bottomAnchor),
+//            menuLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
+//            menuLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+//            menuLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            
+            tabBarCollectionView.topAnchor.constraint(equalTo: emailTextView.bottomAnchor, constant: 5),
+            tabBarCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            tabBarCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tabBarCollectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            tabBarCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
