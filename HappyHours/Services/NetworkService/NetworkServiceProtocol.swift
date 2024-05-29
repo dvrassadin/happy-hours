@@ -60,5 +60,12 @@ protocol NetworkServiceProtocol {
         offset: UInt,
         allowRetry: Bool
     ) async throws -> FeedbackResponse
+    func getFeedbackAnswers(
+        feedbackID: Int,
+        limit: UInt,
+        offset: UInt,
+        allowRetry: Bool
+    ) async throws -> FeedbackAnswersResponse
     func sendFeedback(_ feedback: SendFeedback) async throws
+    
 }

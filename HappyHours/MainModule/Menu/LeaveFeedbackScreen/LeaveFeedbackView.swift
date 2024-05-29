@@ -17,6 +17,7 @@ final class LeaveFeedbackView: UIView {
         textView.layer.cornerRadius = 10
         textView.clipsToBounds = true
         textView.font = .preferredFont(forTextStyle: .body)
+        textView.textColor = .mainText
         return textView
     }()
     

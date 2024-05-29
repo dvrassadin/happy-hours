@@ -71,6 +71,11 @@ final class MenuVC: UIViewController, AlertPresenter {
         menuView.restaurantHeaderView.set(restaurant: model.restaurant)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        model.resetFeedbackAnswers()
+    }
+    
     // MARK: Update menu
     
     private func updateMenu() {
@@ -81,16 +86,6 @@ final class MenuVC: UIViewController, AlertPresenter {
                 menuView.tableView.reloadData()
                 menuView.tableView.layoutIfNeeded()
                 menuView.tableView.setContentOffset(contentOffset, animated: false)
-//                if menuView.tableView.numberOfSections > 0 {
-//                    menuView.tableView.reloadSections(
-//                        IndexSet(integer: 0),
-//                        with: .automatic
-//                    )
-//                    menuView.tableView.layoutIfNeeded()
-//                    menuView.tableView.setContentOffset(contentOffset, animated: false)
-//                } else {
-//                    menuView.tableView.reloadData()
-//                }
             } catch AuthError.invalidToken {
                 showAlert(.invalidToken) { _ in
                     UIApplication.shared.sendAction(
@@ -117,16 +112,6 @@ final class MenuVC: UIViewController, AlertPresenter {
                 menuView.tableView.reloadData()
                 menuView.tableView.layoutIfNeeded()
                 menuView.tableView.setContentOffset(contentOffset, animated: false)
-//                if menuView.tableView.numberOfSections > 0 {
-//                    menuView.tableView.reloadSections(
-//                        IndexSet(IndexSet(integer: 0)),
-//                        with: .automatic
-//                    )
-//                    menuView.tableView.layoutIfNeeded()
-//                    menuView.tableView.setContentOffset(contentOffset, animated: false)
-//                } else {
-//                    menuView.tableView.reloadData()
-//                }
             } catch AuthError.invalidToken {
                 showAlert(.invalidToken) { _ in
                     UIApplication.shared.sendAction(
@@ -229,6 +214,10 @@ extension MenuVC: UITableViewDataSource {
 
 extension MenuVC: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedTab == MenuTab.feedback && indexPath.section == 0 ? nil : indexPath
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedTab else { return }
         
@@ -241,7 +230,15 @@ extension MenuVC: UITableViewDelegate {
             present(beverageVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
         case .feedback:
-            break
+            guard indexPath.section == 1 else {
+                menuView.tableView.deselectRow(at: indexPath, animated: true)
+                return
+            }
+            
+            let feedback = model.feedback[indexPath.row]
+            let feedbackVC = FeedbackVC(feedback: feedback, model: model)
+            navigationController?.pushViewController(feedbackVC, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
@@ -293,7 +290,14 @@ extension MenuVC: UICollectionViewDataSource {
             withReuseIdentifier: MenuTabCollectionViewCell.identifier,
             for: indexPath
         ) as? MenuTabCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(name: MenuTab.allCases[indexPath.row].name)
+        let tab = MenuTab.allCases[indexPath.row]
+//        cell.configure(name: MenuTab.allCases[indexPath.row].name)
+        switch tab {
+        case .feedback:
+            cell.configure(name: "\(tab.name) (\(model.restaurant.feedbackCount))")
+        default:
+            cell.configure(name: tab.name)
+        }
         return cell
     }
     

@@ -34,7 +34,6 @@ final class LeaveFeedbackTableViewCell: UITableViewCell {
         backgroundColor = .background
         addSubviews()
         setUpConstraints()
-//        setUpNavigation()
     }
     
     private func addSubviews() {
@@ -51,11 +50,4 @@ final class LeaveFeedbackTableViewCell: UITableViewCell {
         ])
     }
 
-//    // MARK: Navigation
-//    
-//    func setUpNavigation() {
-//        writeReviewButton.addAction(UIAction { [weak self] _ in
-//            print("Leave Feedback")
-//        }, for: .touchUpInside)
-//    }
 }

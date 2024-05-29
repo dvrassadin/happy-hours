@@ -62,7 +62,7 @@ final class MenuTabCollectionViewCell: UICollectionViewCell {
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-            selectionLine.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            selectionLine.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 1),
             selectionLine.widthAnchor.constraint(equalTo: nameLabel.widthAnchor),
             selectionLine.heightAnchor.constraint(equalToConstant: 2),
             selectionLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)

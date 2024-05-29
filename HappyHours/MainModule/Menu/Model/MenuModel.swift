@@ -29,6 +29,8 @@ final class MenuModel: MenuModelProtocol {
     }
     private(set) var feedback: [Feedback] = []
     private var countOfAllFeedbacks = 0
+    private(set) var answers: [FeedbackAnswer] = []
+    private var countOfAllAnswers = 0
     
     // MARK: lifecycle
     
@@ -85,9 +87,39 @@ final class MenuModel: MenuModelProtocol {
         }
     }
     
+    func updateFeedbackAnswers(feedbackID: Int, append: Bool = false) async throws {
+        if append && answers.count >= countOfAllAnswers { return }
+        
+        let limit: UInt = 50
+        
+        if append {
+            let answersResponse = try await networkService.getFeedbackAnswers(
+                feedbackID: feedbackID,
+                limit: limit,
+                offset: UInt(answers.count),
+                allowRetry: true
+            )
+            answers.append(contentsOf: answersResponse.results)
+        } else {
+            let answersResponse = try await networkService.getFeedbackAnswers(
+                feedbackID: feedbackID,
+                limit: limit,
+                offset: 0,
+                allowRetry: true
+            )
+            answers = answersResponse.results
+            countOfAllAnswers = answersResponse.count
+        }
+    }
+    
     func sendFeedback(_ text: String) async throws {
         let feedback = SendFeedback(establishment: restaurant.id, text: text)
         try await networkService.sendFeedback(feedback)
+    }
+    
+    func resetFeedbackAnswers() {
+        answers = []
+        countOfAllAnswers = 0
     }
     
 }

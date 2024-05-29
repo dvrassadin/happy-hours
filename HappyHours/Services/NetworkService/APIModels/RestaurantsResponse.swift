@@ -37,6 +37,7 @@ struct Restaurant: Decodable {
         return nil
     }
     let email: String?
+    let feedbackCount: Int
     
     private let location: Location?
     var locationCoordinate: CLLocationCoordinate2D? {

@@ -32,18 +32,12 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
     private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX"
-//        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         return decoder
     }()
     
     private let encoder: JSONEncoder = {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        encoder.dateEncodingStrategy = .formatted(dateFormatter)
         return encoder
     }()
     
@@ -537,8 +531,6 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         if let dateOfBirth {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
             guard let contentDescription = "Content-Disposition: form-data; name=\"date_of_birth\"\(lineBreak)\(lineBreak)".data(using: .utf8),
                   let content = "\(customDateFormatter.string(from: dateOfBirth))".data(using: .utf8)
             else {
@@ -553,7 +545,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         request.httpBody = body
         
         logger.info("Starting request: \(url.absoluteString)")
-        let (data, response) = try await session.data(for: request)
+        let (_, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse
@@ -967,20 +959,12 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.unexpectedStatusCode
         }
         
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXXXX"
         decoder.dateDecodingStrategy = .formatted(isoDateFormatter)
         let ordersResponse: OrdersResponse
         do {
             ordersResponse = try decoder.decode(OrdersResponse.self, from: data)
             logger.info("Received menu for request: \(url.absoluteString)")
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
-//            decoder.dateDecodingStrategy = .formatted(dateFormatter)
         } catch {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
-//            decoder.dateDecodingStrategy = .formatted(dateFormatter)
             logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
             throw APIError.decodingError
         }
@@ -1156,6 +1140,79 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         return feedbacks
     }
     
+    func getFeedbackAnswers(
+        feedbackID: Int,
+        limit: UInt,
+        offset: UInt,
+        allowRetry: Bool = true
+    ) async throws -> FeedbackAnswersResponse {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/feedback/feedbacks/\(feedbackID)/answers/list/")
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "limit", value: String(limit)),
+            URLQueryItem(name: "offset", value: String(offset))
+        ]
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(
+            "Bearer \(try await authService.validAccessToken)",
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 401 {
+            if allowRetry {
+                try await authService.refreshTokens()
+                return try await getFeedbackAnswers(
+                    feedbackID: feedbackID,
+                    limit: limit,
+                    offset: offset,
+                    allowRetry: false
+                )
+            }
+            logger.error("Invalid token for request: \(url.absoluteString)")
+            throw AuthError.invalidToken
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let answersResponse: FeedbackAnswersResponse
+        do {
+            decoder.dateDecodingStrategy = .formatted(isoDateFormatter)
+            answersResponse = try decoder.decode(FeedbackAnswersResponse.self, from: data)
+            logger.info("Received answers for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+        
+        return answersResponse
+    }
+    
     func sendFeedback(_ feedback: SendFeedback) async throws {
         guard var urlComponents = URLComponents(string: baseURL) else {
             logger.error("Invalid server URL: \(self.baseURL)")
@@ -1187,7 +1244,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         
         logger.info("Starting request: \(url.absoluteString)")
         let (_, response) = try await session.data(for: request)
-        
+
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse

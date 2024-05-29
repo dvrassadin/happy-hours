@@ -18,5 +18,6 @@ struct Feedback: Decodable {
     let displayUser: String
     let createdAt: Date
     let text: String
+    let answers: Bool
     
 }

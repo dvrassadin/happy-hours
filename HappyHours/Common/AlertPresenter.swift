@@ -35,6 +35,7 @@ enum AlertType {
     case invalidToken
     case getFeedbackServerError
     case sendFeedbackServerError
+    case getFeedbackAnswersServerError
 }
 
 protocol AlertPresenter: UIViewController { }
@@ -126,6 +127,9 @@ extension AlertPresenter {
         case .sendFeedbackServerError:
             title = String(localized: "Unable to Send")
             message = String(localized: "Failed to send the feedback.")
+        case .getFeedbackAnswersServerError:
+            title = String(localized: "Unable to Download")
+            message = String(localized: "Failed to get the feedback answers.")
         }
         
         let alertController = UIAlertController(

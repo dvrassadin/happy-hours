@@ -1,18 +1,17 @@
 //
-//  FeedbackTabelViewCell.swift
+//  FeedbackAnswerTableViewCell.swift
 //  HappyHours
 //
-//  Created by Daniil Rassadin on 27/5/24.
+//  Created by Daniil Rassadin on 29/5/24.
 //
 
 import UIKit
 
-final class FeedbackTableViewCell: UITableViewCell {
+final class FeedbackAnswerTableViewCell: UITableViewCell {
 
     // MARK: Properties
     
-    static let identifier = "FeedbackCell"
-//    private(set) var id: Int?
+    static let identifier = "FeedbackAnswerCell"
 
     // MARK: UI components
     
@@ -29,17 +28,6 @@ final class FeedbackTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = .mainText
-        return label
-    }()
-    
-    private let repliedLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .main
-        label.text = String(localized: "Replied")
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        label.isHidden = true
         return label
     }()
     
@@ -74,7 +62,6 @@ final class FeedbackTableViewCell: UITableViewCell {
     private func addSubviews() {
         contentView.addSubview(userNameLabel)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(repliedLabel)
         contentView.addSubview(feedbackLabel)
     }
 
@@ -82,15 +69,11 @@ final class FeedbackTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            userNameLabel.trailingAnchor.constraint(equalTo: repliedLabel.leadingAnchor, constant: -5),
-            
-            repliedLabel.topAnchor.constraint(equalTo: userNameLabel.topAnchor),
-            repliedLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            
+            userNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             dateLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
             dateLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: repliedLabel.trailingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
             
             feedbackLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
             feedbackLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
@@ -101,11 +84,10 @@ final class FeedbackTableViewCell: UITableViewCell {
     
     // MARK: Configure data
     
-    func configure(feedback: Feedback) {
-        userNameLabel.text = feedback.displayUser
-        dateLabel.text = feedback.createdAt.formatted()
-        feedbackLabel.text = feedback.text
-        repliedLabel.isHidden = !feedback.answers
+    func configure(answer: FeedbackAnswer) {
+        userNameLabel.text = answer.displayUser
+        dateLabel.text = answer.createdAt.formatted()
+        feedbackLabel.text = answer.text
     }
     
     override func prepareForReuse() {
@@ -113,7 +95,6 @@ final class FeedbackTableViewCell: UITableViewCell {
         userNameLabel.text = nil
         dateLabel.text = nil
         feedbackLabel.text = nil
-        repliedLabel.isHidden = true
     }
 
 }
