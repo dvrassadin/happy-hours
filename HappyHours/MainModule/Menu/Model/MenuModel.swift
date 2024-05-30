@@ -28,7 +28,7 @@ final class MenuModel: MenuModelProtocol {
         }
     }
     private(set) var feedback: [Feedback] = []
-    private var countOfAllFeedbacks = 0
+    private(set) var countOfAllFeedbacks = 0
     private(set) var answers: [FeedbackAnswer] = []
     private var countOfAllAnswers = 0
     

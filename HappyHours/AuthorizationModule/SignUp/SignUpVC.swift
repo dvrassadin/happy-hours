@@ -36,6 +36,11 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
         setUpNavigation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        signUpView.endEditing(true)
+    }
+    
     // MARK: Navigation
     
     private func setUpNavigation() {

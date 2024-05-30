@@ -64,12 +64,12 @@ final class MenuVC: UIViewController, AlertPresenter {
         Task {
             menuView.restaurantHeaderView.logoImageView.image = await model.logoImage
         }
-    }
-    
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
         menuView.restaurantHeaderView.set(restaurant: model.restaurant)
     }
+    
+//    override func viewIsAppearing(_ animated: Bool) {
+//        super.viewIsAppearing(animated)
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -112,6 +112,15 @@ final class MenuVC: UIViewController, AlertPresenter {
                 menuView.tableView.reloadData()
                 menuView.tableView.layoutIfNeeded()
                 menuView.tableView.setContentOffset(contentOffset, animated: false)
+                let indexPath = IndexPath(
+                    item: MenuTab.feedback.rawValue,
+                    section: 0
+                )
+                if let cell = menuView.restaurantHeaderView.tabBarCollectionView.cellForItem(
+                    at: indexPath
+                ) as? MenuTabCollectionViewCell {
+                    cell.configure(name: "\(MenuTab.feedback.name) (\(model.countOfAllFeedbacks))")
+                }
             } catch AuthError.invalidToken {
                 showAlert(.invalidToken) { _ in
                     UIApplication.shared.sendAction(

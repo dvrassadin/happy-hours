@@ -49,6 +49,11 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         setUpNavigation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        editProfileView.endEditing(true)
+    }
+    
     // MARK: Navigation
     
     private func setUpNavigation() {

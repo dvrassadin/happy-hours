@@ -12,6 +12,7 @@ protocol MenuModelProtocol {
     var restaurant: Restaurant { get }
     var menu: [(category: String, beverages: [Beverage])] { get }
     var feedback: [Feedback] { get }
+    var countOfAllFeedbacks: Int { get }
     var answers: [FeedbackAnswer] { get }
     var logoImage: UIImage? { get async }
     
