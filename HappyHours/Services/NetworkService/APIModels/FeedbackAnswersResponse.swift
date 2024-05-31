@@ -11,6 +11,7 @@ struct FeedbackAnswersResponse: Decodable {
     
     let count: Int
     let results: [FeedbackAnswer]
+    
 }
 
 struct FeedbackAnswer: Decodable {

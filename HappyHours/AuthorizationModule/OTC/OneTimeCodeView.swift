@@ -16,6 +16,8 @@ final class OneTimeCodeView: AuthScreenView {
     private let numberOfDigits: UInt
     private var digitsLabels = [UILabel]()
     var oneTimeCodeFilled: ((String) -> Void)?
+    private var timer: Timer?
+    private var secondsRemained = 0
     
     // MARK: UI components
     
@@ -48,6 +50,19 @@ final class OneTimeCodeView: AuthScreenView {
         stackView.spacing = 5
         return stackView
     }()
+    
+    let resendButton: UIButton = {
+        let button = UIButton(configuration: .plain())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let buttonTitleAttributes = AttributeContainer(
+        [
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor.mainText
+        ]
+    )
 
     // MARK: Lifecycle
     
@@ -77,6 +92,7 @@ final class OneTimeCodeView: AuthScreenView {
         addSubview(descriptionLabel)
         addSubview(codeTextField)
         codeTextField.addSubview(cellsStackView)
+        addSubview(resendButton)
     }
     
     private func configureLabels() {
@@ -125,7 +141,10 @@ final class OneTimeCodeView: AuthScreenView {
                 cellsStackView.topAnchor.constraint(equalTo: codeTextField.topAnchor),
                 cellsStackView.leadingAnchor.constraint(equalTo: codeTextField.leadingAnchor),
                 cellsStackView.trailingAnchor.constraint(equalTo: codeTextField.trailingAnchor),
-                cellsStackView.bottomAnchor.constraint(equalTo: codeTextField.bottomAnchor)
+                cellsStackView.bottomAnchor.constraint(equalTo: codeTextField.bottomAnchor),
+                
+                resendButton.topAnchor.constraint(equalTo: cellsStackView.bottomAnchor, constant: 10),
+                resendButton.centerXAnchor.constraint(equalTo: cellsStackView.centerXAnchor)
             ]
         )
     }
@@ -148,6 +167,55 @@ final class OneTimeCodeView: AuthScreenView {
             codeTextField.text?.removeAll()
             textDidChange()
         }
+    }
+    
+    // MARK: Timer methods
+    
+    func startCountdown() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.timerStep()
+        }
+        secondsRemained = 120
+        resendButton.isEnabled = false
+        timer?.fire()
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+        resendButton.isEnabled = true
+        resendButton.configuration?.attributedTitle = AttributedString(
+            String(localized: "Resend code"),
+            attributes: buttonTitleAttributes
+        )
+    }
+    
+    private func timerStep() {
+        guard secondsRemained > 0 else {
+            stopTimer()
+            return
+        }
+        
+        secondsRemained -= 1
+        self.resendButton.configuration?.attributedTitle = AttributedString(
+            String(localized: "Resend code in \(self.timeFormatted(seconds: self.secondsRemained))"),
+            attributes: self.buttonTitleAttributes
+        )
+//        if secondsRemained > 0 {
+//            secondsRemained -= 1
+//            self.resendButton.configuration?.attributedTitle = AttributedString(
+//                String(localized: "Resend code in \(self.timeFormatted(seconds: self.secondsRemained))"),
+//                attributes: self.buttonTitleAttributes
+//            )
+//        } else {
+//            stopTimer()
+//        }
+    }
+    
+    private func timeFormatted(seconds: Int) -> String {
+        let minutes = secondsRemained / 60
+        let seconds = secondsRemained % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
     
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct FeedbackResponse: Decodable {
+    
     let count: Int
     let results: [Feedback]
 }

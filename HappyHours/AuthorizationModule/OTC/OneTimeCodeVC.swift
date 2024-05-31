@@ -34,6 +34,8 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigation()
+        otcView.startCountdown()
+        setUpResending()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +48,8 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
     private func setUpNavigation() {
         otcView.oneTimeCodeFilled = { [weak self] code in
             guard let self, let code = self.otcView.codeTextField.text else { return }
+            
+            otcView.stopTimer()
             Task {
                 do {
                     try await self.model.sendOTC(code)
@@ -60,6 +64,23 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
         }
     }
 
+    // MARK: Code resending
+    
+    private func setUpResending() {
+        otcView.resendButton.addAction(UIAction { [weak self] _ in
+            print("Resend OTC")
+            guard let self, let email = self.model.resetEmail else { return }
+            Task {
+                do {
+                    try await self.model.sendEmailForOTC(email)
+                    self.otcView.startCountdown()
+                } catch {
+                    self.showAlert(.sendingEmailServerError)
+                }
+            }
+        }, for: .touchUpInside)
+    }
+    
 }
 
 // MARK: - Preview

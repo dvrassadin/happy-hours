@@ -56,7 +56,6 @@ final class SignInView: AuthScreenView {
             attributes: AttributeContainer([.font: UIFont.systemFont(ofSize: 12),
                                             .foregroundColor: UIColor.mainText])
         )
-        button.configuration?.baseForegroundColor = .black
         return button
     }()
     

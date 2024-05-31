@@ -67,7 +67,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.invalidServerURL
         }
         
-        urlComponents.path.append("/api/v1/user/auth/token/")
+        urlComponents.path.append("/api/v1/user/client/auth/token/")
         
         guard let url = urlComponents.url else {
             logger.error("Invalid API endpoint: \(urlComponents)")

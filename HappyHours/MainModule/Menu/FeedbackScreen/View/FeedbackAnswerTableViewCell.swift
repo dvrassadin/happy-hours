@@ -36,7 +36,7 @@ final class FeedbackAnswerTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .mainText
-        label.numberOfLines = 3
+        label.numberOfLines = 0
         return label
     }()
     
@@ -69,7 +69,7 @@ final class FeedbackAnswerTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            userNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
             dateLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
             dateLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),

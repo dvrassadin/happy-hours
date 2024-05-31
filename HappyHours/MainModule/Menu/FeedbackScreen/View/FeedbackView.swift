@@ -29,7 +29,6 @@ final class FeedbackView: UIView {
     init(feedback: Feedback) {
         feedbackHeader = FeedbackHeaderView(feedback: feedback)
         super.init(frame: .zero)
-        setUpFeedback(feedback: feedback)
         setUpUI()
     }
     
@@ -59,10 +58,6 @@ final class FeedbackView: UIView {
             
             feedbackHeader.widthAnchor.constraint(equalTo: tableView.widthAnchor)
         ])
-    }
-    
-    private func setUpFeedback(feedback: Feedback) {
-        
     }
     
 }

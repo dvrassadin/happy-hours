@@ -67,10 +67,6 @@ final class MenuVC: UIViewController, AlertPresenter {
         menuView.restaurantHeaderView.set(restaurant: model.restaurant)
     }
     
-//    override func viewIsAppearing(_ animated: Bool) {
-//        super.viewIsAppearing(animated)
-//    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         model.resetFeedbackAnswers()
@@ -176,7 +172,7 @@ extension MenuVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let selectedTab else { return UITableViewCell () }
+        guard let selectedTab else { return UITableViewCell() }
         
         switch selectedTab {
         case .menu:
@@ -299,8 +295,8 @@ extension MenuVC: UICollectionViewDataSource {
             withReuseIdentifier: MenuTabCollectionViewCell.identifier,
             for: indexPath
         ) as? MenuTabCollectionViewCell else { return UICollectionViewCell() }
+        
         let tab = MenuTab.allCases[indexPath.row]
-//        cell.configure(name: MenuTab.allCases[indexPath.row].name)
         switch tab {
         case .feedback:
             cell.configure(name: "\(tab.name) (\(model.restaurant.feedbackCount))")

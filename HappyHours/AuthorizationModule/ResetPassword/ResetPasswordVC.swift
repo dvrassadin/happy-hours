@@ -37,6 +37,11 @@ final class ResetPasswordVC: UIViewController, EmailChecker, AlertPresenter {
         resetPasswordView.emailTextField.becomeFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resetPasswordView.endEditing(true)
+    }
+    
     // MARK: Navigation
     
     private func setUpNavigation() {

@@ -34,6 +34,11 @@ final class NewPasswordVC: UIViewController, PasswordChecker, AlertPresenter {
         setUpNavigation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        newPasswordView.endEditing(true)
+    }
+    
     // MARK: Navigation
     
     private func setUpNavigation() {
