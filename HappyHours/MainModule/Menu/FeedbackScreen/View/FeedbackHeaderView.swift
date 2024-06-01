@@ -89,7 +89,7 @@ final class FeedbackHeaderView: UIView {
             feedbackLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor),
             feedbackLabel.trailingAnchor.constraint(equalTo: dateLabel.trailingAnchor),
             
-            answersHeaderLabel.topAnchor.constraint(equalTo: feedbackLabel.bottomAnchor, constant: 5),
+            answersHeaderLabel.topAnchor.constraint(equalTo: feedbackLabel.bottomAnchor, constant: 20),
             answersHeaderLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
             answersHeaderLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
             answersHeaderLabel.bottomAnchor.constraint(equalTo: bottomAnchor)

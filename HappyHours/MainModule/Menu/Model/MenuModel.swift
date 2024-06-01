@@ -28,7 +28,7 @@ final class MenuModel: MenuModelProtocol {
         }
     }
     private(set) var feedback: [Feedback] = []
-    private(set) var countOfAllFeedbacks = 0
+    private(set) var countOfAllFeedbacks: Int
     private(set) var answers: [FeedbackAnswer] = []
     private var countOfAllAnswers = 0
     
@@ -38,6 +38,7 @@ final class MenuModel: MenuModelProtocol {
         self.restaurant = restaurant
         _logoImage = logoImage
         self.networkService = networkService
+        countOfAllFeedbacks = restaurant.feedbackCount
     }
     
     // MARK: Get menu

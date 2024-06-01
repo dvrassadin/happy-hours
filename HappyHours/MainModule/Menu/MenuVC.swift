@@ -108,14 +108,25 @@ final class MenuVC: UIViewController, AlertPresenter {
                 menuView.tableView.reloadData()
                 menuView.tableView.layoutIfNeeded()
                 menuView.tableView.setContentOffset(contentOffset, animated: false)
-                let indexPath = IndexPath(
+                let selectedIndexPaths = menuView.restaurantHeaderView.tabBarCollectionView.indexPathsForSelectedItems
+                let feedbackIndexPath = IndexPath(
                     item: MenuTab.feedback.rawValue,
                     section: 0
                 )
-                if let cell = menuView.restaurantHeaderView.tabBarCollectionView.cellForItem(
-                    at: indexPath
-                ) as? MenuTabCollectionViewCell {
-                    cell.configure(name: "\(MenuTab.feedback.name) (\(model.countOfAllFeedbacks))")
+//                if let cell = menuView.restaurantHeaderView.tabBarCollectionView.cellForItem(
+//                    at: indexPath
+//                ) as? MenuTabCollectionViewCell {
+//                    cell.configure(name: "\(MenuTab.feedback.name) (\(model.countOfAllFeedbacks))")
+//                }
+                menuView.restaurantHeaderView.tabBarCollectionView.reloadItems(
+                    at: [feedbackIndexPath]
+                )
+                selectedIndexPaths?.forEach { indexPath in
+                    menuView.restaurantHeaderView.tabBarCollectionView.selectItem(
+                        at: indexPath,
+                        animated: false,
+                        scrollPosition: .left
+                    )
                 }
             } catch AuthError.invalidToken {
                 showAlert(.invalidToken) { _ in
@@ -299,7 +310,8 @@ extension MenuVC: UICollectionViewDataSource {
         let tab = MenuTab.allCases[indexPath.row]
         switch tab {
         case .feedback:
-            cell.configure(name: "\(tab.name) (\(model.restaurant.feedbackCount))")
+//            cell.configure(name: "\(tab.name) (\(model.restaurant.feedbackCount))")
+            cell.configure(name: "\(tab.name) (\(model.countOfAllFeedbacks))")
         default:
             cell.configure(name: tab.name)
         }
