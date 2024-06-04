@@ -36,6 +36,8 @@ enum AlertType {
     case getFeedbackServerError
     case sendFeedbackServerError
     case getFeedbackAnswersServerError
+    case noSubscriptionForScanning
+    case getSubscriptionServerError
 }
 
 protocol AlertPresenter: UIViewController { }
@@ -130,6 +132,12 @@ extension AlertPresenter {
         case .getFeedbackAnswersServerError:
             title = String(localized: "Unable to Download")
             message = String(localized: "Failed to get the feedback answers.")
+        case .noSubscriptionForScanning:
+            title = String(localized: "No Subscription")
+            message = String(localized: "You must have a subscription to scan codes.")
+        case .getSubscriptionServerError:
+            title = String(localized: "Unable to Get Subscription")
+            message = String(localized: "Failed to get subscription status. You must have a subscription to scan codes.")
         }
         
         let alertController = UIAlertController(

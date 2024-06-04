@@ -186,7 +186,8 @@ final class OneTimeCodeView: AuthScreenView {
         resendButton.isEnabled = true
         resendButton.configuration?.attributedTitle = AttributedString(
             String(localized: "Resend code"),
-            attributes: buttonTitleAttributes
+            attributes: AttributeContainer([.font: UIFont.boldSystemFont(ofSize: 12),
+                                            .foregroundColor: UIColor.main])
         )
     }
     

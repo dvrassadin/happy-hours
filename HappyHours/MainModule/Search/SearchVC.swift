@@ -202,7 +202,7 @@ final class SearchVC: UISearchController, AlertPresenter {
 extension SearchVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let beverageVC = BeverageVC(beverage: model.beverages[indexPath.row])
+        let beverageVC = BeverageVC(beverage: filteredBeverages[indexPath.row])
         beverageVC.sheetPresentationController?.prefersGrabberVisible = true
         beverageVC.sheetPresentationController?.detents = [.medium(), .large()]
         present(beverageVC, animated: true)
@@ -297,7 +297,12 @@ extension SearchVC: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        updateRestaurantsInRadius(searchView.mapView)
+        switch searchView.searchMode {
+        case .beverages:
+            updateBeverages()
+        case .restaurants:
+            updateRestaurantsInRadius(searchView.mapView)
+        }
     }
     
 }

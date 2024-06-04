@@ -1257,4 +1257,69 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         logger.info("Feedback sent for request: \(url.absoluteString)")
     }
     
+    // MARK: Subscription
+    
+    func getActiveSubscription(allowRetry: Bool) async throws -> Subscription {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/subscription/subscriptions/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(
+            "Bearer \(try await authService.validAccessToken)",
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 401 {
+            if allowRetry {
+                try await authService.refreshTokens()
+                return try await getActiveSubscription(allowRetry: false)
+            }
+            logger.error("Invalid token for request: \(url.absoluteString)")
+            throw AuthError.invalidToken
+        }
+        
+        if httpResponse.statusCode == 404 {
+            logger.error("There are not an active subscription for request: \(url.absoluteString)")
+            throw APIError.noActiveSubscription
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let subscription: Subscription
+        do {
+            decoder.dateDecodingStrategy = .formatted(isoDateFormatter)
+            subscription = try decoder.decode(Subscription.self, from: data)
+            logger.info("Received subscription for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+        
+        return subscription
+    }
+    
 }

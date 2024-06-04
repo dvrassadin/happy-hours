@@ -7,14 +7,16 @@
 
 import UIKit
 
-final class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController, AlertPresenter {
     
     private let networkService: NetworkServiceProtocol
+    private let subscriptionService: SubscriptionServiceProtocol
     
     // MARK: Lifecycle
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
+        self.subscriptionService = SubscriptionService(networkService: networkService)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,6 +35,7 @@ final class MainTabBarController: UITabBarController {
         view.backgroundColor = .background
         tabBar.tintColor = .main
         title = String(localized: "Happy Hours")
+        delegate = self
         setUpTabs()
     }
     
@@ -40,11 +43,14 @@ final class MainTabBarController: UITabBarController {
         let restaurantsModel: RestaurantsModelProtocol = RestaurantsModel(
             networkService: networkService
         )
-        let restaurantsVC = RestaurantsVC(model: restaurantsModel)
+        let restaurantsVC = RestaurantsVC(
+            model: restaurantsModel,
+            subscriptionService: subscriptionService
+        )
         let restaurantsTabBarItem = UITabBarItem(
             title: String(localized: "Restaurants"),
-            image: UIImage(systemName: "fork.knife"),
-            selectedImage: UIImage(systemName: "fork.knife")
+            image: UIImage(systemName: "cup.and.saucer"),
+            selectedImage: UIImage(systemName: "cup.and.saucer.fill")
         )
         restaurantsVC.tabBarItem = restaurantsTabBarItem
         
@@ -86,6 +92,31 @@ final class MainTabBarController: UITabBarController {
         viewControllers = [restaurantsVC, searchVC, scannerVC, orderVC, profileVC]
     }
     
+    // MARK: Open ScannerVC
+    
+    private func openScanner() {
+        Task {
+            do {
+                if try await subscriptionService.isSubscriptionActive {
+                    selectedIndex = 2
+                } else {
+                    showAlert(.noSubscriptionForScanning)
+                }
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
+            } catch {
+                showAlert(.getSubscriptionServerError)
+            }
+        }
+    }
+    
 }
 
 // MARK: - Preview
@@ -100,5 +131,21 @@ final class MainTabBarController: UITabBarController {
             )
         )
     )
+    
+}
+
+
+extension MainTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(
+        _ tabBarController: UITabBarController,
+        shouldSelect viewController: UIViewController
+    ) -> Bool {
+        if viewController is ScannerVC {
+            openScanner()
+            return false
+        }
+        return true
+    }
     
 }

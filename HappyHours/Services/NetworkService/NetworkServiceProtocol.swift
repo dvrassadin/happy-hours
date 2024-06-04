@@ -67,5 +67,6 @@ protocol NetworkServiceProtocol {
         allowRetry: Bool
     ) async throws -> FeedbackAnswersResponse
     func sendFeedback(_ feedback: SendFeedback) async throws
+    func getActiveSubscription(allowRetry: Bool) async throws -> Subscription
     
 }

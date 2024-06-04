@@ -14,12 +14,14 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
     // MARK: Properties
     
     private let model: RestaurantsModelProtocol
+    private let subscriptionService: SubscriptionServiceProtocol
     private lazy var restaurantsView = RestaurantsView()
 
     // MARK: Lifecycle
     
-    init(model: RestaurantsModelProtocol) {
+    init(model: RestaurantsModelProtocol, subscriptionService: SubscriptionServiceProtocol) {
         self.model = model
+        self.subscriptionService = subscriptionService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,6 +44,11 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
         super.viewDidLoad()
         restaurantsView.activityIndicator.startAnimating()
         updateRestaurants()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateSubscriptionStatus()
     }
     
     // MARK: Update restaurants
@@ -69,6 +76,29 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
             }
         }
     }
+    
+    // MARK: Update subscription status
+    
+    private func updateSubscriptionStatus() {
+        restaurantsView.subscriptionStatus = .updating
+        Task {
+            do {
+                let isActive = try await subscriptionService.isSubscriptionActive
+                restaurantsView.subscriptionStatus = isActive ? .active : .noActive
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
+            } catch {
+                restaurantsView.subscriptionStatus = .error
+            }
+        }
+    }
 
 }
 
@@ -76,15 +106,15 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
 
 @available(iOS 17, *)
 #Preview {
+    let networkService = NetworkService(
+        authService: AuthService(keyChainService: KeyChainService())
+    )
     
-    RestaurantsVC(
+    return RestaurantsVC(
         model: RestaurantsModel(
-            networkService: NetworkService(
-                authService: AuthService(
-                    keyChainService: KeyChainService()
-                )
-            )
-        )
+            networkService: networkService
+        ),
+        subscriptionService: SubscriptionService(networkService: networkService)
     )
     
 }

@@ -8,6 +8,30 @@
 import UIKit
 
 final class RestaurantsView: UIView {
+    
+    // MARK: Properties
+    
+    enum SubscriptionStatus {
+        case active, noActive, updating, error
+        
+        var message: String {
+            switch self {
+            case .active:
+                return String(localized: "Your subscription is active. 🟢")
+            case .noActive:
+                return String(localized: "You do not have an active subscription. 🔴")
+            case .updating:
+                return String(localized: "Subscription status is updating... ")
+            case .error:
+                return String(localized: "Unable to get subscription status.")
+            }
+        }
+    }
+    var subscriptionStatus = SubscriptionStatus.updating {
+        didSet {
+            headerLabel.text = subscriptionStatus.message
+        }
+    }
 
     // MARK: UI components
     
@@ -53,8 +77,8 @@ final class RestaurantsView: UIView {
     
     private func setUpUI() {
         backgroundColor = .background
+        headerLabel.text = SubscriptionStatus.updating.message
         tableView.tableHeaderView = headerLabel
-        headerLabel.text = String(localized: "Your subscription is active. 🟢")
         addSubviews()
         setUpConstraints()
     }
