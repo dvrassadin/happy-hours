@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 final class FeedbackView: UIView {
 
@@ -23,6 +24,18 @@ final class FeedbackView: UIView {
     }()
     
     private let feedbackHeader: FeedbackHeaderView
+    
+//    private let messageTextView: UITextView = {
+//        let textView = UITextView()
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        return textView
+//    }()
+//    
+//    private let sendButton: UIButton = {
+//        let button = UIButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
     
     // MARK: Lifecycle
     

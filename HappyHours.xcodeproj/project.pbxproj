@@ -14,6 +14,7 @@
 		511104A82C0DCD8B005E13AE /* SubscriptionPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511104A72C0DCD8B005E13AE /* SubscriptionPlan.swift */; };
 		511104B02C0ECF33005E13AE /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511104AF2C0ECF33005E13AE /* SubscriptionService.swift */; };
 		511104B22C0EE6A0005E13AE /* SubscriptionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511104B12C0EE6A0005E13AE /* SubscriptionServiceProtocol.swift */; };
+		511104B42C0F17C7005E13AE /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 511104B32C0F17C7005E13AE /* Localizable.xcstrings */; };
 		51253A212BEE2B6800106D57 /* KeyChainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A202BEE2B6800106D57 /* KeyChainServiceProtocol.swift */; };
 		51253A402BEF489300106D57 /* MenuTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A3F2BEF489300106D57 /* MenuTableViewCellDelegate.swift */; };
 		51253A422BEF56FF00106D57 /* PlaceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51253A412BEF56FF00106D57 /* PlaceOrder.swift */; };
@@ -124,6 +125,7 @@
 		511104A72C0DCD8B005E13AE /* SubscriptionPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlan.swift; sourceTree = "<group>"; };
 		511104AF2C0ECF33005E13AE /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
 		511104B12C0EE6A0005E13AE /* SubscriptionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionServiceProtocol.swift; sourceTree = "<group>"; };
+		511104B32C0F17C7005E13AE /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		51253A202BEE2B6800106D57 /* KeyChainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainServiceProtocol.swift; sourceTree = "<group>"; };
 		51253A3F2BEF489300106D57 /* MenuTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		51253A412BEF56FF00106D57 /* PlaceOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceOrder.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				519B5CE02BC58C4200BD4EB4 /* MainModule */,
 				51CF88662BC3B8D900196E8A /* Assets.xcassets */,
 				512D00572BD6C1EF0057D696 /* Inter-VariableFont.ttf */,
+				511104B32C0F17C7005E13AE /* Localizable.xcstrings */,
 				51CF88682BC3B8D900196E8A /* LaunchScreen.storyboard */,
 				51CF886B2BC3B8D900196E8A /* Info.plist */,
 			);
@@ -729,6 +732,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				512D00582BD6C1EF0057D696 /* Inter-VariableFont.ttf in Resources */,
+				511104B42C0F17C7005E13AE /* Localizable.xcstrings in Resources */,
 				51CF88672BC3B8D900196E8A /* Assets.xcassets in Resources */,
 				51CF88722BC3B93000196E8A /* .gitignore in Resources */,
 				51CF886A2BC3B8D900196E8A /* Base in Resources */,
@@ -987,7 +991,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4645TSUXP2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyHours/Info.plist;
@@ -1005,7 +1009,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dvrassadin.HappyHours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1024,7 +1028,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4645TSUXP2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyHours/Info.plist;
@@ -1042,7 +1046,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dvrassadin.HappyHours;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

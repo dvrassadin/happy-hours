@@ -1,0 +1,338 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld replies" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld reply"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld replies"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Access Denied" : {
+
+    },
+    "An error occurred while searching for drinks." : {
+
+    },
+    "Answers:" : {
+
+    },
+    "Are you sure you want to logout?" : {
+
+    },
+    "Beverages" : {
+
+    },
+    "Camera Error" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "cancelled" : {
+
+    },
+    "Cannot Create Account" : {
+
+    },
+    "completed" : {
+
+    },
+    "Confirm Password" : {
+
+    },
+    "Contacts:" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Could not find such restaurants." : {
+
+    },
+    "Could not open code scanner." : {
+
+    },
+    "Create" : {
+
+    },
+    "Create Account" : {
+
+    },
+    "Create New Password" : {
+
+    },
+    "Date of Birth" : {
+
+    },
+    "Edit Profile" : {
+
+    },
+    "Email Address" : {
+
+    },
+    "Empty Name" : {
+
+    },
+    "Enter Code" : {
+
+    },
+    "Enter the code sent to %@." : {
+
+    },
+    "Enter the name of the restaurant you want to find." : {
+
+    },
+    "Enter your new passwords again." : {
+
+    },
+    "Error" : {
+
+    },
+    "Error Getting Restaurant" : {
+
+    },
+    "Failed to get list of restaurants. Try again." : {
+
+    },
+    "Failed to get subscription status. You must have a subscription to scan codes." : {
+
+    },
+    "Failed to get the feedback answers." : {
+
+    },
+    "Failed to get the feedback." : {
+
+    },
+    "Failed to get the restaurant." : {
+
+    },
+    "Failed to get your credentials." : {
+
+    },
+    "Failed to make the order. It may not be happy hours or you may have ordered recently." : {
+
+    },
+    "Failed to send the feedback." : {
+
+    },
+    "Failed to update your credentials." : {
+
+    },
+    "Feedback" : {
+
+    },
+    "Get for\nFree" : {
+
+    },
+    "Happy Hours" : {
+
+    },
+    "Happy hours from %@ to %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Happy hours from %1$@ to %2$@."
+          }
+        }
+      }
+    },
+    "Incorrect Barcode" : {
+
+    },
+    "Incorrect Code" : {
+
+    },
+    "Invalid Email" : {
+
+    },
+    "Invalid Name" : {
+
+    },
+    "Invalid Password" : {
+
+    },
+    "Leave Feedback" : {
+
+    },
+    "Log In" : {
+
+    },
+    "Log Out" : {
+
+    },
+    "Menu" : {
+
+    },
+    "Name" : {
+
+    },
+    "Name should not be empty and contains digits." : {
+
+    },
+    "New Member?" : {
+
+    },
+    "No Subscription" : {
+
+    },
+    "Nothing Found" : {
+
+    },
+    "Order Placed" : {
+
+    },
+    "Orders" : {
+
+    },
+    "Password" : {
+
+    },
+    "Passwords do not Match" : {
+
+    },
+    "pending" : {
+
+    },
+    "Please enter your email address. We will send you a code to reset your password." : {
+
+    },
+    "Please, enter your name." : {
+
+    },
+    "preparation" : {
+
+    },
+    "Profile" : {
+
+    },
+    "Resend code" : {
+
+    },
+    "Resend code in %@" : {
+
+    },
+    "Reset Password" : {
+
+    },
+    "Restaurants" : {
+
+    },
+    "Scanner" : {
+
+    },
+    "Search" : {
+
+    },
+    "Send" : {
+
+    },
+    "Session Expired" : {
+
+    },
+    "Sign In to Continue" : {
+
+    },
+    "Sign up Here" : {
+
+    },
+    "Subscription status is updating... " : {
+
+    },
+    "Success" : {
+
+    },
+    "The email could not be sent or the user does not exist." : {
+
+    },
+    "The one-time code is incorrect." : {
+
+    },
+    "The password does not meet the password requirements or the server is unavailable." : {
+
+    },
+    "The password is incorrect or the user is not registered." : {
+
+    },
+    "There are no beverages available at this restaurant." : {
+
+    },
+    "This email address is not valid.\nEnter a different address." : {
+
+    },
+    "This is not a restaurant menu barcode." : {
+
+    },
+    "This password is too short.\nPasswords are 8 and more characters long." : {
+
+    },
+    "This restaurant was not found or there are problems with the Internet." : {
+
+    },
+    "Unable to Download" : {
+
+    },
+    "Unable to Get Image" : {
+
+    },
+    "Unable to Get Menu" : {
+
+    },
+    "Unable to Get Subscription" : {
+
+    },
+    "Unable to get subscription status." : {
+
+    },
+    "Unable to Make Order" : {
+
+    },
+    "Unable to Send" : {
+
+    },
+    "Unable to Set Password" : {
+
+    },
+    "Unable to Update" : {
+
+    },
+    "Update" : {
+
+    },
+    "You do not have an active subscription. 🔴" : {
+
+    },
+    "You must have a subscription to scan codes." : {
+
+    },
+    "You need to log into the application again." : {
+
+    },
+    "Your account was created." : {
+
+    },
+    "Your order was successful. Enjoy your meal." : {
+
+    },
+    "Your subscription is active. 🟢" : {
+
+    }
+  },
+  "version" : "1.0"
+}

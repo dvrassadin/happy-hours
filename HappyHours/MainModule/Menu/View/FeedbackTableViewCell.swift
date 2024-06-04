@@ -36,7 +36,6 @@ final class FeedbackTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .main
-        label.text = String(localized: "Replied")
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         label.isHidden = true
@@ -105,7 +104,10 @@ final class FeedbackTableViewCell: UITableViewCell {
         userNameLabel.text = feedback.displayUser
         dateLabel.text = feedback.createdAt.formatted()
         feedbackLabel.text = feedback.text
-        repliedLabel.isHidden = !feedback.answers
+        if feedback.answers > 0 {
+            repliedLabel.text = String(localized: "\(feedback.answers) replies")
+            repliedLabel.isHidden = false
+        }
     }
     
     override func prepareForReuse() {
