@@ -72,6 +72,9 @@ final class MenuVC: UIViewController, AlertPresenter {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         model.resetFeedbackAnswers()
+        if selectedTab == .feedback {
+            updateFeedback()
+        }
     }
     
     // MARK: Update menu

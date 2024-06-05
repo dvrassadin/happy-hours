@@ -68,9 +68,9 @@ final class LeaveFeedbackVC: UIViewController, AlertPresenter {
             do {
                 try await model.sendFeedback(text)
                 navigationController?.popViewController(animated: true)
-                if let menuVC = navigationController?.topViewController as? MenuVC {
-                    menuVC.updateFeedback()
-                }
+//                if let menuVC = navigationController?.topViewController as? MenuVC {
+//                    menuVC.updateFeedback()
+//                }
             } catch AuthError.invalidToken {
                 showAlert(.invalidToken) { _ in
                     UIApplication.shared.sendAction(

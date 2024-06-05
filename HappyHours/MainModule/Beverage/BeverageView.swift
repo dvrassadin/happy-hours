@@ -146,7 +146,7 @@ final class BeverageView: UIView {
         beverageNameLabel.text = beverage.name
         beverageCategoryLabel.text = beverage.category
         beverageDescriptionLabel.text = beverage.description
-        beveragePriceLabel.text = "\(beverage.price) som"
+        beveragePriceLabel.text = "\(beverage.price) KGS"
     }
     
 }
