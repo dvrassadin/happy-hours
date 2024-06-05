@@ -12,7 +12,7 @@ actor SubscriptionService: SubscriptionServiceProtocol {
     // MARK: Properties
     
     private let networkService: NetworkServiceProtocol
-    var needUpdateSubscription = true
+    private var needUpdateSubscription = true
     private var subscription: Subscription?
     var isSubscriptionActive: Bool {
         get async throws {
@@ -40,6 +40,10 @@ actor SubscriptionService: SubscriptionServiceProtocol {
         }
         needUpdateSubscription = false
         return subscription
+    }
+    
+    func setNeedUpdateSubscription() {
+        needUpdateSubscription = true
     }
     
 }

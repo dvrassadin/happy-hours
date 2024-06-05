@@ -21,6 +21,7 @@ protocol MenuModelProtocol {
     func updateFeedback(append: Bool) async throws
     func updateFeedbackAnswers(feedbackID: Int, append: Bool) async throws
     func sendFeedback(_ text: String) async throws
+    func sendFeedbackAnswer(feedbackID: Int, text: String) async throws
     func resetFeedbackAnswers()
     
 }

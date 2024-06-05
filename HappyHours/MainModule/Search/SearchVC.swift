@@ -22,6 +22,7 @@ final class SearchVC: UISearchController, AlertPresenter {
         return locationManager
     }()
     private let model: SearchModelProtocol
+    private let userService: UserServiceProtocol
     private var searchText: String?
     private var isLoadingBeverages = false
     private var isFiltering = false
@@ -42,8 +43,9 @@ final class SearchVC: UISearchController, AlertPresenter {
 
     // MARK: Lifecycle
     
-    init(model: SearchModelProtocol) {
+    init(model: SearchModelProtocol, userService: UserServiceProtocol) {
         self.model = model
+        self.userService = userService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -353,7 +355,7 @@ extension SearchVC: MKMapViewDelegate {
                 logoImage: nil,
                 networkService: model.networkService
             )
-            let menuVC = MenuVC(model: menuModel, areOrdersEnable: false)
+            let menuVC = MenuVC(model: menuModel, userService: userService, areOrdersEnable: false)
             menuVC.sheetPresentationController?.prefersGrabberVisible = true
             present(menuVC, animated: true)
         } else {
@@ -368,7 +370,11 @@ extension SearchVC: MKMapViewDelegate {
                         logoImage: nil,
                         networkService: model.networkService
                     )
-                    let menuVC = MenuVC(model: menuModel, areOrdersEnable: false)
+                    let menuVC = MenuVC(
+                        model: menuModel,
+                        userService: userService,
+                        areOrdersEnable: false
+                    )
                     present(menuVC, animated: true)
                     restaurantMarkerView.stopActivityIndicator()
                 } catch {

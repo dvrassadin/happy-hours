@@ -15,13 +15,19 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
     
     private let model: RestaurantsModelProtocol
     private let subscriptionService: SubscriptionServiceProtocol
+    private let userService: UserServiceProtocol
     private lazy var restaurantsView = RestaurantsView()
 
     // MARK: Lifecycle
     
-    init(model: RestaurantsModelProtocol, subscriptionService: SubscriptionServiceProtocol) {
+    init(
+        model: RestaurantsModelProtocol,
+        subscriptionService: SubscriptionServiceProtocol,
+        userService: UserServiceProtocol
+    ) {
         self.model = model
         self.subscriptionService = subscriptionService
+        self.userService = userService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -109,12 +115,14 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
     let networkService = NetworkService(
         authService: AuthService(keyChainService: KeyChainService())
     )
+    let userService: UserServiceProtocol = UserService(networkService: networkService)
     
     return RestaurantsVC(
         model: RestaurantsModel(
             networkService: networkService
         ),
-        subscriptionService: SubscriptionService(networkService: networkService)
+        subscriptionService: SubscriptionService(networkService: networkService),
+        userService: userService
     )
     
 }
@@ -165,6 +173,7 @@ extension RestaurantsVC: UITableViewDelegate {
             )
             let menuVC = MenuVC(
                 model: menuModel,
+                userService: userService,
                 areOrdersEnable: false
             )
             navigationController?.pushViewController(menuVC, animated: true)

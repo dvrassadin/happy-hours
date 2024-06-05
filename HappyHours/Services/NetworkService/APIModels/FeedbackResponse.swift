@@ -16,6 +16,7 @@ struct FeedbackResponse: Decodable {
 struct Feedback: Decodable {
     
     let id: Int
+    let user: String
     let displayUser: String
     let createdAt: Date
     let text: String

@@ -16,6 +16,7 @@ final class ScannerVC: UIViewController, AlertPresenter {
 
     private let session = AVCaptureSession()
     private let networkService: NetworkServiceProtocol
+    private let userService: UserServiceProtocol
     private let queue = DispatchQueue(label: "ScannerQueue")
     
     // MARK: UI Components
@@ -29,8 +30,9 @@ final class ScannerVC: UIViewController, AlertPresenter {
     
     // MARK: Lifecycle
     
-    init(networkService: NetworkServiceProtocol) {
+    init(networkService: NetworkServiceProtocol, userService: UserServiceProtocol) {
         self.networkService = networkService
+        self.userService = userService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -139,7 +141,11 @@ extension ScannerVC: AVCaptureMetadataOutputObjectsDelegate {
                     logoImage: nil,
                     networkService: networkService
                 )
-                let menuVC = MenuVC(model: menuModel, areOrdersEnable: true)
+                let menuVC = MenuVC(
+                    model: menuModel,
+                    userService: userService,
+                    areOrdersEnable: true
+                )
                 navigationController?.pushViewController(menuVC, animated: true)
                 activityIndicator.stopAnimating()
             } catch AuthError.invalidToken {

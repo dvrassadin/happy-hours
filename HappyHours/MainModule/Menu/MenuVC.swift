@@ -16,6 +16,7 @@ final class MenuVC: UIViewController, AlertPresenter {
     private lazy var menuView = MenuView()
     private let model: MenuModelProtocol
     private let areOrdersEnable: Bool
+    private let userService: UserServiceProtocol
     
     private enum MenuTab: Int, CaseIterable {
         case menu
@@ -32,8 +33,9 @@ final class MenuVC: UIViewController, AlertPresenter {
     
     // MARK: Lifecycle
     
-    init(model: MenuModelProtocol, areOrdersEnable: Bool) {
+    init(model: MenuModelProtocol, userService: UserServiceProtocol, areOrdersEnable: Bool) {
         self.model = model
+        self.userService = userService
         self.areOrdersEnable = areOrdersEnable
         super.init(nibName: nil, bundle: nil)
     }
@@ -252,7 +254,7 @@ extension MenuVC: UITableViewDelegate {
             }
             
             let feedback = model.feedback[indexPath.row]
-            let feedbackVC = FeedbackVC(feedback: feedback, model: model)
+            let feedbackVC = FeedbackVC(feedback: feedback, model: model, userService: userService)
             navigationController?.pushViewController(feedbackVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
         }

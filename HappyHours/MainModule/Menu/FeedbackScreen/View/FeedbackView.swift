@@ -25,17 +25,7 @@ final class FeedbackView: UIView {
     
     private let feedbackHeader: FeedbackHeaderView
     
-//    private let messageTextView: UITextView = {
-//        let textView = UITextView()
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        return textView
-//    }()
-//    
-//    private let sendButton: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
+    lazy var answerInputView = AnswerInputView()
     
     // MARK: Lifecycle
     
@@ -53,8 +43,12 @@ final class FeedbackView: UIView {
     
     private func setUpUI() {
         backgroundColor = .background
+//        if #available(iOS 17.0, *) {
+//            keyboardLayoutGuide.usesBottomSafeArea = false
+//        }
         addSubviews()
         setUpConstraints()
+        setUpHidingKeyboard()
     }
     
     private func addSubviews() {
@@ -63,14 +57,41 @@ final class FeedbackView: UIView {
     }
     
     private func setUpConstraints() {
+        let tableViewBottomAnchor = tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        tableViewBottomAnchor.priority = .defaultLow
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            tableViewBottomAnchor,
             
-            feedbackHeader.widthAnchor.constraint(equalTo: tableView.widthAnchor)
+            feedbackHeader.widthAnchor.constraint(equalTo: tableView.widthAnchor),
         ])
+        
+    }
+    
+    func setUpAnswerInputView() {
+        addSubview(answerInputView)
+        
+        NSLayoutConstraint.activate([
+            answerInputView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            answerInputView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
+            answerInputView.topAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            answerInputView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            answerInputView.sendButton.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -5),
+            
+            tableView.bottomAnchor.constraint(equalTo: answerInputView.topAnchor)
+        ])
+    }
+    
+    // MARK: User interaction
+    
+    private func setUpHidingKeyboard() {
+        tableView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        )
     }
     
 }

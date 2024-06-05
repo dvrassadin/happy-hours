@@ -118,6 +118,11 @@ final class MenuModel: MenuModelProtocol {
         try await networkService.sendFeedback(feedback)
     }
     
+    func sendFeedbackAnswer(feedbackID: Int, text: String) async throws {
+        let feedbackAnswer = FeedbackAnswerCreate(feedback: feedbackID, text: text)
+        try await networkService.sendFeedbackAnswer(feedbackAnswer)
+    }
+    
     func resetFeedbackAnswers() {
         answers = []
         countOfAllAnswers = 0

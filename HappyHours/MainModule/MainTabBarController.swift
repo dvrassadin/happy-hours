@@ -11,12 +11,14 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
     
     private let networkService: NetworkServiceProtocol
     private let subscriptionService: SubscriptionServiceProtocol
+    private let userService: UserServiceProtocol
     
     // MARK: Lifecycle
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
         self.subscriptionService = SubscriptionService(networkService: networkService)
+        self.userService = UserService(networkService: networkService)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,7 +47,8 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
         )
         let restaurantsVC = RestaurantsVC(
             model: restaurantsModel,
-            subscriptionService: subscriptionService
+            subscriptionService: subscriptionService,
+            userService: userService
         )
         let restaurantsTabBarItem = UITabBarItem(
             title: String(localized: "Restaurants"),
@@ -55,7 +58,7 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
         restaurantsVC.tabBarItem = restaurantsTabBarItem
         
         let searchModel = SearchModel(networkService: networkService)
-        let searchVC = SearchVC(model: searchModel)
+        let searchVC = SearchVC(model: searchModel, userService: userService)
         let searchTabBarItem = UITabBarItem(
             title: String(localized: "Search"),
             image: UIImage(systemName: "magnifyingglass"),
@@ -63,7 +66,7 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
         )
         searchVC.tabBarItem = searchTabBarItem
         
-        let scannerVC = ScannerVC(networkService: networkService)
+        let scannerVC = ScannerVC(networkService: networkService, userService: userService)
         let scannerTabBarItem = UITabBarItem(
             title: String(localized: "Scanner"),
             image: UIImage(systemName: "qrcode"),
