@@ -32,7 +32,7 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     // MARK: Navigation bar items
     
-    private let searchController = UISearchController()
+//    private let searchController = UISearchController()
     
     private lazy var rightBarButton = UIBarButtonItem(
         title: "All",
@@ -59,18 +59,19 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.delegate = self
+        searchView.searchBar.delegate = self
         searchView.mapView.delegate = self
         searchView.tableView.dataSource = self
         searchView.tableView.delegate = self
         searchView.delegate = self
+        searchView.searchBar.searchTextField.delegate = self
         updateBeverages()
         setUpUserInteraction()
     }
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        tabBarController?.navigationItem.searchController = searchController
+//        tabBarController?.navigationItem.searchController = searchController
         if searchView.searchMode == .beverages {
             tabBarController?.navigationItem.rightBarButtonItem = rightBarButton
         }
@@ -87,7 +88,7 @@ final class SearchVC: UISearchController, AlertPresenter {
     private func setUpUserInteraction() {
         searchView.mapView.addGestureRecognizer(
             UITapGestureRecognizer(
-                target: searchController.searchBar,
+                target: searchView.searchBar,
                 action: #selector(searchView.endEditing)
             )
         )
@@ -262,7 +263,7 @@ extension SearchVC: UIScrollViewDelegate {
 extension SearchVC: SearchViewDelegate {
     
     func searchModeHasChanged(_ searchMode: SearchMode) {
-        searchController.searchBar.text = nil
+        searchView.searchBar.text = nil
         switch searchMode {
         case .beverages:
             tabBarController?.navigationItem.rightBarButtonItem = rightBarButton
@@ -285,7 +286,7 @@ extension SearchVC: SearchViewDelegate {
 extension SearchVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
+        guard let text = searchView.searchBar.text, !text.isEmpty else { return }
         
         switch searchView.searchMode {
         case .beverages:
@@ -296,35 +297,68 @@ extension SearchVC: UISearchBarDelegate {
                 searchView.mapView.showAnnotations(searchView.mapView.annotations, animated: true)
             }
         }
+        searchView.endEditing(true)
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        switch searchView.searchMode {
+//        case .beverages:
+//            updateBeverages()
+//        case .restaurants:
+//            updateRestaurantsInRadius(searchView.mapView)
+//        }
+//    }
+//    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if
+//    }
+    
+}
+
+// MARK: - UITextFieldDelegate
+
+extension SearchVC: UITextFieldDelegate {
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
         switch searchView.searchMode {
         case .beverages:
             updateBeverages()
         case .restaurants:
             updateRestaurantsInRadius(searchView.mapView)
         }
+        return true
     }
     
 }
+
+
 
 // MARK: - MKMapViewDelegate
 
 extension SearchVC: MKMapViewDelegate {
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        guard !searchView.mapView.isHidden, !searchController.isActive else { return }
-        NSObject.cancelPreviousPerformRequests(
-            withTarget: self,
-            selector: #selector(updateRestaurantsInRadius(_:)),
-            object: searchView.mapView
-        )
-        perform(
-            #selector(updateRestaurantsInRadius(_:)),
-            with: searchView.mapView,
-            afterDelay: 0.75
-        )
+        guard !searchView.mapView.isHidden else { return }
+
+        func updateMap() {
+            NSObject.cancelPreviousPerformRequests(
+                withTarget: self,
+                selector: #selector(updateRestaurantsInRadius(_:)),
+                object: searchView.mapView
+            )
+            perform(
+                #selector(updateRestaurantsInRadius(_:)),
+                with: searchView.mapView,
+                afterDelay: 0.5
+            )
+        }
+        if let text = searchView.searchBar.text {
+            if text.isEmpty {
+                updateMap()
+            }
+        } else {
+            updateMap()
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {

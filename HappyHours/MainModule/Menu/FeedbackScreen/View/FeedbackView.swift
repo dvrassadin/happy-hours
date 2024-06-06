@@ -59,16 +59,15 @@ final class FeedbackView: UIView {
     private func setUpConstraints() {
         let tableViewBottomAnchor = tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         tableViewBottomAnchor.priority = .defaultLow
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             tableViewBottomAnchor,
             
             feedbackHeader.widthAnchor.constraint(equalTo: tableView.widthAnchor),
         ])
-        
     }
     
     func setUpAnswerInputView() {

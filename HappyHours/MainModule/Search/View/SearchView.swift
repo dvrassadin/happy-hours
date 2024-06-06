@@ -17,6 +17,7 @@ final class SearchView: UIView {
         didSet {
             changeSelectedView()
             delegate?.searchModeHasChanged(searchMode)
+            endEditing(true)
         }
     }
     private var addedID = Set<Int>()
@@ -24,6 +25,17 @@ final class SearchView: UIView {
     weak var delegate: SearchViewDelegate?
     
     // MARK: UI components
+    
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.tintColor = .main
+        searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = String(localized: "Search")
+        searchBar.searchTextField.textColor = .mainText
+//        searchBar.showsCancelButton = true
+        return searchBar
+    }()
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: SearchMode.allCases.map({ $0.name }))
@@ -41,6 +53,7 @@ final class SearchView: UIView {
         )
         tableView.backgroundColor = .background
         tableView.allowsSelection = true
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     
@@ -100,6 +113,7 @@ final class SearchView: UIView {
     }
     
     private func addSubviews() {
+        addSubview(searchBar)
         addSubview(segmentedControl)
         addSubview(tableView)
         addSubview(mapView)
@@ -110,13 +124,17 @@ final class SearchView: UIView {
     private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
-                segmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+                searchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+                searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+                searchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+                
+                segmentedControl.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
                 Constraints.textFieldAndButtonWidthConstraint(for: segmentedControl, on: self),
                 segmentedControl.centerXAnchor.constraint(equalTo: centerXAnchor),
                 
                 tableView.topAnchor.constraint(
                     equalTo: segmentedControl.bottomAnchor,
-                    constant: 10
+                    constant: 5
                 ),
                 tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
                 tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -143,6 +161,10 @@ final class SearchView: UIView {
     }
     
     // MARK: User interaction
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        endEditing(true)
+    }
     
     private func setUpUserInteraction() {
         segmentedControl.addAction(UIAction { [weak self] _ in
