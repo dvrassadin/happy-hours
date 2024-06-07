@@ -15,10 +15,10 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     private lazy var editProfileView = EditProfileView()
     private let model: ProfileModelProtocol
-    private var avatar: UIImage? {
+    private var newAvatar: UIImage? {
         didSet {
             DispatchQueue.main.async {
-                self.editProfileView.userImageView.image = self.avatar
+                self.editProfileView.userImageView.image = self.newAvatar
             }
             avatarWasChanged = true
         }
@@ -27,9 +27,9 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
 
     // MARK: Lifecycle
     
-    init(model: ProfileModelProtocol, avatar: UIImage?) {
+    init(model: ProfileModelProtocol) {
         self.model = model
-        self.avatar = avatar
+//        self.avatar = avatar
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,8 +43,23 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let user = model.user {
-            editProfileView.set(user: user, avatar: avatar)
+        Task {
+            do {
+                let user = try await model.user
+                let avatarImage = await model.getAvatarImage()
+                editProfileView.set(user: user, avatar: avatarImage)
+            } catch AuthError.invalidToken {
+                showAlert(.invalidToken) { _ in
+                    UIApplication.shared.sendAction(
+                        #selector(LogOutDelegate.logOut),
+                        to: nil,
+                        from: self,
+                        for: nil
+                    )
+                }
+            } catch {
+                showAlert(.getUserServerError)
+            }
         }
         setUpNavigation()
     }
@@ -84,8 +99,8 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                 editProfileView.isUpdating = false
             }
             do {
-                if avatarWasChanged, let avatar {
-                    let compressedAvatar = compress(image: avatar, toMB: 3)
+                if avatarWasChanged, let newAvatar {
+                    let compressedAvatar = compress(image: newAvatar, toMB: 3)
                     try await model.editUser(
                         imageData: compressedAvatar,
                         name: name,
@@ -174,7 +189,7 @@ extension EditProfileVC: PHPickerViewControllerDelegate {
             }
             guard let image = reading as? UIImage else { return }
             
-            self.avatar = image
+            self.newAvatar = image
         }
     }
     

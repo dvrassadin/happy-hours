@@ -45,9 +45,12 @@ final class ProfileVC: UIViewController, AlertPresenter {
     
     private func setUpNavigation() {
         profileView.profileButton.addAction(UIAction { [weak self] _ in
-            guard let self, model.user != nil else { return }
-            let editProfileVC = EditProfileVC(model: self.model, avatar: profileView.userImageView.image)
+            guard let self else { return }
+            let editProfileVC = EditProfileVC(model: self.model)
             self.navigationController?.pushViewController(editProfileVC, animated: true)
+//            guard let self, model.user != nil else { return }
+//            let editProfileVC = EditProfileVC(model: self.model, avatar: profileView.userImageView.image)
+//            self.navigationController?.pushViewController(editProfileVC, animated: true)
         }, for: .touchUpInside)
         
         profileView.logOutButton.addAction(UIAction { [weak self] _ in
@@ -85,14 +88,14 @@ final class ProfileVC: UIViewController, AlertPresenter {
     private func setUser() {
         Task {
             do {
-                try await model.downloadUser()
-                guard let user = model.user else { 
-                    showAlert(.getUserServerError)
-                    return
-                }
-                profileView.nameLabel.text = user.name
-                profileView.emailLabel.text = user.email
-                if let avatar = await model.avatarImage {
+//                try await model.downloadUser()
+//                guard let user = model.user else { 
+//                    showAlert(.getUserServerError)
+//                    return
+//                }
+                profileView.nameLabel.text = try await model.user.name
+                profileView.emailLabel.text = try await model.user.email
+                if let avatar = await model.getAvatarImage() {
                     profileView.userImageView.image = avatar
                 }
             } catch AuthError.invalidToken {
@@ -112,19 +115,19 @@ final class ProfileVC: UIViewController, AlertPresenter {
 
 }
 
-// MARK: - Preview
-
-@available(iOS 17, *)
-#Preview {
-    
-    ProfileVC(
-        model: ProfileModel(
-            networkService: NetworkService(
-                authService: AuthService(
-                    keyChainService: KeyChainService()
-                )
-            )
-        )
-    )
-    
-}
+//// MARK: - Preview
+//
+//@available(iOS 17, *)
+//#Preview {
+//    
+//    ProfileVC(
+//        model: ProfileModel(
+//            networkService: NetworkService(
+//                authService: AuthService(
+//                    keyChainService: KeyChainService()
+//                )
+//            )
+//        )
+//    )
+//    
+//}

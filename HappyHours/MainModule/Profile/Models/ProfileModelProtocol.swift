@@ -9,10 +9,9 @@ import UIKit
 
 protocol ProfileModelProtocol {
     
-    var user: User? { get }
-    var avatarImage: UIImage? { get async }
-    
-    func downloadUser() async throws
+    var user: User { get async throws }
+
+    func getAvatarImage() async -> UIImage?
     func logOut() async throws
     func editUser(imageData: Data?, name: String?, dateOfBirth: Date?) async throws
     

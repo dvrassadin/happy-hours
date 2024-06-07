@@ -331,8 +331,6 @@ extension SearchVC: UITextFieldDelegate {
     
 }
 
-
-
 // MARK: - MKMapViewDelegate
 
 extension SearchVC: MKMapViewDelegate {
@@ -390,8 +388,10 @@ extension SearchVC: MKMapViewDelegate {
                 networkService: model.networkService
             )
             let menuVC = MenuVC(model: menuModel, userService: userService, areOrdersEnable: false)
-            menuVC.sheetPresentationController?.prefersGrabberVisible = true
-            present(menuVC, animated: true)
+            let navigationController = UINavigationController(rootViewController: menuVC)
+            navigationController.navigationBar.tintColor = .main
+            navigationController.sheetPresentationController?.prefersGrabberVisible = true
+            present(navigationController, animated: true)
         } else {
             restaurantMarkerView.startActivityIndicator()
             Task {

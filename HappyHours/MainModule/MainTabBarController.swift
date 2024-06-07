@@ -83,7 +83,11 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
         )
         orderVC.tabBarItem = ordersTabBarItem
         
-        let profileModel: ProfileModelProtocol = ProfileModel(networkService: networkService)
+        let profileModel: ProfileModelProtocol = ProfileModel(
+            networkService: networkService,
+            userService: userService,
+            subscriptionService: subscriptionService
+        )
         let profileVC = ProfileVC(model: profileModel)
         let profileTabBarItem = UITabBarItem(
             title: String(localized: "Profile"),
