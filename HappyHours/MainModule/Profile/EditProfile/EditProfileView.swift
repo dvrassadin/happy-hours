@@ -33,11 +33,13 @@ final class EditProfileView: UIView {
     
     // MARK: UI components
     
-    let userImageView: UIImageView = {
+    private let defaultAvatar: UIImage? = UIImage(
+        systemName: "person.circle.fill"
+    )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+    
+    lazy var userImageView: UIImageView = {
         let imageView = UIImageView(
-            image: UIImage(
-                systemName: "person.circle.fill"
-            )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+            image: defaultAvatar
         )
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -189,14 +191,23 @@ final class EditProfileView: UIView {
         )
     }
     
-    func set(user: User, avatar: UIImage?) {
-        if let avatar {
-            userImageView.image = avatar
-        }
+    func set(user: User) {
+//        if let avatar {
+//            userImageView.image = avatar
+//        }
         nameTextField.text = user.name
         if let dateOfBirth = user.dateOfBirth {
             datePicker.date = dateOfBirth
         }
         emailTextField.text = user.email
     }
+    
+    func set(avatar: UIImage?) {
+        if let avatar {
+            userImageView.image = avatar
+        } else {
+            userImageView.image = defaultAvatar
+        }
+    }
+    
 }

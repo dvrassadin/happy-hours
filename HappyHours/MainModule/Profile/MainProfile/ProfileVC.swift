@@ -39,6 +39,7 @@ final class ProfileVC: UIViewController, AlertPresenter {
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         setUser()
+        setSubscription()
     }
     
     // MARK: Navigation
@@ -48,13 +49,38 @@ final class ProfileVC: UIViewController, AlertPresenter {
             guard let self else { return }
             let editProfileVC = EditProfileVC(model: self.model)
             self.navigationController?.pushViewController(editProfileVC, animated: true)
-//            guard let self, model.user != nil else { return }
-//            let editProfileVC = EditProfileVC(model: self.model, avatar: profileView.userImageView.image)
-//            self.navigationController?.pushViewController(editProfileVC, animated: true)
         }, for: .touchUpInside)
         
         profileView.logOutButton.addAction(UIAction { [weak self] _ in
             self?.logOut()
+        }, for: .touchUpInside)
+        
+        profileView.subscriptionButton.addAction(UIAction { [weak self] _ in
+            let alertController = UIAlertController(
+                title: "Subscription will be available soon.",
+                message: nil,
+                preferredStyle: .alert
+            )
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alertController, animated: true)
+//            guard let self else { return }
+//            Task {
+//                do {
+//                    if try await self.model.isSubscriptionActive {
+//                        
+//                    } else {
+//                        let subscriptionModel: SubscriptionModelProtocol = SubscriptionModel(
+//                            networkService: self.model.networkService,
+//                            subscriptionService: self.model.subscriptionService)
+//                        let subscriptionPlansVC = SubscriptionPlansVC(model: subscriptionModel)
+//                        self.navigationController?.pushViewController(
+//                            subscriptionPlansVC, animated: true
+//                        )
+//                    }
+//                } catch AuthError.invalidToken {
+//                    self.logOutWithAlert()
+//                }
+//            }
         }, for: .touchUpInside)
     }
     
@@ -88,46 +114,37 @@ final class ProfileVC: UIViewController, AlertPresenter {
     private func setUser() {
         Task {
             do {
-//                try await model.downloadUser()
-//                guard let user = model.user else { 
-//                    showAlert(.getUserServerError)
-//                    return
-//                }
-                profileView.nameLabel.text = try await model.user.name
-                profileView.emailLabel.text = try await model.user.email
-                if let avatar = await model.getAvatarImage() {
-                    profileView.userImageView.image = avatar
-                }
+                profileView.set(user: try await model.user)
+                profileView.set(avatar: await model.getAvatarImage())
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                self.logOut()
             } catch {
                 showAlert(.getUserServerError)
             }
         }
     }
+    
+    // MARK: Set subscription
+    
+    private func setSubscription() {
+        Task {
+            do {
+                let subscription = try await model.subscription
+                profileView.set(subscription: subscription)
+            } catch AuthError.invalidToken {
+                logOut()
+            } catch {
+                profileView.setSubscriptionError()
+            }
+        }
+    }
 
 }
-
-//// MARK: - Preview
-//
-//@available(iOS 17, *)
-//#Preview {
-//    
-//    ProfileVC(
-//        model: ProfileModel(
-//            networkService: NetworkService(
-//                authService: AuthService(
-//                    keyChainService: KeyChainService()
-//                )
-//            )
-//        )
-//    )
-//    
-//}

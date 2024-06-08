@@ -72,14 +72,15 @@ final class LeaveFeedbackVC: UIViewController, AlertPresenter {
 //                    menuVC.updateFeedback()
 //                }
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.sendFeedbackServerError)
             }

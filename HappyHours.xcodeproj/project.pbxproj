@@ -34,6 +34,8 @@
 		512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D00682BD7AAAD0057D696 /* EditProfileView.swift */; };
 		512D006B2BD7AB830057D696 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D006A2BD7AB830057D696 /* EditProfileVC.swift */; };
 		512D006D2BD803150057D696 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512D006C2BD803150057D696 /* AlertPresenter.swift */; };
+		5133893D2C12D4E900F545AE /* SubscriptionModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5133893C2C12D4E900F545AE /* SubscriptionModelProtocol.swift */; };
+		5133893F2C12D4FA00F545AE /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5133893E2C12D4FA00F545AE /* SubscriptionModel.swift */; };
 		5138299D2BCD747800AA4878 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5138299C2BCD747800AA4878 /* ResetPasswordView.swift */; };
 		5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5138299E2BCD74AB00AA4878 /* ResetPasswordVC.swift */; };
 		513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513829A12BCD90D500AA4878 /* OneTimeCodeVC.swift */; };
@@ -54,6 +56,9 @@
 		5148B92B2BD40E8600659D73 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B92A2BD40E8600659D73 /* Constraints.swift */; };
 		5148B95A2BD61C8300659D73 /* RestaurantsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9592BD61C8300659D73 /* RestaurantsResponse.swift */; };
 		5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */; };
+		5150BA172C1437F000895045 /* SubscriptionPlansVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA162C1437F000895045 /* SubscriptionPlansVC.swift */; };
+		5150BA192C14389800895045 /* SubscriptionPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA182C14389800895045 /* SubscriptionPlansView.swift */; };
+		5150BA1B2C143B5200895045 /* SubscriptionPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */; };
 		515178302C04676000EAFFA4 /* MenuTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151782F2C04676000EAFFA4 /* MenuTabCollectionViewCell.swift */; };
 		515178572C04CABB00EAFFA4 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515178562C04CABB00EAFFA4 /* FeedbackTableViewCell.swift */; };
 		5151785D2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151785C2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift */; };
@@ -150,6 +155,8 @@
 		512D00682BD7AAAD0057D696 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		512D006A2BD7AB830057D696 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		512D006C2BD803150057D696 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		5133893C2C12D4E900F545AE /* SubscriptionModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModelProtocol.swift; sourceTree = "<group>"; };
+		5133893E2C12D4FA00F545AE /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
 		5138299C2BCD747800AA4878 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		5138299E2BCD74AB00AA4878 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		513829A12BCD90D500AA4878 /* OneTimeCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeVC.swift; sourceTree = "<group>"; };
@@ -170,6 +177,9 @@
 		5148B92A2BD40E8600659D73 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		5148B9592BD61C8300659D73 /* RestaurantsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsResponse.swift; sourceTree = "<group>"; };
 		5148B95B2BD6201200659D73 /* RestaurantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsTableViewCell.swift; sourceTree = "<group>"; };
+		5150BA162C1437F000895045 /* SubscriptionPlansVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlansVC.swift; sourceTree = "<group>"; };
+		5150BA182C14389800895045 /* SubscriptionPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlansView.swift; sourceTree = "<group>"; };
+		5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanTableViewCell.swift; sourceTree = "<group>"; };
 		5151782F2C04676000EAFFA4 /* MenuTabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabCollectionViewCell.swift; sourceTree = "<group>"; };
 		515178562C04CABB00EAFFA4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		5151785C2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveFeedbackTableViewCell.swift; sourceTree = "<group>"; };
@@ -301,6 +311,8 @@
 		511104B92C101A9B005E13AE /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
+				5150BA152C1437DA00895045 /* SubscriptionPlans */,
+				5133893B2C12D4D600F545AE /* Model */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -370,6 +382,15 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		5133893B2C12D4D600F545AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5133893C2C12D4E900F545AE /* SubscriptionModelProtocol.swift */,
+				5133893E2C12D4FA00F545AE /* SubscriptionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5138299B2BCD745300AA4878 /* ResetPassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +452,16 @@
 				512D006C2BD803150057D696 /* AlertPresenter.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		5150BA152C1437DA00895045 /* SubscriptionPlans */ = {
+			isa = PBXGroup;
+			children = (
+				5150BA162C1437F000895045 /* SubscriptionPlansVC.swift */,
+				5150BA182C14389800895045 /* SubscriptionPlansView.swift */,
+				5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */,
+			);
+			path = SubscriptionPlans;
 			sourceTree = "<group>";
 		};
 		515178602C05BD2700EAFFA4 /* LeaveFeedbackScreen */ = {
@@ -795,6 +826,7 @@
 				51AC3B1B2BE698670021F505 /* User.swift in Sources */,
 				515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */,
 				51253A422BEF56FF00106D57 /* PlaceOrder.swift in Sources */,
+				5150BA1B2C143B5200895045 /* SubscriptionPlanTableViewCell.swift in Sources */,
 				513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */,
 				51AC3B132BE3EEBD0021F505 /* CreateUser.swift in Sources */,
 				512D006B2BD7AB830057D696 /* EditProfileVC.swift in Sources */,
@@ -810,12 +842,14 @@
 				5184614E2BFD0652001C02B6 /* OrdersVC.swift in Sources */,
 				511104BE2C105297005E13AE /* UserServiceProtocol.swift in Sources */,
 				51CF885E2BC3B8D800196E8A /* AppDelegate.swift in Sources */,
+				5133893D2C12D4E900F545AE /* SubscriptionModelProtocol.swift in Sources */,
 				511104BC2C10528B005E13AE /* UserService.swift in Sources */,
 				518B1EA32BECAEB4004F203F /* AuthServiceDelegate.swift in Sources */,
 				515178572C04CABB00EAFFA4 /* FeedbackTableViewCell.swift in Sources */,
 				516C202F2BE9E0C700FCBFB1 /* MenuVC.swift in Sources */,
 				513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */,
 				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
+				5133893F2C12D4FA00F545AE /* SubscriptionModel.swift in Sources */,
 				5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */,
 				5148B92B2BD40E8600659D73 /* Constraints.swift in Sources */,
 				515EF0512BDFE574008795BA /* NetworkServiceProtocol.swift in Sources */,
@@ -843,6 +877,7 @@
 				515178302C04676000EAFFA4 /* MenuTabCollectionViewCell.swift in Sources */,
 				51253A212BEE2B6800106D57 /* KeyChainServiceProtocol.swift in Sources */,
 				511104A82C0DCD8B005E13AE /* SubscriptionPlan.swift in Sources */,
+				5150BA192C14389800895045 /* SubscriptionPlansView.swift in Sources */,
 				512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */,
 				51BC17632BE3A3A90095C104 /* LogIn.swift in Sources */,
 				518B1E782BEA4476004F203F /* MenuTableViewCell.swift in Sources */,
@@ -885,6 +920,7 @@
 				51AC3B152BE3F8300021F505 /* CreateUserResponse.swift in Sources */,
 				51B329652BC64C6300D7ADFB /* SignInView.swift in Sources */,
 				5103C66D2BE0E3B2009CFCB7 /* AuthorizationModelProtocol.swift in Sources */,
+				5150BA172C1437F000895045 /* SubscriptionPlansVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

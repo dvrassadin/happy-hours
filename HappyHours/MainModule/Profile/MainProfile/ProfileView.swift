@@ -11,12 +11,12 @@ final class ProfileView: UIView {
     
     // MARK: UI components
     
-    let userImageView: UIImageView = {
-        let imageView = UIImageView(
-            image: UIImage(
-                systemName: "person.circle.fill"
-            )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
-        )
+    private let defaultAvatar = UIImage(
+        systemName: "person.circle.fill"
+    )?.withTintColor(.TextField.placeholder, renderingMode: .alwaysOriginal)
+    
+    private lazy var userImageView: UIImageView = {
+        let imageView = UIImageView(image: defaultAvatar)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 40
@@ -24,7 +24,7 @@ final class ProfileView: UIView {
         return imageView
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
@@ -32,7 +32,7 @@ final class ProfileView: UIView {
         return label
     }()
     
-    let emailLabel: UILabel = {
+    private let emailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
@@ -48,6 +48,37 @@ final class ProfileView: UIView {
     }()
     
     let profileButton = CommonButton(title: String(localized: "Edit Profile"))
+    
+    private let subscriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .mainText
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.text = String(localized: "Subscription")
+        return label
+    }()
+    
+    let subscriptionButton: UIButton = {
+        let button = UIButton(configuration: .borderedProminent())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration?.baseBackgroundColor = .white
+        button.configuration?.baseForegroundColor = .mainText
+        button.configuration?.imagePlacement = .trailing
+        button.configuration?.titleAlignment = .leading
+        button.configuration?.titlePadding = 10
+        button.configuration?.buttonSize = .large
+        button.contentHorizontalAlignment = .fill
+        button.isEnabled = false
+        button.configurationUpdateHandler = { button in
+            switch button.state {
+            case .disabled:
+                button.configuration?.image = nil
+            default:
+                button.configuration?.image = UIImage(systemName: "chevron.right")
+            }
+        }
+        return button
+    }()
     
     let logOutButton = CommonButton(title: String(localized: "Log Out"), isTinted: true)
 
@@ -76,6 +107,8 @@ final class ProfileView: UIView {
         stackView.addArrangedSubview(emailLabel)
         addSubview(stackView)
         addSubview(profileButton)
+        addSubview(subscriptionLabel)
+        addSubview(subscriptionButton)
         addSubview(logOutButton)
     }
     
@@ -100,7 +133,7 @@ final class ProfileView: UIView {
                 stackView.topAnchor.constraint(equalTo: userImageView.topAnchor),
                 stackView.trailingAnchor.constraint(
                     equalTo: safeAreaLayoutGuide.trailingAnchor,
-                    constant: -2
+                    constant: -10
                 ),
                 stackView.bottomAnchor.constraint(equalTo: userImageView.bottomAnchor),
                 
@@ -108,6 +141,14 @@ final class ProfileView: UIView {
                 Constraints.textFieldAndButtonHeighConstraint(for: profileButton, on: self),
                 Constraints.textFieldAndButtonWidthConstraint(for: profileButton, on: self),
                 profileButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+                subscriptionLabel.topAnchor.constraint(equalTo: profileButton.bottomAnchor, constant: 20),
+                subscriptionLabel.leadingAnchor.constraint(equalTo: userImageView.leadingAnchor),
+                subscriptionLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+                
+                subscriptionButton.topAnchor.constraint(equalTo: subscriptionLabel.bottomAnchor, constant: 5),
+                subscriptionButton.leadingAnchor.constraint(equalTo: subscriptionLabel.leadingAnchor),
+                subscriptionButton.trailingAnchor.constraint(equalTo: subscriptionLabel.trailingAnchor),
                 
                 logOutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 Constraints.textFieldAndButtonWidthConstraint(for: logOutButton, on: self),
@@ -119,6 +160,44 @@ final class ProfileView: UIView {
                 )
             ]
         )
+    }
+    
+    func set(user: User) {
+        nameLabel.text = user.name
+        emailLabel.text = user.email
+    }
+    
+    func set(avatar: UIImage?) {
+        if let avatar {
+            userImageView.image = avatar
+        } else {
+            userImageView.image = defaultAvatar
+        }
+    }
+    
+    func set(subscription: Subscription?) {
+        if let subscription {
+            subscriptionButton.configuration?.title = subscription.plan.name
+            subscriptionButton.configuration?.subtitle = String(
+                localized: "\(subscription.plan.duration) membership\nValid through \(subscription.endDate.formatted())"
+            )
+        } else {
+            subscriptionButton.configuration?.title = String(
+                localized: "You do not have a subscription"
+            )
+            subscriptionButton.configuration?.subtitle = String(
+                localized: "Select your subscription plan."
+            )
+        }
+        subscriptionButton.isEnabled = true
+    }
+    
+    func setSubscriptionError() {
+        subscriptionButton.configuration?.title = String(
+            localized: "Failed to load subscription information"
+        )
+        subscriptionButton.configuration?.subtitle = nil
+        subscriptionButton.isEnabled = false
     }
     
 }

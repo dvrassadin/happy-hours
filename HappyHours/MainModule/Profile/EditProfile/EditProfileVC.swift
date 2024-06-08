@@ -29,7 +29,6 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     
     init(model: ProfileModelProtocol) {
         self.model = model
-//        self.avatar = avatar
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -46,17 +45,19 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         Task {
             do {
                 let user = try await model.user
+                editProfileView.set(user: user)
                 let avatarImage = await model.getAvatarImage()
-                editProfileView.set(user: user, avatar: avatarImage)
+                editProfileView.set(avatar: avatarImage)
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.getUserServerError)
             }
@@ -115,14 +116,15 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                 }
                 navigationController?.popViewController(animated: true)
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.editUserServerError)
             }

@@ -11,27 +11,30 @@ final class ProfileModel: ProfileModelProtocol {
     
     // MARK: Properties
     
-    private let networkService: NetworkServiceProtocol
+    let networkService: NetworkServiceProtocol
     private let userService: UserServiceProtocol
-    private let subscriptionService: SubscriptionServiceProtocol
-//    private(set) var user: User?
+    let subscriptionService: SubscriptionServiceProtocol
     var user: User {
         get async throws {
             try await userService.getUser()
         }
     }
-//    private var avatarImage: UIImage? {
-//        get async {
-//            guard let url = try? await user.avatar,
-//                  let data = await networkService.getImageData(from: url),
-//                  let image = UIImage(data: data)
-//            else { return nil }
-//            return image
-//        }
-//    }
     private var avatarImage: UIImage?
     private var needUpdateAvatarImage: Bool = true
-//    private(set) var avatarImage: UIImage?
+    var subscription: Subscription? {
+        get async throws {
+            try await subscriptionService.getSubscription()
+        }
+    }
+    var isSubscriptionActive: Bool {
+        get async throws {
+            guard let subscription = try await subscriptionService.getSubscription() else {
+                return false
+            }
+            return subscription.isActive && subscription.endDate > .now
+        }
+    }
+    
     
     // MARK: Lifecycle
     
@@ -47,9 +50,6 @@ final class ProfileModel: ProfileModelProtocol {
     
     // MARK: Updating user
     
-//    func downloadUser() async throws {
-//        try await self.user = networkService.getUser(allowRetry: true)
-//    }
     func getAvatarImage() async -> UIImage? {
         if needUpdateAvatarImage {
             needUpdateAvatarImage = false
@@ -63,7 +63,6 @@ final class ProfileModel: ProfileModelProtocol {
     }
     
     func editUser(imageData: Data?, name: String?, dateOfBirth: Date?) async throws {
-//        do {
         if let _ = imageData {
             needUpdateAvatarImage = true
         }
@@ -74,10 +73,6 @@ final class ProfileModel: ProfileModelProtocol {
             allowRetry: true
         )
         await userService.setNeedUpdateUser()
-//            try await self.user = networkService.getUser(allowRetry: true)
-//        } catch {
-//            throw error
-//        }
     }
     
     // MARK: Logout

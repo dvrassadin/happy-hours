@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ membership\nValid through %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ membership\nValid through %2$@"
+          }
+        }
+      }
+    },
     "%lld replies" : {
       "localizations" : {
         "en" : {
@@ -110,6 +120,9 @@
     "Failed to get list of restaurants. Try again." : {
 
     },
+    "Failed to get subscription pans." : {
+
+    },
     "Failed to get subscription status. You must have a subscription to scan codes." : {
 
     },
@@ -123,6 +136,9 @@
 
     },
     "Failed to get your credentials." : {
+
+    },
+    "Failed to load subscription information" : {
 
     },
     "Failed to make the order. It may not be happy hours or you may have ordered recently." : {
@@ -243,6 +259,9 @@
     "Search" : {
 
     },
+    "Select your subscription plan." : {
+
+    },
     "Send" : {
 
     },
@@ -253,6 +272,9 @@
 
     },
     "Sign up Here" : {
+
+    },
+    "Subscription" : {
 
     },
     "Subscription status is updating... " : {
@@ -316,6 +338,9 @@
 
     },
     "Update" : {
+
+    },
+    "You do not have a subscription" : {
 
     },
     "You do not have an active subscription. 🔴" : {

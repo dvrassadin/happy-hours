@@ -149,14 +149,15 @@ extension ScannerVC: AVCaptureMetadataOutputObjectsDelegate {
                 navigationController?.pushViewController(menuVC, animated: true)
                 activityIndicator.stopAnimating()
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 self.activityIndicator.stopAnimating()
                 showAlert(.barcodeServerError) { _ in

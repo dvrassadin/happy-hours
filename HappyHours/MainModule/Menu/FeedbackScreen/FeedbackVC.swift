@@ -65,14 +65,15 @@ final class FeedbackVC: UIViewController, AlertPresenter {
                     )
                 }
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.getFeedbackAnswersServerError)
             }
@@ -88,14 +89,15 @@ final class FeedbackVC: UIViewController, AlertPresenter {
                     feedbackView.setUpAnswerInputView()
                 }
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             }
         }
     }
@@ -111,14 +113,15 @@ final class FeedbackVC: UIViewController, AlertPresenter {
                 updateAnswers(withScroll: true)
                 feedbackView.answerInputView.textView.text.removeAll()
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.sendFeedbackAnswerServerError)
             }

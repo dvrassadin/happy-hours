@@ -88,14 +88,15 @@ final class MenuVC: UIViewController, AlertPresenter {
                 menuView.tableView.layoutIfNeeded()
                 menuView.tableView.setContentOffset(contentOffset, animated: false)
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 menuView.tableView.reloadData()
                 showAlert(.gettingMenuServerError)
@@ -134,14 +135,15 @@ final class MenuVC: UIViewController, AlertPresenter {
                     )
                 }
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 menuView.tableView.reloadData()
                 showAlert(.getFeedbackServerError)
@@ -276,14 +278,15 @@ extension MenuVC: MenuTableViewCellDelegate {
                 try await model.makeOrder(order)
                 showAlert(.orderMade)
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.makingOrderServerError)
             }

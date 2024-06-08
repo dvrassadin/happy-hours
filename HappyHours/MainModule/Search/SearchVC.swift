@@ -113,14 +113,15 @@ final class SearchVC: UISearchController, AlertPresenter {
                     searchView.addMapAnnotation(restaurant: restaurant)
                 }
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.getRestaurantsServerError)
             }
@@ -132,14 +133,15 @@ final class SearchVC: UISearchController, AlertPresenter {
             try await model.updateRestaurants(search: search)
             searchView.addNewMapAnnotations(restaurants: model.restaurants)
         } catch AuthError.invalidToken {
-            showAlert(.invalidToken) { _ in
-                UIApplication.shared.sendAction(
-                    #selector(LogOutDelegate.logOut),
-                    to: nil,
-                    from: self,
-                    for: nil
-                )
-            }
+//            showAlert(.invalidToken) { _ in
+//                UIApplication.shared.sendAction(
+//                    #selector(LogOutDelegate.logOut),
+//                    to: nil,
+//                    from: self,
+//                    for: nil
+//                )
+//            }
+            logOutWithAlert()
         } catch {
             showAlert(.getRestaurantsServerError)
         }
@@ -177,14 +179,15 @@ final class SearchVC: UISearchController, AlertPresenter {
                     searchView.tableView.reloadData()
                 }
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 searchView.showNothingFoundState()
                 showAlert(.beveragesServerError)

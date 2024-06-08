@@ -69,14 +69,15 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
                 try await model.getRestaurants(limit: 100, offset: 0)
                 restaurantsView.tableView.reloadData()
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 showAlert(.getRestaurantsServerError)
             }
@@ -92,14 +93,15 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
                 let isActive = try await subscriptionService.isSubscriptionActive
                 restaurantsView.subscriptionStatus = isActive ? .active : .noActive
             } catch AuthError.invalidToken {
-                showAlert(.invalidToken) { _ in
-                    UIApplication.shared.sendAction(
-                        #selector(LogOutDelegate.logOut),
-                        to: nil,
-                        from: self,
-                        for: nil
-                    )
-                }
+//                showAlert(.invalidToken) { _ in
+//                    UIApplication.shared.sendAction(
+//                        #selector(LogOutDelegate.logOut),
+//                        to: nil,
+//                        from: self,
+//                        for: nil
+//                    )
+//                }
+                logOutWithAlert()
             } catch {
                 restaurantsView.subscriptionStatus = .error
             }

@@ -7,6 +7,12 @@
 
 import UIKit
 
+// MARK: - AlertPresenter protocol
+
+protocol AlertPresenter: UIViewController { }
+
+// MARK: - Alert cases
+
 enum AlertType {
     
     case invalidEmail
@@ -39,9 +45,10 @@ enum AlertType {
     case noSubscriptionForScanning
     case getSubscriptionServerError
     case sendFeedbackAnswerServerError
+    case getSubscriptionPlansServerError
 }
 
-protocol AlertPresenter: UIViewController { }
+// MARK: Alert presenting
 
 extension AlertPresenter {
     
@@ -142,6 +149,9 @@ extension AlertPresenter {
         case .sendFeedbackAnswerServerError:
             title = String(localized: "Unable to Send")
             message = String(localized: "Failed to send your reply to this review.")
+        case .getSubscriptionPlansServerError:
+            title = String(localized: "Unable to Download")
+            message = String(localized: "Failed to get subscription pans.")
         }
         
         let alertController = UIAlertController(
@@ -152,6 +162,23 @@ extension AlertPresenter {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
         
         present(alertController, animated: true)
+    }
+    
+}
+
+// MARK: Log out
+
+extension AlertPresenter {
+    
+    func logOutWithAlert() {
+        showAlert(.invalidToken) { _ in
+            UIApplication.shared.sendAction(
+                #selector(LogOutDelegate.logOut),
+                to: nil,
+                from: self,
+                for: nil
+            )
+        }
     }
     
 }
