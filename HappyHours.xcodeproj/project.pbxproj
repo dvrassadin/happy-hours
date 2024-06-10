@@ -126,6 +126,9 @@
 		51CF88672BC3B8D900196E8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51CF88662BC3B8D900196E8A /* Assets.xcassets */; };
 		51CF886A2BC3B8D900196E8A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 51CF88692BC3B8D900196E8A /* Base */; };
 		51CF88722BC3B93000196E8A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 51CF88712BC3B93000196E8A /* .gitignore */; };
+		51DE3F422C174674008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE3F412C174674008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift */; };
+		51DE3F442C1747D2008D8CC1 /* SubscriptionPlanWithCheckmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE3F432C1747D2008D8CC1 /* SubscriptionPlanWithCheckmarkTableViewCell.swift */; };
+		51DE3F462C175027008D8CC1 /* FreeTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE3F452C175027008D8CC1 /* FreeTrial.swift */; };
 		51EEC06C2BE391C100780019 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEC06B2BE391C100780019 /* APIError.swift */; };
 /* End PBXBuildFile section */
 
@@ -251,6 +254,9 @@
 		51CF88692BC3B8D900196E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51CF886B2BC3B8D900196E8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51CF88712BC3B93000196E8A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		51DE3F412C174674008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanBasicTableViewCell.swift; sourceTree = "<group>"; };
+		51DE3F432C1747D2008D8CC1 /* SubscriptionPlanWithCheckmarkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanWithCheckmarkTableViewCell.swift; sourceTree = "<group>"; };
+		51DE3F452C175027008D8CC1 /* FreeTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrial.swift; sourceTree = "<group>"; };
 		51EEC06B2BE391C100780019 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -464,6 +470,8 @@
 			children = (
 				5150BA162C1437F000895045 /* SubscriptionPlansVC.swift */,
 				5150BA182C14389800895045 /* SubscriptionPlansView.swift */,
+				51DE3F412C174674008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift */,
+				51DE3F432C1747D2008D8CC1 /* SubscriptionPlanWithCheckmarkTableViewCell.swift */,
 				5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */,
 			);
 			path = SubscriptionPlans;
@@ -741,6 +749,7 @@
 				511104A72C0DCD8B005E13AE /* SubscriptionPlan.swift */,
 				511104B72C0F6F13005E13AE /* FeedbackAnswerCreate.swift */,
 				5150BA1C2C158A2600895045 /* Payment.swift */,
+				51DE3F452C175027008D8CC1 /* FreeTrial.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -866,6 +875,8 @@
 				513B6CC82BCF9F950006DD25 /* NewPasswordView.swift in Sources */,
 				5133893F2C12D4FA00F545AE /* SubscriptionModel.swift in Sources */,
 				5148B95C2BD6201200659D73 /* RestaurantsTableViewCell.swift in Sources */,
+				51DE3F462C175027008D8CC1 /* FreeTrial.swift in Sources */,
+				51DE3F422C174674008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift in Sources */,
 				5148B92B2BD40E8600659D73 /* Constraints.swift in Sources */,
 				515EF0512BDFE574008795BA /* NetworkServiceProtocol.swift in Sources */,
 				512D00652BD7894F0057D696 /* ProfileModelProtocol.swift in Sources */,
@@ -914,6 +925,7 @@
 				515178702C06E93000EAFFA4 /* FeedbackAnswersResponse.swift in Sources */,
 				518B1EA12BEBD453004F203F /* AuthServiceProtocol.swift in Sources */,
 				515178642C05BD8D00EAFFA4 /* LeaveFeedbackView.swift in Sources */,
+				51DE3F442C1747D2008D8CC1 /* SubscriptionPlanWithCheckmarkTableViewCell.swift in Sources */,
 				513829A22BCD90D500AA4878 /* OneTimeCodeVC.swift in Sources */,
 				51CF88602BC3B8D800196E8A /* SceneDelegate.swift in Sources */,
 				515178622C05BD7700EAFFA4 /* LeaveFeedbackVC.swift in Sources */,

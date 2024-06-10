@@ -67,7 +67,7 @@ final class PaymentVC: UIViewController, AlertPresenter {
     
     private func updateSubscription(statusCode: Int) {
         Task {
-            await model.updateSubscription(paymentURL: paymentURL)
+            await model.updateSubscription()
             navigationController?.popToRootViewController(animated: true)
         }
     }

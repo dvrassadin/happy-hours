@@ -13,5 +13,6 @@ protocol SubscriptionModelProtocol {
     
     func updateSubscriptionPlans() async throws
     func createPayment(subscriptionPlanID: Int) async throws -> URL
-    func updateSubscription(paymentURL: URL) async
+    func updateSubscription() async
+    func createFreeTrial(subscriptionPlanID: Int) async throws
 }

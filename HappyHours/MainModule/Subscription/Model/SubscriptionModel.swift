@@ -35,9 +35,15 @@ final class SubscriptionModel: SubscriptionModelProtocol {
         ).approvalUrl
     }
     
-    func updateSubscription(paymentURL: URL) async {
+    func updateSubscription() async {
         await subscriptionService.setNeedUpdateSubscription()
 //        try await networkService.executePayment(paymentURL: paymentURL)
+    }
+    
+    func createFreeTrial(subscriptionPlanID: Int) async throws {
+        let freeTrial = FreeTrial(planId: subscriptionPlanID)
+        try await networkService.createFreeTrial(freeTrial: freeTrial, allowRetry: true)
+        await subscriptionService.setNeedUpdateSubscription()
     }
     
 }

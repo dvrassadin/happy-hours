@@ -11,6 +11,8 @@ final class SubscriptionPlansView: UIView {
     
     // MARK: Properties
     
+    private let allowSubscribe: Bool
+    
     var isOpeningPayment: Bool = false {
         didSet {
             if isOpeningPayment {
@@ -59,18 +61,19 @@ final class SubscriptionPlansView: UIView {
         return label
     }()
     
-    private let bottomView: UIView = {
+    private lazy var bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .background
         return view
     }()
     
-    let subscribeButton = CommonButton(title: "Subscribe")
+    lazy var subscribeButton = CommonButton(title: "Subscribe")
     
     // MARK: Lifecycle
     
-    init() {
+    init(allowSubscribe: Bool) {
+        self.allowSubscribe = allowSubscribe
         super.init(frame: .zero)
         setUpUI()
     }
@@ -83,16 +86,20 @@ final class SubscriptionPlansView: UIView {
     
     private func setUpUI() {
         backgroundColor = .background
-        subscribeButton.isEnabled = tableView.indexPathForSelectedRow != nil
         addSubviews()
         setUpConstraints()
+        if allowSubscribe {
+            subscribeButton.isEnabled = tableView.indexPathForSelectedRow != nil
+        }
     }
     
     private func addSubviews() {
         tableView.tableHeaderView = headerLabel
         addSubview(tableView)
-        addSubview(bottomView)
-        bottomView.addSubview(subscribeButton)
+        if allowSubscribe {
+            addSubview(bottomView)
+            bottomView.addSubview(subscribeButton)
+        }
     }
     
     private func setUpConstraints() {
@@ -102,18 +109,22 @@ final class SubscriptionPlansView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            headerLabel.widthAnchor.constraint(equalTo: tableView.widthAnchor),
-            
-            bottomView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            subscribeButton.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 10),
-            subscribeButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            Constraints.textFieldAndButtonHeighConstraint(for: subscribeButton, on: self),
-            Constraints.textFieldAndButtonWidthConstraint(for: subscribeButton, on: bottomView),
-            subscribeButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            headerLabel.widthAnchor.constraint(equalTo: tableView.widthAnchor)
         ])
+        
+        if allowSubscribe {
+            NSLayoutConstraint.activate([
+                bottomView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                bottomView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                bottomView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                
+                subscribeButton.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 10),
+                subscribeButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+                Constraints.textFieldAndButtonHeighConstraint(for: subscribeButton, on: self),
+                Constraints.textFieldAndButtonWidthConstraint(for: subscribeButton, on: bottomView),
+                subscribeButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            ])
+        }
     }
 
 }

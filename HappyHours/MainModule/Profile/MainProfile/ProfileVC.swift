@@ -67,13 +67,23 @@ final class ProfileVC: UIViewController, AlertPresenter {
             guard let self else { return }
             Task {
                 do {
+                    let subscriptionModel: SubscriptionModelProtocol = SubscriptionModel(
+                    networkService: self.model.networkService,
+                    subscriptionService: self.model.subscriptionService)
+                    
                     if try await self.model.isSubscriptionActive {
-                        
+                        let subscriptionPlansVC = SubscriptionPlansVC(
+                            model: subscriptionModel,
+                            allowSubscribe: false
+                        )
+                        self.navigationController?.pushViewController(
+                            subscriptionPlansVC, animated: true
+                        )
                     } else {
-                        let subscriptionModel: SubscriptionModelProtocol = SubscriptionModel(
-                            networkService: self.model.networkService,
-                            subscriptionService: self.model.subscriptionService)
-                        let subscriptionPlansVC = SubscriptionPlansVC(model: subscriptionModel)
+                        let subscriptionPlansVC = SubscriptionPlansVC(
+                            model: subscriptionModel,
+                            allowSubscribe: true
+                        )
                         self.navigationController?.pushViewController(
                             subscriptionPlansVC, animated: true
                         )

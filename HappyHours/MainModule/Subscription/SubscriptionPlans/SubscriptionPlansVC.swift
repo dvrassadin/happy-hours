@@ -11,14 +11,16 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
 
     // MARK: Properties
     
-    private lazy var subscriptionPlansView = SubscriptionPlansView()
+    private lazy var subscriptionPlansView = SubscriptionPlansView(allowSubscribe: allowSubscribe)
     private let model: SubscriptionModelProtocol
+    private let allowSubscribe: Bool
     private var selectedIndexPath: IndexPath?
     
     // MARK: Lifecycle
     
-    init(model: SubscriptionModelProtocol) {
+    init(model: SubscriptionModelProtocol, allowSubscribe: Bool) {
         self.model = model
+        self.allowSubscribe = allowSubscribe
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,8 +37,10 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
         title = String(localized: "Subscription Plans")
         subscriptionPlansView.tableView.dataSource = self
         subscriptionPlansView.tableView.delegate = self
-        setUpNavigation()
         updateSubscriptions()
+        if allowSubscribe {
+            setUpNavigation()
+        }
     }
     
     // MARK: Update subscriptions
@@ -61,8 +65,25 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
             guard let self, let selectedIndexPath else { return }
             
             let subscriptionPlan = self.model.subscriptionPlans[selectedIndexPath.row]
-            self.goToPaymentVC(subscriptionPlanID: subscriptionPlan.id)
+            if subscriptionPlan.freeTrialDays > 0 {
+                createFreeTrial(subscriptionPlanID: subscriptionPlan.id)
+            } else {
+                self.goToPaymentVC(subscriptionPlanID: subscriptionPlan.id)
+            }
         }, for: .touchUpInside)
+    }
+    
+    private func createFreeTrial(subscriptionPlanID: Int) {
+        Task {
+            do {
+                try await model.createFreeTrial(subscriptionPlanID: subscriptionPlanID)
+                navigationController?.popToRootViewController(animated: true)
+            } catch AuthError.invalidToken {
+                logOutWithAlert()
+            } catch {
+                showAlert(.createFreeTrialServerError)
+            }
+        }
     }
 
     private func goToPaymentVC(subscriptionPlanID: Int) {
