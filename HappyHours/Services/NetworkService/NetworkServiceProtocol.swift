@@ -70,4 +70,6 @@ protocol NetworkServiceProtocol {
     func sendFeedbackAnswer(_ feedbackAnswer: FeedbackAnswerCreate) async throws
     func getActiveSubscription(allowRetry: Bool) async throws -> Subscription
     func getSubscriptionPlans(allowRetry: Bool) async throws -> [SubscriptionPlan]
+    func createPayment(subscriptionPlanID: Int, allowRetry: Bool) async throws -> Payment
+//    func executePayment(paymentURL: URL) async throws
 }

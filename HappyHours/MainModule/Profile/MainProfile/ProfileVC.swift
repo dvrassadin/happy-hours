@@ -34,6 +34,7 @@ final class ProfileVC: UIViewController, AlertPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigation()
+        title = String(localized: "Profile")
     }
     
     override func viewIsAppearing(_ animated: Bool) {
@@ -56,31 +57,31 @@ final class ProfileVC: UIViewController, AlertPresenter {
         }, for: .touchUpInside)
         
         profileView.subscriptionButton.addAction(UIAction { [weak self] _ in
-            let alertController = UIAlertController(
-                title: "Subscription will be available soon.",
-                message: nil,
-                preferredStyle: .alert
-            )
-            alertController.addAction(UIAlertAction(title: "OK", style: .default))
-            self?.present(alertController, animated: true)
-//            guard let self else { return }
-//            Task {
-//                do {
-//                    if try await self.model.isSubscriptionActive {
-//                        
-//                    } else {
-//                        let subscriptionModel: SubscriptionModelProtocol = SubscriptionModel(
-//                            networkService: self.model.networkService,
-//                            subscriptionService: self.model.subscriptionService)
-//                        let subscriptionPlansVC = SubscriptionPlansVC(model: subscriptionModel)
-//                        self.navigationController?.pushViewController(
-//                            subscriptionPlansVC, animated: true
-//                        )
-//                    }
-//                } catch AuthError.invalidToken {
-//                    self.logOutWithAlert()
-//                }
-//            }
+//            let alertController = UIAlertController(
+//                title: "Subscription will be available soon.",
+//                message: nil,
+//                preferredStyle: .alert
+//            )
+//            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+//            self?.present(alertController, animated: true)
+            guard let self else { return }
+            Task {
+                do {
+                    if try await self.model.isSubscriptionActive {
+                        
+                    } else {
+                        let subscriptionModel: SubscriptionModelProtocol = SubscriptionModel(
+                            networkService: self.model.networkService,
+                            subscriptionService: self.model.subscriptionService)
+                        let subscriptionPlansVC = SubscriptionPlansVC(model: subscriptionModel)
+                        self.navigationController?.pushViewController(
+                            subscriptionPlansVC, animated: true
+                        )
+                    }
+                } catch AuthError.invalidToken {
+                    self.logOutWithAlert()
+                }
+            }
         }, for: .touchUpInside)
     }
     
@@ -135,12 +136,16 @@ final class ProfileVC: UIViewController, AlertPresenter {
     // MARK: Set subscription
     
     private func setSubscription() {
+        profileView.isLoadingSubscription = true
         Task {
+            defer {
+                profileView.isLoadingSubscription = false
+            }
             do {
                 let subscription = try await model.subscription
                 profileView.set(subscription: subscription)
             } catch AuthError.invalidToken {
-                logOut()
+                logOutWithAlert()
             } catch {
                 profileView.setSubscriptionError()
             }

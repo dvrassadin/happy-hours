@@ -59,6 +59,8 @@
 		5150BA172C1437F000895045 /* SubscriptionPlansVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA162C1437F000895045 /* SubscriptionPlansVC.swift */; };
 		5150BA192C14389800895045 /* SubscriptionPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA182C14389800895045 /* SubscriptionPlansView.swift */; };
 		5150BA1B2C143B5200895045 /* SubscriptionPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */; };
+		5150BA1D2C158A2600895045 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA1C2C158A2600895045 /* Payment.swift */; };
+		5150BA202C158C4B00895045 /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5150BA1F2C158C4B00895045 /* PaymentVC.swift */; };
 		515178302C04676000EAFFA4 /* MenuTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151782F2C04676000EAFFA4 /* MenuTabCollectionViewCell.swift */; };
 		515178572C04CABB00EAFFA4 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515178562C04CABB00EAFFA4 /* FeedbackTableViewCell.swift */; };
 		5151785D2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151785C2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift */; };
@@ -180,6 +182,8 @@
 		5150BA162C1437F000895045 /* SubscriptionPlansVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlansVC.swift; sourceTree = "<group>"; };
 		5150BA182C14389800895045 /* SubscriptionPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlansView.swift; sourceTree = "<group>"; };
 		5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanTableViewCell.swift; sourceTree = "<group>"; };
+		5150BA1C2C158A2600895045 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		5150BA1F2C158C4B00895045 /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		5151782F2C04676000EAFFA4 /* MenuTabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTabCollectionViewCell.swift; sourceTree = "<group>"; };
 		515178562C04CABB00EAFFA4 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		5151785C2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveFeedbackTableViewCell.swift; sourceTree = "<group>"; };
@@ -312,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				5150BA152C1437DA00895045 /* SubscriptionPlans */,
+				5150BA1E2C158C3200895045 /* Payment */,
 				5133893B2C12D4D600F545AE /* Model */,
 			);
 			path = Subscription;
@@ -462,6 +467,14 @@
 				5150BA1A2C143B5200895045 /* SubscriptionPlanTableViewCell.swift */,
 			);
 			path = SubscriptionPlans;
+			sourceTree = "<group>";
+		};
+		5150BA1E2C158C3200895045 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				5150BA1F2C158C4B00895045 /* PaymentVC.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		515178602C05BD2700EAFFA4 /* LeaveFeedbackScreen */ = {
@@ -727,6 +740,7 @@
 				511104A52C0DCCC8005E13AE /* Subscription.swift */,
 				511104A72C0DCD8B005E13AE /* SubscriptionPlan.swift */,
 				511104B72C0F6F13005E13AE /* FeedbackAnswerCreate.swift */,
+				5150BA1C2C158A2600895045 /* Payment.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -824,6 +838,7 @@
 				5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */,
 				511104B82C0F6F13005E13AE /* FeedbackAnswerCreate.swift in Sources */,
 				51AC3B1B2BE698670021F505 /* User.swift in Sources */,
+				5150BA1D2C158A2600895045 /* Payment.swift in Sources */,
 				515CE3652BDB87D60032364D /* BeverageTableViewCell.swift in Sources */,
 				51253A422BEF56FF00106D57 /* PlaceOrder.swift in Sources */,
 				5150BA1B2C143B5200895045 /* SubscriptionPlanTableViewCell.swift in Sources */,
@@ -870,6 +885,7 @@
 				5151785D2C0594DA00EAFFA4 /* LeaveFeedbackTableViewCell.swift in Sources */,
 				5148B95A2BD61C8300659D73 /* RestaurantsResponse.swift in Sources */,
 				51B329842BCA686D00D7ADFB /* SignUpView.swift in Sources */,
+				5150BA202C158C4B00895045 /* PaymentVC.swift in Sources */,
 				518B1E6E2BE9FA4F004F203F /* RestaurantHeaderView.swift in Sources */,
 				512D00622BD7892F0057D696 /* ProfileModel.swift in Sources */,
 				5151785F2C05A37600EAFFA4 /* FeedbackResponse.swift in Sources */,

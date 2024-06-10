@@ -106,7 +106,6 @@ final class FeedbackVC: UIViewController, AlertPresenter {
     
     private func sendAnswer() {
         guard let text = feedbackView.answerInputView.textView.text, !text.isEmpty else { return }
-        
         Task {
             do {
                 try await model.sendFeedbackAnswer(feedbackID: feedback.id, text: text)

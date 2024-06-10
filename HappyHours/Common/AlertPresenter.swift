@@ -46,6 +46,8 @@ enum AlertType {
     case getSubscriptionServerError
     case sendFeedbackAnswerServerError
     case getSubscriptionPlansServerError
+    case createPaymentError
+    case paymentError
 }
 
 // MARK: Alert presenting
@@ -152,6 +154,12 @@ extension AlertPresenter {
         case .getSubscriptionPlansServerError:
             title = String(localized: "Unable to Download")
             message = String(localized: "Failed to get subscription pans.")
+        case .createPaymentError:
+            title = String(localized: "Unable to Make Payment")
+            message = String(localized: "Try again later.")
+        case .paymentError:
+            title = String(localized: "Error")
+            message = String(localized: "Failed to make payment.")
         }
         
         let alertController = UIAlertController(

@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ KGS/%lld days" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%1$@ KGS/%2$lld day"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%1$@ KGS/%2$lld days"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%@ membership\nValid through %@" : {
       "localizations" : {
         "en" : {
@@ -99,6 +121,9 @@
     "Empty Name" : {
 
     },
+    "Enjoy free beverages.\nYou can get one beverage per hour and one beverage at a place within a day." : {
+
+    },
     "Enter Code" : {
 
     },
@@ -139,6 +164,9 @@
 
     },
     "Failed to load subscription information" : {
+
+    },
+    "Failed to make payment." : {
 
     },
     "Failed to make the order. It may not be happy hours or you may have ordered recently." : {
@@ -277,6 +305,9 @@
     "Subscription" : {
 
     },
+    "Subscription Plans" : {
+
+    },
     "Subscription status is updating... " : {
 
     },
@@ -310,6 +341,9 @@
     "This restaurant was not found or there are problems with the Internet." : {
 
     },
+    "Try again later." : {
+
+    },
     "Unable to Download" : {
 
     },
@@ -328,6 +362,9 @@
     "Unable to Make Order" : {
 
     },
+    "Unable to Make Payment" : {
+
+    },
     "Unable to Send" : {
 
     },
@@ -338,6 +375,9 @@
 
     },
     "Update" : {
+
+    },
+    "Updating" : {
 
     },
     "You do not have a subscription" : {

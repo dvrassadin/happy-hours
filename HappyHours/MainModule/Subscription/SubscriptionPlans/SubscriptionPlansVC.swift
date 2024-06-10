@@ -13,6 +13,7 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
     
     private lazy var subscriptionPlansView = SubscriptionPlansView()
     private let model: SubscriptionModelProtocol
+    private var selectedIndexPath: IndexPath?
     
     // MARK: Lifecycle
     
@@ -31,8 +32,10 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = String(localized: "Subscription Plans")
         subscriptionPlansView.tableView.dataSource = self
         subscriptionPlansView.tableView.delegate = self
+        setUpNavigation()
         updateSubscriptions()
     }
     
@@ -41,7 +44,7 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
     private func updateSubscriptions() {
         Task {
             do {
-                try await model.updateSubscription()
+                try await model.updateSubscriptionPlans()
                 subscriptionPlansView.tableView.reloadData()
             } catch AuthError.invalidToken {
                 logOutWithAlert()
@@ -50,7 +53,36 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
             }
         }
     }
+    
+    // MARK: Navigation
+    
+    private func setUpNavigation() {
+        subscriptionPlansView.subscribeButton.addAction(UIAction { [weak self] _ in
+            guard let self, let selectedIndexPath else { return }
+            
+            let subscriptionPlan = self.model.subscriptionPlans[selectedIndexPath.row]
+            self.goToPaymentVC(subscriptionPlanID: subscriptionPlan.id)
+        }, for: .touchUpInside)
+    }
 
+    private func goToPaymentVC(subscriptionPlanID: Int) {
+        subscriptionPlansView.isOpeningPayment = true
+        Task {
+            defer {
+                subscriptionPlansView.isOpeningPayment = false
+            }
+            do {
+                let url = try await model.createPayment(subscriptionPlanID: subscriptionPlanID)
+                let paymentVC = PaymentVC(model: model, paymentURL: url)
+                navigationController?.pushViewController(paymentVC, animated: true)
+            } catch AuthError.invalidToken {
+                logOutWithAlert()
+            } catch {
+                showAlert(.createPaymentError)
+            }
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -67,8 +99,8 @@ extension SubscriptionPlansVC: UITableViewDataSource {
             for: indexPath
         ) as? SubscriptionPlanTableViewCell else { return UITableViewCell() }
         
-        cell.configure(subscriptionPlan: model.subscriptionPlans[indexPath.row])
-        
+        let plan = model.subscriptionPlans[indexPath.row]
+        cell.configure(subscriptionPlan: plan, isSelected: selectedIndexPath == indexPath)
         return cell
     }
     
@@ -77,5 +109,21 @@ extension SubscriptionPlansVC: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension SubscriptionPlansVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        subscriptionPlansView.subscribeButton.isEnabled = tableView.indexPathForSelectedRow != nil
+        let oldSelectedIndexPath = selectedIndexPath
+        selectedIndexPath = indexPath
+        
+        if let oldSelectedIndexPath {
+            tableView.reloadRows(at: [oldSelectedIndexPath], with: .automatic)
+        }
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            UITableView.automaticDimension
+    }
     
 }

@@ -24,7 +24,20 @@ final class SubscriptionModel: SubscriptionModelProtocol {
     
     // MARK: Update subscriptions
     
-    func updateSubscription() async throws {
+    func updateSubscriptionPlans() async throws {
         subscriptionPlans = try await networkService.getSubscriptionPlans(allowRetry: true)
     }
+    
+    func createPayment(subscriptionPlanID: Int) async throws -> URL {
+        try await networkService.createPayment(
+            subscriptionPlanID: subscriptionPlanID,
+            allowRetry: true
+        ).approvalUrl
+    }
+    
+    func updateSubscription(paymentURL: URL) async {
+        await subscriptionService.setNeedUpdateSubscription()
+//        try await networkService.executePayment(paymentURL: paymentURL)
+    }
+    
 }

@@ -192,7 +192,6 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         
         logger.info("Starting request: \(url.absoluteString)")
         let (data, response) = try await session.data(for: request)
-        
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse
@@ -203,7 +202,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         guard httpResponse.statusCode == 200 else {
-            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            logger.error("Unexpected status code: \(httpResponse.statusCode)\n\(String(data: data, encoding: .utf8) ?? "")")
             throw APIError.unexpectedStatusCode
         }
         
@@ -1423,5 +1422,85 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         
         return subscriptionPlans
     }
+    
+    func createPayment(subscriptionPlanID: Int, allowRetry: Bool) async throws -> Payment {
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            logger.error("Invalid server URL: \(self.baseURL)")
+            throw APIError.invalidServerURL
+        }
+        
+        urlComponents.path.append("/api/v1/subscription/create-payment/\(subscriptionPlanID)/")
+        
+        guard let url = urlComponents.url else {
+            logger.error("Invalid API endpoint: \(urlComponents)")
+            throw APIError.invalidAPIEndpoint
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(
+            "Bearer \(try await authService.validAccessToken)",
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        logger.info("Starting request: \(url.absoluteString)")
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("API response is not HTTP response")
+            throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 401 {
+            if allowRetry {
+                try await authService.refreshTokens()
+                return try await createPayment(
+                    subscriptionPlanID: subscriptionPlanID,
+                    allowRetry: false
+                )
+            }
+            logger.error("Invalid token for request: \(url.absoluteString)")
+            throw AuthError.invalidToken
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+            throw APIError.unexpectedStatusCode
+        }
+        
+        let payment: Payment
+        do {
+            payment = try decoder.decode(Payment.self, from: data)
+            logger.info("Received payment URL for request: \(url.absoluteString)")
+        } catch {
+            logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+            throw APIError.decodingError
+        }
+        
+        return payment
+    }
+    
+//    func executePayment(paymentURL: URL) async throws {
+//        
+//        var request = URLRequest(url: paymentURL)
+//        
+//        request.httpMethod = "GET"
+//        
+//        logger.info("Starting request: \(paymentURL.absoluteString)")
+//        let (data, response) = try await session.data(for: request)
+//        print(String(data: data, encoding: .utf8))
+//        guard let httpResponse = response as? HTTPURLResponse else {
+//            logger.error("API response is not HTTP response")
+//            throw APIError.notHTTPResponse
+//        }
+//        
+//        guard httpResponse.statusCode == 200 else {
+//            logger.error("Unexpected status code: \(httpResponse.statusCode)")
+//            throw APIError.unexpectedStatusCode
+//        }
+//    }
     
 }

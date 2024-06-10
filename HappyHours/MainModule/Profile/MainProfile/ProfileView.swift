@@ -9,6 +9,19 @@ import UIKit
 
 final class ProfileView: UIView {
     
+    // MARK: Properties
+    
+    var isLoadingSubscription: Bool = false {
+        didSet {
+            if isLoadingSubscription {
+                subscriptionButton.configuration?.title = String(localized: "Updating")
+                subscriptionButton.configuration?.showsActivityIndicator = true
+            } else {
+                subscriptionButton.configuration?.showsActivityIndicator = false
+            }
+        }
+    }
+    
     // MARK: UI components
     
     private let defaultAvatar = UIImage(
