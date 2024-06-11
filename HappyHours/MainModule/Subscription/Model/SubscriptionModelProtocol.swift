@@ -10,9 +10,11 @@ import Foundation
 protocol SubscriptionModelProtocol {
     
     var subscriptionPlans: [SubscriptionPlan] { get }
+    var currentSubscriptionPlan: SubscriptionPlan? { get async throws }
     
     func updateSubscriptionPlans() async throws
     func createPayment(subscriptionPlanID: Int) async throws -> URL
     func updateSubscription() async
     func createFreeTrial(subscriptionPlanID: Int) async throws
+    
 }

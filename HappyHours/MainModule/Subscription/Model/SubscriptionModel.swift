@@ -14,6 +14,11 @@ final class SubscriptionModel: SubscriptionModelProtocol {
     private let networkService: NetworkServiceProtocol
     private let subscriptionService: SubscriptionServiceProtocol
     private(set) var subscriptionPlans: [SubscriptionPlan] = []
+    var currentSubscriptionPlan: SubscriptionPlan? {
+        get async throws {
+            try await subscriptionService.getSubscription()?.plan
+        }
+    }
     
     // MARK: Lifecycle
     

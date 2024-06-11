@@ -82,6 +82,9 @@
     "Cannot Create Account" : {
 
     },
+    "Chose a Plan" : {
+
+    },
     "completed" : {
 
     },
@@ -242,6 +245,9 @@
     "No Subscription" : {
 
     },
+    "Not Now" : {
+
+    },
     "Nothing Found" : {
 
     },
@@ -392,6 +398,9 @@
     "You must have a subscription to scan codes." : {
 
     },
+    "You must have a subscription to scan codes. See subscription plans." : {
+
+    },
     "You need to log into the application again." : {
 
     },
@@ -399,6 +408,9 @@
 
     },
     "Your order was successful. Enjoy your meal." : {
+
+    },
+    "YOUR PLAN" : {
 
     },
     "Your subscription is active. 🟢" : {

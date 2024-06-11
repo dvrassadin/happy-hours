@@ -44,6 +44,10 @@ final class SubscriptionPlansView: UIView {
             SubscriptionPlanTableViewCell.self,
             forCellReuseIdentifier: SubscriptionPlanTableViewCell.identifier
         )
+        tableView.register(
+            SubscriptionPlanBasicTableViewCell.self,
+            forCellReuseIdentifier: SubscriptionPlanBasicTableViewCell.identifier
+        )
         tableView.backgroundColor = .background
         return tableView
     }()

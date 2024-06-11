@@ -2,16 +2,16 @@
 //  SubscriptionPlanBasicTableViewCell.swift
 //  HappyHours
 //
-//  Created by Daniil Rassadin on 10/6/24.
+//  Created by Daniil Rassadin on 11/6/24.
 //
 
 import UIKit
 
-class SubscriptionPlanBasicTableViewCell: UITableViewCell {
+final class SubscriptionPlanBasicTableViewCell: UITableViewCell {
 
     // MARK: Properties
     
-    static let identifier = "SubscriptionPlanTableViewCell"
+    static let identifier = "SubscriptionPlansBasicTableViewCell"
 
     // MARK: UI components
     
@@ -38,6 +38,33 @@ class SubscriptionPlanBasicTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .mainText
         label.font = .preferredFont(forTextStyle: .headline)
+        return label
+    }()
+    
+    private let yourPlanStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    private let yourPlanImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "star"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .main
+        imageView.contentMode = .scaleAspectFit
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        return imageView
+    }()
+    
+    private let yourPlanLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .TextField.text
+        label.font = .boldSystemFont(ofSize: 10)
+        label.text = String(localized: "YOUR PLAN")
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
@@ -79,7 +106,7 @@ class SubscriptionPlanBasicTableViewCell: UITableViewCell {
     
     // MARK: Set up UI
     
-    func setUpUI() {
+    private func setUpUI() {
         backgroundColor = .background
         selectionStyle = .none
         addSubviews()
@@ -89,12 +116,15 @@ class SubscriptionPlanBasicTableViewCell: UITableViewCell {
     private func addSubviews() {
         contentView.addSubview(backgroundStackView)
         backgroundStackView.addArrangedSubview(planNameLabel)
+        backgroundStackView.addArrangedSubview(yourPlanStackView)
+        yourPlanStackView.addArrangedSubview(yourPlanImageView)
+        yourPlanStackView.addArrangedSubview(yourPlanLabel)
         backgroundStackView.addArrangedSubview(priceLabel)
         backgroundStackView.addArrangedSubview(divider)
         backgroundStackView.addArrangedSubview(descriptionLabel)
     }
 
-    func setUpConstraints() {
+    private func setUpConstraints() {
         NSLayoutConstraint.activate(
             [
                 backgroundStackView.topAnchor.constraint(
@@ -114,6 +144,8 @@ class SubscriptionPlanBasicTableViewCell: UITableViewCell {
                     constant: -10
                 ),
                 
+//                yourPlanImageView.widthAnchor.constraint(equalTo: yourPlanImageView.heightAnchor),
+                
                 divider.heightAnchor.constraint(equalToConstant: 1)
             ]
         )
@@ -127,7 +159,7 @@ class SubscriptionPlanBasicTableViewCell: UITableViewCell {
     
     // MARK: Configure data
     
-    func configure(subscriptionPlan: SubscriptionPlan, isSelected: Bool) {
+    func configure(subscriptionPlan: SubscriptionPlan, isSelected: Bool, isYourPlan: Bool) {
         planNameLabel.text = subscriptionPlan.name
         if subscriptionPlan.freeTrialDays > 0 {
             priceLabel.text = String(
@@ -138,6 +170,7 @@ class SubscriptionPlanBasicTableViewCell: UITableViewCell {
         }
         descriptionLabel.text = subscriptionPlan.description
         expand(isSelected: isSelected)
+        yourPlanStackView.isHidden = !isYourPlan
     }
     
     override func prepareForReuse() {

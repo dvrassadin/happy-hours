@@ -15,6 +15,7 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
     private let model: SubscriptionModelProtocol
     private let allowSubscribe: Bool
     private var selectedIndexPath: IndexPath?
+    private var currentPlanID: Int?
     
     // MARK: Lifecycle
     
@@ -49,11 +50,32 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
         Task {
             do {
                 try await model.updateSubscriptionPlans()
+                setCurrentPlanIndexPath()
                 subscriptionPlansView.tableView.reloadData()
             } catch AuthError.invalidToken {
                 logOutWithAlert()
             } catch {
                 showAlert(.getSubscriptionPlansServerError)
+            }
+        }
+    }
+    
+    private func setCurrentPlanIndexPath() {
+        Task {
+            do {
+                if let currentPlan = try await model.currentSubscriptionPlan,
+                   let currentPlanIndex = model.subscriptionPlans.firstIndex(where: {
+                       $0.id == currentPlan.id
+                   }) {
+                    currentPlanID = currentPlan.id
+                    selectedIndexPath = IndexPath(row: currentPlanIndex, section: 0)
+                    if let selectedIndexPath {
+                        subscriptionPlansView.tableView.reloadRows(
+                            at: [selectedIndexPath],
+                            with: .automatic
+                        )
+                    }
+                }
             }
         }
     }
@@ -115,14 +137,29 @@ extension SubscriptionPlansVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: SubscriptionPlanTableViewCell.identifier,
-            for: indexPath
-        ) as? SubscriptionPlanTableViewCell else { return UITableViewCell() }
-        
         let plan = model.subscriptionPlans[indexPath.row]
-        cell.configure(subscriptionPlan: plan, isSelected: selectedIndexPath == indexPath)
-        return cell
+
+        if allowSubscribe {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: SubscriptionPlanTableViewCell.identifier,
+                for: indexPath
+            ) as? SubscriptionPlanTableViewCell else { return UITableViewCell() }
+            
+            cell.configure(subscriptionPlan: plan, isSelected: selectedIndexPath == indexPath)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: SubscriptionPlanBasicTableViewCell.identifier,
+                for: indexPath
+            ) as? SubscriptionPlanBasicTableViewCell else { return UITableViewCell() }
+            
+            cell.configure(
+                subscriptionPlan: plan,
+                isSelected: selectedIndexPath == indexPath,
+                isYourPlan: currentPlanID == plan.id
+            )
+            return cell
+        }
     }
     
 }

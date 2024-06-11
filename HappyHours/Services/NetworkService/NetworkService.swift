@@ -1534,7 +1534,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         logger.info("Starting request: \(url.absoluteString)")
-        let (data, response) = try await session.data(for: request)
+        let (_, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")

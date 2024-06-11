@@ -101,23 +101,42 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
     
     // MARK: Open ScannerVC
     
+    private func showSubscribeAlert() {
+        let alertController = UIAlertController(
+            title: String(localized: "No Subscription"),
+            message: String(localized: "You must have a subscription to scan codes. See subscription plans."),
+            preferredStyle: .alert
+        )
+        
+        let notNowAction = UIAlertAction(title: String(localized: "Not Now"), style: .default)
+        let chosePlaneAction = UIAlertAction(
+            title: String(localized: "Chose a Plan"),
+            style: .default
+        ) { _ in
+            let subscriptionModel = SubscriptionModel(
+                networkService: self.networkService,
+                subscriptionService: self.subscriptionService
+            )
+            let subscriptionPlansVC = SubscriptionPlansVC(
+                model: subscriptionModel,
+                allowSubscribe: true
+            )
+            self.navigationController?.pushViewController(subscriptionPlansVC, animated: true)
+        }
+        alertController.addAction(notNowAction)
+        alertController.addAction(chosePlaneAction)
+        present(alertController, animated: true)
+    }
+    
     private func openScanner() {
         Task {
             do {
                 if try await subscriptionService.isSubscriptionActive {
                     selectedIndex = 2
                 } else {
-                    showAlert(.noSubscriptionForScanning)
+                    showSubscribeAlert()
                 }
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.getSubscriptionServerError)

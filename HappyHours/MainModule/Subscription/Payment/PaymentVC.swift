@@ -65,11 +65,15 @@ final class PaymentVC: UIViewController, AlertPresenter {
         webView.load(request)
     }
     
-    private func updateSubscription(statusCode: Int) {
+    private func updateSubscription() {
         Task {
             await model.updateSubscription()
             navigationController?.popToRootViewController(animated: true)
         }
+    }
+    
+    private func cancelSubscription() {
+        navigationController?.popToRootViewController(animated: true)
     }
 
 }
@@ -83,16 +87,19 @@ extension PaymentVC: WKNavigationDelegate {
         decidePolicyFor navigationResponse: WKNavigationResponse,
         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
     ) {
-        guard let url = navigationResponse.response.url,
-              url.absoluteString.contains("/api/v1/subscription/execute-payment/"),
-              let httpResponse = navigationResponse.response as? HTTPURLResponse
+        guard let httpResponse = navigationResponse.response as? HTTPURLResponse,
+              httpResponse.statusCode == 200,
+              let url = httpResponse.url
         else {
             decisionHandler(.allow)
             return
         }
         
-        if httpResponse.statusCode == 200 {
-            updateSubscription(statusCode: httpResponse.statusCode)
+        if url.absoluteString.contains("/api/v1/subscription/execute-payment/") {
+            updateSubscription()
+            decisionHandler(.cancel)
+        } else if url.absoluteString.contains("/api/v1/subscription/cancel-payment/") {
+            cancelSubscription()
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
