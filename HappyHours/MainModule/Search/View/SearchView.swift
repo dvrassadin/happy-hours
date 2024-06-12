@@ -33,7 +33,6 @@ final class SearchView: UIView {
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = String(localized: "Search")
         searchBar.searchTextField.textColor = .mainText
-//        searchBar.showsCancelButton = true
         return searchBar
     }()
     

@@ -32,8 +32,6 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     // MARK: Navigation bar items
     
-//    private let searchController = UISearchController()
-    
     private lazy var rightBarButton = UIBarButtonItem(
         title: "All",
         style: .plain,
@@ -71,7 +69,6 @@ final class SearchVC: UISearchController, AlertPresenter {
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-//        tabBarController?.navigationItem.searchController = searchController
         if searchView.searchMode == .beverages {
             tabBarController?.navigationItem.rightBarButtonItem = rightBarButton
         }
@@ -113,14 +110,6 @@ final class SearchVC: UISearchController, AlertPresenter {
                     searchView.addMapAnnotation(restaurant: restaurant)
                 }
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.getRestaurantsServerError)
@@ -133,14 +122,6 @@ final class SearchVC: UISearchController, AlertPresenter {
             try await model.updateRestaurants(search: search)
             searchView.addNewMapAnnotations(restaurants: model.restaurants)
         } catch AuthError.invalidToken {
-//            showAlert(.invalidToken) { _ in
-//                UIApplication.shared.sendAction(
-//                    #selector(LogOutDelegate.logOut),
-//                    to: nil,
-//                    from: self,
-//                    for: nil
-//                )
-//            }
             logOutWithAlert()
         } catch {
             showAlert(.getRestaurantsServerError)
@@ -179,14 +160,6 @@ final class SearchVC: UISearchController, AlertPresenter {
                     searchView.tableView.reloadData()
                 }
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 searchView.showNothingFoundState()
@@ -302,19 +275,6 @@ extension SearchVC: UISearchBarDelegate {
         }
         searchView.endEditing(true)
     }
-    
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        switch searchView.searchMode {
-//        case .beverages:
-//            updateBeverages()
-//        case .restaurants:
-//            updateRestaurantsInRadius(searchView.mapView)
-//        }
-//    }
-//    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if
-//    }
     
 }
 

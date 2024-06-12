@@ -16,7 +16,19 @@ final class CommonTextField: UITextField {
             backgroundColor = newValue ? .white : .TextField.disabledBackground
         }
     }
-
+    
+    // MARK: UI components
+    
+    private lazy var eyeButton: UIButton = {
+        let button = UIButton(configuration: .plain())
+        button.configuration?.image = UIImage(systemName: self.isSecureTextEntry ? "eye.slash" : "eye")
+        button.configuration?.baseForegroundColor = .systemGray
+        button.configuration?.contentInsets = .init(top: 2, leading: 2, bottom: 2, trailing: 4)
+        if #available(iOS 17.0, *) {
+            button.isSymbolAnimationEnabled = true
+        }
+        return button
+    }()
     // MARK: Lifecycle
     
     init(
@@ -36,6 +48,13 @@ final class CommonTextField: UITextField {
         }
         if textContentType == .password || textContentType == .newPassword {
             isSecureTextEntry = true
+            eyeButton.addAction(UIAction { [weak self] _ in
+                guard let self else { return }
+                self.isSecureTextEntry.toggle()
+                eyeButton.configuration?.image = UIImage(systemName: self.isSecureTextEntry ? "eye.slash" : "eye")
+            }, for: .touchUpInside)
+            rightView = eyeButton
+            rightViewMode = .always
         }
         setUpAppearance()
     }
