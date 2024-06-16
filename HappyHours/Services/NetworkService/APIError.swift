@@ -17,4 +17,5 @@ enum APIError: Error {
     case decodingError
     case noToken
     case noActiveSubscription
+    
 }

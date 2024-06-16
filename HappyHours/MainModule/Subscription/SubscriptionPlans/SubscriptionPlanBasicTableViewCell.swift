@@ -144,8 +144,6 @@ final class SubscriptionPlanBasicTableViewCell: UITableViewCell {
                     constant: -10
                 ),
                 
-//                yourPlanImageView.widthAnchor.constraint(equalTo: yourPlanImageView.heightAnchor),
-                
                 divider.heightAnchor.constraint(equalToConstant: 1)
             ]
         )

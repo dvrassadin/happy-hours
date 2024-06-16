@@ -161,6 +161,7 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
     
 }
 
+// MARK: - UITabBarControllerDelegate
 
 extension MainTabBarController: UITabBarControllerDelegate {
     

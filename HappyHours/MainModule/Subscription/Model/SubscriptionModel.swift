@@ -42,7 +42,6 @@ final class SubscriptionModel: SubscriptionModelProtocol {
     
     func updateSubscription() async {
         await subscriptionService.setNeedUpdateSubscription()
-//        try await networkService.executePayment(paymentURL: paymentURL)
     }
     
     func createFreeTrial(subscriptionPlanID: Int) async throws {

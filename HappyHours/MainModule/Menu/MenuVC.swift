@@ -278,14 +278,6 @@ extension MenuVC: MenuTableViewCellDelegate {
                 try await model.makeOrder(order)
                 showAlert(.orderMade)
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.makingOrderServerError)
@@ -318,7 +310,6 @@ extension MenuVC: UICollectionViewDataSource {
         let tab = MenuTab.allCases[indexPath.row]
         switch tab {
         case .feedback:
-//            cell.configure(name: "\(tab.name) (\(model.restaurant.feedbackCount))")
             cell.configure(name: "\(tab.name) (\(model.countOfAllFeedbacks))")
         default:
             cell.configure(name: tab.name)

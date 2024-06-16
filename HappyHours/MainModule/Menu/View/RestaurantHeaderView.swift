@@ -9,6 +9,11 @@ import UIKit
 
 final class RestaurantHeaderView: UIView {
     
+    // MARK: Properties
+    
+    lazy var readMore = false
+    private var wasAddedReadMore = false
+    
     // MARK: UI components
     
     let logoImageView: UIImageView = {
@@ -45,13 +50,28 @@ final class RestaurantHeaderView: UIView {
         return textView
     }()
     
-    private let descriptionLabel: UILabel = {
+    let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .mainText
-        label.numberOfLines = 0
+        label.numberOfLines = 3
         return label
+    }()
+    
+    lazy var readMoreButton: UIButton = {
+        let button = UIButton(configuration: .plain())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration?.title = "Read More"
+        button.configuration?.baseForegroundColor = .main
+        button.configuration?.titleTextAttributesTransformer =
+        UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.preferredFont(forTextStyle: .caption1)
+            return outgoing
+        }
+        button.configuration?.contentInsets = .zero
+        return button
     }()
     
     private let happyHoursLabel: UILabel = {
@@ -103,18 +123,8 @@ final class RestaurantHeaderView: UIView {
         return textView
     }()
     
-//    private let menuLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = .preferredFont(forTextStyle: .title1)
-//        label.textColor = .mainText
-//        label.text = String(localized: "Menu")
-//        return label
-//    }()
-    
     let tabBarCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-//        layout.estimatedItemSize = CGSize(width: 500, height: 100)
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
@@ -145,6 +155,13 @@ final class RestaurantHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if isLabelTextTruncated(descriptionLabel) && !wasAddedReadMore {
+            addReadMoreButton()
+        }
+    }
+    
     // MARK: Set up UI
     
     private func setUpUI() {
@@ -164,7 +181,6 @@ final class RestaurantHeaderView: UIView {
         addSubview(contactsLabel)
         addSubview(phoneNumberTextView)
         addSubview(emailTextView)
-//        addSubview(menuLabel)
         addSubview(tabBarCollectionView)
     }
     
@@ -174,6 +190,12 @@ final class RestaurantHeaderView: UIView {
             constant: 10
         )
         leadingAnchor.priority = UILayoutPriority(999)
+        
+        let happyHoursTop = happyHoursLabel.topAnchor.constraint(
+            equalTo: descriptionLabel.bottomAnchor,
+            constant: 10
+        )
+        happyHoursTop.priority = .defaultLow
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: topAnchor),
@@ -194,7 +216,8 @@ final class RestaurantHeaderView: UIView {
             descriptionLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             
-            happyHoursLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+//            happyHoursLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            happyHoursTop,
             happyHoursLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             happyHoursLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             
@@ -206,11 +229,6 @@ final class RestaurantHeaderView: UIView {
            
             emailTextView.topAnchor.constraint(equalTo: phoneNumberTextView.bottomAnchor, constant: 10),
             emailTextView.trailingAnchor.constraint(equalTo: phoneNumberTextView.trailingAnchor),
-            
-//            menuLabel.topAnchor.constraint(equalTo: emailTextView.bottomAnchor),
-//            menuLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
-//            menuLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-//            menuLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
             
             tabBarCollectionView.topAnchor.constraint(equalTo: emailTextView.bottomAnchor, constant: 5),
             tabBarCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -229,6 +247,35 @@ final class RestaurantHeaderView: UIView {
         }
         phoneNumberTextView.text = restaurant.phoneNumber
         emailTextView.text = restaurant.email
+    }
+    
+    func addReadMoreButton() {
+        addSubview(readMoreButton)
+        
+        NSLayoutConstraint.activate([
+            readMoreButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
+            readMoreButton.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
+            
+            happyHoursLabel.topAnchor.constraint(equalTo: readMoreButton.bottomAnchor, constant: 10)
+        ])
+        
+        wasAddedReadMore = true
+    }
+    
+    func isLabelTextTruncated(_ label: UILabel) -> Bool {
+        guard let text = label.text, let font = label.font else { return false }
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [.font: font]
+        
+        let boundingRect = text.boundingRect(
+            with: CGSize(width: label.frame.width, height: .greatestFiniteMagnitude),
+            options: [.usesLineFragmentOrigin],
+            attributes: textAttributes,
+            context: nil
+        )
+        print(boundingRect.size.height)
+        print(label.frame.height)
+        return boundingRect.size.height > label.frame.height
     }
     
 }
