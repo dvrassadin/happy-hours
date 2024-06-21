@@ -50,6 +50,8 @@ final class MenuVC: UIViewController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem()
+        setUpNavigationBar()
         menuView.restaurantHeaderView.tabBarCollectionView.dataSource = self
         menuView.restaurantHeaderView.tabBarCollectionView.delegate = self
         if let firstTab = MenuTab.allCases.first {
@@ -77,6 +79,12 @@ final class MenuVC: UIViewController, AlertPresenter {
         }
     }
     
+    // MARK: Set up UI
+    
+    private func setUpNavigationBar() {
+        title = String(localized: "Establishment Info")
+    }
+    
     // MARK: Update menu
     
     private func updateMenu() {
@@ -88,14 +96,6 @@ final class MenuVC: UIViewController, AlertPresenter {
                 menuView.tableView.layoutIfNeeded()
                 menuView.tableView.setContentOffset(contentOffset, animated: false)
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 menuView.tableView.reloadData()
@@ -119,11 +119,6 @@ final class MenuVC: UIViewController, AlertPresenter {
                     item: MenuTab.feedback.rawValue,
                     section: 0
                 )
-//                if let cell = menuView.restaurantHeaderView.tabBarCollectionView.cellForItem(
-//                    at: indexPath
-//                ) as? MenuTabCollectionViewCell {
-//                    cell.configure(name: "\(MenuTab.feedback.name) (\(model.countOfAllFeedbacks))")
-//                }
                 menuView.restaurantHeaderView.tabBarCollectionView.reloadItems(
                     at: [feedbackIndexPath]
                 )
@@ -135,14 +130,6 @@ final class MenuVC: UIViewController, AlertPresenter {
                     )
                 }
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 menuView.tableView.reloadData()

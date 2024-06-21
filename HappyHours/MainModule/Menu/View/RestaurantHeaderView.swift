@@ -37,15 +37,12 @@ final class RestaurantHeaderView: UIView {
         return label
     }()
     
-    private let addressTextView: UITextView = {
-        let textView = UITextView()
+    private let addressLabel: UILabel = {
+        let textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .preferredFont(forTextStyle: .subheadline)
-        textView.textColor = .mainText
+        textView.textColor = .darkGray
         textView.textAlignment = .right
-//        textView.dataDetectorTypes = .address
-        textView.isEditable = false
-        textView.isScrollEnabled = false
         textView.backgroundColor = .clear
         return textView
     }()
@@ -88,23 +85,17 @@ final class RestaurantHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .mainText
+        label.textColor = .darkGray
         label.numberOfLines = 0
         label.text = String(localized: "Contacts:")
         return label
     }()
     
-    private let phoneNumberTextView: UITextView = {
-        let textView = UITextView()
+    private let phoneNumberLabel: UILabel = {
+        let textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
-//        textView.dataDetectorTypes = .phoneNumber
         textView.font = .preferredFont(forTextStyle: .body)
-        textView.isScrollEnabled = false
-        textView.textContainerInset = .zero
         textView.textColor = .mainText
-        textView.isEditable = false
-        textView.isSelectable = true
-        textView.isScrollEnabled = false
         textView.backgroundColor = .clear
         return textView
     }()
@@ -175,11 +166,11 @@ final class RestaurantHeaderView: UIView {
     private func addSubviews() {
         addSubview(logoImageView)
         addSubview(nameLabel)
-        addSubview(addressTextView)
+        addSubview(addressLabel)
         addSubview(descriptionLabel)
         addSubview(happyHoursLabel)
         addSubview(contactsLabel)
-        addSubview(phoneNumberTextView)
+        addSubview(phoneNumberLabel)
         addSubview(emailTextView)
         addSubview(tabBarCollectionView)
     }
@@ -208,15 +199,14 @@ final class RestaurantHeaderView: UIView {
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             nameLabel.bottomAnchor.constraint(equalTo: logoImageView.bottomAnchor),
             
-            addressTextView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 10),
-            addressTextView.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
-            addressTextView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            addressLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 10),
+            addressLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
+            addressLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
            
-            descriptionLabel.topAnchor.constraint(equalTo: addressTextView.bottomAnchor, constant: 10),
+            descriptionLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 10),
             descriptionLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             
-//            happyHoursLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
             happyHoursTop,
             happyHoursLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             happyHoursLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
@@ -224,11 +214,11 @@ final class RestaurantHeaderView: UIView {
             contactsLabel.topAnchor.constraint(equalTo: happyHoursLabel.bottomAnchor, constant: 10),
             contactsLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor),
             
-            phoneNumberTextView.topAnchor.constraint(equalTo: contactsLabel.topAnchor),
-            phoneNumberTextView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            phoneNumberLabel.topAnchor.constraint(equalTo: contactsLabel.topAnchor),
+            phoneNumberLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
            
-            emailTextView.topAnchor.constraint(equalTo: phoneNumberTextView.bottomAnchor, constant: 10),
-            emailTextView.trailingAnchor.constraint(equalTo: phoneNumberTextView.trailingAnchor),
+            emailTextView.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 10),
+            emailTextView.trailingAnchor.constraint(equalTo: phoneNumberLabel.trailingAnchor),
             
             tabBarCollectionView.topAnchor.constraint(equalTo: emailTextView.bottomAnchor, constant: 5),
             tabBarCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -240,12 +230,12 @@ final class RestaurantHeaderView: UIView {
     
     func set(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
-        addressTextView.text = restaurant.address
+        addressLabel.text = restaurant.address
         descriptionLabel.text = restaurant.description
         if let hhStart = restaurant.hhStart, let hhEnd = restaurant.hhEnd {
             happyHoursLabel.text = String(localized: "Happy hours from \(hhStart) to \(hhEnd).")
         }
-        phoneNumberTextView.text = restaurant.phoneNumber
+        phoneNumberLabel.text = restaurant.phoneNumber
         emailTextView.text = restaurant.email
     }
     
@@ -273,8 +263,6 @@ final class RestaurantHeaderView: UIView {
             attributes: textAttributes,
             context: nil
         )
-        print(boundingRect.size.height)
-        print(label.frame.height)
         return boundingRect.size.height > label.frame.height
     }
     

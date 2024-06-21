@@ -17,7 +17,7 @@ enum SearchMode: Int, CaseIterable {
         case .beverages:
             String(localized: "Beverages")
         case .restaurants:
-            String(localized: "Restaurants")
+            String(localized: "Establishments")
         }
     }
     

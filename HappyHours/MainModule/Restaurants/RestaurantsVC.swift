@@ -48,7 +48,7 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = String(localized: "Restaurants")
+        title = String(localized: "Establishments")
         restaurantsView.activityIndicator.startAnimating()
         updateRestaurants()
     }

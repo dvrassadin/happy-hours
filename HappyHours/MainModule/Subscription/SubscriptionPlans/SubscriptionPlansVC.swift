@@ -36,6 +36,7 @@ final class SubscriptionPlansVC: UIViewController, AlertPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = String(localized: "Subscription Plans")
+        navigationItem.backBarButtonItem = UIBarButtonItem()
         subscriptionPlansView.tableView.dataSource = self
         subscriptionPlansView.tableView.delegate = self
         updateSubscriptions()

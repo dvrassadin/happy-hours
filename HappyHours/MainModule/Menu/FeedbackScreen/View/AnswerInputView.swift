@@ -30,8 +30,8 @@ final class AnswerInputView: UIView {
 
     // MARK: UI components
     
-    let textView: UITextView = {
-        let textView = UITextView()
+    let textView: PlaceholderTextView = {
+        let textView = PlaceholderTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
         textView.font = .preferredFont(forTextStyle: .body)
@@ -40,6 +40,7 @@ final class AnswerInputView: UIView {
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.TextField.editingBorder.cgColor
         textView.tintColor = .main
+        textView.placeholder = String(localized: "Enter your answer")
         return textView
     }()
     

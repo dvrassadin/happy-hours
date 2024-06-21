@@ -31,7 +31,7 @@ final class NothingFoundStateView: UIStackView {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = String(localized: "Enter the name of the restaurant you want to find.")
+        label.text = String(localized: "Enter the name of the establishment you want to find.")
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .TextField.text
         label.textAlignment = .center

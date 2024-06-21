@@ -209,11 +209,12 @@ extension SearchVC: UITableViewDataSource {
             for: indexPath
         ) as? BeverageTableViewCell else { return UITableViewCell() }
         
-        var contentConfiguration = cell.defaultContentConfiguration()
+//        var contentConfiguration = cell.defaultContentConfiguration()
         let beverage = filteredBeverages[indexPath.row]
-        contentConfiguration.text = beverage.name
-        contentConfiguration.secondaryText = beverage.establishment
-        cell.contentConfiguration = contentConfiguration
+//        contentConfiguration.text = beverage.name
+//        contentConfiguration.secondaryText = beverage.establishment
+//        cell.contentConfiguration = contentConfiguration
+        cell.configure(beverage: beverage)
         
         return cell
     }

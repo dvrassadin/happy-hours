@@ -49,14 +49,6 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                 let avatarImage = await model.getAvatarImage()
                 editProfileView.set(avatar: avatarImage)
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.getUserServerError)
@@ -116,14 +108,6 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                 }
                 navigationController?.popViewController(animated: true)
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.editUserServerError)
@@ -139,11 +123,6 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
         
         guard isValidName(name) else {
             showAlert(.invalidName)
-            return false
-        }
-        
-        guard let email = editProfileView.emailTextField.text, isValidEmail(email) else {
-            showAlert(.invalidEmail)
             return false
         }
         

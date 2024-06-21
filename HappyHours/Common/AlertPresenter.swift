@@ -89,7 +89,7 @@ extension AlertPresenter {
             title = String(localized: "Cannot Create Account")
         case .getRestaurantsServerError:
             title = String(localized: "Unable to Download")
-            message = String(localized: "Failed to get list of restaurants. Try again.")
+            message = String(localized: "Failed to get list of establishments. Try again.")
         case .getUserServerError:
             title = String(localized: "Unable to Download")
             message = String(localized: "Failed to get your credentials.")
@@ -107,7 +107,7 @@ extension AlertPresenter {
             message = String(localized: "The password does not meet the password requirements or the server is unavailable.")
         case .gettingMenuServerError:
             title = String(localized: "Unable to Get Menu")
-            message = String(localized: "There are no beverages available at this restaurant.")
+            message = String(localized: "There are no beverages available at this establishment.")
         case .makingOrderServerError:
             title = String(localized: "Unable to Make Order")
             message = String(localized: "Failed to make the order. It may not be happy hours or you may have ordered recently.")
@@ -116,16 +116,16 @@ extension AlertPresenter {
             message = String(localized: "Your order was successful. Enjoy your meal.")
         case .invalidBarcode:
             title = String(localized: "Incorrect Barcode")
-            message = String(localized: "This is not a restaurant menu barcode.")
+            message = String(localized: "This is not an establishment menu barcode.")
         case .barcodeServerError:
-            title = String(localized: "Error Getting Restaurant")
-            message = String(localized: "This restaurant was not found or there are problems with the Internet.")
+            title = String(localized: "Error Getting Establishment")
+            message = String(localized: "This establishment was not found or there are problems with the Internet.")
         case .getRestaurantServerError:
             title = String(localized: "Unable to Download")
-            message = String(localized: "Failed to get the restaurant.")
+            message = String(localized: "Failed to get the establishment.")
         case .restaurantsNotFound:
             title = String(localized: "Nothing Found")
-            message = String(localized: "Could not find such restaurants.")
+            message = String(localized: "Could not find such establishment.")
         case .beveragesServerError:
             title = String(localized: "Error")
             message = String(localized: "An error occurred while searching for drinks.")

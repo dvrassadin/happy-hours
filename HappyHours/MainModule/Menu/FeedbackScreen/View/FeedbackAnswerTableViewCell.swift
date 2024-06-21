@@ -67,7 +67,7 @@ final class FeedbackAnswerTableViewCell: UITableViewCell {
 
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
@@ -78,7 +78,7 @@ final class FeedbackAnswerTableViewCell: UITableViewCell {
             feedbackLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
             feedbackLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
             feedbackLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
-            feedbackLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            feedbackLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
         ])
     }
     

@@ -81,9 +81,9 @@ final class RestaurantsTableViewCell: UITableViewCell {
 
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 5),
+            logoImageView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
             logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -5),
+            logoImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10),
             logoImageView.heightAnchor.constraint(equalToConstant: 70),
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor),
             

@@ -571,7 +571,7 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         logger.info("User edited for request: \(url.absoluteString)")
     }
     
-    // MARK: Restaurants requests
+    // MARK: Establishments requests
     
     func getRestaurants(
         limit: UInt,
@@ -1482,26 +1482,6 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         
         return payment
     }
-    
-//    func executePayment(paymentURL: URL) async throws {
-//        
-//        var request = URLRequest(url: paymentURL)
-//        
-//        request.httpMethod = "GET"
-//        
-//        logger.info("Starting request: \(paymentURL.absoluteString)")
-//        let (data, response) = try await session.data(for: request)
-//        print(String(data: data, encoding: .utf8))
-//        guard let httpResponse = response as? HTTPURLResponse else {
-//            logger.error("API response is not HTTP response")
-//            throw APIError.notHTTPResponse
-//        }
-//        
-//        guard httpResponse.statusCode == 200 else {
-//            logger.error("Unexpected status code: \(httpResponse.statusCode)")
-//            throw APIError.unexpectedStatusCode
-//        }
-//    }
     
     func createFreeTrial(freeTrial: FreeTrial, allowRetry: Bool) async throws {
         guard var urlComponents = URLComponents(string: baseURL) else {

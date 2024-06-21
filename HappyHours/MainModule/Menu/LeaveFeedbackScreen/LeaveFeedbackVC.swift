@@ -68,18 +68,7 @@ final class LeaveFeedbackVC: UIViewController, AlertPresenter {
             do {
                 try await model.sendFeedback(text)
                 navigationController?.popViewController(animated: true)
-//                if let menuVC = navigationController?.topViewController as? MenuVC {
-//                    menuVC.updateFeedback()
-//                }
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.sendFeedbackServerError)
@@ -93,11 +82,12 @@ final class LeaveFeedbackVC: UIViewController, AlertPresenter {
 extension LeaveFeedbackVC: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        guard let text = textView.text, !text.isEmpty, text.count > 5 else {
+        guard let text = textView.text, !text.isEmpty, text.count > 0 else {
             navigationItem.rightBarButtonItem?.isEnabled = false
             return
         }
         
         navigationItem.rightBarButtonItem?.isEnabled = true
     }
+    
 }

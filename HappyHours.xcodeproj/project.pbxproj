@@ -77,6 +77,7 @@
 		515CE3682BDB91960032364D /* SearchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3672BDB91960032364D /* SearchViewDelegate.swift */; };
 		515CE36A2BDB92130032364D /* SearchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515CE3692BDB92130032364D /* SearchMode.swift */; };
 		515DCCBD2C21CCF600A0408D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 515DCCBC2C21CCF600A0408D /* README.md */; };
+		515DCCC72C254A9300A0408D /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515DCCC62C254A9300A0408D /* PlaceholderTextView.swift */; };
 		515EF0512BDFE574008795BA /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */; };
 		516AD57F2BF483EB00F26B32 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516AD57E2BF483EB00F26B32 /* RestaurantAnnotation.swift */; };
 		516AD5812BF494AA00F26B32 /* RestaurantMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516AD5802BF494AA00F26B32 /* RestaurantMarkerView.swift */; };
@@ -203,6 +204,7 @@
 		515CE3672BDB91960032364D /* SearchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDelegate.swift; sourceTree = "<group>"; };
 		515CE3692BDB92130032364D /* SearchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMode.swift; sourceTree = "<group>"; };
 		515DCCBC2C21CCF600A0408D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		515DCCC62C254A9300A0408D /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		516AD57E2BF483EB00F26B32 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 		516AD5802BF494AA00F26B32 /* RestaurantMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMarkerView.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				51B329752BC6B8DF00D7ADFB /* CommonButton.swift */,
 				5148B92A2BD40E8600659D73 /* Constraints.swift */,
 				51B329812BC9869600D7ADFB /* CommonTextField.swift */,
+				515DCCC62C254A9300A0408D /* PlaceholderTextView.swift */,
 				512D00552BD6B3DB0057D696 /* NameChecker.swift */,
 				513B6CC02BCF987E0006DD25 /* EmailChecker.swift */,
 				512D006C2BD803150057D696 /* AlertPresenter.swift */,
@@ -909,6 +912,7 @@
 				512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */,
 				51BC17632BE3A3A90095C104 /* LogIn.swift in Sources */,
 				518B1E782BEA4476004F203F /* MenuTableViewCell.swift in Sources */,
+				515DCCC72C254A9300A0408D /* PlaceholderTextView.swift in Sources */,
 				51AACDFB2BF337E0008CD997 /* SearchModelProtocol.swift in Sources */,
 				5151786D2C06E23600EAFFA4 /* FeedbackHeaderView.swift in Sources */,
 				518461462BFB01B2001C02B6 /* BeverageVC.swift in Sources */,
@@ -1091,7 +1095,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 4645TSUXP2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyHours/Info.plist;
@@ -1128,7 +1132,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 4645TSUXP2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyHours/Info.plist;

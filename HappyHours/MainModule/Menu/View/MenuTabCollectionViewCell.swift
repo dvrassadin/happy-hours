@@ -13,7 +13,10 @@ final class MenuTabCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "MenuTabCell"
     override var isSelected: Bool {
-        didSet { selectionLine.isHidden = !isSelected }
+        didSet {
+            selectionLine.isHidden = !isSelected
+            nameLabel.textColor = isSelected ? .main : .darkGray
+        }
     }
     
     // MARK: UI components
@@ -21,7 +24,8 @@ final class MenuTabCollectionViewCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .preferredFont(forTextStyle: .body)
+        label.textColor = .darkGray
         return label
     }()
     

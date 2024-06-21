@@ -81,12 +81,6 @@ final class EditProfileView: UIView {
         return datePicker
     }()
     
-    let emailTextField = CommonTextField(
-        placeholder: String(localized: "Email Address"),
-        textContentType: .emailAddress,
-        keyboardType: .emailAddress
-    )
-    
     let updateButton = CommonButton(title: String(localized: "Update"))
 
     // MARK: Lifecycle
@@ -106,7 +100,6 @@ final class EditProfileView: UIView {
         backgroundColor = .background
         addSubviews()
         setUpConstraints()
-        emailTextField.isEnabled = false
     }
     
     private func addSubviews() {
@@ -115,7 +108,6 @@ final class EditProfileView: UIView {
         addSubview(nameTextField)
         addSubview(dateOfBirthLabel)
         addSubview(datePicker)
-        addSubview(emailTextField)
         addSubview(updateButton)
     }
     
@@ -126,7 +118,6 @@ final class EditProfileView: UIView {
             relatedBy: .equal,
             toItem: userImageView,
             attribute: .trailing,
-//            multiplier: 0.8536,
             multiplier: 0.95,
             constant: 0
         )
@@ -136,7 +127,6 @@ final class EditProfileView: UIView {
             relatedBy: .equal,
             toItem: userImageView,
             attribute: .bottom,
-//            multiplier: 0.8536,
             multiplier: 0.95,
             constant: 0
         )
@@ -170,36 +160,22 @@ final class EditProfileView: UIView {
                 datePicker.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 datePicker.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor),
                 
-                emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-                Constraints.topBetweenTextFieldsAndButtons(for: emailTextField, under: datePicker),
-                emailTextField.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
-                emailTextField.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
-                
-                Constraints.topBetweenTextFieldsAndButtons(
-                    for: updateButton,
-                    under: emailTextField
-                ),
                 updateButton.centerXAnchor.constraint(equalTo: centerXAnchor),
                 updateButton.widthAnchor.constraint(equalTo: nameTextField.widthAnchor),
                 updateButton.heightAnchor.constraint(equalTo: nameTextField.heightAnchor),
                 
                 keyboardLayoutGuide.topAnchor.constraint(
-                    greaterThanOrEqualToSystemSpacingBelow: updateButton.bottomAnchor,
-                    multiplier: 1.05
+                    equalTo: updateButton.bottomAnchor, constant: 10
                 )
             ]
         )
     }
     
     func set(user: User) {
-//        if let avatar {
-//            userImageView.image = avatar
-//        }
         nameTextField.text = user.name
         if let dateOfBirth = user.dateOfBirth {
             datePicker.date = dateOfBirth
         }
-        emailTextField.text = user.email
     }
     
     func set(avatar: UIImage?) {
@@ -208,6 +184,13 @@ final class EditProfileView: UIView {
         } else {
             userImageView.image = defaultAvatar
         }
+    }
+    
+    // MARK: User interaction
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        endEditing(true)
     }
     
 }

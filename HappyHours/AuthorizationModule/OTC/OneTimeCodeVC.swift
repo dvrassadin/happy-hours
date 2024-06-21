@@ -68,7 +68,6 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
     
     private func setUpResending() {
         otcView.resendButton.addAction(UIAction { [weak self] _ in
-            print("Resend OTC")
             guard let self, let email = self.model.resetEmail else { return }
             Task {
                 do {

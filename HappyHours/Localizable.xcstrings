@@ -82,6 +82,9 @@
     "Cannot Create Account" : {
 
     },
+    "Category: " : {
+
+    },
     "Chose a Plan" : {
 
     },
@@ -97,7 +100,7 @@
     "Continue" : {
 
     },
-    "Could not find such restaurants." : {
+    "Could not find such establishment." : {
 
     },
     "Could not open code scanner." : {
@@ -133,7 +136,10 @@
     "Enter the code sent to %@." : {
 
     },
-    "Enter the name of the restaurant you want to find." : {
+    "Enter the name of the establishment you want to find." : {
+
+    },
+    "Enter your answer" : {
 
     },
     "Enter your new passwords again." : {
@@ -142,13 +148,22 @@
     "Error" : {
 
     },
-    "Error Getting Restaurant" : {
+    "Error Getting Establishment" : {
+
+    },
+    "Establishment Info" : {
+
+    },
+    "Establishment: " : {
+
+    },
+    "Establishments" : {
 
     },
     "Failed to get Fee Trial." : {
 
     },
-    "Failed to get list of restaurants. Try again." : {
+    "Failed to get list of establishments. Try again." : {
 
     },
     "Failed to get subscription pans." : {
@@ -157,13 +172,13 @@
     "Failed to get subscription status. You must have a subscription to scan codes." : {
 
     },
+    "Failed to get the establishment." : {
+
+    },
     "Failed to get the feedback answers." : {
 
     },
     "Failed to get the feedback." : {
-
-    },
-    "Failed to get the restaurant." : {
 
     },
     "Failed to get your credentials." : {
@@ -222,6 +237,9 @@
 
     },
     "Leave Feedback" : {
+
+    },
+    "Leave your feedback" : {
 
     },
     "Log In" : {
@@ -287,9 +305,6 @@
     "Reset Password" : {
 
     },
-    "Restaurants" : {
-
-    },
     "Scanner" : {
 
     },
@@ -311,13 +326,16 @@
     "Sign up Here" : {
 
     },
+    "Status: " : {
+
+    },
     "Subscription" : {
 
     },
     "Subscription Plans" : {
 
     },
-    "Subscription status is updating... " : {
+    "Subscription status is updating..." : {
 
     },
     "Success" : {
@@ -335,19 +353,19 @@
     "The password is incorrect or the user is not registered." : {
 
     },
-    "There are no beverages available at this restaurant." : {
+    "There are no beverages available at this establishment." : {
 
     },
     "This email address is not valid.\nEnter a different address." : {
 
     },
-    "This is not a restaurant menu barcode." : {
+    "This establishment was not found or there are problems with the Internet." : {
+
+    },
+    "This is not an establishment menu barcode." : {
 
     },
     "This password is too short.\nPasswords are 8 and more characters long." : {
-
-    },
-    "This restaurant was not found or there are problems with the Internet." : {
 
     },
     "Try again later." : {

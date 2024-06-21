@@ -11,13 +11,15 @@ final class LeaveFeedbackView: UIView {
 
     // MARK: UI components
     
-    let textView: UITextView = {
-        let textView = UITextView()
+    let textView: PlaceholderTextView = {
+        let textView = PlaceholderTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.layer.cornerRadius = 10
         textView.clipsToBounds = true
         textView.font = .preferredFont(forTextStyle: .body)
         textView.textColor = .mainText
+        textView.tintColor = .main
+        textView.placeholder = String(localized: "Leave your feedback")
         return textView
     }()
     

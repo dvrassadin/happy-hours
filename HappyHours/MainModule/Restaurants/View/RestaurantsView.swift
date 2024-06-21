@@ -21,7 +21,7 @@ final class RestaurantsView: UIView {
             case .noActive:
                 return String(localized: "You do not have an active subscription. 🔴")
             case .updating:
-                return String(localized: "Subscription status is updating... ")
+                return String(localized: "Subscription status is updating...")
             case .error:
                 return String(localized: "Unable to get subscription status.")
             }

@@ -50,8 +50,11 @@ final class MenuModel: MenuModelProtocol {
             offset: offset,
             allowRetry: true
         )
+//        menu = Dictionary(grouping: beverages) { $0.category }
+//            .map { (category: $0, beverages: $1) }
+//            .sorted { $0.category < $1.category }
         menu = Dictionary(grouping: beverages) { $0.category }
-            .map { (category: $0, beverages: $1) }
+            .map { (category: $0, beverages: $1.sorted(by: { $0.name < $1.name })) }
             .sorted { $0.category < $1.category }
     }
     

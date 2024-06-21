@@ -38,6 +38,7 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
         tabBar.tintColor = .main
         title = String(localized: "Happy Hours")
         delegate = self
+        navigationItem.backBarButtonItem = UIBarButtonItem()
         setUpTabs()
     }
     
@@ -51,7 +52,7 @@ final class MainTabBarController: UITabBarController, AlertPresenter {
             userService: userService
         )
         let restaurantsTabBarItem = UITabBarItem(
-            title: String(localized: "Restaurants"),
+            title: String(localized: "Establishments"),
             image: UIImage(systemName: "cup.and.saucer"),
             selectedImage: UIImage(systemName: "cup.and.saucer.fill")
         )
