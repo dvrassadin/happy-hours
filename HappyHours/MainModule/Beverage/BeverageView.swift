@@ -68,8 +68,6 @@ final class BeverageView: UIView {
     private let restaurantNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textColor = .mainText
-//        label.font = .preferredFont(forTextStyle: .largeTitle)
         label.numberOfLines = 2
         return label
     }()
@@ -143,42 +141,13 @@ final class BeverageView: UIView {
                 restaurantNameLabel.leadingAnchor.constraint(equalTo: beverageNameLabel.leadingAnchor),
                 restaurantNameLabel.trailingAnchor.constraint(equalTo: beverageNameLabel.trailingAnchor),
                 restaurantNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
-//                beverageCategoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
-                
-//                restaurantNameLabel.topAnchor.constraint(
-//                    equalTo: contentView.topAnchor,
-//                    constant: 5
-//                ),
-//                restaurantNameLabel.trailingAnchor.constraint(
-//                    equalTo: contentView.trailingAnchor,
-//                    constant: -15
-//                ),
-//                
-//                beverageNameLabel.topAnchor.constraint(equalTo: restaurantNameLabel.bottomAnchor, constant: 5),
-//                beverageNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-//                beverageNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-//                
-//                beverageCategoryLabel.topAnchor.constraint(equalTo: beverageNameLabel.bottomAnchor, constant: 5),
-//                beverageCategoryLabel.leadingAnchor.constraint(equalTo: beverageNameLabel.leadingAnchor),
-//                beverageCategoryLabel.trailingAnchor.constraint(equalTo: beverageNameLabel.trailingAnchor),
-//                
-//                beverageDescriptionLabel.topAnchor.constraint(equalTo: beverageCategoryLabel.bottomAnchor, constant: 10),
-//                beverageDescriptionLabel.leadingAnchor.constraint(equalTo: beverageNameLabel.leadingAnchor),
-//                beverageDescriptionLabel.trailingAnchor.constraint(equalTo: beverageNameLabel.trailingAnchor),
-//                
-//                beveragePriceLabel.topAnchor.constraint(equalTo: beverageDescriptionLabel.bottomAnchor, constant: 10),
-//                beveragePriceLabel.leadingAnchor.constraint(equalTo: beverageNameLabel.leadingAnchor),
-//                beveragePriceLabel.trailingAnchor.constraint(equalTo: beverageNameLabel.trailingAnchor),
-//                beveragePriceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
             ]
         )
     }
     
     func setUpBeverage(_ beverage: Beverage) {
-//        restaurantNameLabel.text = beverage.establishment
         setRestaurantAttributedTitle(restaurant: beverage.establishment)
         beverageNameLabel.text = beverage.name
-//        beverageCategoryLabel.text = beverage.category
         setCategoryAttributedTitle(category: beverage.category)
         beverageDescriptionLabel.text = beverage.description
         setStatusAttributedTitle(status: beverage.availabilityStatus)

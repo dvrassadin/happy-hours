@@ -87,18 +87,32 @@ extension PaymentVC: WKNavigationDelegate {
         decidePolicyFor navigationResponse: WKNavigationResponse,
         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
     ) {
-        guard let httpResponse = navigationResponse.response as? HTTPURLResponse,
-              httpResponse.statusCode == 200,
-              let url = httpResponse.url
-        else {
+        guard let httpResponse  = navigationResponse.response as? HTTPURLResponse,
+              let url = httpResponse.url else {
             decisionHandler(.allow)
             return
         }
         
         if url.absoluteString.contains("/api/v1/subscription/execute-payment/") {
-            updateSubscription()
-            decisionHandler(.cancel)
-        } else if url.absoluteString.contains("/api/v1/subscription/cancel-payment/") {
+            switch httpResponse.statusCode {
+            case 200:
+                updateSubscription()
+                decisionHandler(.cancel)
+            case 401:
+                showAlert(.executePaymentSessionExpired) { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                    decisionHandler(.cancel)
+                }
+            case 500:
+                showAlert(.executePaymentUnknownError) { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                    decisionHandler(.cancel)
+                }
+            default:
+                decisionHandler(.allow)
+            }
+        } else if url.absoluteString.contains("/api/v1/subscription/cancel-payment/")
+                    && httpResponse.statusCode == 200 {
             cancelSubscription()
             decisionHandler(.cancel)
         } else {

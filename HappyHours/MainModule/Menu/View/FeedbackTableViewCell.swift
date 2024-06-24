@@ -12,7 +12,6 @@ final class FeedbackTableViewCell: UITableViewCell {
     // MARK: Properties
     
     static let identifier = "FeedbackCell"
-//    private(set) var id: Int?
 
     // MARK: UI components
     

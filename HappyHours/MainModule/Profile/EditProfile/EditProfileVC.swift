@@ -46,8 +46,7 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
             do {
                 let user = try await model.user
                 editProfileView.set(user: user)
-                let avatarImage = await model.getAvatarImage()
-                editProfileView.set(avatar: avatarImage)
+                editProfileView.set(avatar: await model.avatarImage)
             } catch AuthError.invalidToken {
                 logOutWithAlert()
             } catch {

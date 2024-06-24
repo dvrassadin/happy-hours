@@ -19,7 +19,14 @@ final class ProfileModel: ProfileModelProtocol {
             try await userService.getUser()
         }
     }
-    private var avatarImage: UIImage?
+    var avatarImage: UIImage? {
+        get async {
+            if let stringURL = try? await user.avatar, let url = URL(string: stringURL) {
+                return await networkService.getImage(from: url)
+            }
+            return nil
+        }
+    }
     private var needUpdateAvatarImage: Bool = true
     var subscription: Subscription? {
         get async throws {
@@ -49,18 +56,6 @@ final class ProfileModel: ProfileModelProtocol {
     }
     
     // MARK: Updating user
-    
-    func getAvatarImage() async -> UIImage? {
-        if needUpdateAvatarImage {
-            needUpdateAvatarImage = false
-            guard let url = try? await user.avatar,
-                  let data = await networkService.getImageData(from: url),
-                  let image = UIImage(data: data)
-            else { return nil }
-            avatarImage = image
-        }
-        return avatarImage
-    }
     
     func editUser(imageData: Data?, name: String?, dateOfBirth: Date?) async throws {
         if let _ = imageData {

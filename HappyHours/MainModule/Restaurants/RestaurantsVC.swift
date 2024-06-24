@@ -70,14 +70,6 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
                 try await model.getRestaurants(limit: 100, offset: 0)
                 restaurantsView.tableView.reloadData()
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 showAlert(.getRestaurantsServerError)
@@ -94,14 +86,6 @@ final class RestaurantsVC: UIViewController, AlertPresenter {
                 let isActive = try await subscriptionService.isSubscriptionActive
                 restaurantsView.subscriptionStatus = isActive ? .active : .noActive
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 logOutWithAlert()
             } catch {
                 restaurantsView.subscriptionStatus = .error
@@ -148,8 +132,8 @@ extension RestaurantsVC: UITableViewDataSource {
         
         cell.configure(restaurant: restaurant)
         Task {
-            if let stringLogo = restaurant.logo {
-                cell.configure(logo: await model.getLogo(stringURL: stringLogo))
+            if let stringURL = restaurant.logo, let url = URL(string: stringURL) {
+                cell.configure(logo: await model.getImage(from: url))
             }
         }
         return cell
@@ -164,8 +148,9 @@ extension RestaurantsVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Task(priority: .high) {
             let logoImage: UIImage?
-            if let stringLogo = model.restaurants[indexPath.row].logo {
-                logoImage = await model.getLogo(stringURL: stringLogo)
+            if let stringURL = model.restaurants[indexPath.row].logo,
+               let url = URL(string: stringURL) {
+                logoImage = await model.getImage(from: url)
             } else {
                 logoImage = nil
             }

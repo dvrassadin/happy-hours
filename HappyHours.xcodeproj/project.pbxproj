@@ -131,6 +131,8 @@
 		51DE3F462C175027008D8CC1 /* FreeTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE3F452C175027008D8CC1 /* FreeTrial.swift */; };
 		51DE3F482C18071E008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE3F472C18071E008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift */; };
 		51EEC06C2BE391C100780019 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEC06B2BE391C100780019 /* APIError.swift */; };
+		51FD4FFD2C2973D100161AC2 /* CacheImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD4FFC2C2973D100161AC2 /* CacheImageObject.swift */; };
+		51FD4FFF2C29745D00161AC2 /* NSCache+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD4FFE2C29745D00161AC2 /* NSCache+Subscript.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -260,6 +262,8 @@
 		51DE3F452C175027008D8CC1 /* FreeTrial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrial.swift; sourceTree = "<group>"; };
 		51DE3F472C18071E008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanBasicTableViewCell.swift; sourceTree = "<group>"; };
 		51EEC06B2BE391C100780019 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		51FD4FFC2C2973D100161AC2 /* CacheImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageObject.swift; sourceTree = "<group>"; };
+		51FD4FFE2C29745D00161AC2 /* NSCache+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCache+Subscript.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +301,8 @@
 				519ECCFD2BDF9CB8004BF955 /* NetworkService.swift */,
 				515EF0502BDFE574008795BA /* NetworkServiceProtocol.swift */,
 				51EEC06B2BE391C100780019 /* APIError.swift */,
+				51FD4FFC2C2973D100161AC2 /* CacheImageObject.swift */,
+				51FD4FFE2C29745D00161AC2 /* NSCache+Subscript.swift */,
 				51EEC06F2BE396D500780019 /* APIModels */,
 			);
 			path = NetworkService;
@@ -911,6 +917,7 @@
 				5150BA192C14389800895045 /* SubscriptionPlansView.swift in Sources */,
 				512D00692BD7AAAD0057D696 /* EditProfileView.swift in Sources */,
 				51BC17632BE3A3A90095C104 /* LogIn.swift in Sources */,
+				51FD4FFD2C2973D100161AC2 /* CacheImageObject.swift in Sources */,
 				518B1E782BEA4476004F203F /* MenuTableViewCell.swift in Sources */,
 				515DCCC72C254A9300A0408D /* PlaceholderTextView.swift in Sources */,
 				51AACDFB2BF337E0008CD997 /* SearchModelProtocol.swift in Sources */,
@@ -939,6 +946,7 @@
 				513B6CC32BCF98D10006DD25 /* PasswordChecker.swift in Sources */,
 				518461562BFDA42A001C02B6 /* OrderTableViewCell.swift in Sources */,
 				518B1E9C2BEB8426004F203F /* AuthService.swift in Sources */,
+				51FD4FFF2C29745D00161AC2 /* NSCache+Subscript.swift in Sources */,
 				511104C22C1068E1005E13AE /* UserError.swift in Sources */,
 				5138299F2BCD74AB00AA4878 /* ResetPasswordVC.swift in Sources */,
 				51253A402BEF489300106D57 /* MenuTableViewCellDelegate.swift in Sources */,
@@ -1104,7 +1112,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "Allow Happy Hours to scan restaurants' QR codes.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Happy Hours to use your location and show it when you are looking for restaurants.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -1141,7 +1149,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "Allow Happy Hours to scan restaurants' QR codes.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Happy Hours to use your location and show it when you are looking for restaurants.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

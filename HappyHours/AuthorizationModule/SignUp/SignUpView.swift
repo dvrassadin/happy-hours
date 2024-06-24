@@ -155,13 +155,5 @@ final class SignUpView: AuthScreenView {
             ]
         )
     }
-    
-    // MARK: User interaction
-    
-    // TODO: Decide whether to use keyboardLayoutGuide or both
-//    override func moveUpContentToElement() -> UIView? {
-//        print(createAccountButton.frame)
-//        return createAccountButton
-//    }
 
 }

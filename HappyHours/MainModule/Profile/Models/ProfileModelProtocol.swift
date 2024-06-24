@@ -14,8 +14,8 @@ protocol ProfileModelProtocol {
     var user: User { get async throws }
     var subscription: Subscription? { get async throws }
     var isSubscriptionActive: Bool { get async throws }
+    var avatarImage: UIImage? { get async }
 
-    func getAvatarImage() async -> UIImage?
     func logOut() async throws
     func editUser(imageData: Data?, name: String?, dateOfBirth: Date?) async throws
     

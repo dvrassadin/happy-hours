@@ -13,6 +13,6 @@ protocol RestaurantsModelProtocol {
     var restaurants: [Restaurant] { get }
     
     func getRestaurants(limit: UInt, offset: UInt) async throws
-    func getLogo(stringURL: String) async -> UIImage?
+    func getImage(from url: URL) async -> UIImage?
     
 }

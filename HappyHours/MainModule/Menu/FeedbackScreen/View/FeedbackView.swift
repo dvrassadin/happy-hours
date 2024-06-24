@@ -43,9 +43,6 @@ final class FeedbackView: UIView {
     
     private func setUpUI() {
         backgroundColor = .background
-//        if #available(iOS 17.0, *) {
-//            keyboardLayoutGuide.usesBottomSafeArea = false
-//        }
         addSubviews()
         setUpConstraints()
         setUpHidingKeyboard()

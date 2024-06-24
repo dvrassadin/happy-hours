@@ -49,6 +49,8 @@ enum AlertType {
     case createPaymentError
     case paymentError
     case createFreeTrialServerError
+    case executePaymentSessionExpired
+    case executePaymentUnknownError
 }
 
 // MARK: Alert presenting
@@ -157,13 +159,19 @@ extension AlertPresenter {
             message = String(localized: "Failed to get subscription pans.")
         case .createPaymentError:
             title = String(localized: "Unable to Make Payment")
-            message = String(localized: "Try again later.")
+            message = String(localized: "You already have an active subscription.")
         case .paymentError:
             title = String(localized: "Error")
             message = String(localized: "Failed to make payment.")
         case .createFreeTrialServerError:
             title = String(localized: "Error")
             message = String(localized: "Failed to get Fee Trial.")
+        case .executePaymentSessionExpired:
+            title = String(localized: "Unable to Make Payment")
+            message = String(localized: "Session has expired. Try again.")
+        case .executePaymentUnknownError:
+            title = String(localized: "Unable to Make Payment")
+            message = String(localized: "Unknown error. Try again.")
         }
         
         let alertController = UIAlertController(

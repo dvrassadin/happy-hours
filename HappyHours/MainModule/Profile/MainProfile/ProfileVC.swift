@@ -10,12 +10,12 @@ import UIKit
 // MARK: - ProfileVC class
 
 final class ProfileVC: UIViewController, AlertPresenter {
-
+    
     // MARK: Properties
     
     private lazy var profileView = ProfileView()
     private let model: ProfileModelProtocol
-
+    
     // MARK: Lifecycle
     
     init(model: ProfileModelProtocol) {
@@ -57,19 +57,12 @@ final class ProfileVC: UIViewController, AlertPresenter {
         }, for: .touchUpInside)
         
         profileView.subscriptionButton.addAction(UIAction { [weak self] _ in
-//            let alertController = UIAlertController(
-//                title: "Subscription will be available soon.",
-//                message: nil,
-//                preferredStyle: .alert
-//            )
-//            alertController.addAction(UIAlertAction(title: "OK", style: .default))
-//            self?.present(alertController, animated: true)
             guard let self else { return }
             Task {
                 do {
                     let subscriptionModel: SubscriptionModelProtocol = SubscriptionModel(
-                    networkService: self.model.networkService,
-                    subscriptionService: self.model.subscriptionService)
+                        networkService: self.model.networkService,
+                        subscriptionService: self.model.subscriptionService)
                     
                     if try await self.model.isSubscriptionActive {
                         let subscriptionPlansVC = SubscriptionPlansVC(
@@ -109,9 +102,9 @@ final class ProfileVC: UIViewController, AlertPresenter {
                 try await self.model.logOut()
             }
             UIApplication.shared.sendAction(#selector(LogOutDelegate.logOut),
-                to: nil,
-                from: self,
-                for: nil
+                                            to: nil,
+                                            from: self,
+                                            for: nil
             )
         }
         alertController.addAction(logOutAction)
@@ -126,16 +119,8 @@ final class ProfileVC: UIViewController, AlertPresenter {
         Task {
             do {
                 profileView.set(user: try await model.user)
-                profileView.set(avatar: await model.getAvatarImage())
+                profileView.set(avatar: await model.avatarImage)
             } catch AuthError.invalidToken {
-//                showAlert(.invalidToken) { _ in
-//                    UIApplication.shared.sendAction(
-//                        #selector(LogOutDelegate.logOut),
-//                        to: nil,
-//                        from: self,
-//                        for: nil
-//                    )
-//                }
                 self.logOut()
             } catch {
                 showAlert(.getUserServerError)
@@ -161,5 +146,5 @@ final class ProfileVC: UIViewController, AlertPresenter {
             }
         }
     }
-
+    
 }

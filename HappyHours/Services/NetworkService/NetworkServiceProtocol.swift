@@ -5,9 +5,9 @@
 //  Created by Daniil Rassadin on 29/4/24.
 //
 
-import Foundation
+import UIKit
 
-protocol NetworkServiceProtocol {
+protocol NetworkServiceProtocol: Actor {
     
     func logIn(_ logIn: LogIn) async throws
     func createUser(_ user: CreateUser) async throws
@@ -18,7 +18,7 @@ protocol NetworkServiceProtocol {
         search: String?,
         allowRetry: Bool
     ) async throws -> [Restaurant]
-    func getImageData(from stringURL: String) async -> Data?
+    func getImage(from url: URL) async -> UIImage?
     func getUser(allowRetry: Bool) async throws -> User
     func editUser(
         imageData: Data?,
@@ -71,6 +71,5 @@ protocol NetworkServiceProtocol {
     func getActiveSubscription(allowRetry: Bool) async throws -> Subscription
     func getSubscriptionPlans(allowRetry: Bool) async throws -> [SubscriptionPlan]
     func createPayment(subscriptionPlanID: Int, allowRetry: Bool) async throws -> Payment
-//    func executePayment(paymentURL: URL) async throws
     func createFreeTrial(freeTrial: FreeTrial, allowRetry: Bool) async throws
 }

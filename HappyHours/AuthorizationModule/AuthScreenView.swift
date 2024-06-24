@@ -58,29 +58,12 @@ class AuthScreenView: UIView {
         backgroundColor = .background
         addSubviews()
         setUpConstrains()
-        // TODO: Decide whether to use keyboardLayoutGuide or both
-//        setUpKeyboardShowAndHiding()
     }
     
     private func addSubviews() {
         addSubview(appNameLabel)
         addSubview(screenNameLabel)
     }
-    // TODO: Decide whether to use keyboardLayoutGuide or both
-//    private func setUpKeyboardShowAndHiding() {
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(moveUpContent(notification:)),
-//            name: UIResponder.keyboardWillShowNotification,
-//            object: nil
-//        )
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(moveDownContent),
-//            name: UIResponder.keyboardWillHideNotification,
-//            object: nil
-//        )
-//    }
     
     private func setUpConstrains() {
         NSLayoutConstraint.activate(
@@ -108,34 +91,6 @@ class AuthScreenView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         endEditing(true)
     }
-    
-    // TODO: Decide whether to use keyboardLayoutGuide or both
-//    /// This method moves up the content when the keyboard appears.
-//    /// - Parameter notification: A notification to get the keyboard size
-//    @objc private func moveUpContent(notification: NSNotification) {
-//        guard let elementFrame = moveUpContentToElement()?.frame,
-//              let keyboardHeight = (notification.userInfo?[
-//                UIResponder.keyboardFrameEndUserInfoKey
-//              ] as? CGRect)?.height
-//        else { return }
-//        
-//        let emptySpaceHeigh = frame.height - elementFrame.origin.y - elementFrame.height
-//        
-//        UIView.animate(withDuration: 0.4) {
-//            self.frame.origin.y = -(keyboardHeight - emptySpaceHeigh) - 5
-//        }
-//    }
-//
-//    
-//    /// This method should be overridden in every subclass that should move up the content when the keyboard appears.
-//    /// - Returns: should return the frame of the element to which to move up the content
-//    func moveUpContentToElement() -> UIView? {
-//        nil
-//    }
-//    
-//    @objc private func moveDownContent() {
-//        frame.origin.y = 0
-//    }
     
 }
 

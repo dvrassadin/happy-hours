@@ -6,8 +6,9 @@
 //
 
 import OSLog
+import UIKit
 
-final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
+actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
     
     // MARK: Properties
     
@@ -49,6 +50,8 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
     )
     
     private let authService: AuthServiceProtocol
+    
+    private let imageCache = NSCache<NSString, CacheImageObject>()
     
     // MARK: Lifecycle
     
@@ -1050,18 +1053,29 @@ final class NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
     
     // MARK: Common requests
     
-    func getImageData(from stringURL: String) async -> Data? {
-        guard let url = URL(string: stringURL) else { return nil }
-        
-        logger.info("Starting request: \(url.absoluteString)")
-        do {
-            let (data, _) = try await session.data(from: url)
-            return data
-        } catch {
-            logger.error("Data not received for image request: \(url.absoluteString)")
+    func getImage(from url: URL) async -> UIImage? {
+        if let cached = imageCache[url] {
+            switch cached {
+            case .inProgress(let task):
+                return try? await task.value
+            case .ready(let image):
+                logger.info("Got image from the cache for url: \(url.absoluteString)")
+                return image
+            }
         }
         
-        return nil
+        let task = Task<UIImage?, Error> {
+            logger.info("Starting request: \(url.absoluteString)")
+            let (data, _) = try await session.data(from: url)
+            let image = UIImage(data: data)
+            return image
+        }
+        imageCache[url] = .inProgress(task)
+        let image = try? await task.value
+        if let image {
+            imageCache[url] = .ready(image)
+        }
+        return image
     }
     
     // MARK: Feedbacks

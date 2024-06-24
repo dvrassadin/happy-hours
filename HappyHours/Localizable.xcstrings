@@ -320,6 +320,9 @@
     "Session Expired" : {
 
     },
+    "Session has expired. Try again." : {
+
+    },
     "Sign In to Continue" : {
 
     },
@@ -368,9 +371,6 @@
     "This password is too short.\nPasswords are 8 and more characters long." : {
 
     },
-    "Try again later." : {
-
-    },
     "Unable to Download" : {
 
     },
@@ -401,10 +401,16 @@
     "Unable to Update" : {
 
     },
+    "Unknown error. Try again." : {
+
+    },
     "Update" : {
 
     },
     "Updating" : {
+
+    },
+    "You already have an active subscription." : {
 
     },
     "You do not have a subscription" : {

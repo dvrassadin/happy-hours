@@ -17,12 +17,8 @@ final class MenuModel: MenuModelProtocol {
     private var _logoImage: UIImage?
     var logoImage: UIImage? {
         get async {
-            if let logoImage = _logoImage {
-                return logoImage
-            } else if let logoImageString = restaurant.logo,
-                      let logoImageData = await networkService.getImageData(from: logoImageString),
-                      let logoImage = UIImage(data: logoImageData) {
-                return logoImage
+            if let stringURL = restaurant.logo, let url = URL(string: stringURL) {
+                return await networkService.getImage(from: url)
             }
             return nil
         }
@@ -50,9 +46,6 @@ final class MenuModel: MenuModelProtocol {
             offset: offset,
             allowRetry: true
         )
-//        menu = Dictionary(grouping: beverages) { $0.category }
-//            .map { (category: $0, beverages: $1) }
-//            .sorted { $0.category < $1.category }
         menu = Dictionary(grouping: beverages) { $0.category }
             .map { (category: $0, beverages: $1.sorted(by: { $0.name < $1.name })) }
             .sorted { $0.category < $1.category }
