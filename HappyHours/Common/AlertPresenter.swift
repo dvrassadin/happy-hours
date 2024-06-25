@@ -51,6 +51,19 @@ enum AlertType {
     case createFreeTrialServerError
     case executePaymentSessionExpired
     case executePaymentUnknownError
+    case otcExpired
+    case incorrectCredentials
+    case accountBlocked
+    case userDoesNotExist
+    case placeOrderNoHH
+    case placeOrderMoreThenOnePerHour
+    case placeOrderWasInThisPlace
+    case registerEmailTaken
+    case registerName
+    case registerImage
+    case editUserPhotoFormat
+    case editUserName
+    
 }
 
 // MARK: Alert presenting
@@ -73,8 +86,8 @@ extension AlertPresenter {
             title = String(localized: "Invalid Password")
             message = String(localized: "This password is too short.\nPasswords are 8 and more characters long.")
         case .notMatchPasswords:
-            title = String(localized: "Passwords do not Match")
-            message = String(localized: "Enter your new passwords again.")
+            title = String(localized: "Unable to Register")
+            message = String(localized: "Passwords do not match, enter your passwords again.")
         case .emptyName:
             title = String(localized: "Empty Name")
             message = String(localized: "Please, enter your name.")
@@ -172,6 +185,41 @@ extension AlertPresenter {
         case .executePaymentUnknownError:
             title = String(localized: "Unable to Make Payment")
             message = String(localized: "Unknown error. Try again.")
+        case .otcExpired:
+            title = String(localized: "Code Expired")
+            message = String(localized: "The code has expired. Please resend the code.")
+        case .incorrectCredentials:
+            title = String(localized: "Incorrect Credentials")
+        case .placeOrderNoHH:
+            title = String(localized: "Unable to Make Order")
+            message = String(localized: "Happy Hours  is not active right now. ")
+        case .placeOrderMoreThenOnePerHour:
+            title = String(localized: "Unable to Make Order")
+            message = String(localized: "You can place one order per hour.")
+        case .placeOrderWasInThisPlace:
+            title = String(localized: "Unable to Make Order")
+            message = String(localized: "You can only place one order per establishment per day.")
+        case .accountBlocked:
+            title = String(localized: "Account is Blocked")
+            message = String(localized: "You account is blocked. Please contact the Administrator via kaganatreviro@gmail.com")
+        case .userDoesNotExist:
+            title = String(localized: "User does not Exist")
+            message = String(localized: "The entered email was not found.")
+        case .registerEmailTaken:
+            title = String(localized: "Unable to Register")
+            message = String(localized: "This email is already taken.")
+        case .registerName:
+            title = String(localized: "Unable to Register")
+            message = String(localized: "This name length is not supported.")
+        case .registerImage:
+            title = String(localized: "Unable to Register")
+            message = String(localized: "This photo format is not supported.")
+        case .editUserPhotoFormat:
+            title = String(localized: "Unable to Update")
+            message = String(localized: "This photo format is not supported.")
+        case .editUserName:
+            title = String(localized: "Unable to Update")
+            message = String(localized: "This name length is not supported.")
         }
         
         let alertController = UIAlertController(

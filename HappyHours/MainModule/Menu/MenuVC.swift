@@ -266,6 +266,12 @@ extension MenuVC: MenuTableViewCellDelegate {
                 showAlert(.orderMade)
             } catch AuthError.invalidToken {
                 logOutWithAlert()
+            } catch APIError.placeOrderNoHH {
+                showAlert(.placeOrderNoHH)
+            } catch APIError.placeOrderWasInThisPlace {
+                showAlert(.placeOrderWasInThisPlace)
+            } catch APIError.placeOrderMoreThenOnePerHour {
+                showAlert(.placeOrderMoreThenOnePerHour)
             } catch {
                 showAlert(.makingOrderServerError)
             }

@@ -108,6 +108,10 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
                 navigationController?.popViewController(animated: true)
             } catch AuthError.invalidToken {
                 logOutWithAlert()
+            } catch APIError.editUserName {
+                showAlert(.editUserName)
+            } catch APIError.editUserPhotoFormat {
+                showAlert(.editUserPhotoFormat)
             } catch {
                 showAlert(.editUserServerError)
             }
@@ -129,28 +133,28 @@ final class EditProfileVC: UIViewController, NameChecker, EmailChecker, AlertPre
     }
     
     private func compress(image: UIImage, toMB expectedSize: Int) -> Data? {
-            let sizeInBytes = expectedSize * 1024 * 1024
-            var needCompress: Bool = true
-            var imageData: Data?
-            var compressingValue: CGFloat = 1.0
-            while (needCompress && compressingValue > 0.0) {
-                if let data: Data = image.jpegData(compressionQuality: compressingValue) {
-                    if data.count < sizeInBytes {
-                        needCompress = false
-                        imageData = data
-                    } else {
-                        compressingValue -= 0.1
-                    }
+        let sizeInBytes = expectedSize * 1024 * 1024
+        var needCompress: Bool = true
+        var imageData: Data?
+        var compressingValue: CGFloat = 1.0
+        while (needCompress && compressingValue > 0.0) {
+            if let data: Data = image.jpegData(compressionQuality: compressingValue) {
+                if data.count < sizeInBytes {
+                    needCompress = false
+                    imageData = data
+                } else {
+                    compressingValue -= 0.1
                 }
             }
-
-            if let imageData {
-                if (imageData.count < sizeInBytes) {
-                    return imageData
-                }
-            }
-            return nil
         }
+        
+        if let imageData {
+            if (imageData.count < sizeInBytes) {
+                return imageData
+            }
+        }
+        return nil
+    }
     
 }
 

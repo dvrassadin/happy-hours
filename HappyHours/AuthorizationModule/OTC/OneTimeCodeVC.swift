@@ -57,6 +57,8 @@ final class OneTimeCodeVC: UIViewController, AlertPresenter {
                         NewPasswordVC(model: self.model),
                         animated: true
                     )
+                } catch APIError.otcExpired {
+                    self.showAlert(.otcExpired)
                 } catch {
                     self.showAlert(.incorrectOTC)
                 }

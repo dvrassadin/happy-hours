@@ -50,6 +50,7 @@
 		513B6CF92BD16E650006DD25 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CF82BD16E650006DD25 /* ProfileVC.swift */; };
 		513B6CFB2BD16E880006DD25 /* RestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */; };
 		513B6CFD2BD16EA60006DD25 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513B6CFC2BD16EA60006DD25 /* ProfileView.swift */; };
+		514067DE2C2A9D8C00EC52D3 /* ErrorBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514067DD2C2A9D8C00EC52D3 /* ErrorBody.swift */; };
 		5148B90F2BD3E7E800659D73 /* LogInDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */; };
 		5148B9112BD3E82600659D73 /* LogOutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9102BD3E82600659D73 /* LogOutDelegate.swift */; };
 		5148B9132BD3F87B00659D73 /* UIWindow+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */; };
@@ -179,6 +180,7 @@
 		513B6CF82BD16E650006DD25 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		513B6CFA2BD16E880006DD25 /* RestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsView.swift; sourceTree = "<group>"; };
 		513B6CFC2BD16EA60006DD25 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		514067DD2C2A9D8C00EC52D3 /* ErrorBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBody.swift; sourceTree = "<group>"; };
 		5148B90E2BD3E7E800659D73 /* LogInDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInDelegate.swift; sourceTree = "<group>"; };
 		5148B9102BD3E82600659D73 /* LogOutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDelegate.swift; sourceTree = "<group>"; };
 		5148B9122BD3F87B00659D73 /* UIWindow+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Navigation.swift"; sourceTree = "<group>"; };
@@ -759,6 +761,7 @@
 				511104B72C0F6F13005E13AE /* FeedbackAnswerCreate.swift */,
 				5150BA1C2C158A2600895045 /* Payment.swift */,
 				51DE3F452C175027008D8CC1 /* FreeTrial.swift */,
+				514067DD2C2A9D8C00EC52D3 /* ErrorBody.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				518B1E782BEA4476004F203F /* MenuTableViewCell.swift in Sources */,
 				515DCCC72C254A9300A0408D /* PlaceholderTextView.swift in Sources */,
 				51AACDFB2BF337E0008CD997 /* SearchModelProtocol.swift in Sources */,
+				514067DE2C2A9D8C00EC52D3 /* ErrorBody.swift in Sources */,
 				5151786D2C06E23600EAFFA4 /* FeedbackHeaderView.swift in Sources */,
 				518461462BFB01B2001C02B6 /* BeverageVC.swift in Sources */,
 				516C202C2BE8EDE400FCBFB1 /* NewPassword.swift in Sources */,
@@ -1103,7 +1107,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 4645TSUXP2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyHours/Info.plist;
@@ -1140,7 +1144,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 4645TSUXP2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyHours/Info.plist;

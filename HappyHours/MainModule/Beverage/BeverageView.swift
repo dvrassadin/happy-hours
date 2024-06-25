@@ -24,6 +24,16 @@ final class BeverageView: UIView {
         return view
     }()
     
+    private let screenNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .mainText
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.textAlignment = .center
+        label.text = String(localized: "Beverage Info")
+        return label
+    }()
+    
     private let beverageNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -95,6 +105,7 @@ final class BeverageView: UIView {
     private func addSubviews() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(screenNameLabel)
         contentView.addSubview(beverageNameLabel)
         contentView.addSubview(beveragePriceLabel)
         contentView.addSubview(beverageDescriptionLabel)
@@ -117,7 +128,11 @@ final class BeverageView: UIView {
                 contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
                 contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
                 
-                beverageNameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 20),
+                screenNameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 20),
+                screenNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                screenNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                
+                beverageNameLabel.topAnchor.constraint(equalTo: screenNameLabel.bottomAnchor,constant: 10),
                 beverageNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
                 beverageNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
                 
@@ -197,5 +212,3 @@ final class BeverageView: UIView {
     }
     
 }
-
-

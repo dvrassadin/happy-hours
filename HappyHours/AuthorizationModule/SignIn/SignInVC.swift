@@ -65,6 +65,9 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
         
         signInView.isLoggingIn = true
         Task {
+            defer {
+                signInView.isLoggingIn = false
+            }
             do {
                 try await model.logIn(email: email, password: password)
                 UIApplication.shared.sendAction(
@@ -74,9 +77,14 @@ final class SignInVC: UIViewController, EmailChecker, PasswordChecker, AlertPres
                     for: nil
                 )
                 signInView.isLoggingIn = false
+            } catch APIError.incorrectCredentials {
+                showAlert(.incorrectCredentials)
+            } catch APIError.accountBlocked {
+                showAlert(.accountBlocked)
+            } catch APIError.userDoesNotExist {
+                showAlert(.userDoesNotExist)
             } catch {
                 showAlert(.accessDenied)
-                signInView.isLoggingIn = false
             }
         }
     }

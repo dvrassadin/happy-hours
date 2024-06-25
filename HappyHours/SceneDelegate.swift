@@ -36,9 +36,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         let navigationController = UINavigationController(rootViewController: vc)
         navigationController.navigationBar.tintColor = .main
-//        if let inter = UIFont(name: "Inter-Regular_Bold", size: 18) {
-//            navigationController.navigationBar.titleTextAttributes = [.font: inter]
-//        }
         
         window?.rootViewController = navigationController
         window?.backgroundColor = .systemBackground

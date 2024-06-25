@@ -162,7 +162,8 @@ extension RestaurantsVC: UITableViewDelegate {
             let menuVC = MenuVC(
                 model: menuModel,
                 userService: userService,
-                areOrdersEnable: false
+                // TODO: Make false
+                areOrdersEnable: true
             )
             navigationController?.pushViewController(menuVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)

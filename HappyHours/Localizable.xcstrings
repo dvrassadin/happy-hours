@@ -58,6 +58,9 @@
     "Access Denied" : {
 
     },
+    "Account is Blocked" : {
+
+    },
     "An error occurred while searching for drinks." : {
 
     },
@@ -65,6 +68,9 @@
 
     },
     "Are you sure you want to logout?" : {
+
+    },
+    "Beverage Info" : {
 
     },
     "Beverages" : {
@@ -86,6 +92,9 @@
 
     },
     "Chose a Plan" : {
+
+    },
+    "Code Expired" : {
 
     },
     "completed" : {
@@ -140,9 +149,6 @@
 
     },
     "Enter your answer" : {
-
-    },
-    "Enter your new passwords again." : {
 
     },
     "Error" : {
@@ -211,6 +217,9 @@
     "Happy Hours" : {
 
     },
+    "Happy Hours  is not active right now. " : {
+
+    },
     "Happy hours from %@ to %@." : {
       "localizations" : {
         "en" : {
@@ -225,6 +234,9 @@
 
     },
     "Incorrect Code" : {
+
+    },
+    "Incorrect Credentials" : {
 
     },
     "Invalid Email" : {
@@ -278,7 +290,7 @@
     "Password" : {
 
     },
-    "Passwords do not Match" : {
+    "Passwords do not match, enter your passwords again." : {
 
     },
     "pending" : {
@@ -344,7 +356,13 @@
     "Success" : {
 
     },
+    "The code has expired. Please resend the code." : {
+
+    },
     "The email could not be sent or the user does not exist." : {
+
+    },
+    "The entered email was not found." : {
 
     },
     "The one-time code is incorrect." : {
@@ -362,13 +380,22 @@
     "This email address is not valid.\nEnter a different address." : {
 
     },
+    "This email is already taken." : {
+
+    },
     "This establishment was not found or there are problems with the Internet." : {
 
     },
     "This is not an establishment menu barcode." : {
 
     },
+    "This name length is not supported." : {
+
+    },
     "This password is too short.\nPasswords are 8 and more characters long." : {
+
+    },
+    "This photo format is not supported." : {
 
     },
     "Unable to Download" : {
@@ -392,6 +419,9 @@
     "Unable to Make Payment" : {
 
     },
+    "Unable to Register" : {
+
+    },
     "Unable to Send" : {
 
     },
@@ -410,7 +440,19 @@
     "Updating" : {
 
     },
+    "User does not Exist" : {
+
+    },
+    "You account is blocked. Please contact the Administrator via kaganatreviro@gmail.com" : {
+
+    },
     "You already have an active subscription." : {
+
+    },
+    "You can only place one order per establishment per day." : {
+
+    },
+    "You can place one order per hour." : {
 
     },
     "You do not have a subscription" : {

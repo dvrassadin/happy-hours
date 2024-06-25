@@ -97,7 +97,28 @@ actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             throw APIError.notHTTPResponse
         }
         
+        if httpResponse.statusCode == 400 {
+            let errorBody: ErrorBody
+            do {
+                errorBody = try decoder.decode(ErrorBody.self, from: data)
+            } catch {
+                logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+                throw APIError.decodingError
+            }
+            switch errorBody.errorCode {
+            case "1": throw APIError.accountBlocked
+            case "2": throw APIError.userDoesNotExist
+            default:
+                logger.error("Unexpected status code: \(httpResponse.statusCode)(\(errorBody.errorCode))\nMessage: \(errorBody.message)")
+                throw APIError.unexpectedStatusCode
+            }
+        }
+        
         guard httpResponse.statusCode == 200 else {
+            if httpResponse.statusCode == 401 {
+                logger.info("Incorrect credentials for request: \(url.absoluteString)")
+                throw APIError.incorrectCredentials
+            }
             logger.error("Unexpected status code: \(httpResponse.statusCode)")
             throw APIError.unexpectedStatusCode
         }
@@ -146,6 +167,24 @@ actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 400 {
+            let errorBody: ErrorBody
+            do {
+                errorBody = try decoder.decode(ErrorBody.self, from: data)
+            } catch {
+                logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+                throw APIError.decodingError
+            }
+            switch errorBody.errorCode {
+            case "1": throw APIError.registerEmailTaken
+            case "2": throw APIError.notMatchPasswords
+            case "3": throw APIError.registerImage
+            default:
+                logger.error("Unexpected status code: \(httpResponse.statusCode)(\(errorBody.errorCode))\nMessage: \(errorBody.message)")
+                throw APIError.unexpectedStatusCode
+            }
         }
 
         guard httpResponse.statusCode == 201 else {
@@ -292,11 +331,28 @@ actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
 
         logger.info("Starting request: \(url.absoluteString)")
-        let (_, response) = try await session.data(for: request)
+        let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 400 {
+            let errorBody: ErrorBody
+            do {
+                errorBody = try decoder.decode(ErrorBody.self, from: data)
+            } catch {
+                logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+                throw APIError.decodingError
+            }
+            switch errorBody.errorCode {
+            case "1": throw APIError.incorrectOTC
+            case "2": throw APIError.otcExpired
+            default:
+                logger.error("Unexpected status code: \(httpResponse.statusCode)(\(errorBody.errorCode))\nMessage: \(errorBody.message)")
+                throw APIError.unexpectedStatusCode
+            }
         }
 
         guard httpResponse.statusCode == 200 else {
@@ -547,10 +603,27 @@ actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         request.httpBody = body
         
         logger.info("Starting request: \(url.absoluteString)")
-        let (_, response) = try await session.data(for: request)
+        let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
             throw APIError.notHTTPResponse
+        }
+        
+        if httpResponse.statusCode == 400 {
+            let errorBody: ErrorBody
+            do {
+                errorBody = try decoder.decode(ErrorBody.self, from: data)
+            } catch {
+                logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+                throw APIError.decodingError
+            }
+            switch errorBody.errorCode {
+            case "1": throw APIError.editUserPhotoFormat
+            case "2": throw APIError.editUserName
+            default:
+                logger.error("Unexpected status code: \(httpResponse.statusCode)(\(errorBody.errorCode))\nMessage: \(errorBody.message)")
+                throw APIError.unexpectedStatusCode
+            }
         }
         
         if httpResponse.statusCode == 401 {
@@ -884,7 +957,7 @@ actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
         }
         
         logger.info("Starting request: \(url.absoluteString)")
-        let (_, response) = try await session.data(for: request)
+        let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("API response is not HTTP response")
@@ -898,6 +971,24 @@ actor NetworkService: NetworkServiceProtocol, AuthServiceDelegate {
             }
             logger.error("Invalid token for request: \(url.absoluteString)")
             throw AuthError.invalidToken
+        }
+        
+        if httpResponse.statusCode == 400 {
+            let errorBody: ErrorBody
+            do {
+                errorBody = try decoder.decode(ErrorBody.self, from: data)
+            } catch {
+                logger.error("Could not decode data for request: \(url.absoluteString)\n\(error)")
+                throw APIError.decodingError
+            }
+            switch errorBody.errorCode {
+            case "1": throw APIError.placeOrderNoHH
+            case "2": throw APIError.placeOrderMoreThenOnePerHour
+            case "3": throw APIError.placeOrderWasInThisPlace
+            default:
+                logger.error("Unexpected status code: \(httpResponse.statusCode)(\(errorBody.errorCode))\nMessage: \(errorBody.message)")
+                throw APIError.unexpectedStatusCode
+            }
         }
         
         guard httpResponse.statusCode == 201 else {

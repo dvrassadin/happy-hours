@@ -83,6 +83,9 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
         
         signUpView.isCreatingAccount = true
         Task {
+            defer {
+                signUpView.isCreatingAccount = false
+            }
             do {
                 try await model.createUser(
                     email: email,
@@ -100,8 +103,13 @@ final class SignUpVC: UIViewController, NameChecker, EmailChecker, PasswordCheck
                         for: nil
                     )
                 }
-            } catch {
-                signUpView.isCreatingAccount = false
+            } catch APIError.registerEmailTaken {
+                showAlert(.registerEmailTaken)
+            } catch APIError.notMatchPasswords {
+                showAlert(.notMatchPasswords)
+            } catch APIError.registerName {
+                showAlert(.registerName)
+            }  catch {
                 showAlert(.createUserServerError, message: error.localizedDescription)
             }
         }
