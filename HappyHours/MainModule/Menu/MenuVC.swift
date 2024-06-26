@@ -280,7 +280,7 @@ extension MenuVC: MenuTableViewCellDelegate {
     
 }
 
-// MARK: UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 
 extension MenuVC: UICollectionViewDataSource {
     

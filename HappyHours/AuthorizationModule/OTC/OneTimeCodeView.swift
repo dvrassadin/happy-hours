@@ -202,15 +202,6 @@ final class OneTimeCodeView: AuthScreenView {
             String(localized: "Resend code in \(self.timeFormatted(seconds: self.secondsRemained))"),
             attributes: self.buttonTitleAttributes
         )
-//        if secondsRemained > 0 {
-//            secondsRemained -= 1
-//            self.resendButton.configuration?.attributedTitle = AttributedString(
-//                String(localized: "Resend code in \(self.timeFormatted(seconds: self.secondsRemained))"),
-//                attributes: self.buttonTitleAttributes
-//            )
-//        } else {
-//            stopTimer()
-//        }
     }
     
     private func timeFormatted(seconds: Int) -> String {

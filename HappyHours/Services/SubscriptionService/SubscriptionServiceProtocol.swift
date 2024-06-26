@@ -13,4 +13,5 @@ protocol SubscriptionServiceProtocol: Actor {
     
     func getSubscription() async throws -> Subscription?
     func setNeedUpdateSubscription()
+    
 }

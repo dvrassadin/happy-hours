@@ -39,7 +39,7 @@ final class KeyChainService: KeyChainServiceProtocol {
         return true
     }
     
-    // MARK: - Removing tokens
+    // MARK: Removing tokens
     
     func deleteAllTokens() {
         JWTType.allCases.forEach { token in

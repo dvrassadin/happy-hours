@@ -104,7 +104,6 @@ final class RestaurantHeaderView: UIView {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = false
-//        textView.dataDetectorTypes = .link
         textView.font = .preferredFont(forTextStyle: .body)
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
