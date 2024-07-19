@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
