@@ -72,4 +72,5 @@ protocol NetworkServiceProtocol: Actor {
     func getSubscriptionPlans(allowRetry: Bool) async throws -> [SubscriptionPlan]
     func createPayment(subscriptionPlanID: Int, allowRetry: Bool) async throws -> Payment
     func createFreeTrial(freeTrial: FreeTrial, allowRetry: Bool) async throws
+    
 }
