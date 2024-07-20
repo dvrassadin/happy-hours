@@ -133,7 +133,6 @@
 		51DE3F482C18071E008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE3F472C18071E008D8CC1 /* SubscriptionPlanBasicTableViewCell.swift */; };
 		51EEC06C2BE391C100780019 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEC06B2BE391C100780019 /* APIError.swift */; };
 		51F5BBA32C4A8136000FE241 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 51F5BBA22C4A8136000FE241 /* Alamofire */; };
-		51F5BBA52C4A8136000FE241 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 51F5BBA42C4A8136000FE241 /* AlamofireDynamic */; };
 		51FD4FFD2C2973D100161AC2 /* CacheImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD4FFC2C2973D100161AC2 /* CacheImageObject.swift */; };
 		51FD4FFF2C29745D00161AC2 /* NSCache+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD4FFE2C29745D00161AC2 /* NSCache+Subscript.swift */; };
 /* End PBXBuildFile section */
@@ -276,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				51F5BBA32C4A8136000FE241 /* Alamofire in Frameworks */,
-				51F5BBA52C4A8136000FE241 /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,7 +786,6 @@
 			name = HappyHours;
 			packageProductDependencies = (
 				51F5BBA22C4A8136000FE241 /* Alamofire */,
-				51F5BBA42C4A8136000FE241 /* AlamofireDynamic */,
 			);
 			productName = HappyHours;
 			productReference = 51CF885A2BC3B8D800196E8A /* HappyHours.app */;
@@ -1223,11 +1220,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 51F5BBA12C4A8136000FE241 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		51F5BBA42C4A8136000FE241 /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 51F5BBA12C4A8136000FE241 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
